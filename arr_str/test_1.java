@@ -5,53 +5,38 @@ import java.util.*;
 
 class test_1 {
 	public static void main(String[] args) {
-		boolean[] char_set = new boolean[256];
-
-		String input = "Premithius";
-		System.out.println(input.length());
-		int i = 0;
-		while(i < input.length()) {
-			int val = input.charAt(i);
-			System.out.println(input.charAt(i) + " is " + val);
-			char_set[i] = true;
-			i++;
-			}
-
-		System.out.println(isUnique(input));
+		System.out.println(isUnique("Premithius"));
+		System.out.println(isUnique("Premithus"));
 		System.out.println(isUniqueChar("premithius"));
 		}
+
 	// Assuming the char set it ASCii.
 	public static boolean isUnique(String str) {
 		boolean[] char_set = new boolean[256];
-
-		int i = 0;
-		while(i < str.length()) {
-			int val = str.charAt(i);
-			if (char_set[val]) {
-				System.out.println("Found again: " + str.charAt(i));
+		// Convert String to CharArray otherwise foreach loop will report error.
+		for (char i : str.toCharArray()) {
+			if (char_set[i]) {
+				System.out.println("Found again: " + i);
 				return false;
-			}
-			char_set[val] = true;
-			i++;
+			} else {char_set[i] = true;}
 		}
 		return true;
 	}
+	
+	// if it's only 'a' to 'z' totally 26 chars. We can use bit mask.
+	// MAX 32 bits. so ASCII can not fit in.
 	public static boolean isUniqueChar(String str) {
 		int checker = 0;
-		for (int i = 0; i < str.length(); i++) {
-			int val = str.charAt(i) - 'a';
-			if ((checker & (1 << val)) > 0) {
-				System.out.println("Found again: " + str.charAt(i));
+		for (char i : str.toCharArray()) {
+			int val = i - 'a'; // 0 - 25
+			if ((checker & (1 << val)) > 0) { // Use AND to check if it's marked already
+				System.out.println("Found again: " + i);
 				return false;
 			}
-			checker |= (1 << val);
-			System.out.println("" + checker);
+			checker |= (1 << val); // use OR to update the checker.
 		}
 		return true;
-	
 	}
-
-
 }
 
 
