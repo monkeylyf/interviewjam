@@ -9,6 +9,7 @@ class test_3 {
 	public static void main(String[] args) {
 		String input = "abbbcdee";
 		removeDuplicates(input.toCharArray());
+		removeDuplicates("abcabcefg".toCharArray());
 	}
 
 	// This is the example answer.
@@ -25,9 +26,9 @@ class test_3 {
 				str[processed] = str[cur];
 				++processed;
 			} // else. nothing. processed pointer stays.
-			System.out.println(processed);
 		}
-		str[processed] = 0;
-		System.out.println(str);
+		System.out.println("Input is " + new String(str));
+		String s = new String(str);
+		System.out.println("Output is " + s.substring(0, processed));
 	}
 }

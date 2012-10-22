@@ -28,30 +28,19 @@ class test_4 {
 	// Solution 1.
 	public static boolean detectAnagram(String a, String b) {
 		if (a.length() != b.length()) return false;
-		String aa = IntArray(a);
-		String bb = IntArray(b);
-		if (aa.equals(bb)) return true;
+		if (intArray(a).equals(intArray(b))) return true;
 		return false;	
 	}
 
-	public static String IntArray(String a) {
+	public static String intArray(String a) {
 		int[] counter = new int[256];
-		int i = 0;
-		while(i < a.length()) {
-			int val = a.charAt(i);
-			++counter[val];
-			++i;
-		}
-		String output = Arrays.toString(counter);
-		return output;
-
+		for (int i : a.toCharArray()) {++counter[i];}
+		return Arrays.toString(counter);
 	}
 
-	// Solution 2.
+	// Solution 2. Cheating...
 	public static boolean Anagram(String a, String b) {
-		if (a.length() != b.length()) {
-			return false;
-			}
+		if (a.length() != b.length()) {return false;}
 		return Sort(a).equals(Sort(b));
 	}
 
