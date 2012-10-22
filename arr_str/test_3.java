@@ -1,78 +1,33 @@
 /*Design an algorithm and write code to remove the duplicate characters in a string
-without using any additional buffer NOTE: One or two additional variables are fine
-An extra copy of the array is not
-FOLLOW UP Write the test cases for this method*/
-
-
-
+without using any additional buffer
+NOTE: One or two additional variables are fine. An extra copy of the array is not
+FOLLOW UP
+Write the test cases for this method
+*/
 
 class test_3 {
 	public static void main(String[] args) {
-		
-		String input = "abcdefgghijk";
-		removeDuplicate(input.toCharArray());
+		String input = "abbbcdee";
 		removeDuplicates(input.toCharArray());
 	}
 
-	public static void removeDuplicate(char[] str) {
-		// If it's null, do nothing.
-		if (str == null) return;
-		// If it's one char array, do nothing.
-		int len = str.length;
-		System.out.println("The length of this char is " + len);
-		if (len == 1) return;
-		
-		int pointer = 1; // Points to the last processed char.
-
-		for (int i = 1;i < len; ++i) {
-			for (int j = 0; j < i; ++j) {
-				if (str[i] == str[j]) {
-					System.out.println("Duplicate found " + str[i]);
-
-				}
-				System.out.println(str[j]);
-			}
-			System.out.println("Done with one loop");
-		}	
-	}
-
-	public static void removeDupilicatesEasy(char[] str) {
-		// If it's null, do nothing.
-		if (str == null) return;
-		// If it's one char array, do nothing.
-		int len = str.length;
-		System.out.println("The length of this char is " + len);
-		if (len == 1) return;
-
-		char[] output;
-
-	
-	
-	}
-
+	// This is the example answer.
 	public static void removeDuplicates(char[] str) {
-		// This is the example answer.
+		if (str == null) return; // If it's null, do nothing.
+		if (str.length == 1) return; // If it's one char array, do nothing.
 
-		// If it's null, do nothing.
-		if (str == null) return;
-		// If it's one char array, do nothing.
 		int len = str.length;
-		System.out.println("The length of this char is " + len);
-		if (len == 1) return;
-
-		int tail = 1;
-
-		for (int i = 1; i < len; ++i) {
+		int processed = 1;
+		for (int cur = 1; cur < len; ++cur) {
 			int j;
-			for (j = 0; j < tail; ++j) {
-				if (str[i] == str[j]) break;
-			}
-			if (j == tail) {
-				str[tail] = str[i];
-				++tail;
-			}
+			for (j = 0; j < processed; ++j) {if (str[cur] == str[j]) break;}
+			if (j == processed) { // means before j, no duplicate detected.
+				str[processed] = str[cur];
+				++processed;
+			} // else. nothing. processed pointer stays.
+			System.out.println(processed);
 		}
-		str[tail] = 0;
+		str[processed] = 0;
 		System.out.println(str);
 	}
 }
