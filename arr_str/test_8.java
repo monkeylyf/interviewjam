@@ -16,9 +16,7 @@ class test_8 {
 
 	public static boolean rotation(String a, String b) {
 		if (a.length() != b.length()) return false;
-		String ab = a + b;
-		if (isSubstring(a, ab)) {return true;
-		} else {
-		return false;}
+		if (isSubstring(a, a + b)) {return true;
+		} else {return false;}
 	}
 }
