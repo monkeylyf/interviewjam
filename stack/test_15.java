@@ -6,14 +6,7 @@ import java.util.Stack;
 
 class test_15 {
 	public static void main(String[] args) {
-		myStack mys = new myStack();
-		mys.push(1);
-		mys.push(2);
-		mys.push(-3);
-		mys.push(4);
-		System.out.println(mys.min());
-		System.out.println("--------------");
-		stack s = new stack();
+		myS s = new myS();
 		s.push(1);
 		System.out.println(s.min());
 		s.push(2);
@@ -32,6 +25,33 @@ class test_15 {
 	}
 }
 
+class myS {
+	Node top;
+	int curmin = Integer.MAX_VALUE;
+
+	public void push(int d) {
+		curmin = Math.min(d, curmin);
+		Node n = new Node(d, curmin);
+		n.next = top;
+		top = n;
+	}
+
+	public int pop() {
+		if (top != null) {
+			int data = top.data;
+			top = top.next;
+			curmin = top.min;
+			return data;
+		}
+		return Integer.MAX_VALUE;
+	}
+
+	public int min() {return top.min;}
+	public int peek() {return top.data;}
+	public boolean isEmpty() {return top == null;}
+}
+
+
 class myStack extends Stack<Node> {
 	public void push(int value) {
 		int newMin = Math.min(value, min());
@@ -48,38 +68,10 @@ class myStack extends Stack<Node> {
 }
 
 
-class stack {
-	Node top;
-	int localMin = Integer.MAX_VALUE;
-	public void push(int d) {
-		localMin = Math.min(localMin, d);
-		Node node = new Node(d, localMin);
-		node.next = top;
-		top = node;
-	}
-
-	public int pop() {
-		if (top != null) {
-			int d = top.data;
-			top = top.next;
-			if (localMin <= d) localMin = top.min;
-			return d;
-		}
-		return Integer.MAX_VALUE;
-	}
-
-	public int min() {return peek().min;}
-
-	public Node peek() {return top;}
-
-	public boolean isEmpty() {return top == null;}
-}
-
 class Node {
 	Node next = null;
 	int data;
 	int min;
-	
 	public Node(int d, int minimum) {
 		data = d;
 		min = minimum;
