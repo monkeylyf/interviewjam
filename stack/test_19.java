@@ -1,4 +1,4 @@
-/*Write a program to sort a stack in ascending order You should not make any
+/*Write a program to sort a stack in ascending order. You should not make any
 assumptions about how the stack is implemented The following are the only
 functions that should be used to write this program: push | pop | peek | 
 isEmpty*/
@@ -13,13 +13,11 @@ class test_19 {
 		s.push(3);
 		s.push(-1);
 		s.push(2);
-		s.printAll();
-		Stack r = sortStack(s);
+		Stack r = my(s);
 		r.printAll();
+	}
 
-	}	
-
-	public static Stack sortStack(Stack s) {
+	public static Stack my(Stack s) {
 		Stack buffer = new Stack();
 		while (!s.isEmpty()) {
 			int tmp = s.pop();

@@ -3,7 +3,7 @@
 
 class test_18 {
 	public static void main(String[] args) {
-		Queue q = new Queue();
+		my q = new my();
 		q.enQueue(1);
 		q.enQueue(2);
 		q.enQueue(3);
@@ -15,24 +15,20 @@ class test_18 {
 	}
 }
 
-class Queue {
-	Stack buffer;
-	Stack tank;
-
-	public Queue() {
+class my {
+	Stack buffer, catcher;
+	public my() {
 		buffer = new Stack();
-		tank = new Stack();
-	}	
-	public void enQueue(int d) {tank.push(d);}
-
+		catcher = new Stack();
+	}
+	public void enQueue(int d) {buffer.push(d);}
 	public int deQueue() {
-		while (tank.top != null) {buffer.push(tank.pop());}
-		int d = buffer.pop();
-		while (buffer.top != null) {tank.push(buffer.pop());}
-		return d;
+		while (!buffer.isEmpty()) {catcher.push(buffer.pop());}
+		int tmp = catcher.pop();
+		while (!catcher.isEmpty()) {buffer.push(catcher.pop());}
+		return tmp;
 	}
 }
-
 
 class Stack {
 	Node top;
@@ -50,6 +46,8 @@ class Stack {
 		}
 		return Integer.MAX_VALUE;
 	}
+
+	public boolean isEmpty() {return top == null;}
 }
 
 
