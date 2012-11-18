@@ -1,0 +1,11 @@
+/*In Java, does the finally block gets executed if we insert a return statement
+inside the try block of a try-catch-finally?*/
+
+Yes, it will get executed.
+The finally block gets executed when the try block exists. However, even when
+we attempt to exit within the try block (normal exit, return, continue, break
+or any exception), the finally block will still be executed.
+
+Note: There are some cases in which the finally block will not get executed:
+if the virtual machine exits in between try/catch block execution, or the
+thread which is executing try/catch block gets killed.

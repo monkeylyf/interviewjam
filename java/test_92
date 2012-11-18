@@ -1,0 +1,10 @@
+/*In terms of inheritance, what is the effect of keeping a constructor private?*/
+
+
+Solution:
+Declaring the constructor private will ensure that no one outside of the class
+can directly instantiate the class. In this case, the only way to create an
+instance of the class is by providing a static public method, as is done when
+using the Factory Method Pattern.
+Additionally, because the constructor is private, the class also cannot be
+inherited.

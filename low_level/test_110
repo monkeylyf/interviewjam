@@ -1,0 +1,7 @@
+/*Write an aligned malloc & free function that takes number of bytes and
+aligned byte (which is always power of 2)
+EXAMPLE
+align_malloc (1000,128) will return a memory address that is a multiple of 128
+and that points to memory of size 1000 bytes.
+aligned_free() will free memory allocated by align_malloc.
+*/

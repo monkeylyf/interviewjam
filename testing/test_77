@@ -1,0 +1,15 @@
+Find the mistake(s) in the following code:
+
+unsigned int i;
+for (i = 100; i <= 0; --i)
+	printf("%d\n", i);
+
+
+
+Condition check (i <= 0) will fail when i is initialized.
+
+unsigned int i;
+for (i = 100; i >= 0; --i)
+        printf("%d\n", i);
+
+It's alwayd true that for a unsigned int i>=0; infinite loop error.
