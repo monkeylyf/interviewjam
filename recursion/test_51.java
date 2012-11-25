@@ -4,27 +4,21 @@ import java.util.*;
 
 class test_51 {
 	public static void main(String[] args) {
-		char[] input = "abcd".toCharArray();
+		String input = "abcd";
 		subset(input);
 	}
 
-	public static void subset(char[] input) {
-		ArrayList<char[]> all = new ArrayList<char[]>();
+	public static void subset(String input) {
+		ArrayList<String> all = new ArrayList<String>();
 		nextSubset(input, all);
-		for (char[] i : all) System.out.println(i);
+		for (String i : all) System.out.println(i);
 	}
 
-	public static void nextSubset(char[] input, ArrayList<char[]> all) {
-		if (input.length == 0) {all.add(input); return;}
-		nextSubset(removeIndex(input, 0), all);
-		ArrayList<char[]> tmp = new ArrayList<char[]>();
-		for (char[] j : all) tmp.add(j);
-		for (char[] i :  tmp) all.add((new String(i) + input[0]).toCharArray());
-	}
-
-	public static char[] removeIndex(char[] input, int i) {
-		String retval = "";
-		for (int j = 0; j < input.length; ++j) {if (j != i) retval += input[j];}
-		return retval.toCharArray();
+	public static void nextSubset(String input, ArrayList<String> all) {
+		if (input.length() == 0) {all.add(input); return;}
+		nextSubset(input.substring(1, input.length()), all);
+		ArrayList<String> tmp = new ArrayList<String>();
+		for (String j : all) tmp.add(j);
+		for (String i : tmp) all.add(input.charAt(0) + i);
 	}
 }
