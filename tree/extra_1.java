@@ -1,5 +1,11 @@
 /*Given the in-order traverse and pre-order traverse of a BINARY TREE, write an
-algorithm to print post-order traverse*/
+algorithm to print post-order traverse.
+
+FOLLOWUP:
+Given in-order and post-order, can you get pre-order? Or given pre-order and
+post-order, can you get in-order?
+
+What if it is binary search tree instead of binary tree?*/
 
 class extra_1 {
     public static void main(String[] args) {
