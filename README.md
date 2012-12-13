@@ -1,4 +1,7 @@
 careercup150
 ============
 
-practice of cc150 in java
+Practice of cc150 in java.
+
+Now more interview quetions will be added for the purpose of
+collation.
