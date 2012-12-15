@@ -11,22 +11,20 @@ class test_22 {
 	public static void main(String[] args) {
 		int len = 7;
 		int[] arr = new int[len];
-		for (int i = 0; i < len; ++i) {arr[i] = i;}
-		//for (int j : arr) {System.out.println(j);}
+		for (int i = 0; i < len; ++i) arr[i] = i;
 		Tree t = new Tree();
 		t.createWithMinHeight(arr);
 		t.bft();
 		System.out.println("--------");
 		t.dft();
 	}
-
 }
 
 class Tree {
 	public Node root;
-
-	public void createWithMinHeight(int[] arr) {root =  addToTree(arr, 0, arr.length -1);}
-
+	public void createWithMinHeight(int[] arr) {
+        root =  addToTree(arr, 0, arr.length -1);
+    }
 	public Node addToTree(int[] arr, int start, int end) {
 		if (start > end) return null;
 		int mid = (start + end) /  2;
@@ -36,7 +34,6 @@ class Tree {
 		node.r = addToTree(arr, mid + 1, end);
 		return node;
 	}
-
 	public void bft() {
 		Queue<Node> unvisited = new LinkedList<Node>();
 		unvisited.add(root);
@@ -47,7 +44,6 @@ class Tree {
 			if (cur.r != null) unvisited.add(cur.r);
 		}
 	}
-
 	public void dft() {
 		Stack<Node> unvisited = new Stack<Node>();
 		unvisited.push(root);
