@@ -6,6 +6,8 @@ step. What is the least cost moving from (0, 0) to (M, N)?
 FOLLOWUP:
 What is the path of min cost?*/
 
+import java.util.ArrayList;
+
 class extra_2 {
     public static void main(String args[]) {
         int[][] right = new int[][] {{0, 0, 1, 1, 1},
@@ -18,21 +20,42 @@ class extra_2 {
                                     {1, 0, 1, 1, 1},
                                     {1, 1, 1, 0, 1},
                                     {1, 1, 1, 0, 1}};
-        myCost(right, down);
+        //myCost(right, down);
+        myPath(right, down);
     }
     public static void myCost(int[][] right, int[][] down) {
-        System.out.println("The min cost is: " +nextCost(right, down, down.length-1, down[0].length-1));
-    }
-    public static int nextCost(int[][] right, int[][] down, int x, int y) {
-        if (x == 0 & y == 0) return 0;
-        else {
-            if (x == 0) return nextCost(right, down, x, y - 1) + right[x][y];
-            if (y == 0) return nextCost(right, down, x - 1, y) + down[x][y];
-            return Math.min(nextCost(right, down, x - 1, y) + down[x][y],
-                            nextCost(right, down, x, y - 1) + right[x][y]);
+        int[][] cost = new int[right.length][right[0].length];
+        cost[0][0] = 0;
+        for (int i = 1; i < right.length; ++i) cost[0][i] = cost[0][i-1] + right[0][i]; // row 0.
+        for (int i = 1; i < down.length; ++i) cost[i][0] = cost[i-1][0] + down[i][0]; // column 0.
+        for (int i = 1; i < right.length; ++i) {
+            for (int j = 1; j < right[i].length; ++j) cost[i][j] = Math.min(cost[i][j-1] + right[i][j], cost[i-1][j] + down[i][j]);
         }
+        System.out.println(cost[right.length - 1][right.length - 1]);
     }
     public static void myPath(int[][] right, int[][] down) {
-    
+        ArrayList<int[]> path = new ArrayList<int[]>();
+        int[][] cost = new int[right.length][right[0].length];
+        cost[0][0] = 0;
+        for (int i = 1; i < right.length; ++i) cost[0][i] = cost[0][i-1] + right[0][i]; // row 0.
+        for (int i = 1; i < down.length; ++i) cost[i][0] = cost[i-1][0] + down[i][0]; // column 0.
+        for (int i = 1; i < right.length; ++i) {
+            for (int j = 1; j < right[i].length; ++j) cost[i][j] = Math.min(cost[i][j-1] + right[i][j], cost[i-1][j] + down[i][j]);
+        }
+
+        for (int i = 0; i < cost.length; ++i) {
+            for (int j = 0; j < cost.length; ++j) System.out.print(cost[i][j] + " ");
+            System.out.println("");
+        }
+
+        int x = cost.length - 1;
+        int y = cost[0].length - 1;
+        path.add(new int[] {cost.length - 1, cost[0].length - 1});
+        while (x != 0 && y != 0) {
+            if (cost[x-1][y] + down[x][y] == cost[x][y]) path.add(new int[] {x-- - 1, y});
+            else path.add(new int[] {x, y-- -1});
+        }
+        path.add(new int[] {0, 0});
+        for (int i = path.size() - 1; i >= 0; --i) System.out.println("(" + path.get(i)[0] + ", " + path.get(i)[1] + ")");
     }
 }
