@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 class test_23 {
-	public static void main(String[] rags) {
+	public static void main(String[] args) {
 		Tree t = new Tree();
 		t.insert(4);
 		t.insert(2);
