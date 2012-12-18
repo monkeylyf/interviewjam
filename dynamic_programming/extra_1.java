@@ -13,35 +13,33 @@ import java.util.*;
 
 class extra_1 {
     public static void main(String args[]) {
-        //int[] two = new int[] {0,0,1,0,2,3,1,3,2,0,3}; // two[0]=two[1]=0;two[2]:0-2;
-        //int[] one = new int[] {0,1,2,2,1,2,2,1,2,2,1}; // one[0]=0; one[1]:0-1;one[2]:1-2;
-        int[] two = new int[] {0,0,1,2,3};
-        int[] one = new int[] {0,1,1,1,1};
-        //myPath(two, one);
-        //myCost(two, one);
-        my(two, one);
+        int[] two = new int[] {0,0,0,1,1,1};
+        int[] one = new int[] {0,1,1,0,0,0};
+        myPath(new int[] {0,0,1,0,2,3,1,3,2,0,3}, new int[] {0,1,2,2,1,2,2,1,2,2,1});
+        my(new int[] {0,0,1,0,2,3,1,3,2,0,3}, new int[] {0,1,2,2,1,2,2,1,2,2,1});
     }
-    // Get the path of min cost.
-    /*public static void myPath(int[] two, int[] one) {
+    // Get path with min cost.
+    public static void myPath(int[]two, int[] one) {
         ArrayList<Integer> path = new ArrayList<Integer>();
-        nextStep(two, one, two.length - 1, "", "", "");
-        for (int i : path) System.out.print(i);
-        System.out.println("");
-    }
-    public static int nextStep(int[] two, int[] one, int x, String step, String t, String o) {
-        if (x == 0) {return 0; step += "0-0";}
-        if (x == 1) {return one[x]; step += "0-1";}
-        else {
-            int take_two = nextStep(two, one, x - 2, path);
-            int take_one = nextStep(two, one, x - 1, path);
-            if ((take_one + one[x]) > (take_two + two[x])) {
-                step = "";
-                return take_two;
-            } else {
-                return take_one;
-            }
+        int[] cost = new int[two.length];
+        cost[0] = 0;
+        cost[1] = one[1];
+        int index = 2;
+        while (index < one.length) {
+            cost[index] = Math.min(cost[index - 1] + one[index], cost[index - 2] + two[index]);
+            ++index;
         }
-    }*/
+        index = cost.length - 1;
+        path.add(index);
+        while (index > 1) {
+            if (cost[index] == two[index] + cost[index - 2]) {
+                index -= 2;
+            } else index -= 1;
+            path.add(index);
+        }  
+        if (path.get(path.size() - 1) == 1) path.add(0);
+        for (int i = path.size() - 1; i >= 0; --i) System.out.print(path.get(i) + " ");
+    }
     // Get the min Cost.
     public static void myCost(int[] two, int[] one) {
         System.out.println("The min cost is: " + nextCost(two, one, two.length - 1));
@@ -55,7 +53,6 @@ class extra_1 {
         int two_before = 0;
         int one_before = one[1];
         int index = 2;
-
         while (index < one.length) {
             int tmp = Math.min(one_before + one[index], two_before + two[index]);
             two_before = one_before;
