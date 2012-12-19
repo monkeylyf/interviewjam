@@ -30,12 +30,13 @@ class leetcode_1 {
             int j = i + 1;
             int k = num.length - 1;
             while (j < k) {
-                if (num[j] + num[k] == -num[i]) {
+                if (num[j] + num[k] > -num[i]) --k;
+                else if (num[j] + num[k] < -num[i]) ++j;
+                else {
                     Collections.addAll(tmp, num[i], num[j++], num[k--]);
                     all.add(tmp);
                     tmp = new ArrayList<Integer>();
-                } else if (num[j] + num[k] > -num[i]) --k;
-                else ++j;
+                }
             }
         }
         return new ArrayList<ArrayList<Integer>>(all);
