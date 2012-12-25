@@ -5,7 +5,15 @@ FOLLOWUP:
 Given in-order and post-order, can you get pre-order? Or given pre-order and
 post-order, can you get in-order?
 
-What if it is binary search tree instead of binary tree?*/
+What if it is binary search tree instead of binary tree?
+
+Answer:
+Given inorder and postorder, tree can be reconstructed.
+Given inorder and preorder, tree can be reconstructed too.
+Given preorder and postorder, tree can not be reconstructed.
+
+Given any of in, post, pre-order traversal of a BST, tree can be reconstructed.
+*/
 
 class extra_1 {
     public static void main(String[] args) {
