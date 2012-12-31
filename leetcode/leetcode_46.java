@@ -13,32 +13,34 @@ class leetcode_46 {
         System.out.println(longestValidParentheses(""));
         System.out.println(longestValidParentheses("("));
         System.out.println(longestValidParentheses(")"));
+        System.out.println(longestValidParentheses(")"));
+        System.out.println(longestValidParentheses("()(()"));
     }
+    // Iterate input string twice. Three times will not be accepted by onlinejudge.
     public static int longestValidParentheses(String s) {
-        int balance = 0;
+        int left = 0;
+        int right = 0;
         int max = 0;
-        int cur_num = 0;
-        int i = 0;
-        while (i < s.length()) {
-            if (s.charAt(i) == '(') {
-                ++balance;
-            } else {
-                --balance;
-                if (balance < 0) {
-                    // the valid parentheses has ended.
-                    if (cur_num > max) {
-                        max = cur_num;
-                    }
-                    // Reset balance & cur_num.
-                    balance = 0;
-                    cur_num = 0;
-                } else {
-                    cur_num += 2;
-                }
+        for (int i = 0; i < s.length(); ++i) {
+            if (s.charAt(i) == '(') left++;
+            else right++;
+            if (left == right && left + right > max) max = left + right;
+            else if (right > left) {
+                left = 0;
+                right = 0;
             }
-            ++i;
         }
-        if (cur_num > max) max = cur_num;
+        left = 0;
+        right = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) == '(') left++;
+            else right++;
+            if (left == right && right + left > max) max = right + left;
+            else if (left > right) {
+                left = 0;
+                right = 0;
+            }
+        }
         return max;
     }
 }
