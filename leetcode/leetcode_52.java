@@ -47,6 +47,15 @@ class leetcode_52 {
         n1.right = n3;
         connect(n1);
     }
+    // More elegant.
+    public static void my(TreeLinkNode root) {
+        if (root == null) return;
+        if (root.left != null) root.left.next = root.right;
+        if (root.right != null) root.right.next = (root.next != null) ? root.next.left : null;
+        connect(root.left);
+        connect(root.right);
+    }
+    // This method is familar to print the bst layer by layer.
     public static void connect(TreeLinkNode root) {
         if (root == null) return;
         Queue<TreeLinkNode> unvisited = new LinkedList<TreeLinkNode>();
