@@ -4,17 +4,18 @@ borders are filled with black pixels*/
 
 class test_144 {
 	public static void main(String[] args) {
-		int[][] input = {{1, 1, 0, 1, 1},
-				  {1, 1, 1, 1, 1},
-				  {0, 1, 0, 0, 1},
-				  {0, 1, 1, 0, 1},
-				  {0, 1, 1, 1, 1}};
+		int[][] input = {
+                         {1, 1, 0, 1, 1},
+        				 {1, 1, 1, 1, 1},
+				         {0, 1, 0, 0, 1},
+				         {0, 1, 1, 0, 1},
+				         {0, 1, 1, 1, 1}
+                        };
 		maxSubsquare(input, 5);
 	}
-
 	public static void maxSubsquare(int[][] m, int n) {
-		 for (int l = n; l > 1; --l) {
-		 	for (int i = 0; i <= n - l; ++i) {
+	    for (int l = n; l > 1; --l) {
+		    for (int i = 0; i <= n - l; ++i) {
 				for (int j = 0; j <= n - l; ++j) {
 					boolean allOne = true;
 					// (i, j) -> (i, j + l - 1) -> (i + l - 1, j) -> (i + l - 1, j + l - 1)
