@@ -1,91 +1,85 @@
-/*Populating next right pointers in each node
+/*Merge k Sorted Lists
 
-Given a binary tree
-public class TreeLinkNode {
-    int val;
-    TreeLinkNode left, right, next;
-    TreeLinkNode(int x) {
-        val = x;
-    }
-}
-
-Populate each next pointer to point to its next right node. If there is no next
-right node, the next pointer should be set to NULL.
-Initially, all next pointers are set to NULL.
-Note:
-You may only use constant extra space.
-You may assume that it is a perfect binary tree (ie, all leaves are at the same
-level, and every parent has two children).
-For example,
-Given the following perfect binary tree,
-
-        1
-       /  \
-      2    3
-     / \  / \
-    4  5  6  7
-After calling your function, the tree should look like:
-
-        1 -> NULL
-       /  \
-      2 -> 3 -> NULL
-     / \  / \
-    4->5->6->7 -> NULL
+Merge k sorted linked lists and return it as one sorted list. Analyze and
+describe its complexity.
 */
 
 
-import java.util.Queue;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
-
-class leetcode_52 {
+class leetcode_51 {
     public static void main(String[] args) {
-        TreeLinkNode n1 = new TreeLinkNode(1);
-        TreeLinkNode n2 = new TreeLinkNode(2);
-        TreeLinkNode n3 = new TreeLinkNode(3);
-        n1.left = n2;
-        n1.right = n3;
-        connect(n1);
     }
-    // More elegant.
-    public static void my(TreeLinkNode root) {
-        if (root == null) return;
-        if (root.left != null) root.left.next = root.right;
-        if (root.right != null) root.right.next = (root.next != null) ? root.next.left : null;
-        connect(root.left);
-        connect(root.right);
+    public static ListNode mergeKLists(ArrayList<ListNode> lists) {
+        if (lists.size() == 0) return null;
+        ListNode head = new ListNode(0);
+        head.next = lists.get(0);
+        for (int i = 1; i < lists.size(); i++) mergeTwo(head, lists.get(i));
+        return head.next;
     }
-    // This method is familar to print the bst layer by layer.
-    public static void connect(TreeLinkNode root) {
-        if (root == null) return;
-        Queue<TreeLinkNode> unvisited = new LinkedList<TreeLinkNode>();
-        LinkedList<TreeLinkNode> ll = new LinkedList<TreeLinkNode>();
-        unvisited.add(root);
-        int count = 1;
-        while (true) {
-            TreeLinkNode node = unvisited.remove();
-            ll.add(node);
-            if (node.left != null) unvisited.add(node.left);
-            if (node.right != null) unvisited.add(node.right);
-            if (--count == 0) {
-                for (int i = 0; i < ll.size(); ++i) {
-                    if (i + 1 < ll.size()) {
-                        ll.get(i).next = ll.get(i + 1);
-                    }
+    public void mergeTwo(ListNode head, ListNode list){
+        ListNode tmp = head.next;
+        ListNode prev = head; 
+        if (tmp == null) head.next = list;
+        while (tmp != null && list != null) {
+            if (tmp.val < list.val) {
+                if (tmp.next != null) {
+                    // tmp ptr and prev ptr move by one step.
+                    prev = tmp;
+                    tmp = tmp.next;
+                } else {
+                    // Simply copy list to tmp.next and done.
+                    tmp.next = list;
+                    break;
                 }
-                ll = new LinkedList<TreeLinkNode>();
-                count = unvisited.size();
+            } else {
+                // Must be: prev.val >= list.val >= tmp.val.
+                ListNode temp = list.next;
+                prev.next = list;
+                list.next = tmp;
+                // Move by one step.
+                prev = list;
+                list = temp;
             }
-            if (unvisited.isEmpty()) break;
         }
+    }
+    // Time limit exceeded.
+    public static ListNode mergeKLists(ArrayList<ListNode> lists) {
+        ArrayList<ListNode> tmp = lists;
+        ListNode res = new ListNode(0);
+        ListNode head = res;
+        res = res.next;
+        for (int i = 0; i < tmp.size(); ++i) {
+            if (tmp.get(i) == null) {
+                tmp.remove(i);
+            }
+        }
+        if (tmp.size() == 0) return null;
+        if (tmp.size() == 1) return lists.get(0);
+        int minIndex;
+        while (tmp.size() != 0) {
+            minIndex = 0;
+            for (int i = 1; i < tmp.size(); ++i) {
+                if (tmp.get(i).val < tmp.get(minIndex).val) {
+                    minIndex = i;
+                }
+            }
+            ListNode min = tmp.get(minIndex);
+            res = new ListNode(min.val);
+            res = res.next;
+            if (min.next != null) min = min.next;
+            else tmp.remove(minIndex);
+        }
+        return head.next;
     }
 }
 
 
-class TreeLinkNode {
+class ListNode {
     int val;
-    TreeLinkNode left, right, next;
-    TreeLinkNode(int x) {
+    ListNode next;
+    ListNode(int x) {
         val = x;
+        next = null;
     }
 }
