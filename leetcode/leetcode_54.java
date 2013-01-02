@@ -1,46 +1,39 @@
-/*Spiral matrix
+/*Merge Two Sorted Lists
 
-Given a matrix of m x n elements (m rows, n columns), return all elements of
-the matrix in spiral order.
-For example,
-Given the following matrix:
-[
-  [ 1, 2, 3 ],
-  [ 4, 5, 6 ],
-  [ 7, 8, 9 ]
-]
-You should return [1,2,3,6,9,8,7,4,5].
+Merge two sorted linked lists and return it as a new list. The new list should
+be made by splicing together the nodes of the first two lists.
 */
-
-import java.util.ArrayList;
-
 
 class leetcode_54 {
     public static void main(String[] args) {
-        int[][] test = new int[2][1];
-        test[0][0] = 3;
-        test[1][0] = 2;
-        spiralOrder(test);
     }
-    public static ArrayList<Integer> spiralOrder(int[][] matrix) {
-        ArrayList<Integer> res = new ArrayList<Integer>();
-        if (matrix.length == 0) return res;
-        int[][] onion = matrix;
-        peelMatrix(onion, res);
-        return res;
-    }
-    public static void peelMatrix(int[][] onion, ArrayList<Integer> res) {
-        int row = onion.length;
-        int col = onion[0].length;
-        for (int i = 0; i < col; ++i) res.add(onion[0][i]);
-        if (row > 1) {
-            int[][] newOnion = new int[col][row - 1];
-            for (int i = 0; i < row - 1; ++i) {
-                for (int j = 0; j < col; ++j) {
-                    newOnion[col - 1 - j][i] = onion[i + 1][j];
+    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if (l1 == null) return l2;
+        ListNode prev = new ListNode(0);
+        prev.next = l1;
+        ListNode cur = l1;
+        ListNode head = prev;
+        while (l2 != null) {
+            if (cur.val < l2.val) {
+                if (cur.next != null) {
+                    // cur ptr and prev ptr move by one step.
+                    prev = cur;
+                    cur = cur.next;
+                } else {
+                    // Simply copy l2 to cur.next and done.
+                    cur.next = l2;
+                    break;
                 }
+            } else {
+                // Must be: prev.val >= l2.val >= cur.val.
+                ListNode temp = l2.next;
+                prev.next = l2;
+                l2.next = cur;
+                // Move by one step.
+                prev = l2;
+                l2 = temp;
             }
-            peelMatrix(newOnion, res);
         }
+        return head.next;
     }
 }
