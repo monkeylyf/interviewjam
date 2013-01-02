@@ -1,32 +1,25 @@
-/*Search in rotated sorted array
+/*Merge Sorted Array
 
-Suppose a sorted array is rotated at some pivot unknown to you beforehand.
-(i.e., [0 1 2 4 5 6 7] might become [4 5 6 7 0 1 2]).
-You are given a target value to search. If found in the array return its index,
-otherwise return -1.
-You may assume no duplicate exists in the array.
+Given two sorted integer arrays A and B, merge B into A as one sorted array.
+Note:
+You may assume that A has enough space to hold additional elements from B. The
+number of elements initialized in A and B are m and n respectively.
 */
-
 
 class leetcode_53 {
     public static void main(String[] args) {
-    
+        merge(new int[] {2, 0}, 1, new int[] {1}, 1);
     }
-    public static int search(int[] A, int target) {
-        int start = 0;
-        int end = A.length - 1;
-        while (start <= end) {
-            int middle = (start + end) / 2;
-            if (A[middle] == target) return middle;
-            else if (A[start] <= A[middle]) {
-                if (target > A[middle]) start = middle + 1;
-                else if (target >= A[start]) end = middle - 1;
-                else start = middle + 1;
+    public static void merge(int A[], int m, int B[], int n) {
+        int a_tail = m - 1;
+        int b_tail = n - 1;
+        while (a_tail >= 0 && b_tail >= 0) {
+            if (A[a_tail] > B[b_tail]) {
+                A[a_tail + b_tail + 1] = A[a_tail--];
+            } else {
+                A[a_tail + b_tail + 1] = B[b_tail--];
             }
-            else if (target < A[middle]) end = middle  - 1;
-            else if (target <= A[end]) start = middle + 1;
-            else end = middle - 1;
         }
-        return -1;
+        while (b_tail >= 0) A[b_tail] = B[b_tail--];
     }
 }
