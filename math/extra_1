@@ -1,0 +1,10 @@
+/*Suppose you begin with a pile of n stones and split this pile into n piles
+of one stone each. Each time you split a pile of stones into two smaller piles
+and you multiply the number of stones in each of the two smaller piles you just
+formed, e.g, if these piles have r and s stones in them, respectively, you
+write down r * s. Show that no matter how you split the piles, the sum of the
+products you write down at each step is a constant.
+
+
+Answer n * (n - 1) / 2
+*/
