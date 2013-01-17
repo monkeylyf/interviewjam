@@ -12,29 +12,26 @@ import java.util.Stack;
 
 class leetcode_111 {
     public static void main(String[] args) {
-    
+        trap(new int[] {0,1,0,2,1,0,1,3,2,1,2,1});
     }
     public static int trap(int[] A) {
         Stack<Integer> s = new Stack<Integer>();
         int res = 0;
-        int left, oldLevel, newLevel;
+        int prev, lowBank, highBank;
         for (int i = 0; i < A.length; ++i) {
-            while (!s.isEmpty() && (i == A.length || A[i] > A[s.peek()])) {
+            while (!s.isEmpty() && A[i] > A[s.peek()]) {
                 // Can hold some water.
-                oldLevel = A[s.peek()];
-                s.pop();
+                lowBank = A[s.pop()];
                 // Remember to check if the stack is empty or not
                 // also, only add water when i < n.
-                if (!s.isEmpty() && i < A.length) {
-                    left = s.peek();
-                    newLevel = Math.min(A[i], A[left]);
-                    res += (newLevel - oldLevel) * (i - left - 1);
+                if (!s.isEmpty()) {
+                    prev = s.peek();
+                    highBank = Math.min(A[i], A[prev]);
+                    res += (highBank - lowBank) * (i - prev - 1);
                 }
             }
-            if (i < A.length) {
-                s.push(i);
-            }
+            s.push(i);
         }
-        return res;
+        return res; 
     }
 }
