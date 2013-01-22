@@ -21,19 +21,21 @@ class Best_Time_to_Buy_and_Sell_Stock_III {
         int retval = 0;
         int[] premax = new int[prices.length];
         int[] postmax = new int[prices.length];
-        premax[0] = 0;
-        postmax[prices.length - 1] = 0;
-        int low=prices[0];
-        int high=prices[prices.length - 1];
+        //premax[0] = 0;
+        //postmax[prices.length - 1] = 0;
+        int low = prices[0];
+        int high = prices[prices.length - 1];
         for (int m = 1; m < prices.length; m++) {
             premax[m] = Math.max(premax[m - 1], prices[m] - low);
             low = Math.min(low, prices[m]);
         }
         for (int n = prices.length - 2; n > 0; n--) {
-            postmax[n] = Math.max(postmax[n+1], high - prices[n]);
+            postmax[n] = Math.max(postmax[n + 1], high - prices[n]);
             high = Math.max(high, prices[n]);
         }
-        for (int j = 1; j < prices.length; j++) retval = Math.max(retval, (premax[j] + postmax[j]));
+        for (int j = 1; j < prices.length; j++) {
+            retval = Math.max(retval, (premax[j] + postmax[j]));
+        }
         return retval;
     }
 }

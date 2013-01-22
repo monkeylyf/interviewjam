@@ -1,8 +1,8 @@
 /*Anagrams
 
 Given an array of strings, return all groups of strings that are anagrams.
-
-Note: All inputs will be in lower-case.*/
+Note: All inputs will be in lower-case.
+*/
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -35,7 +35,9 @@ class leetcode_Anagrams {
         while (itr.hasNext()) {
             String str = (String) itr.next();
             if (dict.get(str).size() > 1) {
-                for (int i : dict.get(str)) all.add(strs[i]);
+                for (int i : dict.get(str)) {
+                    all.add(strs[i]);
+                }
             }
         }
         return all;
