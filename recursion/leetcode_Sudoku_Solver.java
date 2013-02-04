@@ -12,36 +12,42 @@ import java.util.HashSet;
 
 class leetcode_Sudoku_Solver {
     public static void main(String[] args) {
-        char[][] board = new char[][] {{'.', '.', '9', '7', '4', '8', '.', '.', '.'},
-                                       {'7', '.', '.', '.', '.', '.', '.', '.', '.'},
-                                       {'.', '2', '.', '1', '.', '9', '.', '.', '.'},
-                                       {'.', '.', '7', '.', '.', '.', '2', '4', '.'},
-                                       {'.', '6', '4', '.', '1', '.', '5', '9', '.'},
-                                       {'.', '9', '8', '.', '.', '.', '3', '.', '.'},
-                                       {'.', '.', '.', '8', '.', '3', '.', '2', '.'},
-                                       {'.', '.', '.', '.', '.', '.', '.', '.', '6'},
-                                       {'.', '.', '.', '2', '7', '5', '9', '.', '.'}
+        char[][] board = new char[][] {{'.', '4', '.', '.', '.', '5', '1', '2', '7'},
+                                       {'.', '.', '.', '1', '.', '.', '3', '9', '4'},
+                                       {'.', '.', '1', '4', '9', '.', '6', '5', '8'},
+                                       {'3', '1', '7', '9', '2', '8', '4', '6', '5'},
+                                       {'5', '9', '2', '7', '4', '6', '8', '1', '3'},
+                                       {'8', '6', '4', '5', '3', '1', '9', '7', '2'},
+                                       {'.', '5', '.', '3', '1', '4', '7', '8', '6'},
+                                       {'4', '7', '6', '2', '8', '9', '5', '3', '1'},
+                                       {'1', '3', '8', '6', '5', '7', '2', '4', '9'}
                                       };
         solveSudoku(board);
     }
     public static void solveSudoku(char[][] board) {
         resolveNext(board, 0, 0);
     }
-    public static void resolveNext(char[][] board, int row, int col) {
+    public static boolean resolveNext(char[][] board, int row, int col) {
         int[] pos = nextPosition(board, row, col);
         int nextRow = pos[0];
         int nextCol = pos[1];
         printBoard(board);
         if (nextRow == -1 && nextCol == -1) {
-            return;
+            return true;
         } else {
             for (int k = 1; k <= 9; ++k) {
+                boolean result = false;
                 board[nextRow][nextCol] = Character.forDigit(k, 10);
                 if (isValidSudoku(board, nextRow, nextCol)) {
-                    resolveNext(board, nextRow, nextCol);
+                    result = resolveNext(board, nextRow, nextCol);
                 }
-                board[nextRow][nextCol] = '.';
+                if (result) {
+                    return true;
+                } else {
+                    board[nextRow][nextCol] = '.'; // Reset on backtrack.
+                }
             }
+            return false;
         }
     }
     public static int[] nextPosition(char[][] board, int row, int col) {
@@ -99,8 +105,8 @@ class leetcode_Sudoku_Solver {
         }
         set = new HashSet<Character>();
         // Check subbox.
-        int i = row / 3;
-        int j = col / 3;
+        int i = row / 3 * 3; 
+        int j = col / 3 * 3; // (i, j) is the upper-left point of the subbox containing (row, col). 
         for (int h = 0; h < 3; ++h) {
             for (int k = 0; k < 3; ++k) {
                 char cur = board[i + h][j + k];
