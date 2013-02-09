@@ -17,11 +17,11 @@ class leetcode_Unique_Paths {
         // path(x, y) = path(x - 1, y) + path(x, y - 1) if (x != 0 && x != 0)
         //            = 1                               else
         int[] prev = new int[n];
-        int[] next = new int[n];
         for (int i = 0; i < n; ++i) {
             prev[i] = 1;
         }
         for (int i = 1; i < m; ++i) {
+            int[] next = new int[n];
             for (int j  = 0; j < n; ++j) {
                 if (j == 0) {
                     next[j] = 1;
@@ -30,7 +30,6 @@ class leetcode_Unique_Paths {
                 } 
             }
             prev = next;
-            next = new int[n];
         }
         return prev[prev.length - 1];
     }

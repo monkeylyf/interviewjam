@@ -20,7 +20,7 @@ import java.util.HashSet;
 
 class leetcode_Unique_Binary_Search_Trees {
     public static void main(String[] args) {
-        numTrees(3);
+        System.out.println(numTrees(4));
     }
     public static int numTrees(int n) {
         // The idea behind this is dp-based.
@@ -33,9 +33,12 @@ class leetcode_Unique_Binary_Search_Trees {
         int bst[] = new int[n + 1];
         bst[0] = 1;
         bst[1] = 1;
+        //   1  2
+        //  /    \
+        // 2      1
         bst[2] = 2;
-        for (int i = 3; i <= n; i++) {
-            for (int j = 1; j < i - 1; j++) {
+        for (int i = 3; i <= n; ++i) {
+            for (int j = 1; j < i - 1; ++j) {
                 bst[i] += bst[j] * bst[i - 1 - j];
             }
             bst[i] += 2 * bst[i - 1];

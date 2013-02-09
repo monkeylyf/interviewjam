@@ -1,7 +1,10 @@
-/*Describe an algorithm to find the largest 1 million numbers in 1 billion
+/*Find_Largest_k_numbers_in_n_Numbers
+careercup
+
+Describe an algorithm to find the largest 1 million numbers in 1 billion
 numbers. Assume that the computer memory can hold all one billion numbers*/
 
-class test_139 {
+class cap_Find_Largest_k_numbers_in_n_Numbers {
 	public static void main(String[] args) {
 		int[] test = {16, 4, 10, 14, 7, 9, 3, 2, 8, 1, 0, 0};
 		maxHeapify(test, 10, 1);
@@ -29,17 +32,19 @@ class test_139 {
 			for (int j : test3) System.out.print(j + " ");
 			System.out.println("");
 		}
-
-		//  
 	}
-
 	public static void maxHeapify(int[] arr, int heapsize, int i) {
 		int l = 2 * i + 1;
 		int r = 2 * i + 2;
 		int largest = 0;
-		if (l + 1 <= heapsize && arr[l] > arr[i]) largest = l;
-		else largest = i;
-		if (r + 1 <= heapsize && arr[r] > arr[largest]) largest = r;
+		if (l + 1 <= heapsize && arr[l] > arr[i]) {
+            largest = l;
+        } else {
+            largest = i;
+        }
+		if (r + 1 <= heapsize && arr[r] > arr[largest]) {
+            largest = r;
+        }
 		if (largest != i) {
 			int tmp = arr[i];
 			arr[i] = arr[largest];
@@ -47,18 +52,21 @@ class test_139 {
 			maxHeapify(arr, heapsize, largest);
 		}
 	}
-
 	public static void buildMaxHeap(int[] arr, int size) {
-		for (int i = (size-1)/2; i>=0; --i) maxHeapify(arr,size,i);
+		for (int i = (size-1)/2; i>=0; --i) {
+            maxHeapify(arr,size,i);
+        }
 	}
-	 
 	public static void minHeapify(int[] arr, int heapsize, int i) {
 		int l = 2 * i + 1;
 		int r = 2 * i + 2;
 		int min = 0;
-		if (l + 1 <= heapsize && arr[l] < arr[i]) min = l;
-		else min = i;
-		if (r + 1 <= heapsize && arr[r] < arr[min]) min = r;
+		if (l + 1 <= heapsize && arr[l] < arr[i]) {
+            min = l;
+        } else min = i;
+		if (r + 1 <= heapsize && arr[r] < arr[min]) {
+            min = r;
+        }
 		if (min != i) {
 			int tmp = arr[i];
 			arr[i] = arr[min];
@@ -66,23 +74,24 @@ class test_139 {
 			minHeapify(arr, heapsize, min);
 		}
 	}
-
 	public static void buildMinHeap(int[] arr, int size) {
-		for (int i = (size-1)/2; i>=0; --i) minHeapify(arr,size,i);
+		for (int i = (size - 1 ) / 2; i >= 0; --i) {
+            minHeapify(arr,size,i);
+        }
 	}
-
 	public static void insertMax(int[] arr, int size, int i) {
 		arr[size] = i;
 		while (true) {
 			int parent = (size - 1) / 2;
-			if (size == 0 || arr[parent] > arr[size]) break;
+			if (size == 0 || arr[parent] > arr[size]) {
+                break;
+            }
 			int tmp = arr[size];
 			arr[size] = arr[parent];
 			arr[parent] = tmp;
 			size = parent;
 		}
 	}
-
 	public static int removeMax(int[] arr, int size) {
 		int retval = arr[0];
 		arr[0] = arr[size - 1];
@@ -90,19 +99,19 @@ class test_139 {
 		maxHeapify(arr, size - 1, 0);
 		return retval;
 	} 
-
 	public static void insertMin(int[] arr, int size, int i) {
 		arr[size] = i;
 		while (true) {
 			int parent = (size - 1) / 2;
-			if (size == 0 || arr[parent] < arr[size]) break;
+			if (size == 0 || arr[parent] < arr[size]) {
+                break;
+            }
 			int tmp = arr[size];
 			arr[size] = arr[parent];
 			arr[parent] = tmp;
 			size = parent;
 		}
 	}
-
 	public static void removeMin(int[] arr, int size) {
 		int retval = arr[0];
 		arr[0] = arr[size - 1];
@@ -111,5 +120,3 @@ class test_139 {
 		return retval;
 	}
 }
-
-

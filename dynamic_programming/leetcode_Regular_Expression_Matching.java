@@ -38,45 +38,47 @@ class leetcode_Regular_Expression_Matching {
                 regex.add(0, p.charAt(i) + "");
             }
         }
-        boolean[][] track = new boolean[s.length() + 1][regex.size() + 1]; // dp-based matrix.
-        track[0][0] = true; // Empty str "" match empty str "".
+        boolean[] prev = new boolean[regex.size() + 1]; // previous row of dp-based matrix
+        prev[0] = true; // Empty str "" match empty str "".
         for (int i = 0; i < regex.size(); ++i) {
             if (regex.get(i).length() == 2) {
-                track[0][i + 1] = true; // i
+                prev[i + 1] = true; // i
             } else {
                 break; // Once a mismatch seen, the rest of them are all mismatch.
             }
         }
         for (int i = 0; i < s.length(); ++i) {
+            boolean[] next = new boolean[regex.size() + 1];
             for (int j = 0; j < regex.size(); ++j) {
                 String cur = regex.get(j);
                 if (cur.length() == 2) {
                     if (cur.charAt(0) == '.' || cur.charAt(0) == s.charAt(i)) {
                         // isMatch(yya, xxa*) = isMatch(yy, xx) || isMatch(yya, xx).
-                        track[i + 1][j + 1] = track[i + 1][j] || track[i][j];
+                        next[j + 1] = next[j] || prev[j];
                         if (i > 0 && (cur.charAt(0) == s.charAt(i - 1) || cur.charAt(0) == '.')) {
                             // 'x*' case: Check if the previous (i > 0) char equals cur char. 
                             // '.*' case: matches anything. 
                             // These two case can match zero or more of the preceding element.
                             // isMatch(yya, xxa*) = isMatch(yy, xx) || isMatch(yya, xx) || isMatch(yy, xxa*)
-                            track[i + 1][j + 1] = track[i + 1][j + 1] || track[i][j + 1];
+                            next[j + 1] = next[j + 1] || prev[j + 1];
                         }
                     } else {
                         // isMatch(yya, xxb*) = isMatch(yya, xx).
-                        track[i + 1][j + 1] = track[i + 1][j]; 
+                        next[j + 1] = next[j]; 
                     }
                 } else {
                     // length() == 1.
                     if (cur.equals(".") || cur.equals(s.charAt(i) + "")) {
                         // isMatch(yya, xxa) = isMatch(yy, xx)
-                        track[i + 1][j + 1] = track[i][j];
+                        next[j + 1] = prev[j];
                     } else {
                         // Mismatch.
-                        track[i + 1][j + 1] = false; 
+                        next[j + 1] = false; 
                     }
                 }
             }
+            prev = next;
         }
-        return track[track.length - 1][track[0].length - 1];
+        return prev[prev.length - 1];
     }
 }

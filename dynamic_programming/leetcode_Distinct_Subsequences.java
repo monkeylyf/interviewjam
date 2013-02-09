@@ -16,6 +16,7 @@ class leetcode_Distinct_Subsequences {
         numDistinct("ccc", "c");
     }
     public static int numDistinct(String S, String T) {
+        //C(S, T) = C(S.substr(0,len-1), T.substr(0,len-1)) + C(S.substr(0,len-1), T)
         int[] prev = new int[T.length() + 1];
         int[] next = new int[T.length() + 1];
         prev[0] = 1;

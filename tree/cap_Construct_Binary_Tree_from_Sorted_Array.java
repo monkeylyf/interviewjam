@@ -1,4 +1,7 @@
-/*Given a sorted (increasing order) array, write an algorithm to create a
+/*Construct_Binary_Tree_from_Sorted_Array
+careercup
+
+Given a sorted (increasing order) array, write an algorithm to create a
 binary tree with minimal height*/
 
 import java.util.ArrayList;
@@ -7,7 +10,7 @@ import java.util.Stack;
 import java.util.LinkedList;
 
 
-class test_22 {
+class cap_Construct_Binary_Tree_from_Sorted_Array {
 	public static void main(String[] args) {
 		int len = 7;
 		int[] arr = new int[len];

@@ -1,7 +1,9 @@
 /*Write an algorithm to find the ‘next’ node (e g , in-order successor) of a given
 node in a binary search tree where each node has a link to its parent
+
 FOLLOWUP
-If there is no link to its parent?*/
+What if there is no link to node's parents?*/
+
 import java.util.*;
 
 
@@ -99,20 +101,17 @@ class test_24 {
 
 class Tree {
 	public Node root;
-
 	public void insert(int d) {
 		Node node = new Node();
 		node.data = d;
 		root = getNext(root, node);
 	}
-
 	public Node getNext(Node entry, Node node) {
 		if (entry == null) entry = node;
 		else if (entry.data > node.data) {entry.l = getNext(entry.l, node);}
 		else entry.r = getNext(entry.r, node);
 		return entry;
 	}
-
 	public Node getNode(Node entry, int key) {
 		if (entry == null) return null;
 		Node n = entry;
@@ -123,7 +122,6 @@ class Tree {
 		}
 		return n;
 	}
-
 	public Stack<Node> getTrace(Node entry, int key) {
 		Stack<Node> trace = new Stack<Node>();
 		if (entry == null) return trace;
@@ -137,9 +135,9 @@ class Tree {
 		trace.push(n);
 		return trace;
 	}
-
-	public Node find(int key) {return findNext(root, key);}
-
+	public Node find(int key) {
+        return findNext(root, key);
+    }
 	public Node findNext(Node entry, int key) {
 		if (entry == null) return null;
 		else {
@@ -148,7 +146,6 @@ class Tree {
 			else return findNext(entry.r, key);
 		}
 	}
-
 	public void bft() {
 		Queue<Node> unvisited = new LinkedList<Node>();
 		unvisited.add(root);
@@ -159,7 +156,6 @@ class Tree {
 			System.out.println(cur.data);
 		}
 	}
-
 	public void dft() {
 		Stack<Node> unvisited = new Stack<Node>();
 		unvisited.push(root);
@@ -170,7 +166,6 @@ class Tree {
 			System.out.println(cur.data);
 		}
 	}
-
 	public Node successorWithParent(int key) {
 		Node cur = find(key);
 		Node node = new Node();
@@ -179,13 +174,14 @@ class Tree {
 			node = cur.r;
 			while (node.l != null) node = node.l;
 			return node;
-		} else if (cur.p == null) {return null;
-		} else {node = cur;
+		} else if (cur.p == null) {
+            return null;
+		} else {
+            node = cur;
 			while (node.p.r == node) node = node.p;
 			return node.p;
 		}
 	}
-
 	public Node successor(int key) {
 		Stack<Node> trace = getTrace(root, key);
 		// Empty stack or stack has only one element, no successor.
@@ -194,19 +190,19 @@ class Tree {
 		Node node = new Node();
 		if (cur.r != null) {
 		        node = cur.r; 
-	                while (node.l != null) node = node.l;
+	            while (node.l != null) node = node.l;
 		        return node;
-		} else if (trace.isEmpty()) {return null;
-		} else {while (!trace.isEmpty()) {
+		} else if (trace.isEmpty()) {
+            return null;
+		} else {
+            while (!trace.isEmpty()) {
 				node = trace.pop();
-				if (node.l == cur) {return node;
-				} else {cur = node;}
+				if (node.l == cur) return node;
+				else cur = node;
 			}
 			return null;
 		}
-		
 	}
-
 	public Node predecessorWithParent(int key) {
 		Node cur = find(key);
 		Node node = new Node();
@@ -215,8 +211,10 @@ class Tree {
 			node = cur.l;
 			while (node.r != null) node = node.r;
 			return node;
-		} else if (cur.p == null) {return null;
-		} else {node = cur;
+		} else if (cur.p == null) {
+            return null;
+		} else {
+            node = cur;
 			while (node.p.l == node) node = node.p;
 			return node.p;
 		}
