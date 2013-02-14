@@ -1,14 +1,19 @@
-/*Given two words of equal length that are in a dictionary, write a method to
+/*Word_Ladder
+
+Given two words of equal length that are in a dictionary, write a method to
 transform one word into another word by changing only one letter at a time. The
 new word you get in each step must be in the dictionary
 EXAMPLE:
 Input: DAMP, LIKE
 Output: DAMP -> LAMP -> LIMP -> LIME ->LIKE
+
+Please check ../recursion/leetcode_Word_Ladder.java and
+../recursion/leetcode_Word_Ladder_II.java
 */
 
 import java.util.*;
 
-class test_143 {
+class cap_Word_Ladder {
 	public static void main(String[] args) {
 		String[] dict = {"DAMP","LAMP","LIMP","LIME","LIKP","LAKP","LIKE","SHIT"};	
 		my(dict, "DAMP", "LIKE");
@@ -19,7 +24,7 @@ class test_143 {
 		Node root = new Node(input);
 		root.depth = 0;
 		unvisited.add(root);
-		while(!unvisited.isEmpty()) {
+		while (!unvisited.isEmpty()) {
 			Node cur = unvisited.remove();
 			if (cur.str == output) {
 				Node tail = cur;
@@ -44,15 +49,20 @@ class test_143 {
 			}
 		}
 	}
-
 	public static boolean diffByOne(String a, String b) {
-		char[] aa = a.toCharArray();
-		char[] bb = b.toCharArray();
-		if (aa.length != bb.length) return false;
+		if (a.length() != b.length()) {
+            return false;
+        }
 		int diff = 0;
-		for (int i = 0; i < aa.length; ++i) if (aa[i] != bb[i]) ++diff;
-		if (diff == 1) return true;
-		return false;
+		for (int i = 0; i < a.length(); ++i) {
+            if (a.charAt(i) != b.charAt(i)) {
+                ++diff;
+            }
+            if (diff > 1) {
+                return false;
+            }
+        }
+		return diff == 1;
 	}
 }
 

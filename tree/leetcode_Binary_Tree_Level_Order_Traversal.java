@@ -22,12 +22,14 @@ class leetcode_Binary_Tree_Level_Order_Traversal {
     }
     public static ArrayList<ArrayList<Integer>> levelOrder(TreeNode root) {
         ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-        if (root == null) return result;
+        if (root == null) {
+            return result;
+        }
         Queue<TreeNode> unvisited = new LinkedList<TreeNode>();
         ArrayList<Integer> tmp = new ArrayList<Integer>();
         unvisited.add(root);
         int count = 1;
-        while (true) {
+        while (!unvisited.isEmpty()) {
             TreeNode node = unvisited.remove();
             tmp.add(node.val);
             if (node.left != null) unvisited.add(node.left);
@@ -37,7 +39,6 @@ class leetcode_Binary_Tree_Level_Order_Traversal {
                 tmp = new ArrayList<Integer>();
                 count = unvisited.size();
             }
-            if (unvisited.isEmpty()) break;
         }
         return result;
     }
