@@ -24,6 +24,11 @@ class facebook_True_False_Generator {
         return new Random().nextInt(2) == 1;
     }
     public static boolean trueKValue(double k, boolean bool) {
+        // The idea behind this is
+        // e.g., 0.8(DEC) = 0.1101....(Binary)
+        // 0.8 = 2^(-1) + 2^(02) + 2^(-4) + ...
+        // These function describes an event A that Nth digit equals to '1'.
+        // The Prob(A) = trueKValue(0.8)
         if (k < 0.5) {
             // e.g., 40% of false equals 60% of true.
             // Make sure k >= 0.5.
