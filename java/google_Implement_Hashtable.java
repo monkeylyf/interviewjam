@@ -11,8 +11,12 @@ class google_Implement_Hashtable {
         Hashtable ht = new Hashtable(10);
         for (char i = 'a'; i <= 'z'; ++i) {
             ht.put(i + "", i);
+            System.out.println(ht);
         }
-        System.out.println(ht.toString());
+        for (char i = 'a'; i <= 'z'; ++i) {
+            System.out.println(ht.remove(i + ""));
+            System.out.println(ht);
+        }
     }
 }
 
@@ -26,9 +30,6 @@ class Hashtable {
         this.size = 0;
         this.capacity = capacity; 
         itemArray = new Item[capacity];
-        for(int i = 0; i < capacity; i++) {
-            itemArray[i] = null;
-        }
     }
     public int size() {
         return size;
@@ -47,34 +48,54 @@ class Hashtable {
         return curItem.element();
     }
     public void put(String key, Object element) {
-        System.out.println("Put key: " + key + " /value: " + element);
+        //System.out.println("Put key: " + key + " /value: " + element);
         if (key != null) {
-            ++size;
             int hashValue = hash(key);
-            System.out.println("Original hashvalue " + hashValue);
+            //System.out.println("Original hashvalue " + hashValue);
             if (itemArray[hashValue] == null) {
                 itemArray[hashValue] = new Item(key, element);
             } else {
                 Item curItem = itemArray[hashValue];
+                //System.out.println("Hashvalue collision. Rotated to next node.");
                 while (curItem.next != null && curItem.next.key() != key) {
                     curItem = curItem.next;
-                    System.out.println("Hashvalue collision. Rotated to next node.");
+                    //System.out.println("Hashvalue collision. Rotated to next node.");
                 }
                 curItem.next = new Item(key, element);
             }
+            ++this.size;
         }
     }
-    //public Object remove(String key) {
-        // not important now.
-    //}
+    public Object remove(String key) {
+        int hashValue = hash(key);
+        System.out.println("Removing key " + key + " with value " + hashValue);
+        if (itemArray[hashValue] == null) {
+            return null; // empty bucket. Key/value pair doesn't exist.
+        }
+        Item curItem = itemArray[hashValue];
+        Item dummy = new Item("dummy", "dummy");
+        dummy.next = curItem;
+        Item prev = dummy; 
+        while (curItem != null) {
+            if (curItem.key().equals(key)) {
+                prev.next = curItem.next;
+                itemArray[hashValue] = dummy.next;
+                --this.size;
+                return curItem.element();
+            }
+            curItem = curItem.next;
+            prev = prev.next;
+        }
+        return null;
+
+    }
     public String toString() {
         StringBuilder s = new StringBuilder("<HashTable[");
         int i = 0;
         int count = 0;
-        System.out.println("size " + this.size);
+        //System.out.println("size " + this.size);
         while (count < this.size) {
             Item curItem = itemArray[i];
-            System.out.println(curItem);
             while (curItem != null) { //Skip the AVAILABLE cells.
                 s.append(curItem.toString());
                 if (count < this.size() - 1) {
