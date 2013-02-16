@@ -45,7 +45,11 @@ class Hashtable {
             // itemArray[hashValue].key() == key --> same key/value pair.
             curItem = curItem.next;
         }
-        return curItem.element();
+        if (curItem == null) {
+            return null;
+        } else {
+            return curItem.element();
+        }
     }
     public void put(String key, Object element) {
         //System.out.println("Put key: " + key + " /value: " + element);
