@@ -30,6 +30,10 @@ class google_kth_Maximum_Element_in_Sorted_Matrix {
         }
     }
     public static int kthMaximum(int[][] matrix, int k) {
+        // The idea behind this is using min heap to add element in Young tableau.
+        // Advantage: easy to understand.
+        // Disadvantage: Space O(M * N) to track the status of each element(added or not).
+        //               Time O(n^2 logn)
         int ret = 0;
         int m = matrix.length;
         int n = matrix[0].length;

@@ -46,7 +46,7 @@ class Hashtable {
             curItem = curItem.next;
         }
         if (curItem == null) {
-            return null;
+            return null; // curItem loops to end and didn't find key. No such existing key.
         } else {
             return curItem.element();
         }
