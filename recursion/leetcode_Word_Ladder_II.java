@@ -38,7 +38,8 @@ class leetcode_Word_Ladder_II {
         ArrayList<ArrayList<String>> all = new ArrayList<ArrayList<String>>();
         Queue<String> unvisited = new LinkedList<String>();
         HashSet<String> visited = new HashSet<String>();
-        Hashtable<String, String> path = new Hashtable<String, String>();
+        ArrayList<String> visitedCache = new ArrayList<String>();
+        Hashtable<String, ArrayList<String>> path = new Hashtable<String, ArrayList<String>>();
         unvisited.add(start); // Init unvisited queue.
         visited.add(start);
         int count = 1; // Counter for the number of unvisited node at next level.
@@ -48,28 +49,38 @@ class leetcode_Word_Ladder_II {
             System.out.println("current String " + str);
             for (String cur : generate(str, dict)) {
                 if (cur.equals(end)) {
-                    System.out.println("Found end " + cur);
+                    System.out.println("Found end " + end);
                     ArrayList<String> res = new ArrayList<String>();
-                    res.add(cur);
-                    while (str != null) {
-                        res.add(0, str);
-                        str = path.get(str);
-                    }
+                    res.add(str);
+                    res.add(end);
+                    nextPath(str, path, all, res);
                     isShortestLevel = true;
-                    System.out.println(res);
-                    all.add(res);
                 } else if (!visited.contains(cur)) {
-                    unvisited.add(cur);
+                    if (!visitedCache.contains(cur)) {
+                        unvisited.add(cur);
+                    }
                     // Mark start as visited. If one of a string's one-char-diff strings
                     // equals it, make sure don't jump to it since we need the shortest
                     // path. no looping.
-                    System.out.println("Add key: " + cur + " pair: " + str);
-                    visited.add(cur);
-                    path.put(cur, str);
+                    visitedCache.add(cur);
+                    if (path.containsKey(cur)) {
+                        ArrayList<String> arr = path.get(cur);
+                        arr.add(str);
+                        System.out.println("Add existing key: " + cur + " ArrayList: " + arr);
+                        path.put(cur, arr);
+                    } else {
+                        ArrayList<String> arr = new ArrayList<String>();
+                        arr.add(str);
+                        System.out.println("Add key: " + cur + " ArrayList: " + arr);
+                        path.put(cur, arr);
+                    }
                 }
             }
             if (--count == 0) { // Done with the cur level.
-                System.out.println("changing level");
+                System.out.println("========changing level=========");
+                for (String i : visitedCache) {
+                    visited.add(i);
+                }
                 count = unvisited.size(); // Reset counter.
                 if (isShortestLevel) { // Done with all unvisited node in shortest level then return.
                     for (ArrayList<String> i : all) System.out.println(i);
@@ -79,16 +90,33 @@ class leetcode_Word_Ladder_II {
         }
         return all;
     }
+    public static void nextPath(String cur, Hashtable<String, ArrayList<String>> path, ArrayList<ArrayList<String>> all, ArrayList<String> res) {
+        ArrayList<String> nextArr = path.get(cur);
+        if (nextArr == null) {
+            ArrayList<String> tmp = new ArrayList<String>();
+            for (String i : res) {
+                tmp.add(i);
+            }
+            all.add(tmp);
+        } else {
+            for (String str : nextArr) {
+                res.add(0, str);
+                nextPath(str, path, all, res);
+                res.remove(0);
+            }
+        }
+    }
     public static HashSet<String> generate(String s, HashSet<String> dict){
         HashSet<String> words = new HashSet<String>();
         for(int i = 0; i < s.length(); ++i){
             for(char j = 'a'; j <= 'z'; ++j){
                 char[] chs = s.toCharArray();
-                if(chs[i] != j ){
-                    chs[i] = j;
-                    String ns = new String(chs);
-                    if(dict.contains(ns))
-                        words.add(ns);
+                chs[i] = j;
+                String ns = new String(chs);
+                if (ns.equals(s)) {
+                    continue;
+                } else if(dict.contains(ns))
+                    words.add(ns);
                 }
             }
         }
