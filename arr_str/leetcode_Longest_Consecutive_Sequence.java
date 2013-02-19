@@ -19,6 +19,34 @@ class leetcode_Longest_Consecutive_Sequence{
         System.out.println(longestConsecutive(new int[] {-6,6,-9,-7,0,3,4,-2,2,-1,9,-9,5,-3,6,1,5,-1,-2,9,-9,-4,-6,-5,6,-1,3}));
     }
     public static int longestConsecutive(int[] num) {
+        int ans=0;
+        HashSet<Integer> hs=new HashSet<Integer>();
+        for (int v : num) {
+            hs.add(v);
+        }
+        for(int v : num) {
+            // Remove by sequence. Find the longest sequence containing point v and remove them
+            // after recording its length.
+            if (hs.contains(v)) {
+                ans = Math.max(ans, getCount(hs, v, false) + getCount(hs, v + 1, true));
+            }
+        }
+        return ans;      
+    }
+    public static int getCount(HashSet<Integer> hs, int v, boolean asc){
+        int count = 0;
+        while (hs.contains(v)){
+            hs.remove(v);
+            ++count;
+            if (asc) {
+                ++v;
+            } else {
+                --v;
+            }
+        }
+        return count;
+    }
+    public static int longestConsecutive1(int[] num) {
         // You can sort the array first but it's gonna take nlogn. We can do better than that.
         // The idea behind this is using int[2] to represent the interval.
         // Loop over the given int array and for each integer i, check if i+1 and i-1 are in the table.
