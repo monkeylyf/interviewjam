@@ -1,7 +1,6 @@
 /*kth_Element_of_a_Sequence_of_Numbers
 google
 
-
 Given a sequence of the form 0123456789101112131415... where each digit is in a
 position, for example the digit in the position 5 is 5, in the position 13 is
 1, in the position 19 is 4, etc.

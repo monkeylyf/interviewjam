@@ -19,6 +19,7 @@ class leetcode_Jump_Game_II {
     }
     // Passed both.
     public static int myJump(int[] A] {
+        // dp-based
         int[] step = new int[A.length];
         step[A.length - 1] = 0;
         for (int i = A.length - 2; i >= 0; --i) {

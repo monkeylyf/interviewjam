@@ -10,6 +10,7 @@ class leetcode_Implement_strStr {
         strStr("mississippi", "issip");
     }
     public static String strStr(String haystack, String needle) {
+        // KMP algorithm O(m+n)is better than this one O(m * n)
         if (needle == "") {
             return haystack;
         }

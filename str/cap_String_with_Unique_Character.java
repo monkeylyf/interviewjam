@@ -1,15 +1,17 @@
-/*Implement an algorithm to determine if a string has all unique characters. What if you
+/*String_with_Unique_Character
+careercup
+
+Implement an algorithm to determine if a string has all unique characters. What if you
 can not use additional data structures?*/
 
 import java.util.*;
 
-class test_1 {
+class cap_String_with_Unique_Character {
 	public static void main(String[] args) {
 		System.out.println(isUnique("Premithius"));
 		System.out.println(isUnique("Premithus"));
 		System.out.println(isUniqueChar("premithius"));
 		}
-
 	// Assuming the char set it ASCii.
 	public static boolean isUnique(String str) {
 		boolean[] char_set = new boolean[256];
@@ -22,7 +24,17 @@ class test_1 {
 		}
 		return true;
 	}
-	
+    public static boolean isUniqueCharacter(String str) {
+        HashSet<Character> hashset = new HashSet<Character>();
+        for (char i : str.toCharArray()) {
+            if (hashset.contains(i)) {
+                return false;
+            } else {
+                hashset.add(i);
+            }
+        }
+        return true;
+    }
 	// if it's only 'a' to 'z' totally 26 chars. We can use bit mask.
 	// MAX 32 bits. so ASCII can not fit in.
 	public static boolean isUniqueChar(String str) {

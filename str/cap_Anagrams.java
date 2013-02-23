@@ -1,8 +1,11 @@
-/*Write a method to decide if two strings are anagrams or not*/
+/*Anagrams
+careercup
+
+Write a method to decide if two strings are anagrams or not*/
 
 import java.util.*;
 
-class test_4 {
+class cap_Anagrams {
 	public static void main(String[] args) {
 		// I should think of more test cases here.
 		// e.g.:
@@ -31,19 +34,16 @@ class test_4 {
 		if (intArray(a).equals(intArray(b))) return true;
 		return false;	
 	}
-
 	public static String intArray(String a) {
 		int[] counter = new int[256];
 		for (int i : a.toCharArray()) {++counter[i];}
 		return Arrays.toString(counter);
 	}
-
 	// Solution 2. Cheating...
 	public static boolean Anagram(String a, String b) {
 		if (a.length() != b.length()) {return false;}
 		return Sort(a).equals(Sort(b));
 	}
-
 	public static String Sort(String a) {
 		char[] chars = a.toCharArray();
 		Arrays.sort(chars);

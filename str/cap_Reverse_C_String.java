@@ -1,9 +1,12 @@
-/*Write code to reverse a C-Style String.C-String means that “abcd” is represented as five characters, including the null character */
+/*Reverse_C_String
+careercup
+
+Write code to reverse a C-Style String.C-String means that “abcd” is represented as five characters, including the null character */
 
 import java.util.*;
 
 
-class test_2 {
+class cap_Reverse_C_String {
 	public static void main(String[] args) {
 		reverseString("silenthill2\0");
 		reverseStr("silenthill2\0");
@@ -24,7 +27,6 @@ class test_2 {
 		}
 		for (char i : arr) System.out.println(i);
 	}
-	
 	// Use int[] to cheat
 	public static void reverseStr(String str) {
 		int[] arr = new int[str.length()];

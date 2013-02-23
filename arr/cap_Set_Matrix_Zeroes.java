@@ -1,8 +1,17 @@
-/*Write an algorithm such that if an element in an MxN matrix is 0, its entire row and column is set to 0*/
+/*Set_Matrix_Zeroes
+careercup
+
+Write an algorithm such that if an element in an MxN matrix is 0, its entire
+row and column is set to 0
+
+
+Mark as duplicate:
+leetcode_Set_Matrix_Zeroes
+*/
 import java.util.*;
 
 
-class test_7 {
+class cap_Set_Matrix_Zeroes {
 	public static void main(String[] args) {
 		long[][] test1 = {{-1,2,0,4}, 
 				  {-5,6,7,8}, 

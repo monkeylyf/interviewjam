@@ -1,8 +1,16 @@
-/*Given an image represented by an NxN matrix, where each pixel in the image is
-4 bytes, write a method to rotate the image by 90 degrees. Can you do this in
-place?*/
+/*Rotate_Image
+careercup
 
-class test_6 {
+Given an image represented by an NxN matrix, where each pixel in the image is
+4 bytes, write a method to rotate the image by 90 degrees. Can you do this in
+place?
+
+
+Mark as duplicate:
+leetcode_Rotate_Image
+*/
+
+class cap_Rotate_Image {
 	public static void main(String[] args) {
 		int[][] test0 = {{1,2,3}, {4,5,6},{7,8,9}};
 		int[][] test1 = {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}, {13,14,15,16}};
@@ -19,7 +27,6 @@ class test_6 {
 		my(test1, 4);
 		my(test2, 6);
 	}
-
 	public static void printMatrix(int[][] Matrix, int n) {
 		for (int i = 0; i < n; ++i) {
 			String output = "";
@@ -29,7 +36,6 @@ class test_6 {
 			System.out.println(output);
 		}
 	}
-
 	public static void my(int[][] m, int n) {
 		int tmp;
 		for (int i = 0; i < n; ++i) {
