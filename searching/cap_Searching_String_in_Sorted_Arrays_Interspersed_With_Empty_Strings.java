@@ -41,9 +41,7 @@ class cap_Searching_String_in_Sorted_Arrays_Interspersed_With_Empty_Strings {
                 return right;
             }
         } else {
-            String[] tmp = new String[] {target, mid};
-            Arrays.sort(tmp);
-            if (tmp[0].equals(target)) {
+            if (target.compareTo(mid) == -1) {
                 return search(A, target, start, middle -1);
             } else {
                 return search(A, target, middle + 1, end);
