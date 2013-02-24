@@ -1,4 +1,4 @@
-/*Search_in_rotated_sorted_array
+/*Search_in_Rotated_Sorted_Array
 
 Suppose a sorted array is rotated at some pivot unknown to you beforehand.
 (i.e., [0 1 2 4 5 6 7] might become [4 5 6 7 0 1 2]).
@@ -8,7 +8,7 @@ You may assume no duplicate exists in the array.
 */
 
 
-class leetcode_Search_in_rotated_sorted_array {
+class leetcode_Search_in_Rotated_Sorted_Array {
     public static void main(String[] args) {
     }
     public static int search(int[] A, int target) {

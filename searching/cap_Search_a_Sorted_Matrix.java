@@ -1,7 +1,14 @@
-/*Given a matrix in which each row and each column is sorted, write a method to
-find an element in it*/
+/*Search_a_Sorted_Matrix
+careercup
 
-class test_62 {
+Given a matrix in which each row and each column is sorted, write a method to
+find an element in it.
+
+Mark as duplicate:
+google_kth_Maximum_Element_in_Sorted_Matrix
+*/
+
+class cap_Search_a_Sorted_Matrix {
 	public static void main(String[] args) {
 		int[][] m = {{0, 5, 10, 15},
 			     {1, 6, 11, 16},
@@ -13,9 +20,6 @@ class test_62 {
 		for (int i : findIndexOfMatrix(m, 9, 5, 4)) System.out.println(i);
 		for (int i : findIndexOfMatrix(m, -9, 5, 4)) System.out.println(i);
 	}
-
-
-	// What if there are duplicate element in the matrix?
 	public static int[] findIndexOfMatrix(int[][] m, int element, int M, int N) {
 		int row = 0;
 		int col = N - 1;
