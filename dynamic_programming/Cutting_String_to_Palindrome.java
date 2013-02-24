@@ -42,6 +42,7 @@ class Cutting_String_to_Palindrome {
         return status[status.length - 1];
     }
     public static int toPalindrome1(String A) {
+        // Time complex O(N^2) but need extra O(N^2) space 
         int n = A.length();
         int[] status = new int[n];
         boolean[][] palindrome = new boolean[n][n];
@@ -51,6 +52,7 @@ class Cutting_String_to_Palindrome {
         }
         for (int i = n - 2; i >= 0; --i) {
             for (int j = i + 1; j < n; ++j) {
+                // dp-based.
                 if (j - i == 1) {
                     palindrome[i][j] = (A.charAt(i) == A.charAt(j)) ? true : false;
                 } else {
