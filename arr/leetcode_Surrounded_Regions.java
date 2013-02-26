@@ -21,6 +21,7 @@ X O X X
 
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Stack;
 
 class leetcode_Surrounded_Regions {
     public static void main(String[] args) {
@@ -70,23 +71,25 @@ class leetcode_Surrounded_Regions {
         }
     }
     public static void bfs(char[][] board, int i, int j) {
+        if (board[i][j] != 'O') {
+            return;
+        }
         int m = board.length;
-        int n = board[0].length;
+        int n = board[0].length; 
         Queue<int[]> unvisited = new LinkedList<int[]>();
         Queue<int[]> nextToVisit = new LinkedList<int[]>();
         unvisited.add(new int[] {i, j});
         while (!unvisited.isEmpty()) {
             int[] point = unvisited.remove();
-            int x = point[0];
-            int y = point[1];
-            if (x < 0 || x >= m || y < 0 || y >= n || board[x][y] != 'O') {
-                continue;
+            int x = point[0]; 
+            int y = point[1]; 
+            if (x >= 0 && x < m && y >= 0 && y < n && board[x][y] == 'O') {
+                board[x][y] = 'B'; // Mark border-related 'O' to 'B'
+                nextToVisit.add(new int[] {x + 1, y});
+                nextToVisit.add(new int[] {x - 1, y});
+                nextToVisit.add(new int[] {x, y + 1});
+                nextToVisit.add(new int[] {x, y - 1});
             }
-            board[x][y] = 'B'; // Mark border-related 'O' to 'B'
-            nextToVisit.add(new int[] {x + 1, y});
-            nextToVisit.add(new int[] {x - 1, y});
-            nextToVisit.add(new int[] {x, y + 1});
-            nextToVisit.add(new int[] {x, y - 1});
             if (unvisited.isEmpty()) { // Switch to next depth.
                 unvisited = nextToVisit;
                 nextToVisit = new LinkedList<int[]>();
@@ -94,15 +97,24 @@ class leetcode_Surrounded_Regions {
         }
     }
     public static void dfs(char[][] board, int x, int y) {
+        if (board[x][y] !=  'O') 
+            return;
         int m = board.length;
         int n = board[0].length;
-        if (x < 0 || x >= m || y < 0 || y >= n || board[x][y] != 'O') {
-            return;
-        }
-        board[x][y] = 'B';
-        dfs(board, x - 1, y);
-        dfs(board, x + 1, y);
-        dfs(board, x, y - 1);
-        dfs(board, x, y + 1);
-    }
+        Stack<int[]> stack = new Stack<int[]>(); // Recurvsion stack is limited on leetcode. Use heap space to mock stack.
+        stack.push(new int[]{x,y});
+        while (stack.size() != 0) {
+            x = stack.peek()[0];
+            y = stack.peek()[1];
+            stack.pop();
+            if (x < 0 || x >= m || y < 0 || y >= n || board[x][y] != 'O') {
+                continue;
+            }
+            board[x][y] = 'B';
+            stack.push(new int[]{ x - 1, y});
+            stack.push(new int[]{ x + 1, y});
+            stack.push(new int[]{ x, y + 1});
+            stack.push(new int[]{ x, y - 1});
+       }
+    }    
 }
