@@ -20,16 +20,14 @@ class leetcode_Binary_Tree_Inorder_Traversal {
         ArrayList<Integer> all = new ArrayList<Integer>();
         Stack<TreeNode> s = new Stack<TreeNode>();
         TreeNode node = root;
-        while (true) {
+        while (node != null || !s.isEmpty()) {
             if (node != null) {
                 s.add(node);
                 node = node.left;
-            } else if (!s.isEmpty()) {
+            } else {
                 node = s.pop();
                 all.add(node.val);
                 node = node.right;
-            } else {
-                break;
             }
         }
         return all;

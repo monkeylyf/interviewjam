@@ -14,104 +14,63 @@ class leetcode_Median_of_Two_Sorted_Arrays {
         //System.out.println(get(new int[] {1}, 0, 0, 1));
         //System.out.println(get(new int[] {}, 0, 0, 1));
     }
+    public static double MedianOfFour(int a, int b, int c, int d) {
+        int min = Math.min(d, Math.min(c, Math.min(b, a)));
+        int max = Math.max(d, Math.max(c, Math.max(b, a)));
+        return (a + b + c + d - min - max) / 2.0;
+    }
+    public static double MedianOfThree(int a, int b, int c) {
+        int min = Math.min(c, Math.min(b, a));
+        int max = Math.max(c, Math.max(b, a));
+        return (a + b + c - min - max);
+    }
     public static double findMedianSortedArrays(int[] A, int[] B) {
-        if (A.length == 0) {
-            return median(B);
-        } else if (B.length == 0) {
-            return median(A);
-        }
-        return findMedian(A, B, 0, A.length - 1);
-    }
-    public double median(int[] A) {
-        int middle = A.length / 2;
-        if (A.length % 2 == 0) {
-            return (A[middle] + A[middle - 1]) / 2.0;
+        if (B.length >= A.length) {
+            return medianSortedArrays(A, B);
         } else {
-            return A[middle];
+            return medianSortedArrays(B, A);
         }
     }
-    public static double findMedian(int[] A, int[] B, int l, int r) {
-        if (l > r) {
-            l = Math.max(0, (A.length + B.length) / 2 - A.length);
-            r = Math.min(B.length, (A.length + B.length) / 2);
-            return findMedian(B, A, 0, B.length - 1);
-        }
-        int i = (l + r) / 2; // Start with the median of A.
-        int j = (A.length + B.length) / 2 - i - 1;
-        if (j >= 0 && A[i] < B[j]) {
-            // A[i] <= B[j] <= B[j + 1]
-            //   1 3 5    with i = 1
-            // -1   4 6 7 with j = 1
-            // Meaning A[i] is less than the median.
-            return findMedian(A, B, i + 1, r); // Binary Search based.
-        } else if (j < B.length - 1 && A[i] > B[j + 1]) {
-            // B[j] <= B[j + 1] <= A[i]
-            //      1 3 5
-            // -3 -1 2 4
-            // Meaning A[i] is larger than the median.
-            return findMedian(A, B, l, i - 1);
-        } else {
-            // B[j] <= A[i] <= B[j + 1] (or B[j] <= A[i]  B[j + 1]indexOfBoundary)
-            // We've got the median A[i]
-            if ((A.length + B.length) % 2 == 1 ) {
-                return A[i];
-            } else if (i > 0) {
-                // A.length + B.length is even.
-                System.out.println("i " + i + " j " + j);
-                return (A[i] + Math.max(B[j], A[i - 1])) / 2.0;
+    public static double medianSortedArrays(int[] A, int[] B) {
+        int n = A.length;
+        int m = B.length;
+        if (n == 0) {
+            if (m % 2 == 1) {
+                return B[m / 2];
             } else {
-                // A.length + B.length is even and i = 0.
-                return (A[i] + B[j]) / 2.0;
+                return (B[m / 2 - 1] + B[m / 2]) / 2.0;
+            }
+        } else if (n == 1) {
+            if (m == 1) {
+                return (A[0] + B[0]) / 2.0;
+            } else if (m % 2 == 1) { // m is odd.
+                return (B[m / 2] + MedianOfThree(A[0], B[m / 2 - 1], B[m / 2 + 1])) / 2.0;
+            } else { // m is even.
+                return MedianOfThree(A[0], B[m / 2 - 1], B[m / 2]);
+            }
+        } else if (n == 2) {
+            if (m == 2) {
+                return MedianOfFour(A[0], A[1], B[0], B[1]);
+            }
+            if (m % 2 == 1) { // m is odd.
+                return MedianOfThree(B[m / 2], Math.min(A[0], B[m / 2 + 1]), Math.max(A[1], B[m / 2 - 1]));
+            } else { // m is even.
+                return MedianOfFour(B[m / 2 - 1], B[m / 2], Math.min(A[0], B[m / 2 + 1]), Math.max(A[1], B[m / 2 - 2]));
             }
         }
-    }
-    public static double Median(int[] A, int[] B) {
-        int m = A.length, n = B.length;
-        //if m+n is even, then the median is the average of (m+n)/2 and (m+n)/2 - 1
-        //if m+n is odd, then the median is (m+n)/2
-        int mid = (m + n) / 2;
-        //look for mid in A
-        //[start, end]: close region to try. inclusive.
-        int start = 0, end = m - 1, i = 0, j = 0;
-        int median = 0;
-        while (start <= end) {
-            i = (start + end) / 2;
-            j = mid - i;
-            if (get(B, j - 1) <= get(A, i) && get(A, i) <= get(B, j)) {
-                //index out of bound here.
-                median = get(A, i);
-                break;
-            } else if (get(A, i)< get(B, j-1)) { //A[i] is smaller than the median
-                start = i + 1;
-                i = (start+end)/2;
-                j = mid - i;
-            } else if (get(A, i) > get(B, j)) { //A[i] is bigger than the median
-                end = i - 1;
-                i = (start + end)/2;
-                j = mid - i;
+        int minRemoved = 0, idxA = n / 2, idxB = m / 2;
+        if (A[idxA] < B[idxB]) {
+            if (n % 2 == 0) {
+                --idxA;
             }
-        }
-        if (start <= end) {
-            //found the median
-            if ((m+n) % 2 == 0) { //index out of bound here
-                int other = Math.max(get(A, i-1), get(B, j-1));
-                return (median + other) * 0.5;
-            } else {
-                return (double)median;
-            }
-        } else { 
-            //not found the median
-            //look for median in B
-            return Median(B, A);
-        }
-    }
-    public static int get(int[] a, int i){
-        if (i < 0) {
-            return Integer.MIN_VALUE;
-        } else if ( i >= a.length) {
-            return Integer.MAX_VALUE;
+            minRemoved = Math.min(idxA, m - idxB - 1);
+            return medianSortedArrays(Arrays.copyOfRange(A, minRemoved, A.length), Arrays.copyOfRange(B, 0, B.length - minRemoved));
         } else {
-            return a[i];
+            if (m % 2 == 0) {
+                --idxB;
+            }
+            minRemoved = Math.min(n - idxA - 1, idxB);
+            return medianSortedArrays(Arrays.copyOfRange(A, 0, A.length - minRemoved), Arrays.copyOfRange(B, minRemoved, B.length));
         }
     }
 }
