@@ -1,17 +1,15 @@
-/*Cutting_String_to_Palindrome
+/*Palindrome_Partitioning_II
 
-Given a string A, you can divide this string into several substrings.
-Design an algorithm to find the minimun number of n, so that each substring
-is palindrome
+Given a string s, partition s such that every substring of the partition is a palindrome.
 
-For example:
-A = "abbab"
-n = 1
-"abba", "b"
+Return the minimum cuts needed for a palindrome partitioning of s.
+
+For example, given s = "aab",
+Return 1 since the palindrome partitioning ["aa","b"] could be produced using 1 cut.
 */
 
 
-class Cutting_String_to_Palindrome {
+class leetcode_Palindrome_Partitioning_II {
     public static void main(String[] args) {
         System.out.println(toPalindrome("tattarrattat")); 
         System.out.println(toPalindrome1("tattarrattat")); 
@@ -76,19 +74,6 @@ class Cutting_String_to_Palindrome {
             }
         }
         return status[status.length - 1];
-    }
-    public static void printMatrix(boolean[][] A) {
-        for (int i = 0; i < A.length; ++i) {
-            for (int j = 0; j < A[i].length; ++j) {
-                if (A[i][j]) {
-                    System.out.print(1 + " ");
-                } else {
-                    System.out.print(0 + " ");
-                }
-            }
-            System.out.println();
-        }
-        System.out.println("----------");
     }
     public static boolean isPalindrome(String A) {
         int head = 0, tail = A.length() - 1;
