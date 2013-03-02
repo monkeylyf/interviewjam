@@ -11,19 +11,24 @@ Return 6.*/
 
 class leetcode_Binary_Tree_Maximum_Path_Sum {
     public static void main(String[] args) {
-    
+        Solution test = new Solution(); 
     }
-    public static int maxPathSum(TreeNode root) {
-        int[] mymax = new int[]{root.val};
-        int val = maxSum(root, mymax);
-        return Math.max(mymax[0], val);
+}
+
+
+class Solution {
+    private int max;
+    public int maxPathSum(TreeNode root) {
+        this.max = root.val;
+        nextPath(root);
+        return this.max;
     }
-    public int maxSum(TreeNode root, int[] mymax) {
+    public int nextPath(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        int left = maxSum(root.left, mymax);
-        int right = maxSum(root.right, mymax);
+        int left = nextPath(root.left);
+        int right = nextPath(root.right);
         int localMax = root.val;
         if (left > 0) {
             localMax += left;
@@ -31,7 +36,7 @@ class leetcode_Binary_Tree_Maximum_Path_Sum {
         if (right > 0) {
             localMax += right;
         }
-        mymax[0] = Math.max(mymax[0], localMax);
+        this.max = Math.max(this.max, localMax);
         return Math.max(root.val, Math.max(root.val + left, root.val + right));
     }
 }

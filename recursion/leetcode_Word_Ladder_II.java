@@ -97,6 +97,7 @@ class leetcode_Word_Ladder_II {
         for (ArrayList<String> i : all) System.out.println(i);
         return all;
     }
+
     public static void nextPath(HashMap<String, ArrayList<String>> path, String start, String end, ArrayList<ArrayList<String>> all, ArrayList<String> one, int level) {
         // :param level: type int. for corner cases like "hot", "hot", ["hot", "dot"]
         // At the first level start might equal to end, but the recursion should keep going.
