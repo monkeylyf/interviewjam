@@ -5,6 +5,17 @@ Suppose on your server there is a huge integer array. Clients will request for
 local min of subarray A[start:end] given start index and end index.
 
 Write a function to find the local min as fast as possible.
+Known as RMQ
+*/
+/*
+1. No brainer:
+Create table int[n][n] for each indexes pair. By using dynamic programming,
+it's <O(N^2), O(1)>.  Space complexity is a concern for large data set.
+
+
+2.
+Split the array in sqrt(n) places.
+
 
 Given A[1,...,n], compute B[1,...,n]
 where B[i] =  j such that for any k, i <= k <= j,
@@ -15,6 +26,10 @@ index 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
 array[9, 5, 1, 2, 0,-1, 3, 6, 4, 10, 11, 7, -2,  8, -3]
      --  -  ----  - --------  ---------  -  ------  --
 local 0  1  3  3  4  7  7  7  10 10  10  11 13  13  14
+
+
+For more solutions:
+http://community.topcoder.com/tc?module=Static&d1=tutorials&d2=lowestCommonAncestor
 */
 
 
@@ -27,6 +42,39 @@ class google_Local_Min_in_Huge_Integer_Array{
                 System.out.print(arr.localMin(i, j) + " ");
             }
             System.out.println();
+        }
+    }
+    public static int[][] noBrainer(int[] A) {
+        // Solution 1, no brainer, dp based
+        // Space complexity O(N^2), Status matrix creation time complexity O(N^2)
+        // Search time complexity O(1).
+        int n = A.length;
+        int[][] status = new int[n][n];
+        for (int i = 0; i < n; ++i) {
+            status[i][i] = i; // Given start i end i, min is A[i]
+        }
+        for (int i = 0; i < n; ++i) {
+            for (int j = i + 1; j < n; ++j) {
+                if (A[status[i][j - 1]] > A[j]) {
+                    status[i][j] = j;
+                } else {
+                    status[i][j] = status[i][j - 1];
+                }
+            }
+        }
+        return status;
+    }
+    public static int[] sqrtN(int[] A) {
+        int width = Math.sqrt(A.length);
+        int[] status = new int[width];
+        for (int i = 0; i < width; ++i) {
+            int locaMin = i * width;
+            for (int j = i * width + 1; j < (i + 1) * width; ++j) {
+                if (A[j] < A[localMin]) {
+                    localMin = j;
+                } 
+            }
+            status[i] = localMin;
         }
     }
     public static class searchArray {
