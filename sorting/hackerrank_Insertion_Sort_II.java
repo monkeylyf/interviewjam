@@ -40,21 +40,15 @@ class Solution {
             return;
         }
         for (int i = 1; i < ar.length; ++i) {
-            insertionSortByIndex(ar, i);
+            int tmp = ar[i];
+            int j = i - 1;
+            while (j >= 0 && ar[j] > tmp) {
+                ar[j + 1] = ar[j];
+                --j;
+            }
+            ar[j + 1] = tmp;
             printArray(ar);
         }
-    }
-    static void insertionSortByIndex(int[] ar, int index) {
-        if (ar == null || ar.length == 0 || index < 1) {
-            return;
-        }
-        int tmp = ar[index];
-        int i = index - 1;
-        while (i >= 0 && ar[i] > tmp) {
-            ar[i + 1] = ar[i];
-            i -= 1;
-        }
-        ar[i + 1] = tmp;
     }
 /* Tail starts here */
     static void printArray(int[] ar) {
