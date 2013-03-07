@@ -6,6 +6,7 @@ import java.util.Random;
 
 class extra_2 {
     public static void main(String[] args) {
+        // The ihea behind this is quick sort.
         for (int i = 1; i < 7; ++i)
             System.out.println(my(new int[] {4,3,2,5,1,7}, i));
     }
@@ -13,16 +14,21 @@ class extra_2 {
         return iThSmallest(arr, 0, arr.length - 1, i);
     }
     public static int iThSmallest(int[] arr, int left, int right, int i) {
-        if (left == right) return arr[left];
+        if (left == right) {
+            return arr[left];
+        }
         int pivot = random_partition(arr, left, right);
         int left_partition_length = pivot - left + 1;
-        if (i == left_partition_length) return arr[pivot];
-        else if (i < left_partition_length) return iThSmallest(arr, left, pivot - 1, i);
-        else return iThSmallest(arr, pivot + 1, right, i - left_partition_length);
+        if (i == left_partition_length) {
+            return arr[pivot];
+        } else if (i < left_partition_length) {
+            return iThSmallest(arr, left, pivot - 1, i);
+        } else {
+            return iThSmallest(arr, pivot + 1, right, i - left_partition_length);
+        }
     }
     public static int random_partition(int[] arr, int left, int right) {
-        Random rand = new Random();
-        int pivot = rand.nextInt(right - left + 1) + left;
+        int pivot = new Random().nextInt(right - left + 1) + left;
         swap(arr, pivot, right);
         int pivot_value = arr[right];
         int i = left - 1;
