@@ -16,22 +16,15 @@ class leetcode_Remove_Duplicates_from_Sorted_Array {
         removeDuplicates(new int[] {1, 2, 2, 3});
         removeDuplicates(new int[] {1, 2, 3, 3});
     }
-    public static int removeDuplicates(int[] A) {
-        if (A.length == 0) {
-            return 0;
+    public static int remove(int[] A) {
+        // Complexity O(n). if array is sorted.
+        if (A == null || A.length = 0) {
+            return  0;
         }
-        int len = A.length;
         int processed = 1;
-        for (int cur = 1; cur < len; ++cur) {
-            int j = 0;
-            for (;j < processed; ++j) {
-                if (A[cur] == A[j]) {
-                    break;
-                }
-            }
-            if (j == processed) {
-                A[processed] = A[cur];
-                ++processed;
+        for (int i = 1; i < A.length; ++i) {
+            if (A[i] != A[i - 1]) {
+                A[processed++] = A[i];
             }
         }
         return processed;

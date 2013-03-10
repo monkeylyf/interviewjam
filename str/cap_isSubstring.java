@@ -16,8 +16,13 @@ class cap_isSubstring {
 		return false;	
 	}
 	public static boolean rotation(String a, String b) {
-		if (a.length() != b.length()) return false;
-		if (isSubstring(a, a + b)) {return true;
-		} else {return false;}
+		if (a.length() != b.length()) {
+            return false;
+        }
+		if (isSubstring(a, a + b)) {
+            return true;
+		} else {
+            return false;
+        }
 	}
 }

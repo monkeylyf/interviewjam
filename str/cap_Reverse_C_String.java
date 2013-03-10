@@ -1,21 +1,18 @@
 /*Reverse_C_String
 careercup
 
-Write code to reverse a C-Style String.C-String means that “abcd” is represented as five characters, including the null character */
-
-import java.util.*;
+Write code to reverse a C-Style String.C-String means that “abcd” is represented as five characters, including the null character
+*/
 
 
 class cap_Reverse_C_String {
 	public static void main(String[] args) {
 		reverseString("silenthill2\0");
 		reverseStr("silenthill2\0");
-		}
-
+	}
 	// string object in java in immutable. Convert to chararray.
 	public static void reverseString(String str) { 
 		char[] arr = str.toCharArray();
-		for (char i : arr) System.out.println(i);
 		int head = 0;
 		int tail = arr.length - 2;
 		while (head < tail) {

@@ -16,6 +16,7 @@ class cap_Remove_Duplicates_from_Array {
 	}
 	public static void removeDuplicates(char[] str) {
         // Sort it first then check: leetcode_Remove_Duplicates_from_Sorted_Array.java
+        // Time complexity O(n^2)
 		if (str == null) {
             return; // If it's null, do nothing.
         }
@@ -40,4 +41,20 @@ class cap_Remove_Duplicates_from_Array {
 		String s = new String(str);
 		System.out.println("Output is " + s.substring(0, processed));
 	}
+    public static void remove(char[] str) {
+        // Unsorted array.
+        // O(nlogn) + O(n).
+        Arrays.sort(str);
+        if (A == null || A.length = 0) {
+            return  0;
+        }   
+        int processed = 1;
+        for (int i = 1; i < A.length; ++i) {
+            if (A[i] != A[i - 1]) {
+                A[processed++] = A[i];
+            }   
+        }   
+        return processed;
+    }   
+
 }

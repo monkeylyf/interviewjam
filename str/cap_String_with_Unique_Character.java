@@ -2,9 +2,11 @@
 careercup
 
 Implement an algorithm to determine if a string has all unique characters. What if you
-can not use additional data structures?*/
+can not use additional data structures?
+*/
 
 import java.util.*;
+
 
 class cap_String_with_Unique_Character {
 	public static void main(String[] args) {
@@ -14,8 +16,8 @@ class cap_String_with_Unique_Character {
 		}
 	// Assuming the char set it ASCii.
 	public static boolean isUnique(String str) {
+        // This solution is, IMO, using additional data structure int array.
 		boolean[] char_set = new boolean[256];
-		// Convert String to CharArray otherwise foreach loop will report error.
 		for (char i : str.toCharArray()) {
 			if (char_set[i]) {
 				System.out.println("Found again: " + i);
@@ -25,6 +27,7 @@ class cap_String_with_Unique_Character {
 		return true;
 	}
     public static boolean isUniqueCharacter(String str) {
+        // Using additional data structure HashSet.
         HashSet<Character> hashset = new HashSet<Character>();
         for (char i : str.toCharArray()) {
             if (hashset.contains(i)) {
@@ -38,14 +41,13 @@ class cap_String_with_Unique_Character {
 	// if it's only 'a' to 'z' totally 26 chars. We can use bit mask.
 	// MAX 32 bits. so ASCII can not fit in.
 	public static boolean isUniqueChar(String str) {
-		int checker = 0;
+		int bitmask = 0;
 		for (char i : str.toCharArray()) {
 			int val = i - 'a'; // 0 - 25
-			if ((checker & (1 << val)) > 0) { // Use AND to check if it's marked already
-				System.out.println("Found again: " + i);
+			if ((bitmask & (1 << val)) > 0) { // Use AND to check if it's marked already
 				return false;
 			}
-			checker |= (1 << val); // use OR to update the checker.
+			bitmask |= (1 << val); // use OR to update the bitmask.
 		}
 		return true;
 	}
