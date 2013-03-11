@@ -38,7 +38,7 @@ class leetcode_Reverse_Nodes_in_k_Group {
         }
         return res.next;
     }
-    public static ListNode reverse(ListNode pre, ListNode next) {A
+    public static ListNode reverse(ListNode pre, ListNode next) {
         // Interesting way to reverse linkedlist...
         ListNode last = pre.next;
         ListNode cur = last.next;

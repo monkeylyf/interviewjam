@@ -17,27 +17,18 @@ class leetcode_Remove_Duplicates_from_Sorted_List {
         // The idea behind this solution is same as 
         // leetcode_Remove_Duplicates_from_Sorted_Array
         if (head == null) {
-            return head;
+            return null;
         }
-        ListNode node = head.next;
-        ListNode processed = node;
-        ListNode prev = head;
-        while (node != null) {
-            ListNode cur = head;
-            while (cur != processed) {
-                if (cur.val == node.val) {
-                    break;
-                }
-                cur = cur.next;
-            }   
-            if (cur == processed) {
-                processed.val = node.val;
+        ListNode cursor = head.next;
+        ListNode processed = head;
+        while (cursor != null) {
+            if (cursor.val != processed.val) {
+                processed.next.val = cursor.val;
                 processed = processed.next;
-                prev = prev.next;
-            }   
-            node = node.next;
+            }
+            cursor = cursor.next;
         }
-        prev.next = null;
+        processed.next = null;
         return head;
     }
 }
