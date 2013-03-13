@@ -87,15 +87,9 @@ public class Fibbonacci_Word {
         HashMap<String, Integer> evenFreq = substringFreq(evenPattern, k);
         HashMap<String, Integer> globalFreq = new HashMap<String, Integer>();
         // Sum up base case frequency.
-        for (int i = 0; i < count[0]; ++i) {
-            sumFreq(globalFreq, baseFreq);
-        }
-        for (int i = 0; i < count[1]; ++i) {
-            sumFreq(globalFreq, oddFreq);
-        }
-        for (int i = 0; i < count[2]; ++i) {
-            sumFreq(globalFreq, evenFreq);
-        }
+        sumFreq(globalFreq, baseFreq, count[0]);
+        sumFreq(globalFreq, oddFreq, count[1]);
+        sumFreq(globalFreq, evenFreq, count[2]);
         int ret = 0;
         for (int i : globalFreq.values()) {
             ret = Math.max(ret, i);
@@ -110,12 +104,12 @@ public class Fibbonacci_Word {
         for (int i : A) System.out.print(i + " ");
         System.out.println();
     }
-    public static void sumFreq(HashMap<String, Integer> global, HashMap<String, Integer> target) {
+    public static void sumFreq(HashMap<String, Integer> global, HashMap<String, Integer> target, int freq) {
         for (String str : target.keySet()) {
             if (global.containsKey(str)) {
-                global.put(str, global.get(str) + target.get(str));
+                global.put(str, global.get(str) + target.get(str) * freq);
             } else {
-                global.put(str, target.get(str));
+                global.put(str, target.get(str) * freq);
             }
         }
     }
