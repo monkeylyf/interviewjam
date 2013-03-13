@@ -17,7 +17,9 @@ class Best_Time_to_Buy_and_Sell_Stock_III {
         maxProfit(new int[] {1,2,4,2,5,7,2,4,9,0});
     }
     public static int maxProfit(int[] prices) {
-        if (prices.length ==0) return 0;
+        if (prices.length ==0) {
+            return 0;
+        }
         int retval = 0;
         int[] premax = new int[prices.length];
         int[] postmax = new int[prices.length];
@@ -29,13 +31,19 @@ class Best_Time_to_Buy_and_Sell_Stock_III {
             premax[m] = Math.max(premax[m - 1], prices[m] - low);
             low = Math.min(low, prices[m]);
         }
-        for (int n = prices.length - 2; n > 0; n--) {
+        for (int n = prices.length - 2; n >= 0; n--) {
             postmax[n] = Math.max(postmax[n + 1], high - prices[n]);
             high = Math.max(high, prices[n]);
         }
+        print(premax);
+        print(postmax);
         for (int j = 1; j < prices.length; j++) {
             retval = Math.max(retval, (premax[j] + postmax[j]));
         }
         return retval;
+    }
+    public static void print(int[] A) {
+        for (int i : A) System.out.print(i + " ");
+        System.out.println();
     }
 }

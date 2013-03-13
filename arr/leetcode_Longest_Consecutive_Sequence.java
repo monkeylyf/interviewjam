@@ -20,23 +20,23 @@ class leetcode_Longest_Consecutive_Sequence{
     }
     public static int longestConsecutive(int[] num) {
         int ans=0;
-        HashSet<Integer> hs=new HashSet<Integer>();
+        HashSet<Integer> set = new HashSet<Integer>();
         for (int v : num) {
-            hs.add(v);
+            set.add(v);
         }
         for(int v : num) {
             // Remove by sequence. Find the longest sequence containing point v and remove them
             // after recording its length.
-            if (hs.contains(v)) {
-                ans = Math.max(ans, getCount(hs, v, false) + getCount(hs, v + 1, true));
+            if (set.contains(v)) {
+                ans = Math.max(ans, getCount(set, v, false) + getCount(set, v + 1, true));
             }
         }
         return ans;      
     }
-    public static int getCount(HashSet<Integer> hs, int v, boolean asc){
+    public static int getCount(HashSet<Integer> set, int v, boolean asc){
         int count = 0;
-        while (hs.contains(v)){
-            hs.remove(v);
+        while (set.contains(v)){
+            set.remove(v);
             ++count;
             if (asc) {
                 ++v;

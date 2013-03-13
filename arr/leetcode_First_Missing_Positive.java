@@ -12,17 +12,20 @@ class leetcode_First_Missing_Positive {
         firstMissingPositive(new int[] {1});
     }
     public static int firstMissingPositive(int[] A) {
+        // The idea is declare a boolean array with length A.length + 2
+        // bool[0] is wasted because here the index is considered as potential missing int.
+        // bool[len + 1] is for the case that {1,2,3,4,5} the missing one is 6.
         boolean[] arr = new boolean[A.length + 2];
-        int res = 1;
         for (int i = 0; i < A.length; ++i) {
-            if (A[i] <= A.length && A[i] > 0) arr[A[i]] = true;
+            if (A[i] <= A.length && A[i] > 0) {
+                arr[A[i]] = true;
+            }
         }
         for (int i = 1; i < arr.length; ++i) {
             if (!arr[i]) {
-                res = i;
-                break;
+                return i;
             }
         }
-        return res;
+        return 1;
     }
 }

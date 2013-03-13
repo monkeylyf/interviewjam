@@ -33,7 +33,7 @@ class leetcode_Container_With_Most_Water {
                 max = cur;
             }
             if (height[head] < height[tail]) {
-                // No matther what value height[tail - 1] is,
+                // No matter what value height[tail - 1] is,
                 // cur >= Math.min(height[head], height[tail - 1]) * (tail - head -1)
                 // So move the index of min value.
                 head++;

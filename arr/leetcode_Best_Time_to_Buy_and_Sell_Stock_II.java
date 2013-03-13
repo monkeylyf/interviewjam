@@ -13,11 +13,15 @@ class leetcode_Best_Time_to_Buy_and_Sell_Stock_II {
         maxProfix(new int[] {2, 1, 4, 5, 2, 9, 7});
     }
     public static maxProfit(int[] prices) {
-        if (prices.length == 0) return 0;
+        if (prices.length == 0) {
+            return 0;
+        }
         int max = 0;
         int cur = prices[0];
         for (int i = 1; i < prices.length; ++i) {
-            if (prices[i] > prices[i - 1]) max += prices[i] - prices[i - 1]; 
+            if (prices[i] > prices[i - 1]) {
+                max += prices[i] - prices[i - 1]; 
+            }
         }
         return max;
     }

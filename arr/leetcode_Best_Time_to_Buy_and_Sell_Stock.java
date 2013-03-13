@@ -13,12 +13,18 @@ class leetcode_Best_Time_to_Buy_and_Sell_Stock {
     }
     // O(N)
     public static int max(int[] prices) {
-        if (prices.length == 0) return 0;
+        if (prices.length == 0) {
+            return 0;
+        }
         int cur_min = prices[0];
         int max = 0;
         for (int i = 1; i < prices.length; ++i) {
-            if (prices[i] - cur_min > max) max = prices[i] - cur_min;
-            if (prices[i] < cur_min) cur_min = prices[i];
+            if (prices[i] - cur_min > max) {
+                max = prices[i] - cur_min;
+            }
+            if (prices[i] < cur_min) {
+                cur_min = prices[i];
+            }
         }
         return max;
     }
