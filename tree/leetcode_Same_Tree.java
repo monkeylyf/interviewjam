@@ -9,12 +9,10 @@ class leetcode_Same_Tree {
     public static void main(String[] args) {
     }
     public static boolean isSameTree(TreeNode a, TreeNode b) {
-        if (p == null && q == null) {
-            return true; // Both null.
-        } else if (p == null || q == null) {
-            return false; // Either is null.
+        if (p == null || q == null) {
+            return p == q;
         } else if (p.val != q.val) {
-            return false; // Different val.
+            return false;
         } else {
             return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
         }
