@@ -36,16 +36,20 @@ class leetcode_Sudoku_Solver {
             return true;
         } else {
             for (int k = 1; k <= 9; ++k) {
-                boolean result = false;
+                //boolean result = false;
                 board[nextRow][nextCol] = Character.forDigit(k, 10);
                 if (isValidSudoku(board, nextRow, nextCol)) {
-                    result = resolveNext(board, nextRow, nextCol);
+                    //result = resolveNext(board, nextRow, nextCol);
+                    if (resolveNext(board, nextRow, nextCol)) {
+                        return true;
+                    }
                 }
-                if (result) {
-                    return true;
-                } else {
-                    board[nextRow][nextCol] = '.'; // Reset on backtrack.
-                }
+                //if (result) {
+                //    return true;
+                //} else {
+                //    board[nextRow][nextCol] = '.'; // Reset on backtrack.
+                board[nextRow][nextCol] = '.';
+                //}
             }
             return false;
         }
