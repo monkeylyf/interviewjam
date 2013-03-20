@@ -85,7 +85,7 @@ public class Billboards {
         }
         updateLocalMin(local, status, status.length - 1 - k, status.length - 1);
         //print(status);
-        return local[0];
+        return sum - local[0];
     }
     public static void print(long[] status) {
         for (long i : status) System.out.print(i + " ");
