@@ -71,11 +71,11 @@ public class Median {
                     // Successfull removed on element.
                     System.out.println("Wrong!");
                 } else if (minHeap.size() == maxHeap.size()) {
+                    // maxHeap.peek() - minHeap.peek() might int overflow. Converted to double.
                     if ((minHeap.peek() & 0x1) == (maxHeap.peek() & 0x1)) {
-                        System.out.println((minHeap.peek() - maxHeap.peek()) / 2 + maxHeap.peek());
+                        System.out.println((int)(((double)maxHeap.peek() - minHeap.peek()) / 2) + minHeap.peek());
                     } else {
-                        System.out.format("%.1f%n", (minHeap.peek() - maxHeap.peek()) / 2.0 + maxHeap.peek()); // No trailing 0s.
-                    }
+                        System.out.format("%.1f%n", ((double)maxHeap.peek() - minHeap.peek()) / 2.0 + minHeap.peek()); // No trailing 0s.
                 } else {
                     System.out.println(minHeap.peek());
                 }
