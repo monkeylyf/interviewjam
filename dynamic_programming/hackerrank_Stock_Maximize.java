@@ -37,26 +37,14 @@ rises. For the second case, you can buy one share on the first two days, and
 sell both of them on the third day.
 */
 
-import java.io.*;
-import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
 
-public class Solution {
+public class Stack_Maximize {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int T = sc.nextInt();
-        for (int i = 0; i < T; ++i) {
-            int n = sc.nextInt();
-            int[] arr = new int[n];
-            for (int j = 0;j < n; ++j) {
-                arr[j] = sc.nextInt();
-            }
-            max(arr);
-        }
     }
     public static void max(int[] arr) {
+        // The idea behind this is iterating arr from right to left and recording the localMax.
+        // You always want to buy stocks at low prices and sell them at high, which means higher
+        // prices must come after lower prices.
         int n = arr.length, localMax = arr[n - 1];
         long sum = 0;
         int i;
