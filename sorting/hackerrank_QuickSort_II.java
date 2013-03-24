@@ -48,6 +48,8 @@ class hackerrank_QuickSort_II {
 
 /* Head ends here */
 class Solution {
+    public static void main(String[] args) {
+    }
     static void quickSort(int[] ar) {
         if (ar == null) {
             return;
@@ -55,44 +57,31 @@ class Solution {
         partition(ar, 0, ar.length - 1);
     }
     public static void partition(int[] ar, int left, int right) {
+        // Since during partitioning, the order of numbers can not be changed,
+        // we need extra space to buffer the numbers.
         if (left < right) {
             int pivot = ar[left];
-            int head = left;
-            int tail = right;
-            while (head < tail) {
-                while (ar[tail] >= pivot && head < tail) {
-                    --tail;
-                }
-                if (head < tail) {
-                    ar[head++] = ar[tail];
-                }
-                while (ar[head] < pivot && head < tail) {
-                    ++head;
-                }
-                if (head < tail) {
-                    ar[tail--] = ar[head];
+            int count = 0;
+            int[] tmp = new int[right - left + 1];
+            for (int i = left + 1; i <= right; ++i) {
+                if (ar[i] <= pivot) {
+                    tmp[count++] = ar[i];
                 }
             }
-            ar[head] = pivot;
-            partition(ar, left, head - 1);
-            partition(ar, head + 1, right);
-            printArray(Arrays.copyOfRange(ar, left, right + 1));
+            int partition = count + left;
+            tmp[count++] = pivot;
+            for (int i = left + 1; i <= right; ++i) {
+                if (ar[i] > pivot) {
+                    tmp[count++] = ar[i];
+                }
+            }
+            int j = left;
+            for (int i = 0; i < tmp.length; ++i) {
+                ar[j++] = tmp[i];
+            }
+            partition(ar, left, partition - 1);
+            partition(ar, partition + 1, right);
+            printArray(ar, left, right);
         }
     }
-/* Tail starts here */
-    static void printArray(int[] ar) {
-        for(int n: ar){
-            System.out.print(n+" ");
-        }
-        System.out.println("");
-    }
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int n = in.nextInt();
-        int[] ar = new int[n];
-        for(int i=0;i<n;i++){
-            ar[i]=in.nextInt(); 
-        }
-        quickSort(ar);
-    }    
 }
