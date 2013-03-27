@@ -33,7 +33,7 @@ class codejam_Ocean_View {
                     localMax = Math.max(localMax, status[j]);
                 }
             }
-            status[j] = localMax + 1;
+            status[i] = localMax + 1;
             max = Math.max(max, status[j]);
         }
         System.out.println("Case #" + T + ": " + (n - max));
