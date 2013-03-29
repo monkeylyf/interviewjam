@@ -1,4 +1,7 @@
-/*Given the in-order traverse and pre-order traverse of a BINARY TREE, write an
+/*Construct_Binary_Tree_from_Inorder_and_Postorder_Traversal
+
+
+Given the in-order traverse and pre-order traverse of a BINARY TREE, write an
 algorithm to print post-order traverse.
 
 FOLLOWUP:
@@ -13,9 +16,13 @@ Given inorder and preorder, tree can be reconstructed too.
 Given preorder and postorder, tree can not be reconstructed.
 
 Given any of in, post, pre-order traversal of a BST, tree can be reconstructed.
+
+Mark as duplicate:
+../tree/leetcode_Construct_Binary_Tree_from_Inorder_and_Postorder_Traversal
+../tree/leetcode_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal
 */
 
-class extra_1 {
+class leetcode_Construct_Binary_Tree_from_Inorder_and_Postorder_Traversal {
     public static void main(String[] args) {
         int[] pre = new int[] {1,2,4,8,9,10,11,5,3,6,7};
         int[] in= new int[] {8,4,10,9,11,2,5,1,6,3,7};
