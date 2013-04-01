@@ -1,9 +1,9 @@
-/*Longest_SubArray_With_Non-coprime_Adjacencies
+/*Longest_Subsequence_With_Non-coprime_Adjacencies
 ACM
 */
 
 
-class ACM_Longest_SubArray_With_Non_coprime_Adjacencies {
+class ACM_Longest_Subsequence_With_Non_coprime_Adjacencies {
     public static void main(String[] args) {
         int[] test = new int[] {2, 3, 4, 6, 9};
         System.out.println(longestNoncoprimeSubarray(test));
