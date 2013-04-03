@@ -36,7 +36,7 @@ PS:”aa” is one lego block of size 1 * 1 * 2, “b” and “c” are lego bl
 
 import java.math.BigInteger;
 
-public class Lego_Blocks {
+class Lego_Blocks {
     public static void main(String[] args) {
         lego(new int[][] {{2, 2}, {3, 2}, {2, 3}, {4, 4}, {1, 10}, {10, 10}, {20, 20}, {5, 5}});
         lego(new int[][] {{1000, 1000}});
@@ -61,13 +61,13 @@ public class Lego_Blocks {
             N = new long[width + 1];
             oneLayer = new BigInteger[width + 1];
             oneLayer[0] = new BigInteger("1");
-            int i;
+            int i, j, prevBlock;
             for (i = 1; i <= width; ++i) {
                 oneLayer[i] = new BigInteger("0");
             }
             // Pre-processing number of ways to build 1 * 1 * width. DP-based.
             for (i = 1; i < P.length; ++i) {
-                for (int prevBlock = 1; prevBlock <= 4; ++prevBlock) {
+                for (prevBlock = 1; prevBlock <= 4; ++prevBlock) {
                     if (i - prevBlock >= 0) {
                         oneLayer[i] = oneLayer[i].add(oneLayer[i - prevBlock]);
                     } else {
@@ -81,7 +81,7 @@ public class Lego_Blocks {
             }
             // Calculate N. DB-based. 
             for (i = 1; i < P.length; ++i) {
-                for (int j = 1; j < i; ++j) {
+                for (j = 1; j < i; ++j) {
                     N[i] -= ((N[j] * (P[i - j])) % modulus);
                     if (N[i] < 0) {
                         N[i] += modulus;
