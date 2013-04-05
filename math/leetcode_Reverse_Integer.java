@@ -9,20 +9,17 @@ class leetcode_Reverse_Integer {
     public static void main(String[] args) {
     }
     public static int reverse(int x) {
-        boolean negtive = false;
-        int res = 0;
-        if (x < 0) {
-            x = -x;
-            negtive = true;
-        }
+        boolean neg = (x < 0) ? true : false;
+        x = (neg) ? -x : x;
+        int ret = 0;
         while (x > 0) {
-            int last = x % 10;
-            res = res * 10 + last;
+            ret *= 10;
+            ret += x % 10;
             x /= 10;
         }
-        if (negtive) {
-            res = - res;
+        if (neg) {
+            return -ret;
         }
-        return res;
+        return ret;
     }
 }
