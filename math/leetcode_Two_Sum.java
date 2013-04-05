@@ -18,42 +18,21 @@ class leetcode_Two_Sum {
     public static void main(String[] args) {
     }
     public static int[] twoSum(int[] numbers, int target) {
-        // The idea behind this is if you sort the array, you can easily find two
-        // numbers sumed up to target but the indexes are unknown because of sorting.
-        // Used a HashMap to set val/index pair.
-        HashMap<Integer, Integer> indexes = new HashMap<Integer, Integer>();
-        for (int i = 0; i < numbers.length; ++i) {
-            if (!indexes.containsKey(numbers[i])) {
-                indexes.put(numbers[i], i + 1);
-            }
-            // Duplicates cannot be solutions unless they sum up to target.
-            else if (numbers[i] * 2 == target) {
-                return new int[] {indexes.get(numbers[i]), i + 1};
-            }
-        }
-        Arrays.sort(numbers);
-        int small = 0;
-        int large = 0;
-        int head = 0;
-        int tail = numbers.length - 1;
-        while (head < tail) {
-            int sum = numbers[head] + numbers[tail];
-            if (sum == target) {
-                small = numbers[head];
-                large = numbers[tail];
-                break;
-            } else if (sum < target) {
-                ++head;
+        // Using hashmap to cache value/index pair.
+        // Iterate through arr once. For each value check if target - value is cached.
+        // If yes, return map.get(target - curValue) + 1, curIndex + 1. If no, cache
+        // current value and index.
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        int i;
+        int[] ret = new int[2];
+        for (i = 0; i < arr.length; ++i) {
+            if (map.containsKey(target - arr[i])) {
+                ret = new int[] {map.get(target - arr[i]) + 1, i + 1};
+                break;        
             } else {
-                --tail;
+                map.put(arr[i], i);
             }
         }
-        int index1 = indexes.get(small);
-        int index2 = indexes.get(large);
-        if (index1 < index2) {
-            return new int[] {index1, index2};
-        } else {
-            return new int[] {index2, index1};
-        }
+        return ret;
     }
 }
