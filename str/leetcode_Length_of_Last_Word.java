@@ -24,4 +24,11 @@ class leetcode_Length_of_Last_Word {
         }
         return count;
     }
+    public int lastWord(String s) {
+        // Interviewer might want you not to use the split method,
+        // but this might be better.
+        String[] arr = s.split(" ");
+        if (arr.length == 0) return 0;
+        else return arr[arr.length - 1].length();
+    }
 }
