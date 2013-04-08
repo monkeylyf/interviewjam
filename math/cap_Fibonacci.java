@@ -1,11 +1,29 @@
-/*Write a method to generate the nth Fibonacci number*/
+/*cap_Fibonacci
+careercup
 
-class test_49 {
+Write a method to generate the nth Fibonacci number
+*/
+
+class cap_Fibonacci {
 	public static void main(String[] args) {
-		for (int i = 0; i < 10; ++i) System.out.println(Fibonacci(i));
-		for (int i = 0; i < 10; ++i) System.out.println(Fibo(i));
+		//for (int i = 0; i < 10; ++i) System.out.println(Fibonacci(i));
+		//for (int i = 0; i < 10; ++i) System.out.println(Fibo(i));
+		for (int i = 0; i < 10; ++i) System.out.println(i + " " + Fib(i));
 	}
+
 	// O(n) time complexy.
+    public static int Fib(int n) {
+        // dp-based
+        // fib(n)=fib(n-1)+fib(n-2)
+        if (n <= 0) return 0;
+        int dp1 = 0, dp2 = 1;
+        while (--n > 0) {
+            dp2 += dp1;
+            dp1 = dp2 - dp1;
+        }
+        return dp2;
+    }
+    // Recursive. Exponential time complexity. A lot of duplicate calculations.
 	public static int Fibonacci(int n) {
 		if (n <= 0) return 0;
 		if (n == 1) return 1;

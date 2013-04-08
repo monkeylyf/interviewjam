@@ -17,8 +17,9 @@ class leetcode_Largest_Rectangle_in_Histogram {
         System.out.println(largestRectangleArea(new int[] {2, 1, 5, 6, 5, 2, 3}));
     }
     public static int largestRectangleArea(int[] height) {
-        /* 1. Brute force: O(n^3), enumerate left and right border and calculate the area.
-         * 2. Using maxHeap: O(n^2 logn? not sure), enumerate left & right and push into maxHeap and peek the min.
+        /* 1. Brute force: O(n^2), (i = 0; i < n; ++i) (j = i + 1; j < n; ++j), track localMin and update max.
+         * 2. Divide and conquer: O(nlogn). Implement a segment tree to track localMin. extend the localMin to
+         *    both right and left as far as possible.
          * 3. Monotone priority stack: O(n)
          */
         int result = 0, lastIndex = 0, lastHeight = 0;
