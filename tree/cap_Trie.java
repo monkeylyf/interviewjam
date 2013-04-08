@@ -15,6 +15,8 @@ class cap_Trie {
         for (int i = 0; i < "BANANA".length(); ++i) {
             System.out.println(t.getIndexes("BANANA".substring(i)));
         }
+        System.out.println("test with empty string " + t.getIndexes(""));
+        System.out.println("neg test " + t.getIndexes("fuckyou"));
     }   
 }   
 
@@ -44,10 +46,8 @@ class TrieNode {
         this.indexes.add(index);
         if (s != null && s.length() > 0) {
             this.val = s.charAt(0);
-            TrieNode child = null;
-            if (this.kids.containsKey(this.val)) {
-                child = kids.get(this.val);
-            } else {
+            TrieNode child = this.kids.get(this.val);
+            if (child == null) {
                 child = new TrieNode();
                 kids.put(this.val, child);
             }
