@@ -1,4 +1,4 @@
-/*Local_Min_in_Huge_Integer_Array
+/*Range_Minimum_Query
 google
 
 Suppose on your server there is a huge integer array. Clients will request for
@@ -30,10 +30,12 @@ local 0  1  3  3  4  7  7  7  10 10  10  11 13  13  14
 
 For more solutions:
 http://community.topcoder.com/tc?module=Static&d1=tutorials&d2=lowestCommonAncestor
+or
+http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/
 */
 
 
-class google_Local_Min_in_Huge_Integer_Array{
+class google_Range_Minimum_Query {
     public static void main(String[] args) {
         int[] input = new int[] {9, 5, 1, 2, 0,-1, 3, 6, 4, 10, 11, 7, -2,  8, -3};
         searchArray arr = new searchArray(input);
