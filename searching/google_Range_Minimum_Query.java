@@ -38,13 +38,9 @@ http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/
 class google_Range_Minimum_Query {
     public static void main(String[] args) {
         int[] input = new int[] {9, 5, 1, 2, 0,-1, 3, 6, 4, 10, 11, 7, -2,  8, -3};
-        searchArray arr = new searchArray(input);
-        for (int i = 0; i < input.length; ++i) {
-            for (int j = i; j < input.length; ++j) {
-                System.out.print(arr.localMin(i, j) + " ");
-            }
-            System.out.println();
-        }
+        int[] arr = new int[] {2,4,3,1,6,7,8,9,1,7};
+        SegmentTreeMin stree = new SegmentTreeMin(arr);
+        System.out.println(stree.query(1, 2));
     }
     public static int[][] noBrainer(int[] A) {
         // Solution 1, no brainer, dp based
@@ -67,10 +63,11 @@ class google_Range_Minimum_Query {
         return status;
     }
     public static int[] sqrtN(int[] A) {
-        int width = Math.sqrt(A.length);
+        // #TODO: unfinished
+        int width = (int)(Math.sqrt(A.length));
         int[] status = new int[width];
         for (int i = 0; i < width; ++i) {
-            int locaMin = i * width;
+            int localMin = i * width;
             for (int j = i * width + 1; j < (i + 1) * width; ++j) {
                 if (A[j] < A[localMin]) {
                     localMin = j;
@@ -78,71 +75,63 @@ class google_Range_Minimum_Query {
             }
             status[i] = localMin;
         }
+        return new int[1];
     }
-    public static class searchArray {
-        int[] array;
-        private int[] local;
-        private int len;
-        searchArray(int[] arr) {
-            array = arr;
-            len = arr.length;
-            local = new int[len];
-            localInit();
-        }
-        private void localInit() {
-            local[len - 1] = len - 1;
-            int i = 0;
-            while (i < len - 1) {
-                int cur = array[i];
-                int j = i;
-                while (j < len - 1) {
-                    if (array[j] > array[j + 1]) {
-                        break;
-                    }
-                    ++j;
-                }
-                for (int k = i; k <= j; ++k) {
-                    local[k] = j;
-                }
-                if (i == j) {
-                    ++i;
-                } else {
-                    i = j;
-                }
-            }
-        }
-        public int localMin(int start, int end) {
-            if (start < 0 || end >= len || start > end) {
-                return Integer.MAX_VALUE;
-            }
-            int retval = array[start];
-            while (start <= end) {
-                retval = Math.min(retval, array[start]);
-                start = local[start] + 1;
-            }
-            return retval;
-        }
+}
+
+
+class SegmentTreeMin {
+    private int[] arr;
+    private int[] stree;
+    private int n;
+    public SegmentTreeMin(int[] arr) {
+        this.arr = arr;
+        this.stree = buildSTree(arr);  
+        this.n = arr.length;
     }
-    public static class Node {
-        //  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
-        // [9, 5, 1, 2, 0,-1, 3, 6, 4, 10, 11, 7, -2,  8, -3]
-        //                           (7,6)
-        //              /                              \
-        //             (3,2)                       (11,7)
-        //       /               \          /                   \
-        //      (1,5)        (5,-1)        (9,10)           (13,8)
-        //    /       \    /        \    /         \     /            \
-        //  (0,9)  (2,1)  (4,0)  (6,3)  (8,4)  (10,11)  (12,-2)  (14,-3)
-        //
-        // For example, start = 3, end = 11
-        // minStart = min of start=3 right kids
-        // minEnd = min of end=11 left kids.
-        //                           (7,6)
-        //              /                              \
-        //             (3,2)                       (11,7)
-        //       /               \          /                   \
-        //      (1,5)        (5,-1)        (9,10)           (13,8)
-        //    /       \    /        \    /         \     /            \
-        //  (0,9)  (2,1)  (4,0)  (6,3)  (8,4)  (10,11)  (12,-2)  (14,-3)
+
+    public void print() {
+        for (int i : this.stree) System.out.print(i + " ");
+        System.out.println();
+    }
+
+    public int nextRMQ( int start, int end, int qStart, int qEnd, int index) {
+        if (qStart <= start && qEnd >= end) {
+            return this.stree[index];
+        }
+        if (end < qStart || start > qEnd) {
+            return Integer.MAX_VALUE;
+        }
+        int mid = start + (end - start) / 2;
+        return Math.min(nextRMQ(start, mid, qStart, qEnd, 2 * index + 1),
+                nextRMQ( mid + 1, end, qStart, qEnd, 2 * index + 2));
+    }
+
+    public int query(int start, int end) {
+        if (start < 0 || end >= this.n || start > end) {
+            return Integer.MIN_VALUE;
+        }
+        return nextRMQ(0, this.n - 1, start, end, 0);
+    }
+
+    public int[] buildSTree(int[] arr) {
+        int height = (int) (Math.ceil(Math.log(arr.length) / Math.log(2)));
+        int maxSize = 2 * (int) (Math.pow(2, height)) - 1;
+        int[] STree = new int[maxSize];
+        buildSegmentTree(arr, 0, arr.length - 1, STree, 0);
+        return STree;
+    }
+
+    public int buildSegmentTree(int[] arr, int start, int end,
+            int[] STree, int index) {
+        if (start == end) {
+            STree[index] = arr[start];
+            return arr[start];
+        }
+        int mid = start + (end - start) / 2;
+        STree[index] = Math.min(
+                buildSegmentTree(arr, start, mid, STree, index * 2 + 1),
+                buildSegmentTree(arr, mid + 1, end, STree, index * 2 + 2));
+        return STree[index];
     }
 }
