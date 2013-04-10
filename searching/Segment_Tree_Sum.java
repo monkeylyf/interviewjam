@@ -27,16 +27,6 @@ class Segment_Tree_Sum {
         return getSum(stree, n, start, end);
     }
     
-    public static int sumNext(int[] STree, int start, int end, int qStart, int qEnd, int index) {
-        if (qStart <= start && qEnd >= end) {
-            return STree[index];
-        }
-        if (end < qStart || start > qEnd) {
-            return 0;
-        }
-        int mid = start + (end - start) / 2;
-        return sumNext(STree, start, mid, qStart, qEnd, 2 * index + 1) + sumNext(STree, mid + 1, end, qStart, qEnd, 2 * index + 2);
-    }
     // Update Setment Tree.
     public static void updateSTree(int arr[], int[] STree, int n, int i, int val) {
         if (i >= n || i < 0) {
@@ -60,6 +50,17 @@ class Segment_Tree_Sum {
     }
     
     // Query Segment Tree.
+    public static int sumNext(int[] STree, int start, int end, int qStart, int qEnd, int index) {
+        if (qStart <= start && qEnd >= end) {
+            return STree[index];
+        }
+        if (end < qStart || start > qEnd) {
+            return 0;
+        }
+        int mid = start + (end - start) / 2;
+        return sumNext(STree, start, mid, qStart, qEnd, 2 * index + 1) + sumNext(STree, mid + 1, end, qStart, qEnd, 2 * index + 2);
+    }
+
     public static int getSum(int[] STree, int n, int start, int end) {
         if (start < 0 || end >= n || start > end) {
             return Integer.MIN_VALUE;

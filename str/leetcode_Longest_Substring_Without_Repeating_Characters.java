@@ -6,7 +6,7 @@ characters. For example, the longest substring without repeating letters for
 is "b", with the length of 1.
 */
 
-import java.util.Hashtable;
+import java.util.*;
 
 
 class leetcode_Longest_Substring_Without_Repeating_Characters {
@@ -15,31 +15,23 @@ class leetcode_Longest_Substring_Without_Repeating_Characters {
         lengthOfLongestSubstring("hchzvfrkmlnozjk");
     }
     public static int lengthOfLongestSubstring(String s) {
-        Hashtable<Character, Integer> dict = new Hashtable<Character, Integer>();
-        int ptr = 0;
-        int length = 0;
-        int cur_index = 0;
-        int i = 0;
+        // Time complexity O()
+        HashMap<Character, Integer> dict = new HashMap<Character, Integer>();
+        int ret = 0, head = 0, i = 0;
+        char curChar;
         while (i < s.length()) {
-            char curChar = s.charAt(i);
+            curChar = s.charAt(i);
             if (dict.containsKey(curChar)) {
-                if (i - cur_index > length) {
-                    // Longer length.
-                    length = i - cur_index;
-                    ptr = cur_index;
-                }
+                ret = Math.max(ret, i - head); // Update 
                 // next loop start from the next char of next duplicate char.
                 i = dict.get(curChar) + 1;
-                cur_index = i;
-                dict = new Hashtable<Character, Integer>();
+                head = i;
+                dict = new HashMap<Character, Integer>(); // clear cache.
             }
             dict.put(s.charAt(i), i);
             ++i;
         }
-        if (s.length() - cur_index > length) {
-            length = s.length() - cur_index;
-            ptr = cur_index;
-        }
-        return length;
+        ret = Math.max(ret, i - head);
+        return ret;        
     }
 }
