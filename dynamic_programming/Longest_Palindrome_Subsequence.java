@@ -21,8 +21,10 @@ class Longest_Palindrome_Subsequence {
                 tail = str.charAt(j + L);
                 //System.out.println("L " + L + " j " + j);
                 if (head == tail) {
+                    // if cur substring's tail equals head, find the longest palindrome subsequence [head + 1, tail -1]
                     dp[j][j + L] = dp[j + 1][j + L - 1] + 2;
                 } else {
+                    // if not, find the longest palindrome subsequence of [head, tail - 1] and [head + 1, tail]
                     dp[j][j + L] = Math.max(dp[j + 1][j + L], dp[j][j + L - 1]);
                 }
             }
