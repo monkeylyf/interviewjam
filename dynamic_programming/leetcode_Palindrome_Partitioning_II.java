@@ -39,41 +39,36 @@ class leetcode_Palindrome_Partitioning_II {
         }
         return status[status.length - 1];
     }
-    public static int toPalindrome1(String A) {
+
+    public static int toPalindrome1(String str) {
         // Time complex O(N^2) but need extra O(N^2) space 
-        int n = A.length();
+        int n = str.length(), i, j;
+        boolean[][] dp = new boolean[n][n];
+        // init dp state.
+        for (i = 0; i < n; ++i) {
+            dp[i][i] = true;
+        }
+        // palindrome dp matrix.
+        for (i = n - 2; i >= 0; --i) {
+            // check for string of length equals 2.    
+            dp[i][i + 1] = (str.charAt(i) == str.charAt(i + 1)) ?  true : false;
+            for (j = i + 2; j < n; ++j) {
+                // check for string of length more than 2.
+                dp[i][j] = (str.charAt(i) == str.charAt(j)) ? dp[i + 1][j - 1] : false;
+            }
+        }
         int[] status = new int[n];
-        boolean[][] palindrome = new boolean[n][n];
-        // Precomputing.
-        for (int i = 0; i < n; ++i) {
-            palindrome[i][i] = true;
-        }
-        for (int i = n - 2; i >= 0; --i) {
-            for (int j = i + 1; j < n; ++j) {
-                // dp-based.
-                if (j - i == 1) {
-                    palindrome[i][j] = (A.charAt(i) == A.charAt(j)) ? true : false;
-                } else {
-                    palindrome[i][j] = (A.charAt(i) == A.charAt(j) && palindrome[i + 1][j - 1]) ? true : false;
-                }
-            }
-        }
-        for (int i = 1; i < n; ++i) {
-            if (palindrome[0][i]) {
-                status[i] = 0; // Cur substr is palindrome, 0 cut.
+        for (i = 1; i < n; ++i) {
+            if (dp[0][i]) {
+                status[i] = 0; // is str.substring(0,i+1) is palindrome, needs 0 cut.
             } else {
-                int minCut = Integer.MAX_VALUE;
-                for (int j = 1; j <= i; ++j) {
-                    if (palindrome[j][i]) {
-                        // iterator through all substr end with index i
-                        // Record the min cut number for rest of cur string.
-                        minCut = Math.min(minCut, status[j - 1]);
-                    }
-                    status[i] = minCut + 1;
+                status[i] = status[i - 1] + 1; // cut init.
+                for (j = 1; j < i; ++j) {
+                    status[i] = (dp[j][i]) ? Math.min(status[i], status[j - 1] + 1) : status[i];
                 }
             }
         }
-        return status[status.length - 1];
+        return status[n - 1];
     }
     public static boolean isPalindrome(String A) {
         int head = 0, tail = A.length() - 1;
