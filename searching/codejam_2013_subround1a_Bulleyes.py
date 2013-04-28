@@ -1,3 +1,7 @@
+#
+# https://code.google.com/codejam/contest/2418487/dashboard#s=p0
+#
+
 import sys
 
 rl = sys.stdin.readline
