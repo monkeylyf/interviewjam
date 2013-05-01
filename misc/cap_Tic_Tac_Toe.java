@@ -8,9 +8,9 @@ import java.util.*;
 
 
 class cap_Tic_Tac_Toe {
-	public static void main(String[] args) {
-		
-	}
+    public static void main(String[] args) {
+
+    }
     // Approach 1: Cache all possbile combination(3^9).
     public static void hasWon(char[][] board) {
         // Approach 2.
