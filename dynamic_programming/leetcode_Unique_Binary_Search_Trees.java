@@ -14,35 +14,40 @@ Given n = 3, there are a total of 5 unique BST's.
 */
 
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.*;
 
 
 class leetcode_Unique_Binary_Search_Trees {
     public static void main(String[] args) {
         System.out.println(numTrees(4));
     }
+
     public static int numTrees(int n) {
         // The idea behind this is dp-based.
-        // numTrees(i+1) = append the last node to the rightmost leaf of bst(i)[numTrees(i)] +
-        //                 append the last node as the root of bst(i)[numTrees(i)] +
-        //                 insert the last node as non-leaf node sum(k=1...i)(bst(k-1)*bst(i-k)
+        // numTrees(i+1) = append node i+1 to node i's right + append tree(0,i) as node i+1 left child.
+        //                 insert the last node as non-leaf node sum(k=1...i)(dp(k-1)*dp(i-k)
         if(n == 0 || n == 1 || n == 2) {
             return n;
         }
-        int bst[] = new int[n + 1];
-        bst[0] = 1;
-        bst[1] = 1;
+	int i, j;
+        int dp[] = new int[n + 1];
         //   1  2
         //  /    \
         // 2      1
-        bst[2] = 2;
-        for (int i = 3; i <= n; ++i) {
-            for (int j = 1; j < i - 1; ++j) {
-                bst[i] += bst[j] * bst[i - 1 - j];
-            }
-            bst[i] += 2 * bst[i - 1];
+        for (i = 0; i <= n; ++i) {
+	    if (i <= 2) { // init dp state
+	        dp[i] = i; // dp[0] = 1; dp[1] = 1; dp[2] = 2;
+	    } else {
+            	for (int j = 1; j <= i - 2; ++j) {
+		    // Consider node i as the intermediate node as a right child of some subtree.
+		    // Then create another substree and append its root to node i.
+		    // There is dp[j] different ways to construct first substree and dp[i - 1 - j] 
+		    // different ways to construct the second substree. Sum the num up.
+                    dp[i] += dp[j] * dp[i - 1 - j];
+            	}
+            	dp[i] += 2 * dp[i - 1];
+	    }
         }
-        return bst[n];
+        return dp[n];
     }
 }
