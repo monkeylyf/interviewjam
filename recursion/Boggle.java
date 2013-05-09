@@ -1,10 +1,13 @@
+/*Boggle
+
+Boggle game
+http://en.wikipedia.org/wiki/Boggle
+*/
+
 import java.util.*;
 
-public class Boggle {
 
-    /**
-     * @param args
-     */
+class Boggle {
     public static void main(String[] args) {
         testSuite1();
         testSuite2();
