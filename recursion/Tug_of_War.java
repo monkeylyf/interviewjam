@@ -75,7 +75,9 @@ class TugOfWar {
 	}
 
 	public void next(int ptr, int cur) {
-		if (ptr == track.length) {
+		if (this.n - cur < this.n / 2 - ptr) {
+			return;	// Trim. if what is left is less than what we need, stop.
+		} else if (ptr == track.length) {
 			int diff = Math.abs(this.sum - 2 * indexToSum(this.track));
 			if (diff < this.minDiff) {
 				this.minDiff = diff;
