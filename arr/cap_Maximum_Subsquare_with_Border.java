@@ -27,6 +27,7 @@ class cap_Maximum_Subsquare_with_Border {
 class Subsquare {
     public int[][] square;
     public int n;
+
     Subsquare(int[][] square) {
         this.square = square;
         this.n = square.length;
@@ -34,6 +35,7 @@ class Subsquare {
             assert(square[row].length == n);
         }
     }
+
     public int[] findMaximumSubsquare() {
         // Brutal force O(n^2)
         int[] ret = new int[3];
