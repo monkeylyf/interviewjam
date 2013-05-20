@@ -16,16 +16,91 @@ A solution set is:
 (-2,  0, 0, 2)
 */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Collections;
+import java.util.*;
 
 
 class leetcode_4Sum {
     public static void main(String[] args) {
-        for (ArrayList<Integer> i : fourSum(new int[] {2, 1, 0, -1}, 2)) System.out.println(i);
+        //for (ArrayList<Integer> i : fourSum(new int[] {2, 1, 0, -1}, 2)) System.out.println(i);
+		solve(new int[] {1,2,3,4,5}, 10);
     }
+
+	// Hashing pairs: sum/index. arr with length n => n^2 pairs.
+	// Sort pairs. Use two pointers find pair of pairs can sum up to target. sort: n^2(lg n^2) = n^2lgn and search: n
+	// So total time complexity is O(^2 logn)
+
+	public static void solve(int[] arr, int target) {
+		// Init vars.
+		int n = arr.length, head, tail, sum, i, j, a, b;
+		ArrayList<int[]> indexes;
+		ArrayList<Integer> pairs = new ArrayList<Integer>();
+		HashMap<Integer, ArrayList<int[]>> dict = new HashMap<Integer, ArrayList<int[]>>();
+		HashSet<ArrayList<Integer>> set = new HashSet<ArrayList<Integer>>();
+		// Hashing pairs: sum/index.
+		for (i = 0; i < n - 1; ++i) {
+			for (j = i + 1; j < n; ++j) {
+				sum = arr[i] + arr[j];
+				indexes = dict.get(sum);
+				if (indexes == null) {
+					indexes = new ArrayList<int[]>();
+					pairs.add(sum);
+				}
+				indexes.add(new int[] { i, j });
+				dict.put(sum, indexes);
+			}
+		}
+		// Sort arraylist and start two pointers.
+		Collections.sort(pairs);
+		head = 0;
+		tail = pairs.size() - 1;
+		while (head < tail) {
+			a = pairs.get(head);
+			b = pairs.get(tail);
+			if (a + b == target) {
+				find_four(set, dict.get(a), dict.get(b), arr);
+				head = head + 1;
+				tail = tail - 1;
+			} else if (a + b > target) {
+				tail = tail - 1;
+			} else {
+				head = head + 1;
+			}
+		}
+		// if x + x = target, check if dict contains key: x.
+		if (target % 2 == 0 && dict.containsKey(target / 2)
+				&& dict.get(target / 2).size() >= 2) {
+			find_four(set, dict.get(target / 2), dict.get(target / 2), arr);
+		}
+
+		ArrayList<ArrayList<Integer>> ret = new ArrayList<ArrayList<Integer>>();
+		for (ArrayList<Integer> darn : set) {
+			ret.add(darn);
+		}
+		System.out.println(ret);
+	}
+
+	public static void find_four(HashSet<ArrayList<Integer>> set, ArrayList<int[]> a,
+			ArrayList<int[]> b, int[] arr) {
+		int i, j;
+		int[] foo, bar;
+		ArrayList<Integer> index;
+		for (i = 0; i < a.size(); ++i) {
+			foo = a.get(i);
+			for (j = 0; j < b.size(); ++j) {
+				bar = b.get(j);
+				if (foo[0] != bar[0] && foo[1] != bar[0] && foo[0] != bar[1]
+						&& foo[1] != bar[1]) {
+					// if indexes do not overlap, we find a valid 4 element.
+					index = new ArrayList<Integer>();
+					Collections.addAll(index, arr[foo[0]], arr[foo[1]],
+							arr[bar[0]], arr[bar[1]]);
+					Collections.sort(index);
+					set.add(index);
+				}
+			}
+		}
+	}
+
     // Since we've know how to implement 3Sum.
     public static ArrayList<ArrayList<Integer>> fourSum(int[] num, int target) {
         ArrayList<ArrayList<Integer>> all = new ArrayList<ArrayList<Integer>>();
