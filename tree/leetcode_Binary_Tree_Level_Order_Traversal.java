@@ -19,7 +19,9 @@ import java.util.Queue;
 
 class leetcode_Binary_Tree_Level_Order_Traversal {
     public static void main(String[] args) {
+
     }
+
     public static ArrayList<ArrayList<Integer>> levelOrder(TreeNode root) {
         ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
         if (root == null) {
@@ -32,8 +34,12 @@ class leetcode_Binary_Tree_Level_Order_Traversal {
         while (!unvisited.isEmpty()) {
             TreeNode node = unvisited.remove();
             tmp.add(node.val);
-            if (node.left != null) unvisited.add(node.left);
-            if (node.right != null) unvisited.add(node.right);
+            if (node.left != null) {
+				unvisited.add(node.left);
+			}
+            if (node.right != null) {
+				unvisited.add(node.right);
+			}
             if (--count == 0) {
                 result.add(tmp);
                 tmp = new ArrayList<Integer>();

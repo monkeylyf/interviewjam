@@ -22,7 +22,18 @@ class leetcode_Sudoku_Solver {
                                        {'4', '7', '6', '2', '8', '9', '5', '3', '1'},
                                        {'1', '3', '8', '6', '5', '7', '2', '4', '9'}
                                       };
-        solveSudoku(board);
+        //solveSudoku(board);
+		char[][] board1 = new char[][] {"8........".toCharArray(),
+										"..36.....".toCharArray(),
+										".7..9.2..".toCharArray(),
+										".5...7...".toCharArray(),
+										"....457..".toCharArray(),
+										"...1...3.".toCharArray(),
+										"..1....68".toCharArray(),
+										"..85...1.".toCharArray(),
+										".9....4..".toCharArray(),
+		};
+        solveSudoku(board1);
     }
     public static void solveSudoku(char[][] board) {
         resolveNext(board, 0, 0);
