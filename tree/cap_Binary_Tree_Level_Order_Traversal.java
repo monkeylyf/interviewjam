@@ -1,4 +1,7 @@
-/*Given a binary search tree, design an algorithm which creates a linked list
+/*Binary_Tree_Level_Order_Traversal
+careercup
+
+Given a binary search tree, design an algorithm which creates a linked list
 of all the nodes at each depth (eg, if you have a tree with depth D, you’ll
 have D linked lists)
 
@@ -8,12 +11,9 @@ Please check:
 leetcode_Binary_Tree_Level_Order_Traversal.java
 */
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.ArrayList;
-import java.util.Stack;
+import java.util.*;
 
-class test_23 {
+class cap_Binary_Tree_Level_Order_Traversal {
 	public static void main(String[] args) {
 		Tree t = new Tree();
 		t.insert(4);
