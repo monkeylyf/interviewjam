@@ -1,10 +1,14 @@
-/*How would you design a stack which, in addition to push and pop, also has a
+/*Stack_with_function_Min
+careercup
+
+How would you design a stack which, in addition to push and pop, also has a
 functionmin which returns the minimum element? Push, pop and min should all
-operate in O(1) time*/
+operate in O(1) time
+*/
 
 import java.util.Stack;
 
-class test_15 {
+class cap_Stack_with_function_Min {
 	public static void main(String[] args) {
 		myS s = new myS();
 		s.push(1);
@@ -24,6 +28,7 @@ class test_15 {
 		System.out.println(s.min());
 	}
 }
+
 
 class myS {
 	Node top;
@@ -46,9 +51,17 @@ class myS {
 		return Integer.MAX_VALUE;
 	}
 
-	public int min() {return top.min;}
-	public int peek() {return top.data;}
-	public boolean isEmpty() {return top == null;}
+	public int min() {
+		return top.min;
+	}
+
+	public int peek() {
+		return top.data;
+	}
+
+	public boolean isEmpty() {
+		return top == null;
+	}
 }
 
 
@@ -69,11 +82,12 @@ class myStack extends Stack<Node> {
 
 
 class Node {
-	Node next = null;
+	Node next;
 	int data;
 	int min;
 	public Node(int d, int minimum) {
-		data = d;
-		min = minimum;
+		this.next = null;
+		this.data = d;
+		this.min = minimum;
 	}
 }
