@@ -13,38 +13,71 @@ import java.util.Stack;
 
 
 class leetcode_Interleaving_String {
+
+    /* DP based.
+	s3 start with either s1[0] or s2[0]. Otherwise return false.
+
+	if s3 start with s1[0], subproblem: s1[1:], s2, s[1:]
+	if s3 start with s2[0], subproblem: s, s2[1:], s[1:]
+	(if s1[0] == s2[0], take or operation)
+
+	if s1[:i-1] and s2[:j-1] is interleaving word, then dp[i][j] == true else false.
+	*/
+
     public static void main(String[] args) {
-        isInterleave("a", "b", "ab");
+		//  isInterleave("XXY", "XXZ", "XXZXXXY");
+    	//	isInterleave("XY" ,"WZ" ,"WZXY");
+    	//	isInterleave ("XY", "X", "XXY");
+    	//	isInterleave ("YX", "X", "XXY");
+    	//	isInterleave ("XXY", "XXZ", "XXXXZY");
+    	//  isInterleave("a", "b", "ab");
+		isInterleave("aabcc", "dbbca", "aadbbcbcac");
+		//	isInterleave("aabcc", "dbbca", "aadbbbaccc");
     }
-    // DP based.
+
     public static boolean isInterleave(String s1, String s2, String s3) {
+		// Time complexity O(mn). Space Complexity O(m)
         if (s1.length() + s2.length() != s3.length()) {
             return false;
         }
-        boolean[] prev = new boolean[s2.length() + 1];
+		int i, j;
+		// Init dp. Empty string state is considered.
+        boolean[] prev = new boolean[s2.length() + 1], next;
         prev[0] = true;
-        for (int i = 0; i < s2.length(); ++i) {
+        for (i = 0; i < s2.length(); ++i) { // "" and s2 are interleaving.
             if (s2.charAt(i) == s3.charAt(i)) {
                 prev[i + 1] = prev[i];
             }
         }
-        for (int i = 0; i < s1.length(); ++i) {
-            boolean[] next = new boolean[s2.length() + 1];
+		print(prev);
+		// DP. checking if s1[:i] and s2[:j] is interleaving with s3[:i+j]
+        for (i = 0; i < s1.length(); ++i) {
+            next = new boolean[s2.length() + 1];
             next[0] = s1.substring(0, i + 1).equals(s3.substring(0, i + 1));
-            for (int j = 0; j < s2.length(); ++j) {
+            for (j = 0; j < s2.length(); ++j) {
+				// if s2[j] == s3[i+j+1], then dp[i][j] = dp[i][j-1]
+				// check if s2[:j-1] and s1[:i] is interleaving
                 if (s2.charAt(j) == s3.charAt(i + j + 1)) {
                     next[j + 1] = next[j];
                 }
+				// if s1[i] == s3[i+j+1], then dp[i][j] = dp[i-1][j]
+				// check if s1[:i-1] and s2[:j] is interleaving
                 if (s1.charAt(i) == s3.charAt(i + j + 1)) {
                     next[j + 1] = next[j + 1] || prev[j + 1];
                 }
             }
             prev = next;
-            next = new boolean[s2.length() + 1];
+			print(prev);
         }
-        return prev[prev.length - 1];
+        return prev[s2.length()];
     }
-    // Way too slow.
+
+	public static void print(boolean[] arr) {
+		for (boolean i : arr) System.out.print((i) ? 'T' : 'F');
+		System.out.println();
+	}
+
+    // Way too slow. Random walk.
     public static boolean is(String s1, String s2, String s3) {
         if (s1.length() + s2.length() != s3.length()) {
             return false;
@@ -78,5 +111,26 @@ class leetcode_Interleaving_String {
             next = new Stack<int[]>();
         }
         return true;
+    }
+
+	// A recursive way to solve the problem. Way too slow.
+	// Worst case time complexity O(2 ** n) because it repeats computing some
+	// same subproblem.
+    public boolean util(String s1, String s2, String s3) {
+        if (s1.length() + s2.length() != s3.length()) {
+            return false;
+        } else if (s1.equals("")) {
+            return s2.equals(s3);
+        } else if (s2.equals("")) {
+            return s1.equals(s3);
+        } else if (s1.charAt(0) != s3.charAt(0) && s2.charAt(0) != s3.charAt(0)) {
+            return false;
+        } else if (s1.charAt(0) == s3.charAt(0) && s2.charAt(0) == s3.charAt(0)) {
+            return util(s1.substring(1), s2, s3.substring(1)) || util(s1, s2.substring(1), s3.substring(1));
+        } else if (s1.charAt(0) == s3.charAt(0)) {
+            return util(s1.substring(1), s2, s3.substring(1));
+        } else {
+            return util(s1, s2.substring(1), s3.substring(1));
+        }
     }
 }
