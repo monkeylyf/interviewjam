@@ -7,13 +7,15 @@ NOTE: This is not necessarily a binary search tree
 FOLLOWUP: what if it is a bst
 */
 
+import java.util.*;
+
+
 public class cap_First_Common_Ancestor {
 
-	/**
+	/*
 	 1. If each node has link pointing back to its parent, simply trace all the way back
 	    to their paths first meets.
 	 2. Naive method. At each level of dfs, check if given nodes are on different sides.
-	 3. 
 	 */
 
 	static int NONE = 0;
@@ -21,7 +23,91 @@ public class cap_First_Common_Ancestor {
 	static int TWO = 2;
 
 	public static void main(String[] args) {
+		TreeNode root = new TreeNode(1);
+		root.left = new TreeNode(3);
+		root.right = new TreeNode(-1);
+		root.right.left = new TreeNode(2);
+		root.right.right = new TreeNode(4);
+		// test case for getPath.
+		ArrayList<TreeNode> path = getPath(root, root.right.right);
+		print(path);
+		path = getPath(root, root.right.left);
+		print(path);
+		//test case for bingoLCA.
+		TreeNode LCA = null;
+		LCA = bingoLCA(root, root, root);
+		System.out.println(LCA.val);
+		LCA = bingoLCA(root, root, root.left);
+		System.out.println(LCA.val);
+		LCA = bingoLCA(root, root.right.left, root.right.right);
+		System.out.println(LCA.val);
+		LCA = bingoLCA(root, root.left, root.right.right);
+		System.out.println(LCA.val);
+	}
 
+	// Robin's algo
+	// 1. Assuming that each kid has a link pointing to its parent. Find the depth of both nodes.
+	// For the lower node, travel to its parent util two nodes are at the same depth. Check if two
+	// nodes are the same node. If yes, that the LCA. If no, both nodes travel back to their parents
+	// and check if they are the same. Rinse wash repeat util they are the same. 
+	// 2. Assuming that there is no link pointing to its parent. Then we need to cache the path
+	// from root to each node. The idea is all most the same as above. But space complexity is
+	// O(depth of tree) instead of O(1)
+
+	public static TreeNode bingoLCA(TreeNode root, TreeNode p, TreeNode q) {
+		if (root == null || p == null || q == null) {
+			return null;	
+		}
+
+		ArrayList<TreeNode> p_path = getPath(root, p);
+		ArrayList<TreeNode> q_path = getPath(root, q);
+
+		while (p_path.size() < q_path.size()) {
+			q_path.remove(q_path.size() - 1);
+		}
+		while (p_path.size() > q_path.size()) {
+			p_path.remove(p_path.size() - 1);
+		}
+
+		int size = p_path.size();
+		while (p_path.get(size - 1) != q_path.get(size - 1)) {
+			p_path.remove(size - 1);
+			q_path.remove(size - 1);
+			--size;	
+		}
+		return p_path.get(size - 1);
+	}
+
+	public static ArrayList<TreeNode> getPath(TreeNode root, TreeNode target) {
+		// If it's bst, then it's easier to find the path from root to target.
+		// Here we assume that it's just a binary tree.
+		ArrayList<TreeNode> path = new ArrayList<TreeNode>();
+		getPathUtil(root, target, path);
+		return path;
+	}
+
+	public static boolean getPathUtil(TreeNode root, TreeNode target, ArrayList<TreeNode> path) {
+		if (root == null) {
+			return false;	
+		}
+		if (root == target) {
+			path.add(root);
+			return true;	
+		}
+		path.add(root);
+		if (getPathUtil(root.left, target, path)) {
+			return true;	
+		}
+		if (getPathUtil(root.right, target, path)) {
+			return true;	
+		}
+		path.remove(path.size() - 1);
+		return false;
+	}
+
+	public static void print(ArrayList<TreeNode> path) {
+		for (TreeNode node : path) System.out.println(node.val + " ");
+		System.out.println();
 	}
 
 	// LCA
@@ -101,7 +187,7 @@ public class cap_First_Common_Ancestor {
 		}
 	}
 
-	class TreeNode {
+	static class TreeNode {
 		TreeNode left;
 		TreeNode right;
 		int val;
