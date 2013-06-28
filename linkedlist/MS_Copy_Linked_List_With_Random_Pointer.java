@@ -1,4 +1,5 @@
-/*Copy_Linked_List_With_Random_Pointer
+/*MS_Copy_Linked_List_With_Random_Pointer
+Microsolf
 
 Given a linkedlist which has next() and random().
 next() points to next node and random() points to a random node in this
@@ -8,10 +9,11 @@ Copy this linkedlist in O(n)
 */
 
 
-class Copy_Linked_List_With_Random_Pointer {
+class MS_Copy_Linked_List_With_Random_Pointer {
     public static void main(String[] args) {
     
     }
+
     public static ListNode copyLinkedList(ListNode head) {
         // TODO: code incomplete
         if (head == null) {
@@ -50,6 +52,8 @@ class Copy_Linked_List_With_Random_Pointer {
             cursor.next = cursor.next.next
         }
     }
+
+	// More elegant solution.
     public static ListNode copy(ListNode head) {
         // Time complexity: O(n) + O(n) + O(n).
         if (head == null) {
