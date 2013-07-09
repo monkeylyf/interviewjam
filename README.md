@@ -1,4 +1,4 @@
-careercup150
+Interviewjam
 ============
 
 This repo started for the purpose of practiceing career cup 150 in java. But things
