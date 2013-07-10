@@ -1,0 +1,4 @@
+# a comment - this is the file type I do not desire to track
+*.class
+*.DS_store
+.pyc
