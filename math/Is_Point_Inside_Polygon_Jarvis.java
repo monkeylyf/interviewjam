@@ -1,15 +1,18 @@
-/*Is_Point_Inside_Polygon
+/*Is_Point_Inside_Polygon_Jarvis
 geeksforgeeks
 
 Given a polygon and a point ‘p’, find if ‘p’ lies inside the polygon or
 not. The points lying on the border are considered inside.
+
+Jarvis march/algorithm: http://en.wikipedia.org/wiki/Gift_wrapping_algorithm
+
+Graham scan: ./Is_Point_Inside_Polygon_Graham_Scan.java
 */
 
 
+public class Is_Point_Inside_Polygon_Jarvis {
 
-public class Is_Point_Inside_Polygon {
-
-	/**
+	/*
 	 * Given the Is_Two_Line_Segments_Intersect function, we can
 	 * implement this easily.
 	 */
