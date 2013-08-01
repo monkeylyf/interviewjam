@@ -5,7 +5,8 @@ You are given two sorted arrays, A and B, and A has a large enough buffer at
 the end to hold B. Write a method to merge B into A in sorted order
 */
 
-class cap_Merge_Two_Sorted_Arrays {
+public class cap_Merge_Two_Sorted_Arrays {
+
 	public static void main(String[] args) {
 		int[] a = new int[9];
 		int[] b = new int[4];
@@ -28,7 +29,9 @@ class cap_Merge_Two_Sorted_Arrays {
 		// output: 1,1,1,1,2,4,6,8,10
 		// In this case a is depleted first.
 		mergeSorted(a, b, 5, 4);
+		print(a);
 	}
+
 	public static void mergeSorted(int[] a, int[] b, int m, int n) {
 		int i = m - 1; // Point to last element of a.
 		int j = n - 1; // Point to last element of b.
@@ -45,7 +48,10 @@ class cap_Merge_Two_Sorted_Arrays {
 		while (j > -1) {
             a[cur--] = b[j--];
         }
-		for (int k : a) System.out.print(" " + k);
+	}
+
+	public static void print(int[] arr) {
+		for (int i : arr) System.out.print(i);	
 		System.out.println();
 	}
 }
