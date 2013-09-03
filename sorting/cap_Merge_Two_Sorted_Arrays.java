@@ -8,6 +8,7 @@ the end to hold B. Write a method to merge B into A in sorted order
 public class cap_Merge_Two_Sorted_Arrays {
 
 	public static void main(String[] args) {
+		// Test case 1.
 		int[] a = new int[9];
 		int[] b = new int[4];
 		for (int i = 0; i < 5; ++i) {
@@ -19,7 +20,9 @@ public class cap_Merge_Two_Sorted_Arrays {
 		// output: 1,2,3,5,7,8,9,10,11
 		// In this case b is depleted first.
 		mergeSorted(a, b, 5, 4);
+		print(a);
 		System.out.println("------");
+		// Test case 2.
 		for (int i = 0; i < 5; ++i) {
             a[i] = i * 2 + 2;
         }
@@ -33,8 +36,9 @@ public class cap_Merge_Two_Sorted_Arrays {
 	}
 
 	public static void mergeSorted(int[] a, int[] b, int m, int n) {
-		int i = m - 1; // Point to last element of a.
-		int j = n - 1; // Point to last element of b.
+		// Pointer to last element of a and pointer to last element of b.
+		int i = m - 1, j = n - 1;
+		// Pointer to the last element after a and b are merged.
 		int cur = m + n - 1;
 		while (i != -1 && j != -1) {
 			if (a[i] >= b[j]) {
@@ -42,16 +46,17 @@ public class cap_Merge_Two_Sorted_Arrays {
             } else {
                 a[cur--] = b[j--];
             }
-			for (int k : a) System.out.print(" " + k);
-			System.out.println();
 		}
+		// Check if a's pointer reaches the head before b's.
+		// In that case copy rest of elements in b to a.
 		while (j > -1) {
             a[cur--] = b[j--];
         }
 	}
 
+	// Helper function.
 	public static void print(int[] arr) {
-		for (int i : arr) System.out.print(i);	
+		for (int i : arr) System.out.print(i + " ");
 		System.out.println();
 	}
 }
