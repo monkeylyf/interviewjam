@@ -1,0 +1,18 @@
+/*Basketball_Shots
+careercap
+
+You have a basketball hoop and someone says that you can play 1 of 2 games.
+Game #1: You get one shot to make the hoop.
+Game #2: You get three shots and you have to make AT LEAST 2 of 3 shots.
+If p is the probability of making a particular shot, for which values of p
+should you pick one game or the other?
+
+
+Define event A to be you winning the game #1 and B to be you winning game #2.
+
+P(A) = p
+P(B) = P(make 0 shot) + P(make 1 shot) + P(make 2 shots)
+     = (1 - p)^3 + C(1, 3) * (1 - p)^2 * p + (2, 3) * (1 - p) * P^2
+
+Plot it with p in range [0, 1] and compare P(A) and P(B)
+*/
