@@ -59,8 +59,8 @@ public class google_Quadtree{
             } else {
                 return newNode;
             }
-        } else if (rootOne.color == WHITE && rootTwo.color == WHITE) {
-            // Both are white.
+        } else if (rootOne.color == WHITE || rootTwo.color == WHITE) {
+            // Either is white.
             return new QTNode(WHITE);
         } else if (rootOne.color == BLACK) {
             // allBlack && pixels = pixels
