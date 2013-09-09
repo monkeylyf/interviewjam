@@ -9,20 +9,23 @@ There are two conventions to define height of Binary Tree
 import java.util.*;
 
 
-class Height_of_Binary_Tree {
+public class Height_of_Binary_Tree {
+
+	// The difference between those two conventional definition is trivial(by 1)
+
 	public static void main(String[] args) {
 		// test case 1.
-		BSTNode root = new BSTNode(1);
-		root.left = new BSTNode(2);
-		root.right = new BSTNode(3);
-		root.left.left = new BSTNode(4);
-		root.left.right = new BSTNode(5);
+		TreeNode root = new TreeNode(1);
+		root.left = new TreeNode(2);
+		root.right = new TreeNode(3);
+		root.left.left = new TreeNode(4);
+		root.left.right = new TreeNode(5);
 		System.out.println(heightIter(root));
 		System.out.println(heightRecr(root));
 	}
 
-	// Recursive.
-	public static int heightRecr(BSTNode root) {
+	// DFS.
+	public static int heightRecr(TreeNode root) {
 		if (root == null) {
 			return 0;	
 		} else {
@@ -30,14 +33,14 @@ class Height_of_Binary_Tree {
 		}
 	}
 
-	// Iterative.
-	public static int heightIter(BSTNode root) {
+	// BFS.
+	public static int heightIter(TreeNode root) {
 		if (root == null) {
 			return 0;	
 		}	
-		Queue<BSTNode> q = new LinkedList<BSTNode>();
-		Queue<BSTNode> next = new LinkedList<BSTNode>();
-		BSTNode cur;
+		Queue<TreeNode> q = new LinkedList<TreeNode>();
+		Queue<TreeNode> next = new LinkedList<TreeNode>();
+		TreeNode cur;
 		q.add(root);
 		int ret = 0;
 		while (!q.isEmpty()) {
@@ -51,21 +54,21 @@ class Height_of_Binary_Tree {
 			if (q.isEmpty()) {
 				// swap queue.
 				q = next; // point q to next
-				next = new LinkedList<BSTNode>(); // Reinit next
+				next = new LinkedList<TreeNode>(); // Reinit next
 				ret = ret + 1;
 			}
 		}
 		return ret;
 	}
-
 }
 
 
-class BSTNode {
-	BSTNode left;
-	BSTNode right;
+class TreeNode {
+	TreeNode left;
+	TreeNode right;
 	int val;
-	BSTNode(int val) {
+
+	TreeNode(int val) {
 		this.left = null;
 		this.right = null;
 		this.val = val;

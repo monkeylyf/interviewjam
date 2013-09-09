@@ -10,73 +10,83 @@ import java.util.Stack;
 import java.util.ArrayList;
 
 
-class google_Two_Sum {
+public class google_Two_Sum {
+
     public static void main(String[] args) {
         TreeNode root = new TreeNode(4);
-        TreeNode node1 = new TreeNode(1);
-        TreeNode node2 = new TreeNode(2);
-        TreeNode node3 = new TreeNode(3);
-        TreeNode node5 = new TreeNode(5);
-        TreeNode node6 = new TreeNode(6);
-        TreeNode node7 = new TreeNode(7);
-        root.left = node2;
-        root.right = node6;
-        node2.left = node1;
-        node2.right = node3;
-        node6.left = node5;
-        node6.right = node7;
+		root.left = new TreeNode(2);
+		root.right = new TreeNode(6);
+		root.left.left = new TreeNode(1);
+		root.left.right = new TreeNode(3);
+		root.right.left = new TreeNode(5);
+		root.right.right = new TreeNode(7);
+		// Test case for two.
         for (int i = 0; i <= 13; ++i) {
-            twoSum(root, i);
             two(root, i);
         }
+		// Test case for twoSum.
+        for (int i = 0; i <= 13; ++i) {
+            twoSum(root, i);
+		}
+		// Test case for answer exists only on left subtree.
+		root = new TreeNode(4);
+		root.left = new TreeNode(2);
+		root.left.left = new TreeNode(1);
+		twoSum(root, 3);
     }
-    public static int twoSum(TreeNode root, int target) {
+
+	// Using two stacks to simulate the inorder traversal with two pointers solution.
+	// Time complexity O(n).
+	// Space complexity O(logn) (height of tree)
+    public static void twoSum(TreeNode root, int target) {
         // The idea behind this is similar to find two sum in a sorted array.
         // Using two stacks to store the left track of nodes and right track of node.
-        Stack<TreeNode> leftStack = new Stack<TreeNode>();
-        Stack<TreeNode> rightStack = new Stack<TreeNode>();
-        TreeNode scan = root;
-        while (scan != null) {
-            leftStack.add(scan);
-            scan = scan.left;
-        }
-        scan = root;
-        while (scan != null) {
-            rightStack.add(scan);
-            scan = scan.right;
-        }
-        while (leftStack.peek().val < rightStack.peek().val) {// exists when root.val == root.val
+        Stack<TreeNode> leftStack = new Stack<TreeNode>(), rightStack = new Stack<TreeNode>();
+        TreeNode scan, leftElem, rightElem;
+		populateRight(root, rightStack);
+		populateLeft(root, leftStack);
+        while (leftStack.peek().val < rightStack.peek().val) {// exits when root.val == root.val
             if (leftStack.peek().val + rightStack.peek().val > target) {
                 // cur sum larger than target.
                 // reduce the tail(rightStack)
-                TreeNode rightElem = rightStack.pop();
+                rightElem = rightStack.pop();
                 if (rightElem.left != null) {
                     // Push the left child of cur node and all of its right children to stack. 
-                    scan = rightElem.left;
-                    while (scan != null) {
+					for (scan = rightElem.left; scan != null; scan = scan.right) {
                         rightStack.add(scan);
-                        scan = scan.right;
                     }
                 }
             } else if (leftStack.peek().val + rightStack.peek().val < target) {
-                TreeNode leftElem = leftStack.pop();
+                leftElem = leftStack.pop();
                 if (leftElem.right != null) {
-                    scan = leftElem.right;
-                    while (scan != null) {
+                    for (scan = leftElem.right; scan != null; scan = scan.left) {
                         leftStack.add(scan);
-                        scan = scan.left;
                     }
                 }
             } else {
-                System.out.println(leftStack.peek().val + ", "
-                        + rightStack.peek().val);
-                return leftStack.peek().val + rightStack.peek().val;
+                System.out.println(String.format("%d + %d = %d", leftStack.peek().val, rightStack.peek().val, target));
+				populateLeft(leftStack.pop().right, leftStack);
+				populateRight(rightStack.pop().left, rightStack);
             }
         }
-        System.out.println("not found");
-        return Integer.MAX_VALUE;
     }
-    public static int two(TreeNode root, int target) {
+
+	public static void populateLeft(TreeNode root,Stack<TreeNode> s) {
+		while (root != null) {
+			s.add(root);
+			root = root.left;
+		}	
+	}
+
+	public static void populateRight(TreeNode root,Stack<TreeNode> s) {
+		while (root != null) {
+			s.add(root);
+			root = root.right;
+		}	
+	}
+
+	// Inorder. Space complexity O(n). Time complexity O(n).
+    public static void two(TreeNode root, int target) {
         ArrayList<TreeNode> arr = new ArrayList<TreeNode>();
         inorderTraversal(root, arr);
         int head = 0;
@@ -88,12 +98,13 @@ class google_Two_Sum {
                 --tail;
             } else {
                 // Found.
-                System.out.println("jimo " + arr.get(head).val + ", " + arr.get(tail).val);
-                return arr.get(head).val + arr.get(tail).val;
+                System.out.println(String.format("%d + %d = %d", arr.get(head).val, arr.get(tail).val, target));
+				++head;
+				--tail;
             }
         }
-        return Integer.MAX_VALUE;
     }
+
     public static void inorderTraversal(TreeNode root, ArrayList<TreeNode> arr) {
         if (root != null) {
             inorderTraversal(root.left, arr);
@@ -108,9 +119,14 @@ class TreeNode {
     TreeNode left;
     TreeNode right;
     int val;
-    TreeNode(int x) {
-        val = x;
-        left = null;
-        right = null;
+
+    TreeNode(int val) {
+        this.left = null;
+        this.right = null;
+        this.val = val;
     }
+
+	public String toString() {
+		return String.format("<%d>", this.val);	
+	}
 }

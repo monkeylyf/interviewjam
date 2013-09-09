@@ -12,17 +12,22 @@ import java.util.*;
 public class K_Nearest_Neighbor {
 	
 	/*
-	1. max heap. O(nlogk). When k is small, time complexity is low.
-	2. selection sort. O(n).
+	1. max heap. O(nlogk). When k is small, time complexity is low. Space complexity O(k).
+	2. selection sort. O(n^2). Space Comparator O(1).
 	3. k-d tree(2-d tree in this case) (2-d tree is non-trivial...)
+	4. quick sort. O(nlogn)
 	*/
 
     public static void main(String[] args) {
-    	System.out.println(heap(new int[][] {{3, 6}, {8, 99}, {-1, 5}, {4, -9}, {0, 1}}, new int[] {0, 0}, 3));
-    	System.out.println(selectionSort(new int[][] {{3, 6}, {8, 99}, {-1, 5}, {4, -9}, {0, 1}}, new int[] {0, 0}, 3));
+		// Test case.
+		int[][] Points = new int[][] {{3, 6}, {8, 99}, {-1, 5}, {4, -9}, {0, 1}};
+		int[] origin = new int[] {0, 0};
+    	System.out.println(heap(Points, origin, 3));
+    	System.out.println(selectionSort(Points, origin, 3));
+    	System.out.println(quickSort(Points, origin, 3));
     }
 
-    // min heap
+    // Max heap.
     public static ArrayList<Point> heap(int[][] pointSet, int[] origin, int k) {
     	ArrayList<Point> ret = new ArrayList<Point>();
     	PriorityQueue<Point> queue = new PriorityQueue<Point>();
@@ -38,14 +43,42 @@ public class K_Nearest_Neighbor {
     	return ret;
     }
 
-    // selection sort.
-    public static ArrayList<Point> selectionSort(int[][] pointSet, int[] origin, int k) {
+    // Selection sort.
+	public static ArrayList<Point> selectionSort(int[][] pointSet, int[] origin, int k) {
+		Point[] arr = new Point[pointSet.length];
+		// Pre-processing.
+		for (int i = 0; i < pointSet.length; ++i) {
+			arr[i] = new Point(pointSet[i][0], pointSet[i][1], origin[0], origin[1]);
+		}
+
+		int i, j, minIdx;
+		for (i = 0; i < arr.length - 1; ++i) {
+			minIdx = i;
+			for (j = i + 1; j < arr.length; ++j) {
+				if (arr[j].eucDistSquare() < arr[minIdx].eucDistSquare()) {
+					minIdx = j;	
+				}
+				if (minIdx != i) {
+					swap(arr, i, minIdx);	
+				}
+			}
+		}
+		// Package and return.
+		ArrayList<Point> ret = new ArrayList<Point>();
+		for (i = 0; i < k; ++i) {
+			ret.add(arr[i]);
+		}
+		return ret;
+	}
+
+	// Quick sort.
+    public static ArrayList<Point> quickSort(int[][] pointSet, int[] origin, int k) {
     	Point[] arr = new Point[pointSet.length];
-    	// Pre-processing.
-    	for (int i = 0;i < pointSet.length; ++i) {
+    	// Pre-processing. Converting int[] to Point object.
+    	for (int i = 0; i < pointSet.length; ++i) {
     		arr[i] = new Point(pointSet[i][0], pointSet[i][1], origin[0], origin[1]);
     	}
-    	selectionSort(arr, k, 0, arr.length - 1);
+    	quickSortUtil(arr, k, 0, arr.length - 1);
     	ArrayList<Point> ret = new ArrayList<Point>();
     	for (int i = 0; i < k; ++i) {
     		ret.add(arr[i]);
@@ -53,18 +86,18 @@ public class K_Nearest_Neighbor {
     	return ret;
     }
 
-    public static void selectionSort(Point[] arr, int k, int left, int right) {
+    public static void quickSortUtil(Point[] arr, int k, int left, int right) {
     	if (left == right) {
     		return;
     	}
     	int pivot = randomPartition(arr, left, right);
     	int leftLength = pivot = left + 1;
-    	if (leftLength == k) {
+    	if (leftLength == k) { // K smallest elements do not have to be in order.
     		return;
     	} else if (leftLength > k) {
-    		selectionSort(arr, k, left, pivot - 1);
+    		quickSortUtil(arr, k, left, pivot - 1);
     	} else {
-    		selectionSort(arr, k, pivot + 1, right);
+    		quickSortUtil(arr, k, pivot + 1, right);
     	}
     }
 
@@ -73,11 +106,12 @@ public class K_Nearest_Neighbor {
     	double pivot = arr[axis].eucDistSquare();
     	swap(arr, axis, right);
     	for (int i = left; i < right; ++i) {
-    		if (arr[i].eucDistSquare() <= pivot) {
+    		if (arr[i].eucDistSquare() < pivot) {
     			swap(arr, left, i);
     			++left;
     		}
     	}
+		swap(arr, left, right);
     	return left;
     }
 
@@ -130,15 +164,16 @@ class Point implements Comparable<Point>{
 
 	@Override
 	public String toString() {
-		return "(" + this.x + ", " + this.y + ")";
+		return String.format("(%d,%d)", this.x, this.y);
 	}
 }
 
-class minComparator implements Comparator<double> {
-    @Override
-    public int compare(double a, double b) {
-        if (a < b) return 1;
-        if (a > b) return -1;
-        return 0;
-    }
-}
+
+// class minComparator implements Comparator<double> {
+// 	@Override
+//     public int compare(double a, double b) {
+//         if (a < b) return 1;
+//         if (a > b) return -1;
+//         return 0;
+//     }
+// }

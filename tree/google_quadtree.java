@@ -14,69 +14,86 @@ __________                         __________
 Each small part is a sub-quadtree
 
 Q1: Design the data strcuture for each node of quadtree.
-Q2: The intersection of two quadtree, ...
+Q2: Describe intersection of two quadtree.
 Q3: Write a function to return the intersection of two quadtree.
 
 
 http://en.wikipedia.org/wiki/Quadtree
-Hint: 1 stands for black, 0 stands for white, 2 stands for grey(black & white).
 intersection of black and white is 1 && 0 = 0
 */
 
 
-class google_Quadtree{
+public class google_Quadtree{
+
+	final int WHITE = 0;
+	final int BLACK = 1;
+	final int GREY = 2;
+
     public static void main(String[] args) {
+		// Test case.
     }
-    public static QuadTreeNode cloneQuadTree(QuadTreeNode root) {
+
+    public static QTNode cloneQT(QTNode root) {
         if (root == null)  {
             return null;
         }
-        QuadTreeNode newNode = new QuadTreeNode(root.color);
+        QTNode newNode = new QTNode(root.color);
         for (int i = 0; i < 4; ++i) {
-            newNode.kids[i] = cloneQuadTree(root.kids[i]);
+            newNode.kids[i] = cloneQT(root.kids[i]);
         }
         return newNode;
     }
-    public static QuadTreeNode intersection(QuadTreeNode rootOne, QuadTreeNode rootTwo) {
-        if (rootOne.color == 2 && rootTwo.color == 2) {
+
+    public static QTNode intersection(QTNode rootOne, QTNode rootTwo) {
+        if (rootOne.color == GREY && rootTwo.color == GREY) {
             // Both contain black & white.
-            QuadTreeNode newNode = new QuadTreeNode(2);
+            QTNode newNode = new QTNode(GREY);
             for (int i = 0; i < 4; ++i) {
                 newNode.kids[i] = intersection(rootOne.kids[i], rootTwo.kids[i]);
             }
+			// Trick here:
             if (newNode.isAllKidsWhite()) {
                 // If Intersection of two grey area is white, it should have no kids and
                 // its color should be set to 0(white).
-                return new QuadTreeNode(0);
+                return new QTNode(WHITE);
             } else {
                 return newNode;
             }
-        } else if (rootOne.color == 0 && rootTwo.color == 0) {
+        } else if (rootOne.color == WHITE && rootTwo.color == WHITE) {
             // Both are white.
-            return new QuadTreeNode(0);
-        } else if (rootOne.color == 1) {
+            return new QTNode(WHITE);
+        } else if (rootOne.color == BLACK) {
             // allBlack && pixels = pixels
-            return cloneQuadTree(rootTwo);
+            return cloneQT(rootTwo);
         } else  {
             // rootTwo.color == 1
-            return cloneQuadTree(rootOne);
+            return cloneQT(rootOne);
         } 
     }
-    public static class QuadTreeNode {
-        int color;
+
+    static class QTNode {
+        private int color;
+
+		private final int WHITE = 0;
+		private final int BLACK = 1;
+		private final int GREY = 2;
+
         // Children.
-        QuadTreeNode[] kids = new QuadTreeNode[4];
-        QuadTreeNode(int x) {
+        QTNode[] kids = new QTNode[4];
+        QTNode(int x) {
+			if (!(x == this.BLACK || x == this.WHITE || x == this.GREY)) {
+				throw new IllegalArgumentException("Invalid color.");	
+			}
             color = x;
-            for (QuadTreeNode kid : kids) {
+            for (QTNode kid : kids) {
                 kid = null;
             }
         }
         public boolean isAllKidsWhite() {
-            for (QuadTreeNode kid : kids) {
+            for (QTNode kid : kids) {
                 if (kid == null) {
                     return false;
-                } else if (kid.color != 0) {
+                } else if (kid.color != this.WHITE) {
                     return false;
                 }
             }

@@ -10,7 +10,8 @@ structurally identical.
 import java.util.*;
 
 
-class google_Topologically_Same_Tree {
+public class google_Topologically_Same_Tree {
+
     public static void main(String[] args) {
     
     }
@@ -28,19 +29,18 @@ class google_Topologically_Same_Tree {
 
     public static boolean isSame(TreeNode a, TreeNode b) {
         // Non-recursive answer. Based on BFS.
-        Queue<TreeNode> aQueue = new LinkedList<TreeNode>();
-        Queue<TreeNode> bQueue = new LinkedList<TreeNode>();
+        Queue<TreeNode> aQueue = new LinkedList<TreeNode>(), bQueue = new LinkedList<TreeNode>();
         TreeNode A, B;
         aQueue.add(a);
         bQueue.add(b);
         while (!aQueue.isEmpty() && !bQueue.isEmpty()) {
             A = aQueue.poll();
             B = bQueue.poll();
-            if ((A == null && B != null) || (A != null && B == null)) {
-                return false;
-            }
             if (A == null && B == null) {
                 continue;
+            }
+			if (A == null ^ b == null) {
+                return false; // Either of the two nodes are null.
             }
             aQueue.add(A.left);
             aQueue.add(A.right);
@@ -56,6 +56,7 @@ class TreeNode {
     TreeNode left;
     TreeNode right;
     int val;
+
     TreeNode(int x) {
         this.left = null;
         this.right = null;

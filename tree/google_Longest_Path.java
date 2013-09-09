@@ -7,7 +7,7 @@ Given a tree, return the number of nodes in its the longest path.
 import java.util.Arrays;
 
 
-class Longest_Path {
+public class Longest_Path {
     public static void main(String[] args) {
     
     }
@@ -40,15 +40,18 @@ class Solution {
     private TreeNode root;
     private int size;
     private int longest;
+
     Solution(TreeNode root) {
         this.root = root;
         longestPath = 0;
         size = kidsSize();
     }
+
     public int longestPath() {
         nextNode(root);
         return this.longest;
     }
+
     public int nextNode(TreeNode node) {
         if (node == null) {
             return 0;
@@ -70,6 +73,7 @@ class Solution {
 class TreeNode {
     private int capacity;
     public TreeNode[] kids;
+
     TreeNode(int x) {
         this.capacity = x;
         kids = new TreeNode[x];
@@ -77,6 +81,7 @@ class TreeNode {
             kids[i] = null;
         }
     }
+
     public int kidsSize() {
         return capacity;
     }

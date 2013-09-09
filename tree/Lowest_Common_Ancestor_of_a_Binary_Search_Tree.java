@@ -11,10 +11,12 @@ LCA of nodes 2 and 8 is 6. LCA of 2 and 4 should be 2.
 */
 
 
-class Lowest_Common_Ancestor_of_a_Binary_Search_Tree {
+public class Lowest_Common_Ancestor_of_a_Binary_Search_Tree {
+
     public static void main(String[] args) {
     
     }
+
     public static TreeNode lca(TreeNode root, TreeNode a, TreeNode b) {
         if (root == null || a == null || b == null) {
             return null;
@@ -27,6 +29,7 @@ class Lowest_Common_Ancestor_of_a_Binary_Search_Tree {
             return root; 
         }
     }
+
     class TreeNode {
         TreeNode left;
         TreeNode right;
