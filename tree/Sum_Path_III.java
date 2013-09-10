@@ -10,10 +10,10 @@ import java.util.*;
 
 public class Sum_Path_III {
 	
-	/** The idea is dfs to traverse all nodes and return all possible paths.
-	*/
+	/* The idea is dfs to traverse all nodes and return all possible paths.*/
+
 	public static void main(String[] args) {
-		// test case 1.
+		// Test case 1.
 		TreeNode root = new TreeNode(1);
 		root.left = new TreeNode(3);
 		root.right = new TreeNode(-1);
@@ -26,15 +26,16 @@ public class Sum_Path_III {
         if (root == null) {
             return null;
         }
-        HashMap<Integer, ArrayList<ArrayList<Integer>>> left = dfs(root.left, target);
-        HashMap<Integer, ArrayList<ArrayList<Integer>>> right = dfs(root.right, target);
-        HashMap<Integer, ArrayList<ArrayList<Integer>>> ret = new HashMap<Integer, ArrayList<ArrayList<Integer>>>();
+		// Ok, HashMap Key represents: the sum of path, Value: int[], elements.
+        HashMap<Integer, ArrayList<ArrayList<Integer>>> left, right, ret;
+		left = dfs(root.left, target);
+        right = dfs(root.right, target);
+        ret = new HashMap<Integer, ArrayList<ArrayList<Integer>>>();
         ArrayList<ArrayList<Integer>> subroutes;
         ArrayList<Integer> subroute;
         // If check root.val matches target, then itself forms a path. 
         if (target == root.val) {
-        	System.out.println("root itself matches target: " + root.val);
-        	System.out.println("===========================");
+        	System.out.println(String.format("root itself matches target: %d\n", root.val));
         }
         if (left == null && right == null) {
 			// If cur node is leaf, cook the return path status.
@@ -112,12 +113,13 @@ public class Sum_Path_III {
         	ret.put(key + root, new_subroutes);
         }    	
     }
-    
+
+	// Helper function.
     public static void print(int[] arr) {
     	for (int i : arr) System.out.print(i + " ");
     	System.out.println();
     }
-    
+
     public static void stdoutOneSide(ArrayList<ArrayList<Integer>> side, int root, boolean isLeftSubtree) {
     	if (side == null) {
     		return;
@@ -125,12 +127,11 @@ public class Sum_Path_III {
     	for (ArrayList<Integer> i : side) {
     		if (isLeftSubtree) {
     			System.out.println("left subtree: " + i);
-    			System.out.println("root node: " + root);
+    			System.out.println("root node: " + root + "\n");
     		} else {
     			System.out.println("root node: " + root);
-    			System.out.println("right subtree: " + i);
+    			System.out.println("right subtree: " + i + "\n");
     		}
-    		System.out.println("===========================");
     	}
     }
     
@@ -139,9 +140,20 @@ public class Sum_Path_III {
     		for (ArrayList<Integer> j : right) {
     			System.out.println("left subtree: " + i);
     			System.out.println("root node: " + root);
-    			System.out.println("right subtree: " + j);
-    			System.out.println("===========================");
+    			System.out.println("right subtree: " + j + "\n");
     		}
     	}
     }
+
+	static class TreeNode {
+		TreeNode left;
+		TreeNode right;
+		int val;
+
+		TreeNode(int val) {
+			this.left = null;
+			this.right = null;
+			this.val = val;
+		}
+	}
 }

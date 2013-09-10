@@ -18,28 +18,36 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 
-class leetcode_Binary_Tree_Zigzag_Level_Order_Travesral {
+public class leetcode_Binary_Tree_Zigzag_Level_Order_Travesral {
+
     public static void main(String[] args) {
+
     }
+
     public static ArrayList<ArrayList<Integer>> zigzagLevelOrder(TreeNode root) {
         ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-        if (root == null) return result;
+        if (root == null) {
+			return result;
+		}
         Queue<TreeNode> unvisited = new LinkedList<TreeNode>();
         ArrayList<Integer> tmp = new ArrayList<Integer>();
         unvisited.add(root);
-        int count = 1;
-        int reverse = 0;
-        while (true) {
+        int count = 1, reverse = 0, swap, head, tail;
+        while (!unvisited.isEmpty()) {
             TreeNode node = unvisited.remove();
             tmp.add(node.val);
-            if (node.left != null) unvisited.add(node.left);
-            if (node.right != null) unvisited.add(node.right);
+            if (node.left != null) {
+				unvisited.add(node.left);
+			}
+            if (node.right != null) {
+				unvisited.add(node.right);
+			}
             if (--count == 0) {
                 if (reverse++ % 2 == 1) {
-                    int head = 0;
-                    int tail = tmp.size() - 1;
+                    head = 0;
+                    tail = tmp.size() - 1;
                     while (head < tail) {
-                        int swap = tmp.get(head);
+                        swap = tmp.get(head);
                         tmp.set(head++, tmp.get(tail));
                         tmp.set(tail--, swap);
                     }
@@ -48,7 +56,6 @@ class leetcode_Binary_Tree_Zigzag_Level_Order_Travesral {
                 tmp = new ArrayList<Integer>();
                 count = unvisited.size();
             }
-            if (unvisited.isEmpty()) break;
         }
         return result;        
     }
@@ -56,10 +63,13 @@ class leetcode_Binary_Tree_Zigzag_Level_Order_Travesral {
 
 
 class TreeNode {
-    int val;
     TreeNode left;
     TreeNode right;
-    TreeNode(int x) {
-        val = x;
+    int val;
+
+    TreeNode(int val) {
+		this.left = null;
+		this.right = null;
+        this.val = x;
     }
 }

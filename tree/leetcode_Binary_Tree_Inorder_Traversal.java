@@ -13,9 +13,13 @@ Note: Recursive solution is trivial, could you do it iteratively?
 import java.util.ArrayList;
 import java.util.Stack;
 
-class leetcode_Binary_Tree_Inorder_Traversal {
+
+public class leetcode_Binary_Tree_Inorder_Traversal {
+
     public static void main(String[] args) {
+
     }
+
     public static ArrayList<Integer> inorderTraversal(TreeNode root) {
         ArrayList<Integer> all = new ArrayList<Integer>();
         Stack<TreeNode> s = new Stack<TreeNode>();
@@ -32,12 +36,14 @@ class leetcode_Binary_Tree_Inorder_Traversal {
         }
         return all;
     }
+
     // Recursive.
     public static ArrayList<Integer> inorderTraverse(TreeNode root) {
         ArrayList<Integer> all = new ArrayList<Integer>();
         inorder(root, all);
         return all;
     }
+
     public static void inorder(TreeNode node, ArrayList<Integer> all) {
         if (node != null) {
             inorder(node.left, all);
@@ -49,10 +55,13 @@ class leetcode_Binary_Tree_Inorder_Traversal {
 
 
 class TreeNode {
-    int val;
     TreeNode left;
     TreeNode right;
+    int val;
+
     TreeNode(int x) {
-        val = x;
+		this.left = null;
+		this.right = null;
+        this.val = x;
     }
 }

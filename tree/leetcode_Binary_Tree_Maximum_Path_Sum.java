@@ -9,7 +9,8 @@ Given the below binary tree,
   2   3
 Return 6.*/
 
-class leetcode_Binary_Tree_Maximum_Path_Sum {
+public class leetcode_Binary_Tree_Maximum_Path_Sum {
+
     public static void main(String[] args) {
         Solution test = new Solution(); 
     }
@@ -18,11 +19,13 @@ class leetcode_Binary_Tree_Maximum_Path_Sum {
 
 class Solution {
     private int max;
+
     public int maxPathSum(TreeNode root) {
         this.max = root.val;
         nextPath(root);
         return this.max;
     }
+
     public int nextPath(TreeNode root) {
         if (root == null) {
             return 0;
@@ -43,10 +46,13 @@ class Solution {
 
 
 class TreeNode {
-    int val;
     TreeNode left;
     TreeNode right;
-    TreeNode(int x) {
-        val = x;
+    int val;
+
+    TreeNode(int val) {
+		this.left = null;
+		this.right = null;
+        this.val = x;
     }
 }

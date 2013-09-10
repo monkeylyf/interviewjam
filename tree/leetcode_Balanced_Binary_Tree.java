@@ -13,44 +13,71 @@ A balanced tree is defined to be a tree such that no two leaf nodes
 differ in distance from the root by more than one.
 */
 
-class leetcode_Balanced_Binary_Tree {
+public class leetcode_Balanced_Binary_Tree {
+
     public static void main(String[] args) {
     
     }
+
     // O(n log n).
     public static boolean isBalanced(TreeNode root) {
-        if (root == null) return true;
+        if (root == null) {
+			return true;
+		}
         int left = maxDepth(root.left);
         int right = maxDepth(root.right);
-        if (Math.abs(left - right) > 1) return false;
-        return isBalanced(root.left) && isBalanced(root.right);
+        if (Math.abs(left - right) > 1) {
+			return false;
+        } else {
+			return isBalanced(root.left) && isBalanced(root.right);
+		}
     }
+
     public int maxDepth(TreeNode node) {
-        if (node == null) return 0; // return 0 or 1 depends on the definition of depth.
-        return Math.max(maxDepth(node.left), maxDepth(node.right)) + 1;
+        if (node == null) {
+			return 0; // return 0 or 1 depends on the definition of depth.
+		} else {
+			return Math.max(maxDepth(node.left), maxDepth(node.right)) + 1;
+		}
     }
+
     // O(n).
     public static boolean isBalancedd(TreeNode root) {
-        if (root == null) return true;
+        if (root == null) {
+			return true;
+		}
         int left = maxDepth(root.left);
         int right = maxDepth(root.right);
-        if (left < 0 || right < 0 || Math.abs(left - right) > 1) return false;
-        else return true;
+        if (left < 0 || right < 0 || Math.abs(left - right) > 1) {
+			return false;
+        } else {
+			return true;
+		}
     }
+
     public int maxD(TreeNode node) {
-        if (node == null) return 0;
+        if (node == null) {
+			return 0;
+		}
         int left = maxD(node.left);
         int right = maxD(node.right);
-        if (left < 0 || right < 0 || Math.abs(left - right) > 1) return -1;
-        else return Math.max(left, right) + 1;
+        if (left < 0 || right < 0 || Math.abs(left - right) > 1) {
+			return -1;
+        } else {
+			return Math.max(left, right) + 1;
+		}
     }
 }
 
+
 class TreeNode {
-    int val;
     TreeNode left;
     TreeNode right;
+    int val;
+
     TreeNode(int x) {
-        val = x;
+		this.left = null;
+		this.right = null;
+        this.val = x;
     }
 }

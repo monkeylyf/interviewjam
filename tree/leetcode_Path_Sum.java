@@ -15,22 +15,31 @@ return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
 */
 
 
-class leetcode_Path_Sum {
+public class leetcode_Path_Sum {
+
     public static void main(String[] args) {
+
     }
+	
+	// I thought:
+	// if (root == null) return sum == 0 else return dfs(root.left, sum - root.val) || dfs(root.right, sum -root.val)
+	// can solve the problem.
+	// But based on the test results on OJ, a tree with only one node has no root-to-leaf path at all. Weird.
+	// 
     public static boolean hasPathSum(TreeNode root, int sum) {
         if (root == null) {
             return false;
-        }
-        return nextSum(root, sum);
+        } else {
+			return nextSum(root, sum);
+		}
     }   
+
     public static boolean nextSum(TreeNode node, int sum) {
         if (node.left == null & node.right == null) {
             // root-to-leaf path.
             return node.val == sum;
         }
-        boolean left = false;
-        boolean right = false; 
+        boolean left = false, right = false; 
         if (node.left != null) {
             left = nextSum(node.left, sum - node.val);
         }
@@ -45,7 +54,11 @@ class leetcode_Path_Sum {
 class TreeNode {
     TreeNode left;
     TreeNode right;
-    TreeNode(int x) {
-        val = x;
+	int val;
+
+    TreeNode(int val) {
+		this.left = null;
+		this.right = null;
+        this.val = x;
     }
 }

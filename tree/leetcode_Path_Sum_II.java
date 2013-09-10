@@ -22,26 +22,32 @@ return
 import java.util.ArrayList;
 
 
-class leetcode_Path_Sum_II {
+public class leetcode_Path_Sum_II {
+
     public static void main(String[] args) {
         TreeNode root = new TreeNode(0);
         root.left = new TreeNode(1);
         root.right = new TreeNode(1);
         ArrayList<ArrayList<Integer>> all = pathSum(root, 1);
-        for (ArrayList<Integer> i : all) System.out.println(i);
+        for (ArrayList<Integer> i : all) {
+			System.out.println(i);
+		}
     }
+
     public static ArrayList<ArrayList<Integer>> pathSum(TreeNode root, int sum) {
         ArrayList<ArrayList<Integer>> all = new ArrayList<ArrayList<Integer>>();
-        if (root == null) {
-            return all;
-        }
-        ArrayList<Integer> tmp = new ArrayList<Integer>();
-        nextSum(root, sum, all, tmp);
+        if (root != null) {
+			ArrayList<Integer> tmp = new ArrayList<Integer>();
+			nextSum(root, sum, all, tmp);
+		}
         return all;
     }
+
+	// Then it's inorder traversal.
     public static void nextSum(TreeNode node, int sum, ArrayList<ArrayList<Integer>> all, ArrayList<Integer> tmp) {
         if (node.left == null && node.right == null) {
             if (node.val == sum) {
+				// Find path.
                 ArrayList<Integer> addOne = new ArrayList<Integer>();
                 for (int i : tmp) {
                     addOne.add(i);
@@ -57,6 +63,7 @@ class leetcode_Path_Sum_II {
             if (node.right != null) {
                 nextSum(node.right, sum - node.val, all, tmp);
             }
+			// Recursion return to upper level so we need to remove the current node from tmp path.
             tmp.remove(tmp.size() - 1);
         }
     }
@@ -67,7 +74,10 @@ class TreeNode {
     TreeNode left;
     TreeNode right;
     int val;
-    TreeNode(int x) {
-        val = x;
+
+    TreeNode(int val) {
+		this.left = null;
+		this.right = null;
+        this.val = val;
     }
 }
