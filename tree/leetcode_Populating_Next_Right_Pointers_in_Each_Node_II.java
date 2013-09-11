@@ -20,10 +20,15 @@ After calling your function, the tree should look like:
     4-> 5 -> 7 -> NULL
 */
 
+import java.util.*;
 
-class leetcode_Polulating_Next_Right_Pointers_in_Each_Node_II {
+
+public class leetcode_Populating_Next_Right_Pointers_in_Each_Node_II {
+
     public static void main(String[] args) {
+
     }
+
     // This method is based on print layer by layer traversal.
     public static void connect(TreeLinkNode root) {
         if (root == null) {
@@ -33,8 +38,9 @@ class leetcode_Polulating_Next_Right_Pointers_in_Each_Node_II {
         LinkedList<TreeLinkNode> ll = new LinkedList<TreeLinkNode>();
         unvisited.add(root);
         int count = 1;
-        while (true) {
-            TreeLinkNode node = unvisited.remove();
+		TreeLinkNode node;
+        while (!unvisited.isEmpty()) {
+            node = unvisited.remove();
             ll.add(node);
             if (node.left != null) {
                 unvisited.add(node.left);
@@ -49,19 +55,21 @@ class leetcode_Polulating_Next_Right_Pointers_in_Each_Node_II {
                 ll = new LinkedList<TreeLinkNode>();
                 count = unvisited.size();
             }
-            if (unvisited.isEmpty()) {
-                break;
-            }
         }
     }
 }
 
 
-TreeNode {
-    TreeNode left;
-    TreeNode right;
+class TreeLinkNode {
+    TreeLinkNode left;
+    TreeLinkNode right;
+	TreeLinkNode next;
     int val;
-    TreeNode(int x) {
-        val = x;
+
+    TreeLinkNode(int val) {
+		this.left = null;
+		this.right = null;
+		this.next = null;
+        this.val = val;
     }
 }

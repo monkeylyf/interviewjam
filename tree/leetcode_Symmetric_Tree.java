@@ -26,9 +26,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 
-class leetcode_Symmetric_Tree {
+public class leetcode_Symmetric_Tree {
+
     public static void main(String[] args) {
+
     }
+
     // Recursive way.
     public static boolean isSymmetric(TreeNode root) {
         // The idea behind this is almost same as Same_Tree
@@ -37,6 +40,7 @@ class leetcode_Symmetric_Tree {
         }
         return isSameNode(root.left, root.right);
     }
+
     public static boolean isSameNode(TreeNode p, TreeNode q) {
         if (p == null && q == null) {
             return true;
@@ -50,6 +54,7 @@ class leetcode_Symmetric_Tree {
             return isSameNode(p.left, q.right) && isSameNode(p.right, q.left);
         }
     }
+
     // Iterative way.
     public static boolean Symmetric(TreeNode root) {
         // The idea behind this is like print by layer.
@@ -60,7 +65,7 @@ class leetcode_Symmetric_Tree {
         ArrayList<TreeNode> layer = new ArrayList<TreeNode>();
         unvisited.add(root);
         int count = 1;
-        while (true) {
+        while (!unvisited.isEmpty()) {
             TreeNode node = unvisited.remove();
             layer.add(node);
             if (node != null) {
@@ -89,9 +94,6 @@ class leetcode_Symmetric_Tree {
                 count = unvisited.size();
                 layer = new ArrayList<TreeNode>();
             }
-            if (unvisited.isEmpty()) {
-                break;
-            }
         }
         return true;
     }
@@ -102,7 +104,10 @@ class TreeNode {
     TreeNode left;
     TreeNode right;
     int val;
-    TreeNode(int x) {
-        val = x;
+
+    TreeNode(int val) {
+		this.left = null;
+		this.right = null;
+        this.val = x;
     }
 }

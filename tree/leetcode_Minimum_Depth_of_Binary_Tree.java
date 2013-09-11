@@ -6,9 +6,17 @@ node down to the nearest leaf node.
 */
 
 
-class leetcode_Minimum_Depth_of_Binary_Tree {
+public class leetcode_Minimum_Depth_of_Binary_Tree {
+
     public static void main(String[] args) {
+
     }
+
+	// Note: You can't just return Math.min(depth(root.left), depth(root.right)) + 1
+	// Case: 
+	//  1
+	//   \
+	//    2
     public static minDepth(TreeNode root) {
         if (root == null) {
             return 0;

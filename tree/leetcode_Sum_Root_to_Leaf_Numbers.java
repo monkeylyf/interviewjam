@@ -18,7 +18,8 @@ Return the sum = 12 + 13 = 25.
 import java.util.ArrayList;
 
 
-class leetcode_Sum_Root_to_Leaf_Numbers {
+public class leetcode_Sum_Root_to_Leaf_Numbers {
+
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(5);
@@ -26,10 +27,12 @@ class leetcode_Sum_Root_to_Leaf_Numbers {
         root.right.right = new TreeNode(6);
         System.out.println(sumNumbers(root));
     }
+
     public static int sumNumbers(TreeNode root) {
         // First impression. DFS + tracking cur sum.
         return preorder(root, 0);
     }
+
     public int preorder(TreeNode root, int sum) {
         if (root == null) {
             return 0;
@@ -49,9 +52,10 @@ class TreeNode {
     int val;
     TreeNode left;
     TreeNode right;
-    TreeNode(int x) {
-        left = null;
-        right = null;
-        val = x;
+
+    TreeNode(int val) {
+        this.left = null;
+        this.right = null;
+        this.val = val;
     }
 }

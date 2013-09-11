@@ -11,9 +11,12 @@ constant space solution?
 import java.util.ArrayList;
 
 
-class leetcode_Recover_Binary_Search_Tree {
+public class leetcode_Recover_Binary_Search_Tree {
+
     public static void main(String[] args) {
+
     }
+
     public static void recoverTree(TreeNode root) {
         if (root == null) {
             return;
@@ -39,6 +42,7 @@ class leetcode_Recover_Binary_Search_Tree {
         nodeOne.val = nodeTwo.val;
         nodeTwo.val = swap;
     }
+
     public static void inorderTraverse(TreeNode root, ArrayList<TreeNode> inorder) {
         if (root == null) {
             return;
@@ -54,7 +58,10 @@ class TreeNode {
     TreeNode left;
     TreeNode right;
     int val;
-    TreeNode(int x) {
-        val = x;
+
+    TreeNode(int val) {
+		this.left = null;
+		this.right = null;
+        this.val = val;
     }
 }

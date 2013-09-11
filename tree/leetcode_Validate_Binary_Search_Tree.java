@@ -10,9 +10,12 @@ Both the left and right subtrees must also be binary search trees.
 */
 
 
-class leetcode_Validate_Binary_Search_Tree {
+public class leetcode_Validate_Binary_Search_Tree {
+
     public static void main(String[] args) {
+
     }
+
     public static boolean isValidBST(TreeNode root) {
         // The idea behind this is deserializing the BST and traversing
         // the array to check if value of every node is less than the latter one.
@@ -25,6 +28,7 @@ class leetcode_Validate_Binary_Search_Tree {
         }
         return true;   
     }
+
     public static void inorderTravesal(TreeNode node, ArrayList<Integer> inorder) {
         if (node != null) {
             inorderTravesal(node.left, inorder);
@@ -39,9 +43,10 @@ class TreeNode {
     TreeNode left;
     TreeNode right;
     int val;
-    TreeNode(int x) {
-        left = null;
-        right = null;
-        val = x;
+
+    TreeNode(int val) {
+        this.left = null;
+        this.right = null;
+        this.val = val;
     }
 }

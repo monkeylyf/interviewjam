@@ -9,7 +9,8 @@ the nodes have the same value.
 import java.util.*;
 
 
-class leetcode_Same_Tree {
+public class leetcode_Same_Tree {
+
     public static void main(String[] args) {
         TreeNode a = new TreeNode(1);
         a.right = new TreeNode(1);
@@ -17,6 +18,7 @@ class leetcode_Same_Tree {
         b.right = new TreeNode(1);
         isSame(a, b);
     }
+
     public static boolean isSameTree(TreeNode p, TreeNode q) {
         if (p == null || q == null) {
             return p == q;
@@ -58,6 +60,7 @@ class TreeNode {
     TreeNode left;
     TreeNode right;
     int val;
+
     TreeNode(int x) {
         this.left = null;
         this.right = null;

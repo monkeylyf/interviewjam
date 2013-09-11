@@ -18,10 +18,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 
-class leetcode_Unique_Binary_Search_Trees_II {
+public class leetcode_Unique_Binary_Search_Trees_II {
+
     public static void main(String[] args) {
         generateTrees(3);
     }
+
     public static ArrayList<TreeNode> generateTrees(int n) {
         boolean[] used = new boolean[n];
         int[] nums = new int[n];
@@ -34,6 +36,7 @@ class leetcode_Unique_Binary_Search_Trees_II {
         nextNode(nums, tmp, used, set, all);
         return all;
     }
+
     public static void nextNode(int[] nums, ArrayList<Integer> tmp, boolean[] used, HashSet<ArrayList<Integer>> set, ArrayList<TreeNode> all) {
         if (tmp.size() == nums.length) {
             TreeNode root = null; 
@@ -57,10 +60,12 @@ class leetcode_Unique_Binary_Search_Trees_II {
             }
         }
     }
+
     public static TreeNode insert(TreeNode root, int x) {
         TreeNode node = new TreeNode(x);
         return insertNode(root, node);
     }
+
     public static TreeNode insertNode(TreeNode root, TreeNode node) {
         if (root == null) {
             root = node;
@@ -71,11 +76,13 @@ class leetcode_Unique_Binary_Search_Trees_II {
         }
         return root;        
     }
+
     public static ArrayList<Integer> preorderTraversal(TreeNode root) {
         ArrayList<Integer> ret = new ArrayList<Integer>();
         preorder(root, ret);
         return ret;
     }
+
     public static void preorder(TreeNode root, ArrayList<Integer> ret) {
         if (root != null) {
             ret.add(root.val);
@@ -90,9 +97,10 @@ class TreeNode {
     TreeNode left;
     TreeNode right;
     int val;
-    TreeNode(int x) {
-        val = x;
-        left = null;
-        right = null;
+
+    TreeNode(int val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
     }
 }
