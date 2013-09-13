@@ -1,9 +1,16 @@
+/*Dijkstra
+geeksforgeeks
+
+Shortest Path Alogorithm.
+*/
+
 import java.util.*;
 
 public class Dijkstra {
 
 	public static void main(String[] args) {
-		int[][] graph = {{0, 4, 0, 0, 0, 0, 0, 8, 0},
+		int[][] graph = {
+				{0, 4, 0, 0, 0, 0, 0, 8, 0},
                 {4, 0, 8, 0, 0, 0, 0, 11, 0},
                 {0, 8, 0, 7, 0, 4, 0, 0, 2},
                 {0, 0, 7, 0, 9, 14, 0, 0, 0},
@@ -41,7 +48,7 @@ public class Dijkstra {
 			System.out.println(i + "\t\t" + dist[i]);
 		}
 	}
-	
+
 	// Given the cur dijkstra status. Find the min distance of cur status.
 	public static int minDistance(int[] dist, boolean[] sptSet) {
 		int min = Integer.MAX_VALUE, min_index = 0, v;

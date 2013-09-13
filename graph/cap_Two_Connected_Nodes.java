@@ -8,12 +8,14 @@ route between two nodes
 import java.util.*;
 
 
-class cap_Two_Connected_Nodes {
+public class cap_Two_Connected_Nodes {
+
+	/*
+	 * The idea is dfs. Let'e assume that it directed graph for straight example.
+	 */
+
 	public static void main(String[] args) {
-		/**
-		* The idea is dfs. Let'e assume that it directed graph for straight example.
-		* 
-		*/
+
 		// test case 1.
 		TCNGraph g1 = new TCNGraph(4);
 		g1.addEdge(0, 1);

@@ -73,6 +73,7 @@ class SCCGraph {
 			
 			if (!visited[v]) {
 				reversed.dfs(v, visited);
+				// STDOUT SCC group by group.
 				System.out.println();
 			}
 		}

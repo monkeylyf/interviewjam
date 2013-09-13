@@ -1,6 +1,12 @@
+/*Topological Sorting
+geeksforgeeks
+
+http://www.geeksforgeeks.org/topological-sorting/
+*/
+
 import java.util.*;
 
-class Topological_Sorting {
+public class Topological_Sorting {
 
 	public static void main(String[] args) {
 		// Test case 1.
@@ -61,7 +67,7 @@ class Graph {
 		//System.out.println("Seting node " + i + " as visited");
 		
 		for (int v : this.adj.get(i)) {
-			// for each node, let talking util there is not next unvisited node.
+			// for each node, keep dfs util there is not next unvisited node.
 			// That's the last we want to print. All push it to stack.
 			if (!visited[v]) {
 				next(v, visited, s);

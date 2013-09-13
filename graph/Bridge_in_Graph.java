@@ -1,12 +1,18 @@
 /*Bridge_in_Graph
 
 geeksforgeeks
+http://www.geeksforgeeks.org/bridge-in-a-graph/
 */
 
 import java.util.*;
 
 public class Bridge_in_Graph {
 
+		/*
+		An edge in an undirected connected graph is a bridge iff removing it disconnects
+		the graph. For a disconnected undirected graph, definition is similar, a bridge
+		is an edge removing which increases number of connected components.
+		*/
 	public static void main(String[] args) {
 		// test case 1
 		BGraph g1 = new BGraph(5);
@@ -42,7 +48,7 @@ class BGraph {
 	ArrayList<ArrayList<Integer>> adj;
 	int time;
 	
-	BGraph(int V) {
+	BGraph(int V) { // Constructor.
 		this.V = V;
 		this.adj = new ArrayList<ArrayList<Integer>>();
 		ArrayList<Integer> tmp;
@@ -51,7 +57,7 @@ class BGraph {
 			this.adj.add(tmp);
 		}
 		this.time = 0;
-	}
+	} // End of constructor.
 	
 	public void bridgeUtil(int u, boolean[] visited, int[] disc, int[] low, int[] parent) {
 		visited[u] = true;

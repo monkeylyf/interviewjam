@@ -7,7 +7,8 @@ of vertices.
 
 import java.util.*;
 
-class Connectivity_in_Directed_Graph {
+public class Connectivity_in_Directed_Graph {
+
 	public static void main(String[] args) {
 		CGraph g1 = new CGraph(5);
 		g1.addEdge(0, 1);
@@ -24,7 +25,6 @@ class Connectivity_in_Directed_Graph {
 		System.out.println(g2.isSC());
 	}	
 }
-
 
 
 class CGraph {
