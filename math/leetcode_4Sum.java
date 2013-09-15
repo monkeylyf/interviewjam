@@ -19,7 +19,8 @@ A solution set is:
 import java.util.*;
 
 
-class leetcode_4Sum {
+public class leetcode_4Sum {
+
     public static void main(String[] args) {
         //for (ArrayList<Integer> i : fourSum(new int[] {2, 1, 0, -1}, 2)) System.out.println(i);
 		solve(new int[] {1,2,3,4,5}, 10);
@@ -27,7 +28,7 @@ class leetcode_4Sum {
 
 	// Hashing pairs: sum/index. arr with length n => n^2 pairs.
 	// Sort pairs. Use two pointers find pair of pairs can sum up to target. sort: n^2(lg n^2) = n^2lgn and search: n
-	// So total time complexity is O(^2 logn)
+	// So total time complexity is O(n^2 logn)
 
 	public static void solve(int[] arr, int target) {
 		// Init vars.
@@ -140,6 +141,7 @@ class leetcode_4Sum {
         }
         return new ArrayList<ArrayList<Integer>>(all);
     }
+
     // O(N^3), way too slow.
     public static ArrayList<ArrayList<Integer>> fourSumTooSlow(int[] num, int target) {
         Arrays.sort(num);

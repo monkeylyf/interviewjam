@@ -5,10 +5,15 @@ Compute and return the square root of x.
 */
 
 
-class leetcode_Sqrt {
+public class leetcode_Sqrt {
+
     public static void main(String[] args) {
         System.out.println(sqrt(2147395600));
     }
+
+
+	// Based on Newton's method
+	// http://en.wikipedia.org/wiki/Newton's_method
     public static int sqrt(int x) {
         if (x == 0) {
             return 0;

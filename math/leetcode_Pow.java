@@ -4,9 +4,11 @@ Implement pow(x, n).
 */
 
 
-class leetcode_Pow {
+public class leetcode_Pow {
+
     public static void main(String[] args) {
     }
+
     public double pow(double x, int n) {
         if (n == 0) {
             return 1;
@@ -24,10 +26,6 @@ class leetcode_Pow {
             n /= 2;
             x *= x;
         }
-        if (negtive) {
-            return 1 / res;
-        } else {
-            return res;
-        }
+		return (negtive) ? 1 / res : res;
     }
 }

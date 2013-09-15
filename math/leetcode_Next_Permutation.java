@@ -13,11 +13,13 @@ corresponding outputs are in the right-hand column.
 */
 
 
-class leetcode_Next_Permutation {
+public class leetcode_Next_Permutation {
+
     public static void main(String[] args) {
         nextPermutation(new int[] {5,4,7,5,3,2});
         nextPermutation(new int[] {1,1});
     }
+
     public static void nextPermutation(int[] num) {
         if (num.length == 1) {
             return;

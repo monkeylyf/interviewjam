@@ -1,12 +1,15 @@
 /*Divide_Two_Integers
+leetcode
 
 Divide two integers without using multiplication, division and mod operator.
 */
 
-class leetcode_Divide_Two_Integers {
+public class leetcode_Divide_Two_Integers {
+
     public static void main(String[] args) {
         System.out.println(divide(2147483647, 1));
     }
+
     public static int divide(int dividend, int divisor) {
         int q = 1;
         // Possible integer overflow here if dividend or divisor == minimum int
@@ -36,8 +39,7 @@ class leetcode_Divide_Two_Integers {
             return 0;
         }
         if (a == b) {
-            if (neg) return -1;
-            else return 1;
+			return (neg) ? -1 : 1;
         }
         //use a binary search to find the q
         int product = b;
@@ -56,10 +58,6 @@ class leetcode_Divide_Two_Integers {
             q = q << 1;
         }
         q = q + divide(a - product, b);
-        if (neg) {
-            return -q;
-        } else {
-            return q;
-        }
+		return (neg) ? -q : q;
     }
 }

@@ -6,13 +6,15 @@ FOLLOWUP
 If your input N is int type and this method returns N.
 */
 
-class cap_Count_Number {
+public class cap_Count_Number {
+
 	public static void main(String[] args) {
 		countTwo(191);
 		countTwo(125);
 		countTwo(221);
 		countTwo(250);
 	}
+
 	public static void countTwo(int n) {
 		int retval = (n + 8) / 10; // First digit case: count within [0, 9]
 		int base = 10;

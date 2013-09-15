@@ -3,9 +3,12 @@
 Given a number represented as an array of digits, plus one to the number.
 */
 
-class leetcode_Plus_One {
+public class leetcode_Plus_One {
+
     public static void main(String[] args) {
+
     }
+
     public static int[] plusOne(int[] digits) {
         // Take care of the last one.
         int carry = (digits[digits.length - 1] + 1 >= 10) ? 1 : 0;
@@ -15,7 +18,8 @@ class leetcode_Plus_One {
             digits[i] = (digit + carry) % 10;
             carry = (digit + carry >= 10) ? 1 : 0;
         }
-        // After iteratio, check if carry equals 1.
+
+        // After iteration, check if carry equals 1.
         if (carry == 1) {
             int[] res = new int[digits.length + 1];
             res[0] = 1;

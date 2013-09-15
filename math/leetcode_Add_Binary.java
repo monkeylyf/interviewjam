@@ -7,10 +7,12 @@ b = "1"
 Return "100".
 */
 
-class leetcode_Add_Binary {
+public class leetcode_Add_Binary {
+
     public static void main(String[] args) {
         System.out.println(addBinary("111", "11"));
     }
+
     // Note: don't try to convert to deci because the input String might
     // exceed int 2^32 range.
     public static String addBinary(String a, String b) {
@@ -19,7 +21,9 @@ class leetcode_Add_Binary {
         while (a.length() != b.length()) {
             if (a.length() > b.length()) {
                 b = "0" + b;
-            } else a = "0" + a;
+            } else {
+				a = "0" + a;
+			}
         }
         for (int i = b.length() - 1; i >= 0; --i) {
             if (b.charAt(i) == '1' && a.charAt(i) == '1') {
@@ -44,7 +48,6 @@ class leetcode_Add_Binary {
                 }
             }
         }
-        if (offset) retval = "1" + retval;
-        return retval;
+		return (offset) ? "1" + retval : retval;
     }
 }

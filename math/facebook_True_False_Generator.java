@@ -7,7 +7,8 @@ Design a function that return true with 70% probability and false with 30%
 import java.util.Random;
 
 
-class facebook_True_False_Generator {
+public class facebook_True_False_Generator {
+
     public static void main(String[] args) {
         int trueCounter = 0;
         int falseCounter = 0;
@@ -20,9 +21,11 @@ class facebook_True_False_Generator {
         }
         System.out.println("true " + trueCounter + " false " + falseCounter);
     }
+
     public static boolean true50() {
         return new Random().nextInt(2) == 1;
     }
+
     public static boolean trueKValue(double k, boolean bool) {
         // The idea behind this is
         // e.g., 0.8(DEC) = 0.1101....(Binary)

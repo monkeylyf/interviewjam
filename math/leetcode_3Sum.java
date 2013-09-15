@@ -19,11 +19,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Collections;
 
-class leetcode_3Sum {
+public class leetcode_3Sum {
+
     public static void main(String[] args) {
         int[] S = new int[] {-1, 0, 1, 2, -1, -4};
         threeSum(S);
     }
+
     public static ArrayList<ArrayList<Integer>> threeSum(int[] num) {
         Arrays.sort(num); // O(n logn).
         HashSet<ArrayList<Integer>> all = new HashSet<ArrayList<Integer>>();

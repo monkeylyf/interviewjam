@@ -5,7 +5,8 @@ Given an integer between 0 and 999,999, print an English phrase that
 describes the integer (eg, “One Thousand, Two Hundred and Thirty Four”)
 */
 
-class cap_Integer_to_English_Phrase {
+public class cap_Integer_to_English_Phrase {
+
 	public static void main(String[] args) {
 		printNum(999999); 
 		printNum(12345); 
@@ -28,6 +29,7 @@ class cap_Integer_to_English_Phrase {
 		printHundred(n % 1000);
 		System.out.println();
 	}
+
 	public static boolean printHundred(int n) {
 		String[] wordarr = {"", "One ", "Two ", "Three ", "Four ",
                      		    "Five ", "Six ", "Seven ", "Eight ",

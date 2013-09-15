@@ -4,7 +4,8 @@ careercup
 Write an algorithm which computes the number of trailing zeros in n factorial
 */
 
-class cap_Trailing_Zeros {
+public class cap_Trailing_Zeros {
+
 	public static void main(String[] args) {
 		System.out.println(trailingZeros(25));
 		System.out.println(trailingZeros(26));
@@ -12,6 +13,7 @@ class cap_Trailing_Zeros {
 		System.out.println(trailingZeros(125));
 		System.out.println(trailingZeros(131));
 	}
+
 	public static int trailingZeros(int n) {
         // The idea behind this is counting the number of factor 5.
         // 10 = 2 * 5, and it's easy to notice that factors 2 is more than factors 5.

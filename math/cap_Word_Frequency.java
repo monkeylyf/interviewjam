@@ -7,7 +7,8 @@ Design a method to find the frequency of occurrences of any given word in a book
 import java.util.*;
 
 
-class cap_Word_Frequency {
+public class cap_Word_Frequency {
+
 	public static void main(String[] args) {
 		String[] book = {"In", "this", "case", "we", "simply", "go", "through",
 				 "the", "book", "word", "by", "word", "and", "count",
@@ -18,6 +19,7 @@ class cap_Word_Frequency {
 				 "word", "in", "the", "book"};
 		System.out.println(getFren(book, "we"));
 	}
+
 	public static double getFren(String[] book, String str) {
 		HashMap<String, Integer> dict = new HashMap<String, Integer>();
 		for (String word : book) {

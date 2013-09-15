@@ -5,10 +5,12 @@ as a string.
 Note: The numbers can be arbitrarily large and are non-negative.
 */
 
-class leetcode_Multiply_Strings {
+public class leetcode_Multiply_Strings {
+
     public static void main(String[] args) {
         System.out.println(multiply("123456789", "987654321"));
     }
+
     public static String multiply(String num1, String num2) {
         if (num1.equals("0") || num2.equals("0")) {
             return "0";
@@ -23,6 +25,7 @@ class leetcode_Multiply_Strings {
         }
         return res; 
     }
+
     public static String add(String num1, String num2) {
         String res = "";
         String addOn = "";
@@ -46,6 +49,7 @@ class leetcode_Multiply_Strings {
         }
         return res;
     }
+
     public static String oneDigitMultiply(String one, String num) {
         if (one.equals("0")) {
             return "0";

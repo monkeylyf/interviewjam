@@ -14,9 +14,12 @@ Output: index1=1, index2=2
 import java.util.HashMap;
 
 
-class leetcode_Two_Sum {
+public class leetcode_Two_Sum {
+
     public static void main(String[] args) {
+
     }
+
     public static int[] twoSum(int[] numbers, int target) {
         // Using hashmap to cache value/index pair.
         // Iterate through arr once. For each value check if target - value is cached.

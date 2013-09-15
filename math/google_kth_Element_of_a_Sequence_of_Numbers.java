@@ -18,34 +18,36 @@ index = 1000, result = 3
 */
 
 
-class google_kth_Element_of_a_Sequence_of_Numbers {
+public class google_kth_Element_of_a_Sequence_of_Numbers {
+
     public static void main(String[] args) {
         for (int i = 1; i <= 250; ++i) {
             System.out.println(getKthElement(i));
         }
     }
+
     public static int getKthElement(int index) {
+		if (index == 1) {
+			return 0; // Edge case. And makes all ranges 9 * 10^n.
+		}
+		--index;
         // The idea behind this is 
         // 1 - 9   total 9, each takes one digit, total 1 * 9 = 9 digits
         // 10 - 99 total 90, each takes two digits, total 90 * 2 = 180 digits.
         // 100 - 999 total 900, each takes three digits, total 900 * 3 = 270.
         // First we need to find out which range input arg index should fall in.
-        int digits = 0;
-        int min = 0;
-        int max = -1;
+        int digits = 0, min = 0, max = -1, tmp, size;
         while (true) {
             digits += 1;
-            min = max + 1;
+            min = max + 1; // The min of current range is the max of last range + 1.
             // digits = 2, max = 99; digits = 5, max = 99999;
-            int tmp = digits;
             max = 9;
-            while (tmp > 1) {
-                max = 10 * max + 9;
-                --tmp;
-            }
+			for (int i = digits; i > 1; --i) {
+                max = 10 * max + 9; // Calculate max.
+			}
             // Total number of digits current range has.
             // 1 - 9, 9 digits; 10 - 99, 180 digits.
-            int size = (max - min + 1) * digits;
+            size = (max - min + 1) * digits;
             if (size > index) {
                 // Find the range index falls in.
                 break;

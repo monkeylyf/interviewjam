@@ -3,7 +3,8 @@
 Determine whether an integer is a palindrome. Do this without extra space.
 */
 
-class leetcode_Palindrome_Number {
+public class leetcode_Palindrome_Number {
+
     public static void main(String[] args) {
         System.out.println(isPalindrome(12321));
         System.out.println(isPalindrome(12334));
@@ -11,6 +12,7 @@ class leetcode_Palindrome_Number {
         System.out.println(isPalindrome(-2147483648));
         System.out.println(isPalindrome(2147447412));
     }
+
     public static boolean isPalindrome(int x) {
         // Be aware of integer overflow.
         if (x < 0) {

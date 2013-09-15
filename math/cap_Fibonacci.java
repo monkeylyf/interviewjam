@@ -4,7 +4,8 @@ careercup
 Write a method to generate the nth Fibonacci number
 */
 
-class cap_Fibonacci {
+public class cap_Fibonacci {
+
 	public static void main(String[] args) {
 		//for (int i = 0; i < 10; ++i) System.out.println(Fibonacci(i));
 		//for (int i = 0; i < 10; ++i) System.out.println(Fibo(i));
@@ -23,12 +24,14 @@ class cap_Fibonacci {
         }
         return dp2;
     }
+
     // Recursive. Exponential time complexity. A lot of duplicate calculations.
 	public static int Fibonacci(int n) {
 		if (n <= 0) return 0;
 		if (n == 1) return 1;
 		return Fibonacci(n - 1) + Fibonacci(n - 2);
 	}
+
 	// O(log n) time complexity.
 	// a(n) = p * a(n - 1) + q * a(n - 2)
 	// Equation: ( a(n)  ) = ( p^2 + q    p) * ( a(n-2) )
@@ -41,8 +44,8 @@ class cap_Fibonacci {
 	// Finally we have:
 	// ( a(2n+1)) = (2 1)^n * (1)
 	//   a(2n)       1 1	   1
-	// We need to calculate (2 1) ^ n in O(log n)time cmoplexity  
-	//			 1 1	
+	// We need to calculate (2 1) ^ n in O(log n)time complexity  
+	//						 1 1	
 	public static int Fibo(int n) {
 		if (n == 0 || n == 1) return 1;
 		int k = n / 2;
@@ -56,6 +59,7 @@ class cap_Fibonacci {
 		if (n % 2 == 1) return val[0] + val[1]; 
 		return val[2] + val[3];
 	}
+
 	private static int[] matrixMultiply(int[] m, int[] n) {
 		return new int[] {m[0] * n[0] + m[1] * n[2],
 				  m[0] * n[1] + m[1] * n[3],

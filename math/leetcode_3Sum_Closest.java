@@ -11,11 +11,13 @@ The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
 
 import java.util.Arrays;
 
-class leetcode_3Sum_Closest {
+public class leetcode_3Sum_Closest {
+
     public static void main(String args[]) {
         for (int i : threeSumClosest(new int[] {-1, 2, 1, -4, 1}, 2)) System.out.println(i);
         for (int i : threeSumClosest(new int[] {-3, -2, -5, 3, -4}, -1)) System.out.println(i);
     }
+
     public static int threeSumClosest(int[] num, int target) {
         Arrays.sort(num);
         int cur_sum = num[0] + num[1] + num[2];

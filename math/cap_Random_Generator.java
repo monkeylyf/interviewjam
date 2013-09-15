@@ -9,16 +9,19 @@ rand5())
 import java.util.Random;
 
 
-class cap_Random_Generator {
+public class cap_Random_Generator {
+
     public static void main(String[] args) {
         for (int i = 0; i < 100; ++i) {
             System.out.println(rand7());
         }
     }
+
     public static int rand5() {
         Random randomGenerator = new Random();
         return randomGenerator.nextInt(5) + 1;
     }
+
     public static int rand7() {
         // The ihead behind this is since we have a uniform distribution of 1 - 5
         // we need uniform distribution of 1 - 7 

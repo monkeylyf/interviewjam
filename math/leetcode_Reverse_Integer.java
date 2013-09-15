@@ -5,9 +5,12 @@ Example1: x = 123, return 321
 Example2: x = -123, return -321
 */
 
-class leetcode_Reverse_Integer {
+public class leetcode_Reverse_Integer {
+
     public static void main(String[] args) {
+
     }
+
     public static int reverse(int x) {
         boolean neg = (x < 0) ? true : false;
         x = (neg) ? -x : x;

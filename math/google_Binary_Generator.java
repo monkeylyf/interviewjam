@@ -9,7 +9,7 @@ distribution.
 import java.util.*;
 
 
-class google_Binary_Generator {
+public class google_Binary_Generator {
     // Open issue:
     // If you can this script you will see that the results have huge difference
     // with different binaryGenerator/myrand.
@@ -53,7 +53,7 @@ class google_Binary_Generator {
 
     public static int generator(int n, boolean myrand) {
         if (n <= 0) {
-            return -1;
+            return -1; // throws new InvalidValueFormat("Invalid input");
         } else if (n == 1) {
             return 0;  
         } else if (n == 2) {
@@ -61,10 +61,11 @@ class google_Binary_Generator {
             return ret;
         }
 
-        int ret, nn;
+		// n >= 3.
+        int ret, nn, len = binaryFormatLength(n) + 1;
         while (true) {
             ret = 0;
-            nn = n;
+            nn = len;
             while (nn > 0) {
                 if (myrand) {
                     ret = (ret << 1) + myrand();
@@ -75,9 +76,13 @@ class google_Binary_Generator {
             }
             if (ret < n) {
                 return ret;
-            }
+            } // else rejects.
         }
-    } 
+    }
+
+	public static int binaryFormatLength(int n) {
+		return Integer.toBinaryString(n).length();	
+	}
 
     public static int binaryGenerator() {
         return new Random().nextInt(2); 

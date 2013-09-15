@@ -23,7 +23,8 @@ The output should be
 import java.util.*;
 
 
-class Random_Number_Generator {
+public class Random_Number_Generator {
+
 	public static void main(String[] args) {
 		// A naive solution is to create a array with freq[0] number of arr[0] and
 		// freq[1] number of arr[1]... in it. Then randomly pick a number from [0, len -1]

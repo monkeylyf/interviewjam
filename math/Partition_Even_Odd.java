@@ -11,7 +11,8 @@ input [5,6,8,2,3,9,4]
 output [5,3,9,6,8,2,4]
 */
 
-class Partition_Even_Odd {
+public class Partition_Even_Odd {
+
     public static void main(String[] args) {
         Solution test  = new Solution();
         test.partition(new int[] {5, 6, 8, 2, 3, 9, 4});
@@ -20,6 +21,7 @@ class Partition_Even_Odd {
 
 
 class Solution {
+
     public void partition(int[] arr) {
         printArray(arr);
         int head = 0;
@@ -48,11 +50,13 @@ class Solution {
         arr[head] = pivot;
         printArray(arr);
     }
+
     public void swap(int[] arr, int head, int tail) {
         int tmp = arr[head];
         arr[head] = arr[tail];
         arr[tail] = tmp;
     }
+
     public void printArray(int[] arr) {
         for (int i : arr) System.out.print(i + " ");
         System.out.println();
