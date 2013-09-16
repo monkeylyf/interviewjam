@@ -6,7 +6,8 @@ Output: 4
 */
 
 
-class Find_Integer_Occurs_with_Odd_Freq {
+public class Find_Integer_Occurs_with_Odd_Freq {
+
 	public static void main(String[] args) {
 		solve(new int[] {1, 2, 3, 4, 3, 2, 1});	
 	}	

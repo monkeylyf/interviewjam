@@ -20,10 +20,12 @@ sequence. Sorry about that.
 import java.util.ArrayList;
 
 
-class leetcode_Gray_Code {
+public class leetcode_Gray_Code {
+
     public static void main(String[] args) {
         for (int i : grayCode(2)) System.out.println(i);
     }
+
     public static ArrayList<Integer> grayCode(int n) {
         ArrayList<Integer> all = new ArrayList<Integer>();
         for (int i = 0; i < Math.pow(2, n); ++i) {
