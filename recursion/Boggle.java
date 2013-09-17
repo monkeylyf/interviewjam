@@ -7,7 +7,8 @@ http://en.wikipedia.org/wiki/Boggle
 import java.util.*;
 
 
-class Boggle {
+public class Boggle {
+
     public static void main(String[] args) {
         testSuite1();
         testSuite2();
@@ -80,6 +81,7 @@ class Boggle {
         visited[i][j] = false;
     }
 
+	// General solution without trie. Exponential time complexity.
     public static HashMap<Integer, ArrayList<String>> boggle(char[][] board,
             HashSet<String> dict) {
         int i, j, n = board.length;
@@ -123,6 +125,7 @@ class Boggle {
     }
 }
 
+
 class TrieDict {
     TrieNodeDict root;
 
@@ -140,6 +143,7 @@ class TrieDict {
         return root.getIndexes(s);
     }
 }
+
 
 class TrieNodeDict {
     ArrayList<Integer> indexes; // Store the all indexes of a specific char.
