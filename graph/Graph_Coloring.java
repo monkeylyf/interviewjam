@@ -1,6 +1,14 @@
+/*Graph_Coloring
+
+*/
+
 import java.util.*;
 
 public class Graph_Coloring {
+
+	/**Given a graph, check if it can be colored with three colors and no neighbors of any
+	 * ponit has the same color.
+	 */
 
 	public static void main(String[] args) {
 		/*Create following graph and test whether it is 3 colorable
@@ -10,8 +18,10 @@ public class Graph_Coloring {
        	   | /   |
       	  (0)---(1)
 		*/
-		int[][] graph = new int[][] { { 1, 1, 1, 1 }, { 1, 1, 1, 0 },
-				{ 1, 1, 1, 1 }, { 1, 0, 1, 1 } };
+		int[][] graph = new int[][] {
+									 { 1, 1, 1, 1 }, { 1, 1, 1, 0 },
+									 { 1, 1, 1, 1 }, { 1, 0, 1, 1 }
+									};
 		solve(graph);
 	}
 
@@ -38,6 +48,7 @@ public class Graph_Coloring {
 		}
 	}
 
+	// Validate if color cur node with cause conflict with its neighbors.
 	public static boolean isValidColor(int[][] graph, int[] color, int cur,
 			int cur_color) {
 		for (int i = 0; i < color.length; ++i) {
@@ -50,12 +61,14 @@ public class Graph_Coloring {
 		return true;
 	}
 
+	// Helper function to print the array.
 	public static void print(int[] arr) {
 		for (int i : arr)
 			System.out.print(i + " ");
 		System.out.println();
 	}
 
+	// Helper function to print the color.
 	public static void printColor(int[] color) {
 		for (int i : color) {
 			switch (i) {
