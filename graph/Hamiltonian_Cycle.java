@@ -12,9 +12,19 @@ Print out all possible hamiltonian cycle.
 
 class Hamiltonian_Cycle {
 
+	/**
+	 * The question is printing out all possible paths and dfs will serve.
+	 * You should check if this graph has hamiltonian path first.
+	 */
+
 	public static void main(String[] args) {
-		int[][] graph = new int[][] { { 1, 1, 0, 1, 0 }, { 1, 1, 1, 1, 1 },
-				{ 0, 1, 1, 0, 1 }, { 1, 1, 0, 1, 1 }, { 0, 1, 1, 1, 1 }, };
+		int[][] graph = new int[][] {
+									 { 1, 1, 0, 1, 0 },
+									 { 1, 1, 1, 1, 1 },
+									 { 0, 1, 1, 0, 1 },
+									 { 1, 1, 0, 1, 1 },
+									 { 0, 1, 1, 1, 1 },
+									};
 		solve(graph);
 	}
 
@@ -40,15 +50,14 @@ class Hamiltonian_Cycle {
 					path[ptr] = i;
 					used[i] = true;
 					walk(graph, path, used, ptr + 1);
-					used[i] = false;
+					used[i] = false; // Backtracking and reset the visited status.
 				}
 			}
 		}
 	}
 
 	public static void print(int[] arr) {
-		for (int i : arr)
-			System.out.print(i + " ");
+		for (int i : arr) System.out.print(i + " ");
 		System.out.println();
 	}
 }
