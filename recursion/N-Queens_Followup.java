@@ -2,7 +2,7 @@
 
 The n-queens puzzle is the problem of placing n queens on an n×n chessboard
 such that no two queens attack each other. 
-*In addition that any THREE queens can not be in the same row or col at the
+*In addition that any THREE queens can not be in the same line at the
 same time*. For example, (0, 0), (1, 2), (2, 4) are in the same line.
 Given an integer n, return all distinct solutions to the n-queens puzzle.
 Each solution contains a distinct board configuration of the n-queens'
@@ -11,10 +11,16 @@ placement, where 'Q' and '.' both indicate a queen and an empty space respective
 
 import java.util.ArrayList;
 
-class N-Queens_Followup {
+public class N-Queens_Followup {
+
+	/**
+	 * This solution is a simple copy of leetcode_N-Queens and is not the right solution!
+	 */
+
     public static void main(String[] args) {
         solveNQueens(8);
     }
+
     public static ArrayList<String[]> solveNQueens(int n) {
         ArrayList<String[]> all = new ArrayList<String[]>();
         int[] board = new int[n];
@@ -25,6 +31,7 @@ class N-Queens_Followup {
         }
         return all;
     }
+
     public static void placeQueen(int row, int n, int[] board, ArrayList<String[]> all) {
         if (row == n) {
             String[] tmp = boardToString(board);
@@ -39,6 +46,7 @@ class N-Queens_Followup {
             }
         }
     }
+
     public static boolean check(int row, int[] board) {
         for (int i = 0; i < row; ++i) {
             int diff = Math.abs(board[i] - board[row]);
@@ -48,6 +56,7 @@ class N-Queens_Followup {
         }
         return true;
     }
+
     public static String[] boardToString(int[] board) {
         String[] res = new String[board.length];
         for (int i = 0; i < board.length; ++i) {

@@ -12,10 +12,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 
-class leetcode_Permutations_II {
+public class leetcode_Permutations_II {
+
     public static void main(String[] args) {
-        for (ArrayList<Integer> i : permuteUnique(new int [] {1, 1, 2})) System.out.println(i);
+		// Test case.
+        System.out.println(permuteUnique(new int [] {1, 1, 2}));
     }
+
     public static ArrayList<ArrayList<Integer>> permuteUnique(int[] num) {
         // Use HashSet instead of ArrayList to kill duplicates.
         HashSet<ArrayList<Integer>> all = new HashSet<ArrayList<Integer>>();
@@ -24,6 +27,7 @@ class leetcode_Permutations_II {
         nextNum(num, used, tmp, all);
         return new ArrayList<ArrayList<Integer>>(all);
     }
+
     public static void nextNum(int[] num, boolean[] used, ArrayList<Integer> tmp, HashSet<ArrayList<Integer>> all) {
         if (tmp.size() == num.length) {
             ArrayList<Integer> res = new ArrayList<Integer>();
