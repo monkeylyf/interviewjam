@@ -22,32 +22,34 @@ import java.util.Collections;
 import java.util.HashSet;
 
 
-class leetcode_Combination_Sum_II {
+public class leetcode_Combination_Sum_II {
+
     public static void main(String[] args) {
         combinationSum2(new int[] {8, 7, 4, 3}, 11);
     }
+
     public static ArrayList<ArrayList<Integer>> combinationSum2(int[] num, int target) {
         HashSet<ArrayList<Integer>> all = new HashSet<ArrayList<Integer>>();
         ArrayList<Integer> tmp = new ArrayList<Integer>();
         nextInt(num, all, tmp, 0, target);
-        for (ArrayList<Integer> i : all) System.out.println(i);
+        for (ArrayList<Integer> i : all) {
+			System.out.println(i);
+		}
         return new ArrayList<ArrayList<Integer>>(all);
     }
+
     public static void nextInt(int[] num, HashSet<ArrayList<Integer>> all, ArrayList<Integer> tmp, int sum, int target) {
         for (int i : num) System.out.print(i + " ");
         System.out.println();
         if (sum == target) {
-            ArrayList<Integer> res = new ArrayList<Integer>();
-            for (int i : tmp) {
-                res.add(i);
-            }
+            ArrayList<Integer> res = new ArrayList<Integer>(tmp);
             Collections.sort(res);
-            if (!all.contains(res)) {
-                all.add(res);
-            }
+			all.add(res);
         } else if (sum < target) {
             for (int i = 0; i < num.length; ++i) {
                 tmp.add(num[i]);
+				// Since every element can be used only once.
+				// Remove trim the array and pass it to next recursion.
                 nextInt(Arrays.copyOfRange(num, i + 1, num.length), all, tmp, sum + num[i], target);
                 tmp.remove(tmp.size() - 1);
             }

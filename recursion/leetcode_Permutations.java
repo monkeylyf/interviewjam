@@ -9,11 +9,19 @@ For example,
 import java.util.ArrayList;
 
 
-class leetcode_Permutations {
+public class leetcode_Permutations {
+
     public static void main(String[] args) {
-        for (ArrayList<Integer> i : permute(new int[] {0, 1})) System.out.println(i);
-        for (ArrayList<Integer> i : permute(new int[] {0, -1, 1})) System.out.println(i);
+		// Test case 1.
+        for (ArrayList<Integer> i : permute(new int[] {0, 1})) {
+			System.out.println(i);
+		}
+		// Test case 2.
+        for (ArrayList<Integer> i : permute(new int[] {0, -1, 1})) {
+			System.out.println(i);
+		}
     }
+
     public static ArrayList<ArrayList<Integer>> permute(int[] num) {
         ArrayList<ArrayList<Integer>> all = new ArrayList<ArrayList<Integer>>();
         ArrayList<Integer> tmp = new ArrayList<Integer>();
@@ -21,6 +29,7 @@ class leetcode_Permutations {
         nextNum(num, used, tmp, all);
         return all;
     }
+
     public static void nextNum(int[] num, boolean[] used, ArrayList<Integer> tmp, ArrayList<ArrayList<Integer>> all) {
         if (tmp.size() == num.length) {
             ArrayList<Integer> res = new ArrayList<Integer>();
@@ -34,6 +43,7 @@ class leetcode_Permutations {
                     tmp.add(i);
                     used[i] = true;
                     nextNum(num, used, tmp, all);
+					// Backtracking reset.
                     tmp.remove(tmp.size() - 1);
                     used[i] = false;
                 }

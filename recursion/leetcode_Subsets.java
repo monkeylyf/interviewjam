@@ -23,10 +23,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-class leetcode_Subsets {
+public class leetcode_Subsets {
+
     public static void main(String[] args) {
-        subsets(new int[] {1, 2, 3});
+		// Test case.
+        System.out.println(subsets(new int[] {1, 2, 3}));
     }
+
     public static ArrayList<ArrayList<Integer>> subsets(int[] S) {
         // The idea behind this is all(1,2,3) = set contains 1 + set contains no 1.
         // When we recurse through the array, we do two steps.
@@ -38,12 +41,10 @@ class leetcode_Subsets {
         nextSubset(S, 0, all, tmp);
         return all;
     }
+
     public static void nextSubset(int[]S, int n, ArrayList<ArrayList<Integer>> all, ArrayList<Integer> tmp) {
         if (S.length == n) {
-            ArrayList<Integer> res = new ArrayList<Integer>();
-            for (int i : tmp) {
-                res.add(i);
-            }
+            ArrayList<Integer> res = new ArrayList<Integer>(tmp);
             Collections.sort(res);
             all.add(res);
         } else {

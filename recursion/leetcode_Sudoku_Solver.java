@@ -10,34 +10,38 @@ A sudoku puzzle...
 import java.util.HashSet;
 
 
-class leetcode_Sudoku_Solver {
+public class leetcode_Sudoku_Solver {
+
     public static void main(String[] args) {
-        char[][] board = new char[][] {{'.', '4', '.', '.', '.', '5', '1', '2', '7'},
-                                       {'.', '.', '.', '1', '.', '.', '3', '9', '4'},
-                                       {'.', '.', '1', '4', '9', '.', '6', '5', '8'},
-                                       {'3', '1', '7', '9', '2', '8', '4', '6', '5'},
-                                       {'5', '9', '2', '7', '4', '6', '8', '1', '3'},
-                                       {'8', '6', '4', '5', '3', '1', '9', '7', '2'},
-                                       {'.', '5', '.', '3', '1', '4', '7', '8', '6'},
-                                       {'4', '7', '6', '2', '8', '9', '5', '3', '1'},
-                                       {'1', '3', '8', '6', '5', '7', '2', '4', '9'}
-                                      };
+		char[][] board;
+		// Test case 1.
+        board = new char[][] {"...1..394".toCharArray(),
+							  "..149.658".toCharArray(),
+							  "317928465".toCharArray(),
+							  "592746813".toCharArray(),
+							  "864531972".toCharArray(),
+							  ".5.314786".toCharArray(),
+							  "476289531".toCharArray(),
+							  "138657249".toCharArray()};
         //solveSudoku(board);
-		char[][] board1 = new char[][] {"8........".toCharArray(),
-										"..36.....".toCharArray(),
-										".7..9.2..".toCharArray(),
-										".5...7...".toCharArray(),
-										"....457..".toCharArray(),
-										"...1...3.".toCharArray(),
-										"..1....68".toCharArray(),
-										"..85...1.".toCharArray(),
-										".9....4..".toCharArray(),
+		// Test case 2.
+		board1 = new char[][] {"8........".toCharArray(),
+							   "..36.....".toCharArray(),
+							   ".7..9.2..".toCharArray(),
+							   ".5...7...".toCharArray(),
+							   "....457..".toCharArray(),
+							   "...1...3.".toCharArray(),
+							   "..1....68".toCharArray(),
+							   "..85...1.".toCharArray(),
+							   ".9....4..".toCharArray(),
 		};
-        solveSudoku(board1);
+        solveSudoku(board);
     }
+
     public static void solveSudoku(char[][] board) {
         resolveNext(board, 0, 0);
     }
+
     public static boolean resolveNext(char[][] board, int row, int col) {
         int[] pos = nextPosition(board, row, col);
         int nextRow = pos[0];
@@ -55,16 +59,14 @@ class leetcode_Sudoku_Solver {
                         return true;
                     }
                 }
-                //if (result) {
-                //    return true;
-                //} else {
-                //    board[nextRow][nextCol] = '.'; // Reset on backtrack.
-                board[nextRow][nextCol] = '.';
-                //}
+                board[nextRow][nextCol] = '.'; // Reset on backtrack.
             }
             return false;
         }
     }
+
+	// Helper function to get next '.'
+	// Return {-1, -1} if all empty spots have been filled.
     public static int[] nextPosition(char[][] board, int row, int col) {
         // Check cur row.
         for (int i = col; i < board[row].length; ++i) {
@@ -84,6 +86,7 @@ class leetcode_Sudoku_Solver {
         }
         return new int[] {-1, -1};
     }
+
     public static void printBoard(char[][] board) {
         for (int i = 0; i < board.length; ++i) {
             for (int j = 0; j< board[i].length; ++j) {
@@ -93,6 +96,7 @@ class leetcode_Sudoku_Solver {
         }
         System.out.println();
     }
+
     public static boolean isValidSudoku(char[][] board, int row, int col) {
         HashSet<Character> set = new HashSet<Character>();
         // Check col.

@@ -15,32 +15,41 @@ C(no 25 cents) = C(10 cents) + C(no 10 cents)
 
 import java.util.*;
 
-class cap_Coins_Change {
+public class cap_Coins_Change {
+
 	public static void main(String[] args) {
         System.out.println(my(100, new int[] {25, 10, 5, 1}));
 	}
+
+	/* Dynamic programming based solution.
+	 * for (int i = 1; i <= value; ++i) for (int value : set) if (value <= i) dp[i] += dp[i - value]
+	 * This dp relationship is not correct because the order of cents does not matter. The outer loop
+	 * should be different types of coins.
+	 */
     public static int my(int val, int[] set) {
-        // Dynamic programming based solution.
-        int[] table = new int[val + 1];
-        table[0] = 1;
-        for (int i = 0; i < set.length; ++i) {
-            for (int j = set[i]; j <= val; ++j) {
-                table[j] += table[j - set[i]];
+		// Init dp. dp[i] represents how many ways for value i.
+        int[] dp = new int[val + 1];
+        dp[0] = 1;
+        for (int value : set) {
+            for (int j = value; j <= val; ++j) {
+                dp[j] += dp[j - value];
             }
+			print(dp);
         }
-        return table[val];
+        return dp[val];
     }
+
+	// Recursion.
     public static void coinChange(int val, int[] set) {
-        // Recursion.
         ArrayList<int[]> all = new ArrayList<int[]>();
         int[] count = new int[set.length];
         nextCoin(val, set, 0, all, count);
         for (int[] one : all) {
-            for (int i : one) System.out.print(i + " ");
-            System.out.println();
+			print(one);
         }
         System.out.println("Total # of solutions are: " + all.size());
     }
+
     public static void nextCoin(int val, int[] set, int index, ArrayList<int[]> all, int[] count) {
         if (val == 0 && index == set.length) {
             // If all coins with diff val have been used for targeted value
@@ -58,4 +67,10 @@ class cap_Coins_Change {
             }
         }
     }
+
+	// Helper function.
+	public static void print(int[] arr) {
+		for (int i : arr) System.out.print(i + " ");
+		System.out.println();
+	}
 }

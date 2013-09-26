@@ -20,12 +20,15 @@ word = "ABCB", -> returns false.
 
 import java.util.ArrayList;
 
-class leetcode_Word_Search {
+public class leetcode_Word_Search {
+
     public static void main(String[] args) {
     }
+
     public static boolean exist(char[][] board, String word) {
         return findNextChar(-1, -1, board, word);
     }
+
     public static boolean findNextChar(int row, int col, char[][] board, String word) {
         if (word.length() == 0) {
             return true; // Reach the end of string, return true.

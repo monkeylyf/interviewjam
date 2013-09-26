@@ -13,7 +13,8 @@ Please check ../recursion/leetcode_Word_Ladder.java and
 
 import java.util.*;
 
-class cap_Word_Ladder {
+public class cap_Word_Ladder {
+
 	public static void main(String[] args) {
 		String[] dict = {"DAMP","LAMP","LIMP","LIME","LIKP","LAKP","LIKE","SHIT"};	
 		my(dict, "DAMP", "LIKE");
@@ -49,6 +50,7 @@ class cap_Word_Ladder {
 			}
 		}
 	}
+
 	public static boolean diffByOne(String a, String b) {
 		if (a.length() != b.length()) {
             return false;

@@ -13,14 +13,18 @@ You should return the following matrix:
 */
 
 
-class leetcode_Spiral_Matrix_II {
+public class leetcode_Spiral_Matrix_II {
+
     public static void main(String[] args) {
+
     }
+
     public static int[][] generateMatrix(int n) {
         int[][] res = new int[n][n];
         drawLayer(res, 0, 0, n, 1);
         return res;
     }
+
     public static void drawLayer(int[][] res, int row, int col, int len, int num) {
         if (len < 0) {
             return;

@@ -9,11 +9,15 @@ left to right) and every column forms a word (reading top to bottom)
 import java.util.*;
 
 
-public class cap_Words_Rectangle {
+public public class cap_Words_Rectangle {
+
     public static void main(String[] args) {
         // Unit tests;
         ArrayList<String> dict = new ArrayList<String>();
-        Collections.addAll(dict, "shit", "fuck", "dude", "word", "list", "hoop", "lamp", "pond", "heap", "wfts", "tank", "ouah", "rcni", "dkkt");
+        Collections.addAll(dict, "shit", "fuck", "dude", "word",
+								 "list", "hoop", "lamp", "pond",
+								 "heap", "wfts", "tank", "ouah",
+								 "rcni", "dkkt");
         WordsRectangle solution = new WordsRectangle(dict);
         System.out.println(solution.largestRectangle());
     }
@@ -21,9 +25,11 @@ public class cap_Words_Rectangle {
 
 
 class WordsRectangle {
+
     public HashMap<Integer, ArrayList<String>> dict;
     public ArrayList<Integer> lens;
     public PriorityQueue<Area> priorityQueue;
+
     WordsRectangle(ArrayList<String> arr) { // Constructor.
         this.priorityQueue = new PriorityQueue<Area>();
         this.dict = new HashMap<Integer, ArrayList<String>>();
@@ -46,7 +52,8 @@ class WordsRectangle {
                 this.priorityQueue.offer(new Area(i, j)); // Priority queue for possible rectangles.
             }
         }
-    }
+    } // End of contructor.
+
     public int largestRectangle() {
         while (!this.priorityQueue.isEmpty()) {
             Area cur = this.priorityQueue.poll(); // Pop the largest rectangle with largest area.
@@ -56,16 +63,14 @@ class WordsRectangle {
         }
         return 0;
     }
+
     private boolean isValidRectangle(int n, int m) {
         ArrayList<String> arr = new ArrayList<String>(this.dict.get(n));
         boolean[] used = new boolean[arr.size()];
         Trie suffix = new Trie(new ArrayList<String>(this.dict.get(m)));
-        if (fillNextRow(new char[n][m], arr, 0, suffix, used)) {
-            return true;
-        } else {
-            return false;
-        }
+        return fillNextRow(new char[n][m], arr, 0, suffix, used);
     }
+
     private boolean fillNextRow(char[][] rect, ArrayList<String> arr, int curRowIndex, Trie suffix, boolean[] used) {
         // DFS.
         if (curRowIndex == rect.length) {
@@ -87,6 +92,7 @@ class WordsRectangle {
             return false;
         }
     }
+
     private boolean isValidRect(char[][] rect, Trie suffix, int curRowIndex) {
         // Using suffix tree to verify rectangle.
         for (int j = 0; j < rect[0].length; ++j) {
@@ -101,6 +107,7 @@ class WordsRectangle {
         }
         return true;
     }
+
     public void print(char[][] m) {
         for (int i = 0; i < m.length; ++i) {
             for (Character c : m[i]) {

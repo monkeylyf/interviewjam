@@ -20,31 +20,38 @@ import java.util.Collections;
 import java.util.HashSet;
 
 
-class leetcode_Combination_Sum {
+public class leetcode_Combination_Sum {
+
+	/**
+	 * Brutal force enumeration.
+	 * Sort the array first so we can prune when the rest of values are
+	 * large than remain.
+	 */
+
     public static void main(String[] args) {
+		// Test case.
         combinationSum(new int[] {1, 2}, 4);
     }
+
     public static ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target) {
         HashSet<ArrayList<Integer>> all = new HashSet<ArrayList<Integer>>();
         ArrayList<Integer> tmp = new ArrayList<Integer>();
         Arrays.sort(candidates);
         nextInt(candidates, all, tmp, 0, target);
-        for (ArrayList<Integer> i : all) System.out.println(i);
+        for (ArrayList<Integer> i : all) {
+			System.out.println(i);
+		}
         return new ArrayList<ArrayList<Integer>>(all);
     }
+
     public static void nextInt(int[] candidates, HashSet<ArrayList<Integer>> all, ArrayList<Integer> tmp, int sum, int target) {
         if (sum == target) {
-            ArrayList<Integer> res = new ArrayList<Integer>();
-            for (int i : tmp) {
-                res.add(i);
-            }
+            ArrayList<Integer> res = new ArrayList<Integer>(tmp);
             Collections.sort(res);
-            if (!all.contains(res)) {
-                all.add(res);
-            }
+			all.add(res);
         } else if (sum < target) {
             for (int i = 0; i < candidates.length; ++i) {
-                tmp.add(candidates[i]);
+                tmp.add(candidates[i]); // Looks like we can do prune here.
                 nextInt(candidates, all, tmp, sum + candidates[i], target);
                 tmp.remove(tmp.size() - 1);
             }

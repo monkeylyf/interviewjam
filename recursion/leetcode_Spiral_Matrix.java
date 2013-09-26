@@ -15,13 +15,16 @@ You should return [1,2,3,6,9,8,7,4,5].
 import java.util.ArrayList;
 
 
-class leetcode_Spiral_Matrix {
+public class leetcode_Spiral_Matrix {
+
     public static void main(String[] args) {
+		// Test case.
         int[][] test = new int[2][1];
         test[0][0] = 3;
         test[1][0] = 2;
         spiralOrder(test);
     }
+
     public static ArrayList<Integer> spiralOrder(int[][] matrix) {
         ArrayList<Integer> res = new ArrayList<Integer>();
         if (matrix.length == 0) {
@@ -31,6 +34,7 @@ class leetcode_Spiral_Matrix {
         peelMatrix(onion, res);
         return res;
     }
+
     public static void peelMatrix(int[][] onion, ArrayList<Integer> res) {
         int row = onion.length;
         int col = onion[0].length;

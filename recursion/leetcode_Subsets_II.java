@@ -23,10 +23,13 @@ import java.util.Collections;
 import java.util.HashSet;
 
 
-class leetcode_Subsets_II {
+public class leetcode_Subsets_II {
+
     public static void main(String[] args) {
-        subsetsWithDup(new int[] {1, 2, 2, 3, 4, 4});
+        System.out.println(subsetsWithDup(new int[] {1, 2, 2, 3, 4, 4}));
+        System.out.println(subsetsWithDup(new int[] {1, 2, 2}));
     }
+
     public static ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
         // The idea behind this is almost same as Subsets.
         // The only different is we used HashSet as the accumulator to avoid duplicates.
@@ -35,12 +38,10 @@ class leetcode_Subsets_II {
         nextSubset(num, 0, all, tmp);
         return new ArrayList<ArrayList<Integer>>(all);
     }
+
     public static void nextSubset(int[]num, int n, HashSet<ArrayList<Integer>> all, ArrayList<Integer> tmp) {
         if (num.length == n) {
-            ArrayList<Integer> res = new ArrayList<Integer>();
-            for (int i : tmp) {
-                res.add(i);
-            }
+            ArrayList<Integer> res = new ArrayList<Integer>(tmp);
             Collections.sort(res);
             all.add(res);
         } else {

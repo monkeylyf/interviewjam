@@ -26,13 +26,15 @@ import java.util.Queue;
 import java.util.Set;
 
 
-class leetcode_Word_Ladder {
+public class leetcode_Word_Ladder {
+
     public static void main(String[] args) {
         HashSet<String> dict = new HashSet<String>();
         //Collections.addAll(dict, "hot","cog","dog","tot","hog","hop","pot","dot");
         Collections.addAll(dict, "hot", "dot");
         System.out.println(my("hot", "hot", dict));
     }
+
     public static int ladderLength(String start, String end, HashSet<String> dict) {
         Queue<String> unvisited = new LinkedList<String>();
         HashSet<String> visited = new HashSet<String>();
@@ -61,6 +63,7 @@ class leetcode_Word_Ladder {
         }
         return 0;        
     }
+
     public staitc Set<String> generate(String s, HashSet<String> dict){
         Set<String> words = new HashSet<String>();
         for(int i = 0; i < s.length(); ++i){

@@ -27,7 +27,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 
-class leetcode_Word_Ladder_II {
+public class leetcode_Word_Ladder_II {
+
     public static void main(String[] args) {
         HashSet<String> dict1 = new HashSet<String>();
         Collections.addAll(dict1, "ted","tex","red","tax","tad","den","rex","pee");
@@ -36,9 +37,10 @@ class leetcode_Word_Ladder_II {
         Collections.addAll(dict2, "hot", "dot");
         test("hot", "hot", dict2);
     }
+
     public static ArrayList<ArrayList<String>> test(String start, String end, HashSet<String> dict) {
-        // The idea behind this is BFS + hashing paths.
-        // Since the shortest path is aksed for then DFS is not an efficienty way to solve this.
+        // The idea behind this is BFS + caching paths.
+        // Since the shortest path is asked for then DFS is not an efficienty way to solve this.
         // Need two HashMap path & tmPath, one for global path and another for path at current level.
         // Need two Queue curLevel & nextTovVisit to record graph level.
         HashMap<String, ArrayList<String>> path = new HashMap<String, ArrayList<String>>();
@@ -56,7 +58,7 @@ class leetcode_Word_Ladder_II {
                     chs[i] = j;
                     String oneCharDiff = new String(chs);
                     if (oneCharDiff.equals(str)) {
-                        continue;
+                        continue; // new string is exactly same as the unchanged.
                     }
                     if (oneCharDiff.equals(end)) {
                         isShortestLevel = true; // Reach the shortest path.
@@ -88,6 +90,7 @@ class leetcode_Word_Ladder_II {
         }
         return new ArrayList<ArrayList<String>>();
     }
+
     public static ArrayList<ArrayList<String>> dfsPath(HashMap<String, ArrayList<String>> path, String start, String end) {
         // Standord DFS.
         ArrayList<ArrayList<String>> all = new ArrayList<ArrayList<String>>();

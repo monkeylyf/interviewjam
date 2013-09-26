@@ -9,9 +9,12 @@ the character '.'.
 import java.util.HashSet;
 
 
-class leetcode_Valid_Sudoku {
+public class leetcode_Valid_Sudoku {
+
     public static void main(String[] args) {
+
     }
+
     public static boolean isValidSudoku(char[][] board) {
         HashSet<Character> set = new HashSet<Character>();
         // Check col.
