@@ -14,10 +14,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 
-class leetcode_Substring_with_Concatenation_of_All_Words {
+public class leetcode_Substring_with_Concatenation_of_All_Words {
+
     public static void main(String[] args) {
         findSubstring("sheateateseatea", new String[] {"sea","tea","ate"});
     }
+
     public static ArrayList<Integer> findSubstring(String S, String[] L) {
         // The idea behind this is to get all possible permutations of given set.
         ArrayList<Integer> res = new ArrayList<Integer>();
@@ -31,15 +33,17 @@ class leetcode_Substring_with_Concatenation_of_All_Words {
         }
         return res;
     }
-    public static void nextString(String[] L, HashSet<String> all, String partial) {
+
+    public static void nextString(String[] L, HashSet<String> all, String acc) {
         if (L.length == 0) {
-            all.add(partial);
+            all.add(acc);
         } else {
             for (int i = 0; i < L.length; ++i) {
-                nextString(removedEle(L, i), all, partial + L[i]);
+                nextString(removedEle(L, i), all, acc + L[i]);
             }
         }
     }
+
     public static String[] removedEle(String[] L, int index) {
         String[] res = new String[L.length - 1];
         int j = 0;

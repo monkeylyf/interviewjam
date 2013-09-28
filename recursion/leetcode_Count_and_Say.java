@@ -12,8 +12,10 @@ Note: The sequence of integers will be represented as a string.
 
 */
 
-class leetcode_Count_and_Say {
+public class leetcode_Count_and_Say {
+
     public static void main(String[] args) {
+		// Test cases.
         System.out.println(countAndSay(1));
         System.out.println(countAndSay(2));
         System.out.println(countAndSay(3));
@@ -22,24 +24,29 @@ class leetcode_Count_and_Say {
         System.out.println(countAndSay(6));
         System.out.println(countAndSay(7));
     }
+
     public static String countAndSay(int n) {
-        String cur = "1";
+        String sequence = "1", acc;
+		char last_char;
+		int count, i;
         while (--n > 0) {
-            String tmp = "";
-            char last_char = cur.charAt(0);
-            int count = 0;
-            for (int i = 0; i < cur.length(); ++i) {
-                if (cur.charAt(i) == last_char) {
+            acc = "";
+            last_char = sequence.charAt(0);
+            count = 0;
+			// Start counting.
+            for (i = 0; i < sequence.length(); ++i) {
+                if (sequence.charAt(i) == last_char) {
                     ++count;
                 } else {
-                    tmp += "" + count + last_char;
-                    count = 1;
-                    last_char = cur.charAt(i);
+					// Different char. Say and switch base char.
+                    acc += "" + count + last_char;
+                    count = 1; // Reset count to 1 since a different char's been already observed.
+                    last_char = sequence.charAt(i);
                 }
             }
-            tmp += "" + count + last_char;
-            cur = tmp;
+            acc += "" + count + last_char;
+            sequence = acc;
         }
-        return cur;
+        return sequence;
     }
 }

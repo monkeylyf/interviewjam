@@ -22,7 +22,7 @@ for i in xrange(N):
             break
 
 # Init dp states.
-# For any board, you can make the coin be any splot at time t with t operations
+# For any board, you can make the coin be any spot at time t with t operations
 # So set the limit ops to K + 1.
 dp = [ [ K + 1 for _ in range(M) ] for _ in range(N) ]
 

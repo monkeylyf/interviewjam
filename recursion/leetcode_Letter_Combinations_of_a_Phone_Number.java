@@ -14,10 +14,12 @@ any order you want.
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class leetcode_Letter_Combinations_of_a_Phone_Number {
+public class leetcode_Letter_Combinations_of_a_Phone_Number {
+
     public static void main(String[] args) {
         letterCombinations("2345");
     }
+
     public static ArrayList<String> letterCombinations(String digits) {
         ArrayList<String> all = new ArrayList<String>();
         ArrayList<String> num = new ArrayList<String>();
@@ -35,16 +37,17 @@ class leetcode_Letter_Combinations_of_a_Phone_Number {
             num.add(phoneMap.get(digit));
         }
         nextLetter("", num, all);
-        for (String i : all) System.out.println(i);
+		System.out.println(all);
         return all; 
     }
-    public static void nextLetter(String partial, ArrayList<String> num, ArrayList<String> all) {
+
+    public static void nextLetter(String acc, ArrayList<String> num, ArrayList<String> all) {
         if (num.size() == 0) {
-            all.add(partial);
+            all.add(acc);
         } else {
             String str = num.remove(num.size() - 1);
             for (int i = 0; i < str.length(); ++i) {
-                nextLetter(str.charAt(i) + partial, num, all);
+                nextLetter(str.charAt(i) + acc, num, all);
             }
             num.add(str);
         }

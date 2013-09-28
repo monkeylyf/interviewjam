@@ -10,7 +10,7 @@ import java.util.*;
 public class Min_Sum_With_Unique_Index_In_Matrix {
 
 	/* 
-     * DPS + Backtraking + Trim.
+     * DPS + Backtraking + Prune.
 	 */
 	
 	public static void main(String[] args) {

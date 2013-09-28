@@ -14,10 +14,12 @@ Note: Given n will be between 1 and 9 inclusive.
 */
 
 
-class leetcode_Permutation_Sequence {
+public class leetcode_Permutation_Sequence {
+
     public static void main(String[] args) {
         System.out.println(getPermutation(4, 16));
     }
+
     public static String getPermutation(int n, int k) {
         String str = "";
         for (int i = 1; i <= n; ++i) {
@@ -25,6 +27,7 @@ class leetcode_Permutation_Sequence {
         }
         return nextNum(str, n, k - 1); // kth --> index k - 1
     }
+
     public static String nextNum(String str, int n, int k) {
         // str.length() == 0 works too but set it to 1 mean one less recursion.
         if (str.length() == 1) {
@@ -34,6 +37,7 @@ class leetcode_Permutation_Sequence {
         int index = k / fctrl; // index of current char.
         return str.charAt(index) + "" + nextNum(str.substring(0, index) + str.substring(index + 1, str.length()), n - 1, k - fctrl * index);
     }
+
     public static int factorial(int n) {
         int res = 1; 
         for (int i = n; i >=1; --i) {
