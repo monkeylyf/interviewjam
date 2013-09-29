@@ -45,7 +45,9 @@ public class google_Quadtree{
     }
 
     public static QTNode intersection(QTNode rootOne, QTNode rootTwo) {
-        if (rootOne.color == GREY && rootTwo.color == GREY) {
+		if (rootOne == null || rooTwo == null) {
+			return null; // Edge case.
+		} else if (rootOne.color == GREY && rootTwo.color == GREY) {
             // Both contain black & white.
             QTNode newNode = new QTNode(GREY);
             for (int i = 0; i < 4; ++i) {
