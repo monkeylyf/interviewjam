@@ -2,9 +2,11 @@
 careercup
 
 Describe an algorithm to find the largest 1 million numbers in 1 billion
-numbers. Assume that the computer memory can hold all one billion numbers*/
+numbers. Assume that the computer memory can hold all one billion numbers
+*/
 
-class cap_Find_Largest_k_numbers_in_n_Numbers {
+public class cap_Find_Largest_k_numbers_in_n_Numbers {
+
 	public static void main(String[] args) {
 		int[] test = {16, 4, 10, 14, 7, 9, 3, 2, 8, 1, 0, 0};
 		maxHeapify(test, 10, 1);
@@ -33,6 +35,7 @@ class cap_Find_Largest_k_numbers_in_n_Numbers {
 			System.out.println("");
 		}
 	}
+
 	public static void maxHeapify(int[] arr, int heapsize, int i) {
 		int l = 2 * i + 1;
 		int r = 2 * i + 2;
@@ -52,11 +55,13 @@ class cap_Find_Largest_k_numbers_in_n_Numbers {
 			maxHeapify(arr, heapsize, largest);
 		}
 	}
+
 	public static void buildMaxHeap(int[] arr, int size) {
 		for (int i = (size-1)/2; i>=0; --i) {
             maxHeapify(arr,size,i);
         }
 	}
+
 	public static void minHeapify(int[] arr, int heapsize, int i) {
 		int l = 2 * i + 1;
 		int r = 2 * i + 2;
@@ -74,11 +79,13 @@ class cap_Find_Largest_k_numbers_in_n_Numbers {
 			minHeapify(arr, heapsize, min);
 		}
 	}
+
 	public static void buildMinHeap(int[] arr, int size) {
 		for (int i = (size - 1 ) / 2; i >= 0; --i) {
             minHeapify(arr,size,i);
         }
 	}
+
 	public static void insertMax(int[] arr, int size, int i) {
 		arr[size] = i;
 		while (true) {
@@ -92,6 +99,7 @@ class cap_Find_Largest_k_numbers_in_n_Numbers {
 			size = parent;
 		}
 	}
+
 	public static int removeMax(int[] arr, int size) {
 		int retval = arr[0];
 		arr[0] = arr[size - 1];
@@ -99,6 +107,7 @@ class cap_Find_Largest_k_numbers_in_n_Numbers {
 		maxHeapify(arr, size - 1, 0);
 		return retval;
 	} 
+
 	public static void insertMin(int[] arr, int size, int i) {
 		arr[size] = i;
 		while (true) {
@@ -112,6 +121,7 @@ class cap_Find_Largest_k_numbers_in_n_Numbers {
 			size = parent;
 		}
 	}
+
 	public static void removeMin(int[] arr, int size) {
 		int retval = arr[0];
 		arr[0] = arr[size - 1];

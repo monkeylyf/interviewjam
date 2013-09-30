@@ -1,4 +1,5 @@
 /*Search_in_Rotated_Sorted_Array_II
+leetcode
 
 Follow up for "Search in Rotated Sorted Array":
 What if duplicates are allowed?
@@ -6,16 +7,20 @@ Would this affect the run-time complexity? How and why?
 Write a function to determine if a given target is in the array.
 */
 
-class leetcode_Search_in_Rotated_Sorted_Array_II {
+public class leetcode_Search_in_Rotated_Sorted_Array_II {
+
     public static void main(String[] args) {
+
     }
+
     public static boolean search(int[] A, int target) {
         return binarySearch(A, 0, A.length - 1, target);
     }
+
     public static boolean binarySearch(int[] A, int start, int end, int target) {
         // The idea behind this is basically the same as Search_in_Rotated_Sorted_Array.
         while (start <= end) {
-            int middle = (start + end) / 2;
+			int middle = (end - start) / 2 + start;
             if (target == A[middle]) {
                 return true;
             } else if (A[start] < A[middle]) {

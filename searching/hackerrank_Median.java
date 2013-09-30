@@ -7,6 +7,7 @@ import java.util.*;
 
 
 public class Median {
+
     public static void main(String[] args) {
         // test case.
         //System.out.println(median(new String[] {}, new int[] {}));
@@ -21,6 +22,7 @@ public class Median {
         //System.out.println(liveStream(new String[] {"r", "r"}, new int[] {1, 1}));
     }
     public static void liveStream(String[] op, int[] arr) {
+
             if (op == null || arr == null || op.length <= 0 || arr.length <= 0 || op.length != arr.length) {
                 return;
             }

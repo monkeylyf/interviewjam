@@ -18,7 +18,12 @@ Given target = 3, return true.
 */
 
 
-class leetcode_Search_a_2D_Matrix {
+public class leetcode_Search_a_2D_Matrix {
+
+	/**
+	 * Please check ./cap_Search_a_Sorted_Matrix.java and it's clearer.
+	 */
+
     public static void main(String[] args) {
         // There are three different ways to solve this problem.
         int[][] matrix = {{1, 2, 6, 10},
@@ -30,6 +35,7 @@ class leetcode_Search_a_2D_Matrix {
                                                       {10, 11, 16, 20},
                                                       {23, 30, 34, 50}}, 23));
     }
+
     public static boolean searchMatrix(int[][] matrix, int target) {
         // Binary search for the specific row.
         // O(logM*N)
@@ -64,9 +70,11 @@ class leetcode_Search_a_2D_Matrix {
         }
         return false;
     }
+
     public static boolean searchMatrix1(int[][] matrix, int target) {
         return matrixBinarySearch(matrix, target, 0, matrix.length - 1, 0, matrix[0].length - 1);
     }
+
     public static boolean matrixBinarySearch(int[][] matrix, int target, int rHead, int rTail, int cHead, int cTail) {
         // 1 1 2 3 3     x < target search region 3,5,8 && 6,7 
         // 1 1 2 3 3     x > target search region 1,2,3 && 4,6
@@ -92,6 +100,7 @@ class leetcode_Search_a_2D_Matrix {
         }
         return false;    
     }
+
     public static boolean searchMatrix2(int[][] matrix, int target) {
         // Starting from matrix[0][n - 1]
         // Worst scenario O(m + n). I can't believe this passes Judge Large.

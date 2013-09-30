@@ -12,9 +12,12 @@ Here are few examples.
 */
 
 
-class leetcode_Search_Insert_Position {
+public class leetcode_Search_Insert_Position {
+
     public static void main(String[] args) {
+
     }
+
     public static int searchInsert(int[] A, int target) {
         if (target <= A[0]) {
             return 0;

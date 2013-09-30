@@ -3,13 +3,15 @@
 careercup
 
 Numbers are randomly generated and passed to a method. Write a program to
-find and maintain the median value as new values are generated*/
+find and maintain the median value as new values are generated
+*/
 
 import java.util.*;
 
-class cap_Maintain_Median {
+public class cap_Maintain_Median {
+
 	public static void main(String[] args) {
-		my median = new my();
+		Solution median = new Solution();
 		for (int i = 0; i < 9; ++i) {
 			median.push(i);
 			System.out.println(median.getMedian());
@@ -17,13 +19,18 @@ class cap_Maintain_Median {
 	}
 }
 
-class my {
+
+class Solution {
+
 	private Comparator<Integer> maxHeapComparator = new maxComparator();
 	private Comparator<Integer> minHeapComparator = new minComparator();
+
 	private PriorityQueue<Integer> max = new PriorityQueue<Integer>(100, maxHeapComparator);
 	private PriorityQueue<Integer> min = new PriorityQueue<Integer>(100, minHeapComparator);
+
 	private int size = 0;
 	private int median = 0;
+
 	public void push(int i ) {
 		if (size++ == 0) {
             median = i;
@@ -43,13 +50,16 @@ class my {
 			}
 		}
 	}
+
 	public int getSize() {
         return size;
     }
+
 	public int getMedian() {
         return median;
     }
 }
+
 
 class maxComparator implements Comparator<Integer> {
 	@Override
@@ -59,6 +69,7 @@ class maxComparator implements Comparator<Integer> {
 		return 0;
 	}
 }
+
 
 class minComparator implements Comparator<Integer> {
 	@Override

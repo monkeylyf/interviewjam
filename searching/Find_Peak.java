@@ -17,7 +17,8 @@ Output:
 */
 
 
-class Find_Peak {
+public class Find_Peak {
+
 	public static void main(String[] args) {
 		solve(new int[] {5, 10, 20, 15});
 		solve(new int[] {1, 3, 20, 4, 1, 0});

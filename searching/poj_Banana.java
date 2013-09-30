@@ -2,15 +2,17 @@
 poj
 
 A good practice of disjoint set. Union-find rocks!
+http://en.wikipedia.org/wiki/Disjoint-set_data_structure
 */
 
 import java.util.*;
 
-class Banana {
+public class Banana {
 
     /**
      * http://poj.org/problem?id=1838
      */
+
     public static void main(String[] args) {
         testSuite1();
     }

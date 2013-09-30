@@ -8,14 +8,16 @@ You may assume no duplicate exists in the array.
 */
 
 
-class leetcode_Search_in_Rotated_Sorted_Array {
+public class leetcode_Search_in_Rotated_Sorted_Array {
+
     public static void main(String[] args) {
+
     }
+
     public static int search(int[] A, int target) {
-        int start = 0;
-        int end = A.length - 1;
+        int start = 0, end = A.length - 1, middle;
         while (start <= end) {
-            int middle = (start + end) / 2;
+			middle = (end - start) / 2 + start;
             if (target == A[middle]) {
                 return middle;
             } else if (A[start] <= A[middle]) {

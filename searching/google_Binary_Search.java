@@ -6,20 +6,23 @@ If duplicate target exist, return i, where i is the max index among all duplicat
 
 */
 
-class google_Binary_Search {
+public class google_Binary_Search {
+
     public static void main(String[] args) {
-        assert binarySearch(new int[] {1, 2, 2, 4}, 3) == 3;
-        assert binarySearch(new int[] {1, 2, 2, 4}, 2) == 2;
-        assert binarySearch(new int[] {1, 2, 2, 2, 4}, 3) == 3;
-        assert binarySearch(new int[] {1, 2, 2, 4}, 1) == 0;
-        assert binarySearch(new int[] {1, 2, 2, 4}, 5) == 3;
+       System.out.println(binarySearch(new int[] {1, 2, 2, 4}, 3) == 3);
+        //assert binarySearch(new int[] {1, 2, 2, 4}, 2) == 2;
+        //assert binarySearch(new int[] {1, 2, 2, 2, 4}, 3) == 3;
+        //assert binarySearch(new int[] {1, 2, 2, 4}, 1) == 0;
+        //assert binarySearch(new int[] {1, 2, 2, 4}, 5) == 3;
     }
+
     public static int binarySearch(int[] A, int target) {
         return binarySearch(A, target, 0, A.length - 1);
     }
+
     public static int binarySearch(int[] A, int target, int head, int tail) {
         while (head <= tail) {
-            int middle = (head + tail) / 2;
+			int middle = (tail - head) / 2 + head;
             int med = A[middle];
             if (med > target) {
                 tail = middle - 1; 
@@ -35,6 +38,7 @@ class google_Binary_Search {
                 }
             }
         }
+		// If it reaches here, target does not exit in this array, return head. 
         return head;
     }
 }
