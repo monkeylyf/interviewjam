@@ -8,10 +8,13 @@ would you use to sort the file and why?
 import java.util.*;
 
 
-class cap_Choose_Sorting_Algorithm {
+public class cap_Choose_Sorting_Algorithm {
+
     public static void main(String[] args) {
+
     }
-    // merge sort. O(nlogn). stable. Non-in-place.
+
+    // Merge sort. O(nlogn). Stable. None-in-place.
     public static int[] mergeSort(int[] arr) {
         if (arr.length <= 1) {
             return arr;
@@ -24,9 +27,10 @@ class cap_Choose_Sorting_Algorithm {
         int[] ret = new int[arr.length];
         System.arraycopy(left, 0, ret, 0, middle);
         System.arraycopy(right, 0, ret, middle, right.length);
-        return merge(left, right);
-    }
-    public static int[] merge(int[] left, int[] right) {
+        return mergeSortUtil(left, right);
+	}
+
+    private static int[] mergeSortUtil(int[] left, int[] right) {
         int[] ret = new int[left.length + right.length];
         int ptr = 0, leftPtr = 0, rightPtr = 0;
         while (leftPtr < left.length || rightPtr < left.length) {
@@ -48,14 +52,16 @@ class cap_Choose_Sorting_Algorithm {
         }
         return ret;
     }
-    // quick sort. O(nlog). inplace. non-stable.
+
+    // Quick sort. O(nlog). Inplace. None-stable.
     public static void quickSort(int[] ar) {
         if (ar == null) {
             return;
         }
         partition(ar, 0, ar.length - 1);
     }
-    public static void partition(int[] ar, int left, int right) {
+
+    private static void partition(int[] ar, int left, int right) {
         if (left < right) {
             int pivot = ar[left];
             int head = left;
@@ -79,7 +85,8 @@ class cap_Choose_Sorting_Algorithm {
             partition(ar, head + 1, right);
         }
     }
-    // insert sort. O(n + d). Stable. In-place. Online.
+
+    // Insertion sort. O(n + d). Stable. In-place. Online.
     public static void insertionSort(int[] ar){
         if (ar == null || ar.length < 1) {
             return;
@@ -88,6 +95,7 @@ class cap_Choose_Sorting_Algorithm {
             insertionSortByIndex(ar, i);
         }
     }
+
     static void insertionSortByIndex(int[] ar, int index) {
         if (ar == null || ar.length == 0 || index < 1) {
             return;
@@ -100,5 +108,6 @@ class cap_Choose_Sorting_Algorithm {
         }
         ar[i + 1] = tmp;  
     }
-    // radix sort.
+
+    // Radix sort.
 }

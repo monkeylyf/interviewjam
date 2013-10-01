@@ -1,5 +1,5 @@
 /*Merge_k_Sorted_Arrays
-geeksforgeeksf
+geeksforgeeks
 */
 
 
@@ -27,7 +27,7 @@ public class Merge_k_Sorted_Arrays {
 	
 	// Scan by layers.
 	// Time complexity O(n * k * k)
-	// Spcae complexity O(n * k)
+	// Space complexity O(n * k)
 	public static int[] mergeSortedArrays(int[][] arr) {
 		int k = arr.length, n = arr[0].length, i, localMin;
 		int[] pointers = new int[k], ret = new int[n * k];
@@ -58,7 +58,7 @@ public class Merge_k_Sorted_Arrays {
 
 	// MinHeap Solution.
 	// Time complexity O(nk * logk)
-	// Spcae complexity O(n * k)
+	// Space complexity O(k)
 	public static int[] minHeapMerge(int[][] arr) {
 		int k = arr.length, n = arr[0].length, i;
 		int[] ret = new int[k * n];

@@ -1,4 +1,5 @@
 /*Sort_Colors
+leetcode
 
 Given an array with n objects colored red, white or blue, sort them so that
 objects of the same color are adjacent, with the colors in the order red, white
@@ -15,28 +16,30 @@ Could you come up with an one-pass algorithm using only constant space?
 */
 
 
-class leetcode_Sort_Colors {
+public class leetcode_Sort_Colors {
+
     public static void main(String[] args) {
+
     }
+
     public static void sortColors(int[] A) {
         // The idea behind this is using three pointers.
-        int start = 0;
-        int end = A.length - 1;
-        int middle = 0;
-        while (middle <= end) {
-            if (A[middle] == 0) {
-                swap(A, middle, start); // all 0s swapped to the left.
+        int start = 0, end = A.length - 1, cursor = 0;
+        while (cursor <= end) {
+            if (A[cursor] == 0) {
+                swap(A, cursor, start); // all 0s swapped to the left.
                 ++start;
-                ++middle;
-            } else if (A[middle] == 2) {
-                swap(A, middle, end); // all 2s swapped to the right
+                ++cursor;
+            } else if (A[cursor] == 2) {
+                swap(A, cursor, end); // all 2s swapped to the right
                 --end;
             } else {
                 // A[start] == 1.
-                ++middle; // for 1, swap nothing.
+                ++cursor; // for 1, swap nothing.
             }
         }
     }
+
     public static void swap(int[] A, int i, int j) {
         int tmp = A[i];
         A[i] = A[j];

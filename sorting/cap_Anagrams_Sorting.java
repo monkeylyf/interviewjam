@@ -11,13 +11,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-class cap_Anagrams_Sorting {
+public class cap_Anagrams_Sorting {
+
 	public static void main(String[] args) {
 		String[] a = {"aba", "ag", "aab", "c", "baa", "ga"};
 		for (String i : a) System.out.print(i + " ");
 		System.out.println();
         System.out.println(sortingAnagram(a));
 	}
+
     public static ArrayList<String> sortingAnagram(String[] A) {
         HashMap<String, ArrayList<Integer>> map = new HashMap<String, ArrayList<Integer>>();
         ArrayList<String> retval = new ArrayList<String>();
@@ -42,6 +44,7 @@ class cap_Anagrams_Sorting {
         return retval;
         
     }
+
 	public static String sortChars(String s) {
 		char[] c = s.toCharArray();
 		Arrays.sort(c);
