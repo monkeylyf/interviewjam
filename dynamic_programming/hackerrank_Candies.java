@@ -1,5 +1,5 @@
 /*Candies
-hackerrank
+hackerrank/leetcode
 
 Alice is a kindergarden teacher. She wants to give some candies to the children
 in her class.  All the children sit in a line and each  of them  has a rating
@@ -33,23 +33,24 @@ Sample Ouput
 
 
 public class Candies {
+
     public static void main(String[] args) {
 
     }
+
     public static void candies(int[] arr, int n) {
         // Elegant Solution of Cong Li.
         // The idea behind this is using two array to track increasing array and decreasing array seperately.
-        int[] left = new int[n];
-        int[] right = new int[n];
-        for (int i = 1; i < n; ++i) {
-            left[i] = (arr[i] > arr[i - 1]) ? left[i - 1] + 1 : 0;
+        int[] ascend = new int[n], descend = new int[n];
+		int sum = 0, i;
+        for (i = 1; i < n; ++i) {
+            ascend[i] = (arr[i] > arr[i - 1]) ? ascend[i - 1] + 1 : 0;
         }
-        for (int i = n - 2; i >= 0; --i) {
-            right[i] = (arr[i] > arr[i + 1]) ? right[i + 1] + 1 : 0;
+        for (i = n - 2; i >= 0; --i) {
+            descend[i] = (arr[i] > arr[i + 1]) ? descend[i + 1] + 1 : 0;
         }
-        int ret = 0;
-        for (int i = 0; i < n; ++i) {
-            ret += Math.max(left[i], right[i]);
+        for (i = 0; i < n; ++i) {
+            ret += Math.max(ascend[i], descend[i]);
         }
         System.out.println(ret + n);
     }
