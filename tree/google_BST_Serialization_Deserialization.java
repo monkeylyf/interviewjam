@@ -20,6 +20,7 @@ public class google_BST_Serialization_Deserialization {
 
 	/**
 	 * Assuming the order of serial is preorder.
+	 * And it's not neccessary to be binary search tree. It applies to binary tree.
 	 */
 	
 	public static void main(String[] args) {
