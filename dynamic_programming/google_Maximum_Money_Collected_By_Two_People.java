@@ -53,27 +53,15 @@ class google_Maximum_Money_Collected_By_Two_People {
                     for (int k = 0; k < n ; ++k) {
                         // Right now A is @(i, j), B is @(h, k).
                         // track[i][j][h][k] = max(track[i + 1][j][h][k],
-                        //                         track[i][ji - 1][h][k],
+                        //                         track[i][i - 1][h][k],
                         //                         track[i][j][h + 1][k],
                         //                         track[i][j][h][k - 1]))        Be careful with indexOfBoundary
                         //                     + matrix[i][j] if (i == h && j == k) Money can be collected by only one guy 
                         //                       matrix[i][j] + matrix[h][k] else 
-                        int leftLeft = 0;
-                        int leftDown = 0;
-                        int downLeft = 0;
-                        int downDown = 0;
-                        if (j != 0 && k != 0) {
-                            leftLeft = track[i][j - 1][h][k - 1];
-                        }
-                        if (j != 0 && h != m - 1) {
-                            leftDown = track[i][j - 1][h + 1][k];
-                        }
-                        if (i != m - 1 && k != 0) {
-                            downLeft = track[i + 1][j][h][k - 1];
-                        }
-                        if (i != m - 1 && h != m - 1) {
-                            downDown = track[i + 1][j][h + 1][k];
-                        }
+                        int leftLeft = (j != 0 && k != 0) ? track[i][j - 1][h][k - 1] : 0;
+                        int leftDown = (j != 0 && h != m - 1) ? track[i][j - 1][h + 1][k] : 0;
+                        int downLeft = (i != m - 1 && k != 0) ? track[i + 1][j][h][k - 1] : 0;
+                        int downDown = (i != m - 1 && h != m - 1) ? track[i + 1][j][h + 1][k] : 0;
                         track[i][j][h][k] = maxOfFour(leftLeft, leftDown, downLeft, downDown);
                         if (i == h && j == k) {
                             track[i][j][h][k] += matrix[i][j];

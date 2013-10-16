@@ -8,7 +8,7 @@ This is a good day
 This is a bad day
 That was good day
 
-Design an alogorithm which returns two
+Design an alogorithm which returns two sentences which has the most common words.
 */
 
 import java.util.ArrayList;
@@ -17,12 +17,14 @@ import java.util.HashSet;
 import java.util.HashMap;
 
 
-class google_Most_Common_Words {
+public class google_Most_Common_Words {
+
     public static void main(String[] args) {
         ArrayList<String> input = new ArrayList<String>();
         Collections.addAll(input, "This is a darn good day", "This was a darn bad day", "That was darn good day", "This is not a good day");
         System.out.println(mostCommonWords(input));
     }
+
     public static ArrayList<String> mostCommonWords(ArrayList<String> sentences) {
         ArrayList<String> retval = new ArrayList<String>();
         HashMap<String, ArrayList<Integer>> dict = new HashMap<String, ArrayList<Integer>>();

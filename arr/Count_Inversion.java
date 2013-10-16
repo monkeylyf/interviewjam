@@ -30,7 +30,7 @@ class Count_Inversion {
 		Arrays.sort(sorted);
 		while (arr.length > 0) {
 			cur = arr[0];
-			index = binarySearch(sortxed, cur);
+			index = binarySearch(sorted, cur);
 			for (i = 0; i < index; ++i) {
 			//for (i = index + 1; i < sorted.length; ++i) {
 				System.out.println(cur + "/" + sorted[i]);

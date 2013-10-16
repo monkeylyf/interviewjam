@@ -17,18 +17,16 @@ class Longest_Palindrome_Substring {
         if (s.length() == 0) {
             return s;
         }
-        int n = s.length();
-        int start = 0;
-        int end = 0;
-        int longest = 1;
+        int n = s.length(), start = 0, end = 0, longest = 1, i, j;
         boolean[][] status = new boolean[n][n];
-        for (int i = 0; i < n; ++i) {
+
+        for (i = 0; i < n; ++i) {
             status[i][i] = true;
         }
-        for (int i = n - 2; i >= 0; --i) {
-            status[i][i + 1] = (s.charAt(i) == s.charAt(i + 1)) ? true : false;
-            for (int j = i + 2; j < n; ++j) {
-                status[i][j] = (s.charAt(i) == s.charAt(j) && status[i + 1][j - 1]) ? true : false;
+        for (i = n - 2; i >= 0; --i) {
+            status[i][i + 1] = s.charAt(i) == s.charAt(i + 1);
+            for (j = i + 2; j < n; ++j) {
+                status[i][j] = (s.charAt(i) == s.charAt(j)) && status[i + 1][j - 1];
                 if (status[i][j] && j - i + 1 > longest) {
                     longest = j - i + 1;
                     start = i;

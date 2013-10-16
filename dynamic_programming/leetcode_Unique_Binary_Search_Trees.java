@@ -17,7 +17,8 @@ Given n = 3, there are a total of 5 unique BST's.
 import java.util.*;
 
 
-class leetcode_Unique_Binary_Search_Trees {
+public class leetcode_Unique_Binary_Search_Trees {
+
     public static void main(String[] args) {
         System.out.println(numTrees(4));
     }
@@ -29,24 +30,21 @@ class leetcode_Unique_Binary_Search_Trees {
         if(n == 0 || n == 1 || n == 2) {
             return n;
         }
-	int i, j;
+		int i, j;
         int dp[] = new int[n + 1];
+		dp[0] = 1; dp[1] = 1; dp[2] = 2;
         //   1  2
         //  /    \
         // 2      1
         for (i = 0; i <= n; ++i) {
-	    if (i <= 2) { // init dp state
-	        dp[i] = i; // dp[0] = 1; dp[1] = 1; dp[2] = 2;
-	    } else {
-            	for (int j = 1; j <= i - 2; ++j) {
-		    // Consider node i as the intermediate node as a right child of some subtree.
-		    // Then create another substree and append its root to node i.
-		    // There is dp[j] different ways to construct first substree and dp[i - 1 - j] 
-		    // different ways to construct the second substree. Sum the num up.
-                    dp[i] += dp[j] * dp[i - 1 - j];
-            	}
-            	dp[i] += 2 * dp[i - 1];
-	    }
+			for (int j = 1; j <= i - 2; ++j) {
+				// Consider node i as the intermediate node as a right child of some subtree.
+				// Then create another substree and append its root to node i.
+				// There is dp[j] different ways to construct first substree and dp[i - 1 - j] 
+				// different ways to construct the second substree. Sum the num up.
+				dp[i] += dp[j] * dp[i - 1 - j];
+			}
+			dp[i] += 2 * dp[i - 1];
         }
         return dp[n];
     }

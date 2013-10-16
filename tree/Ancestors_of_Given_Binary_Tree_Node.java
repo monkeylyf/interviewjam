@@ -1,11 +1,11 @@
 /*Ancestors_of_Given_Binary_Tree_Node
-geeksfor geeks
+geeksforgeeks
 
 Given a Binary Tree and a key, write a function that prints all the ancestors
 of the key in the given binary tree.
 */
 
-class Ancestors_of_Given_Binary_Tree_Node {
+public class Ancestors_of_Given_Binary_Tree_Node {
 	
 	public static void main(String[] args) {
 		// test case 1.

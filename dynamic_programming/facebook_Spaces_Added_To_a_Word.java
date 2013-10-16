@@ -40,27 +40,27 @@ class facebook_Spaces_Added_To_a_Word{
     }
 
     public static int minSpaces(String word, HashSet<String> dict) {
-	if (dict.contains(word)) {
-	    return 0;
-	}
-	int i, j, n = word.length();
+		if (dict.contains(word)) {
+			return 0;
+		}
+		int i, j, n = word.length();
         int[] dp = new int[n];
-	Arrays.fill(dp, -1);
-	for (i = 1; i <= n; ++i) {
-	    if (dict.contains(word.substring(0, i))) {
-	    	dp[i - 1] = 0;
-	    } else {
-	    	for (j = 1; j < i; ++j) {
-		    if (dict.contains(word.substring(j, i)) && dp[j - 1] != -1) {
-		        if (dp[i - 1] == -1) {
-			    dp[i - 1] = dp[j - 1] + 1;
+		Arrays.fill(dp, -1);
+		for (i = 1; i <= n; ++i) {
+			if (dict.contains(word.substring(0, i))) {
+				dp[i - 1] = 0;
 			} else {
-			    dp[i - 1] = Math.min(dp[i - 1], dp[j - 1] + 1);
+				for (j = 1; j < i; ++j) {
+					if (dict.contains(word.substring(j, i)) && dp[j - 1] != -1) {
+						if (dp[i - 1] == -1) {
+							dp[i - 1] = dp[j - 1] + 1;
+						} else {
+							dp[i - 1] = Math.min(dp[i - 1], dp[j - 1] + 1);
+						}
+					}
+				}
 			}
-		    }
-	    	}
-	    }
-	}
+		}
         print(dp);
         return dp[n - 1];
     }
@@ -68,7 +68,7 @@ class facebook_Spaces_Added_To_a_Word{
     public static int maxSpaces(String word, HashSet<String> dict) {
         // The idea behind this is bp-based.
         // First assume that all the string in dict can be found in given word.
-	int i, j, n = word.length();
+		int i, j, n = word.length();
         int[] dp = new int[n + 1]; // dp[0] should be 0, which is default.
         String substr;
         for (i = 0; i < n; ++i) {

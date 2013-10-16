@@ -6,23 +6,22 @@ of another. Given two strings,s1 and s2, write code to check if s2 is a rotation
 s1 using only one call to isSubstring (i e , “waterbottle” is a rotation of
 “erbottlewat”)*/
 
-class cap_isSubstring {
+public class cap_isSubstring {
+
 	public static void main(String[] args) {
 		String a = "fuckthisshit";
 		String b = "ckthisshitfu";
-		rotation(a, b);
+		isRotation(a, b);
 	}
 	public static boolean isSubstring(String a, String b) {
+		// Check KMP or strStr.
 		return false;	
 	}
-	public static boolean rotation(String a, String b) {
+	public static boolean isRotation(String a, String b) {
 		if (a.length() != b.length()) {
             return false;
-        }
-		if (isSubstring(a, a + b)) {
-            return true;
-		} else {
-            return false;
-        }
+        } else {
+			return isSubstring(a, a + b);
+		}
 	}
 }

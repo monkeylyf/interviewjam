@@ -21,18 +21,16 @@ public class Max_Product_Cutting {
 		// - - - - - - a rope of length 6.
 		//  1 2 3 4 5 6
 		//
-		int i, j, localMax;
+		int i, j;
 		// Init dp state.
 		int[] dp = new int[len + 1];
 		dp[1] = 1;
 		// dp.
 		for (i = 2; i <= len; ++i) {
-			localMax = Integer.MIN_VALUE;
 			for (j = 1; j <= i / 2; ++j) {
-				localMax = Math.max(localMax, dp[i - j] * j); // Two cuts, one between j and i-j and another within i-j 
-				localMax = Math.max(localMax, j * (i - j)); // One cut between j and i-j.
+				dp[i] = Math.max(dp[i], dp[i - j] * j); // Two cuts, one between j and i-j and another within i-j 
+				dp[i] = Math.max(dp[i], j * (i - j)); // One cut between j and i-j.
 			}
-			dp[i] = localMax;
 		}
 		print(dp);
 		return dp[len];
@@ -45,5 +43,10 @@ public class Max_Product_Cutting {
 			ret = (ret < arr[i]) ? arr[i] : ret;	
 		}
 		return ret;
+	}
+
+	public static void print(int[] arr) {
+		for (int i : arr) System.out.print(i + " ");
+		System.out.println();
 	}
 }
