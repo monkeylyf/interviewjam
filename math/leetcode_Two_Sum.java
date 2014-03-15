@@ -39,3 +39,14 @@ public class leetcode_Two_Sum {
         return ret;
     }
 }
+
+/*Python version.
+
+def twoSum(num, target):
+    dic = {}
+    for idx, val in enumerate(num):
+        try:
+            return (dic[target - val] + 1, idx + 1)
+        except KeyError:
+            dic[val] = idx
+*/
