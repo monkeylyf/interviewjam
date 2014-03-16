@@ -59,3 +59,41 @@ class ListNode {
         next = null;
     }
 }
+
+
+/* Python version
+
+
+def addTwoNumbers(self, l1, l2):
+    carry = False
+    
+    dummy = ListNode(-1)
+    cursor = dummy
+    while l1 and l2:
+        s = l1.val + l2.val + 1 if carry else l1.val + l2.val
+        carry = (s >= 10)
+        cursor.next = ListNode(s % 10)
+        cursor = cursor.next
+        l1 = l1.next
+        l2 = l2.next
+    
+    while l1:
+        s = l1.val + 1 if carry else l1.val
+        carry = (s >= 10)
+        cursor.next = ListNode(s % 10)
+        cursor = cursor.next
+        l1 = l1.next
+    
+    while l2:
+        s = l2.val + 1 if carry else l2.val
+        carry = (s >= 10)
+        cursor.next = ListNode(s % 10)
+        cursor = cursor.next
+        l2 = l2.next
+    
+    if carry:
+        cursor.next = ListNode(1)
+        
+    return dummy.next
+
+*/
