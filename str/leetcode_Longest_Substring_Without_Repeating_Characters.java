@@ -26,7 +26,7 @@ class leetcode_Longest_Substring_Without_Repeating_Characters {
                 // next loop start from the next char of next duplicate char.
                 i = dict.get(curChar) + 1;
                 head = i;
-                dict = new HashMap<Character, Integer>(); // clear cache.
+                dict.clear(); // clear cache.
             }
             dict.put(s.charAt(i), i);
             ++i;
@@ -35,3 +35,23 @@ class leetcode_Longest_Substring_Without_Repeating_Characters {
         return ret;        
     }
 }
+
+/* Python version.
+def lengthOfLongestSubstring(self, s):
+    ret = 0
+    
+    head = 0
+    tail = 0
+    dic = {}
+    
+    while tail < len(s):
+        if s[tail] in dic:
+            ret = max(ret, tail - head)
+            head = tail = dic[s[tail]] + 1
+            dic.clear()
+        else:
+            dic[s[tail]] = tail
+            tail += 1
+            
+    return max(ret, tail - head)
+*/
