@@ -64,3 +64,17 @@ public class leetcode_Word_Break {
         }
     }
 }
+
+
+/*Python Version
+def wordBreak(self, s, dict):
+    dp = [ False for _ in xrange(len(s)) ]
+    
+    for i in xrange(len(s)):
+        for j in xrange(i + 1):
+            if s[j : i + 1] in dict and (j == 0 or dp[j - 1]):
+                dp[i] = True
+                break
+    return dp[-1]
+
+*/
