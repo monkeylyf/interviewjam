@@ -24,15 +24,14 @@ public class leetcode_Palindrome_Number {
         }
         int left_dividor = 1;
         int right_dividor = 1;
-        int tmp = Math.abs(x);
         // Find the possible largest left_dividor.
-        while (tmp / left_dividor >= 10 && left_dividor < Integer.MAX_VALUE / 10) {
-            // tmp / left_divdor >= 10 -->
+        while (x / left_dividor >= 10 && left_dividor < Integer.MAX_VALUE / 10) {
+            // x / left_divdor >= 10 -->
             // left_dividor < Integer.MAX_VALUE / 10 prevent integer overflow.
             left_dividor *= 10;
         }
-        while (left_dividor >= right_dividor) {
-            if (tmp / left_dividor % 10 != tmp / right_dividor % 10) {
+        while (left_dividor > right_dividor) {
+            if (x / left_dividor % 10 != x / right_dividor % 10) {
                 return false;
             }
             left_dividor /= 10;
@@ -41,3 +40,37 @@ public class leetcode_Palindrome_Number {
         return true;
     }
 }
+
+/*Python Version
+Cheating:
+def isPalindrome(self, x):
+    x = str(x)
+    head = 0
+    tail = len(x) - 1
+    while head < tail:
+        if x[head] != x[tail]:
+            return False
+        head += 1
+        tail -= 1
+    return True
+
+Not cheating:
+
+def isPalindrome(self, x):
+    if x < 0:
+        return False
+        
+    left = 1
+    right = 1
+    
+    while x / left >= 10:
+        left *= 10
+    
+    while left > right:
+        if x / left % 10 != x / right % 10:
+            return False
+        left /= 10
+        right *= 10
+    
+    return True
+*/
