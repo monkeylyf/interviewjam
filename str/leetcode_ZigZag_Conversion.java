@@ -41,7 +41,7 @@ class leetcode_ZigZag_Conversion {
             // 3 5   11 13
             // 4     12
             // F(row) = index                   if index < nRows
-            //          2 * index - 2 - index   else
+            //          2 * nRows - 2 - index   else
             int mod = i % (2 * (nRows - 1)); // Pattern repeats every (2n - 2) numbers.
             all.get((mod < nRows) ?  mod : 2 * nRows - 2 - mod).add(s.charAt(i));
         }
@@ -51,3 +51,18 @@ class leetcode_ZigZag_Conversion {
         return res;
     }
 }
+
+
+/*Python Version
+def convert(self, s, nRows):
+    if nRows == 1:
+        return s
+    container = [ [] for _ in xrange(nRows) ]
+    for idx, val in enumerate(s):
+        mod = idx % (2 * (nRows - 1))
+        container[mod if mod < nRows else 2 * nRows - 2 - mod].append(val)
+    res = ''
+    for inner in container:
+        res += ''.join(inner)
+    return res
+*/

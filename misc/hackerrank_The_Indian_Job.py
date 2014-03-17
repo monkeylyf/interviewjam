@@ -51,7 +51,7 @@ def dp(G, arr):
                 upbound = max(upbound, i + j)
 
     for i in xrange(upbound + 1):
-        # 
+        # union of [s - G, G] and [0, upbound + 1] should be [s - G, min(G, upbound) + 1]
         if i <= G and s - i <= G and dp[i] and dp[s - i]:
             return True
 
