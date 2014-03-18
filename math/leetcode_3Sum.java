@@ -48,3 +48,35 @@ public class leetcode_3Sum {
         return new ArrayList<ArrayList<Integer>>(all);
     }
 }
+
+/*Python Version (TLE WTF?)
+
+def threeSum(self, num):
+    num = sorted(num)
+    if len(num) <= 2:
+        return []
+    if len(num) == 3:
+        return [] if sum(num) != 0 else num
+        
+    head = 0
+    res = set()
+    
+    while head < len(num) - 2:
+        middle = head + 1
+        tail = len(num) - 1
+        
+        s = -num[head]
+        
+        while middle < tail:
+            if num[middle] + num[tail] == s:
+                res.add((num[head], num[middle], num[tail]))
+                middle += 1
+                tail -= 1
+            elif num[middle] + num[tail] > s:
+                tail -= 1
+            else:
+                middle += 1
+        head += 1
+        
+    return list(res)
+*/
