@@ -25,3 +25,22 @@ class leetcode_Longest_Common_Prefix {
         return res;
     }
 }
+
+/*Python Version
+def longestCommonPrefix(self, strs):
+    if not strs:
+        return ''
+    ret = ''
+    
+    i = 0
+    while True:
+        try:
+            base = strs[0][i]
+            for word in strs:
+                if word[i] != base:
+                    return ret
+        except IndexError:
+            return ret
+        ret += base
+        i += 1
+*/
