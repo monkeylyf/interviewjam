@@ -29,15 +29,41 @@ public class leetcode_3Sum_Closest {
                 if (Math.abs(sum - target) < Math.abs(cur_sum - target)) {
                     cur_sum = sum;
                 }
+
                 if (sum > target) {
                     --k;
                 } else if (sum < target) {
                     ++j;
                 } else {
-                    break; // If sum == target, we've found the closest
+                    return cur_sum; // If sum == target, we've found the closest
                 }
             }
         }
         return cur_sum;
     }
 }
+
+/*Python Version
+def threeSumClosest(self, num, target):
+    num = sorted(num)
+    
+    head = 0
+    ret = sum(num[:3])
+    
+    while head < len(num) - 2:
+        mid = head + 1
+        tail = len(num) - 1
+        
+        while mid < tail:
+            s = num[head] + num[mid] + num[tail]
+            if abs(target - ret) > abs(target - s):
+                ret = s
+            if s < target:
+                mid += 1
+            elif s == target:
+                return ret
+            else:
+                tail -= 1
+        head += 1
+    return ret
+*/

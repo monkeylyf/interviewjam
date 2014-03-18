@@ -39,12 +39,16 @@ public class leetcode_3Sum {
                 } else if (num[j] + num[k] < -num[i]) {
                     ++j;
                 } else {
-                    Collections.addAll(tmp, num[i], num[j++], num[k--]);
+					// Collect result.
+                    Collections.addAll(tmp, num[i], num[j], num[k]);
                     all.add(tmp);
                     tmp = new ArrayList<Integer>();
+					++j;
+					--k;
                 }
             }
         }
+
         return new ArrayList<ArrayList<Integer>>(all);
     }
 }
