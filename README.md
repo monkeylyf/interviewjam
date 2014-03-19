@@ -13,11 +13,13 @@ Feed sources:
 
 3. geeksforgeeks
 
-4. interview experiences posts on mitbbs
+4. interview experiences posts on mitbbs/Careercup
 
 5. leetcode
 
-6. others
+6. USACO
+
+7. others
 
 Most of solutions are in Java and some are in Python.
 C/C++/Scala will be introduced later on...
