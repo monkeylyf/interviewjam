@@ -45,6 +45,23 @@ public class leetcode_Gas_Station {
 				localSum = 0; // Reset local sum.
 			}
 		}
-		return (total >= 0) ? j + 1 : -1;
+		return (total >= 0) ? valley + 1 : -1;
 	}
 }
+
+/* Python Version
+def canCompleteCircuit(self, gas, cost):
+    if sum(gas) < sum(cost):
+        return -1
+        
+    acc = 0
+    start_idx = -1 # Handle edge case with one stop only.
+    
+    for i in xrange(len(gas)):
+        acc += gas[i] - cost[i]
+        if acc < 0:
+            acc = 0
+            start_idx = i
+    
+    return start_idx + 1
+*/
