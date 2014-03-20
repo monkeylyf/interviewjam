@@ -55,3 +55,19 @@ public class Candies {
         System.out.println(ret + n);
     }
 }
+
+/*Python Version
+
+def candy(self, ratings):
+    left_to_right = [ 1 for _ in xrange(len(ratings)) ]
+    for i in xrange(len(ratings) - 1):
+        if ratings[i] < ratings[i + 1]:
+            left_to_right[i + 1] = left_to_right[i] + 1
+    
+    right_to_left = [ 1 for _ in xrange(len(ratings)) ]
+    for i in reversed(xrange(1, len(ratings))):
+        if ratings[i - 1] > ratings[i]:
+            right_to_left[i - 1] = right_to_left[i] + 1
+            
+    return sum([ max(left_to_right[i], right_to_left[i]) for i in xrange(len(ratings)) ])
+*/
