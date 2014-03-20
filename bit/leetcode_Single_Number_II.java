@@ -19,14 +19,19 @@ public class leetcode_Single_Number_II {
 		System.out.println(singleNumber(new int[] {-2,-2,1,1,-3,1,-3,-3,-4,-2}));
 	}
 
+	/* The idea here is count count the 1/0 at each digit of the binary representation
+	   of the given numbers. Since it is either 1 or 0, then the sum should be x * 1/0 +1/0
+       . the element appears once has sum % n at this position.
+       
+	   Be aware of the two's component, which is how negative integer is represented in binary
+       form.
+     */
 	public static int singleNumber(int[] A) {
 		char[] bits = new char[32];
-		int i, j, sum, bit;
-		for (i = 0; i < 32; ++i) {
-			sum = 0;
-			for (j = 0; j < A.length; ++j) {
-				bit = (A[j] >> i) % 2;	
-				sum += bit;
+		for (int i = 0; i < 32; ++i) {
+			int sum = 0;
+			for (int j = 0; j < A.length; ++j) {
+				sum += (A[j] >> i) % 2;	
 			}
 			bits[31 - i] = (sum % 3 == 0) ? '0' : '1';
 		}
@@ -48,3 +53,22 @@ public class leetcode_Single_Number_II {
 		System.out.println();	
 	}
 }
+
+
+/* Python Version
+def singleNumber(self, A):
+    bits = [ '0' for _ in xrange(32) ]
+    
+    for digit in xrange(32):
+        count = 0
+        for num in A:
+            count += (num >> digit) % 2
+        bits[31 - digit] = '0' if count % 3 == 0 else '1'
+    if bits[0] == '1':
+        for idx, val in enumerate(bits):
+            bits[idx] = '0' if val == '1' else '1'
+        return -int(''.join(bits), 2) - 1
+    else:
+        return int(''.join(bits), 2)
+
+*/
