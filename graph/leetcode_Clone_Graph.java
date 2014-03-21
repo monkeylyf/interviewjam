@@ -110,4 +110,33 @@ class UndirectedGraphNode {
 		this.label = x;
 		this.neighbors = new ArrayList<UndirectedGraphNode>();
 	}
-};
+}
+
+
+/*Python Version
+def cloneGraph(self, node):
+    # BFS
+    if not node:
+        return node
+    
+    charted = { node: UndirectedGraphNode(node.label) }
+    pipe = [node]
+    
+    while pipe:
+        cur = pipe.pop()
+        try:
+            cloned = charted[cur]
+        except KeyError:
+            cloned = UndirectedGraphNode(cur.label)
+        
+        for neighbor in cur.neighbors:
+            try:
+                neighborClone = charted[neighbor]
+            except KeyError:
+                neighborClone = UndirectedGraphNode(neighbor.label)
+                charted[neighbor] = neighborClone
+                pipe.append(neighbor)
+            cloned.neighbors.append(neighborClone)
+    
+    return charted[node]
+*/
