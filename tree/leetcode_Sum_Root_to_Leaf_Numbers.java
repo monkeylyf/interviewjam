@@ -59,3 +59,19 @@ class TreeNode {
         this.val = val;
     }
 }
+
+
+/* Python Version
+def sumNumbers(self, root):
+    def preorder(root, s):
+        if not root:
+            return 0
+        else:
+            s = s * 10 + root.val
+            if not root.left and not root.right:
+                return s
+            else:
+                return preorder(root.left, s) + preorder(root.right, s)
+    
+    return preorder(root, 0)
+*/
