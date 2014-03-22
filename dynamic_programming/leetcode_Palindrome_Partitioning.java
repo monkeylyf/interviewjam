@@ -70,3 +70,30 @@ class Solution {
         } 
     }
 }
+
+
+/* Python Version
+def partition(self, s):
+    # Nested function.
+    def dfs(idx, conb):
+        if idx == len(s):
+            ret.append(conb[::1])
+        else:
+            for i in xrange(idx, len(s)):
+                if dp[idx][i]:
+                    conb.append(s[idx : i + 1])
+                    dfs(i + 1, conb)
+                    conb.pop()
+
+    # Cook the dp status of palindrome
+    dp = [ [ True if i == j else False for i in xrange(len(s)) ] for j in xrange(len(s)) ]
+
+    for i in reversed(xrange(len(s) - 1)):
+        for j in xrange(i + 1, len(s)):
+            dp[i][j] = (s[i] == s[j]) and (i + 1 == j or dp[i + 1][j - 1])
+
+    ret = []
+    dfs(0, [])
+
+    return ret
+*/
