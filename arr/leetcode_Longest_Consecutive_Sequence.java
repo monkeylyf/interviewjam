@@ -95,3 +95,25 @@ class leetcode_Longest_Consecutive_Sequence{
         return maxLength;
     }
 }
+
+/* Python Version
+
+def longestConsecutive(self, num):
+    s = set(num)
+    ret = 0
+    for i in num:
+        if not i in s:
+            continue
+        
+        up = i
+        while up + 1in s:
+            s.remove(up + 1)
+            up += 1
+        down = i
+        while down - 1 in s:
+            s.remove(down - 1)
+            down -= 1
+        
+        ret = max(ret, up - down + 1)
+    return ret
+*/
