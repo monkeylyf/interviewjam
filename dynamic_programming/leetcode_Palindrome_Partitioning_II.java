@@ -118,3 +118,28 @@ class leetcode_Palindrome_Partitioning_II {
         return status;
     }
 }
+
+
+/* Python Version
+def minCut(self, s):
+    
+    n = len(s)
+    dp = [ [ True if i == j else False for i in xrange(n) ] for j in xrange(n) ]
+    
+    for i in reversed(xrange(n - 1)):
+        for j in xrange(i + 1, n):
+            dp[i][j] = (s[i] == s[j]) and (i + 1 == j or dp[i + 1][j - 1])
+            
+    cut = [ 0 for _ in xrange(n) ]
+    
+    for i in xrange(1, n):
+        if dp[0][i]:
+            cut[i] = 0
+        else:
+            cut[i] = cut[i - 1] + 1
+            for j in xrange(1, i):
+                if dp[j][i]:
+                    cut[i] = min(cut[i], cut[j - 1] + 1)
+    return cut[-1]
+
+*/
