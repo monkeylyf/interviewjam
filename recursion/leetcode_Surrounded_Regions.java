@@ -118,3 +118,50 @@ class leetcode_Surrounded_Regions {
        }
     }    
 }
+
+
+/* Python Version 
+(The input is list of strings which is pain in the neck since str in python in immutable
+so a str has to been converted into list then you can change char in it and they have to
+be converted back to str after that. Darn.)
+
+def solve(self, board):
+    # Nested function.
+    def bfs(i, j):
+        if board[i][j] == 'X':
+            return
+
+        pipe = [(i, j)]
+
+        while pipe:
+            (x, y) = pipe.pop()
+            if x >= 0 and x < n and y >= 0 and y < m and board[x][y] == 'O':
+                arr = list(board[x])
+                arr[y] = 'M' # Marked
+                board[x] = ''.join(arr)
+                pipe.append((x - 1, y))
+                pipe.append((x, y - 1))
+                pipe.append((x + 1, y))
+                pipe.append((x, y + 1))
+
+    if not board or len(board) <= 1:
+        return
+    (n, m) = (len(board), len(board[0]))
+
+    for i in xrange(n):
+        bfs(i, 0)
+        bfs(i, m - 1)
+
+    for i in xrange(m):
+        bfs(0, i)
+        bfs(n - 1, i)
+
+    for i in xrange(n):
+        arr = list(board[i])
+        for j in xrange(m):
+            if arr[j] == 'M':
+                arr[j] = 'O'
+            elif arr[j] == 'O':
+                arr[j] = 'X'
+        board[i] = ''.join(arr)
+*/
