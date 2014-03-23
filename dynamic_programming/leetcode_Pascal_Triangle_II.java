@@ -28,3 +28,20 @@ class leetcode_Pascal_Triangle_II {
         return res;
     }
 }
+
+
+/* Python Version
+def getRow(self, rowIndex):
+    ret = []
+    for i in xrange(rowIndex + 1):
+        cur = []
+        if i == 0:
+            cur.append(1)
+        else:
+            for j in xrange(i + 1):
+                item = 1 if j == 0 or j == i else ret[j - 1] + ret[j]
+                cur.append(item)
+        ret = cur
+    
+    return ret
+*/
