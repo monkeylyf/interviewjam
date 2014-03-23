@@ -26,3 +26,18 @@ class leetcode_Best_Time_to_Buy_and_Sell_Stock_II {
         return max;
     }
 }
+
+
+/* Python Version
+def maxProfit(self, prices):
+    if not prices:
+        return 0
+        
+    ret = 0
+    
+    for i in xrange(1, len(prices)):
+        if prices[i] > prices[i - 1]:
+            ret += prices[i] - prices[i - 1]
+            
+    return ret
+*/
