@@ -59,3 +59,22 @@ class leetcode_Triangle {
         return res;
     }
 }
+
+
+/* Python Version
+def minimumTotal(self, triangle):
+    n = len(triangle)
+    dp = [ [ 0 for _ in xrange(n) ]  for _ in xrange(n) ]
+    dp[0][0] = triangle[0][0]
+    for i in xrange(1, n):
+        for j in xrange(i + 1):
+            if j == 0:
+                prev_min = dp[i - 1][j] 
+            elif j == i:
+                prev_min = dp[i - 1][j - 1]
+            else:
+                prev_min = min(dp[i - 1][j - 1], dp[i - 1][j])
+            dp[i][j] = prev_min + triangle[i][j]
+    
+    return min(dp[-1])
+*/
