@@ -73,3 +73,30 @@ class TreeLinkNode {
         this.val = val;
     }
 }
+
+/* Python Version
+def connect(self, root):
+    if not root:
+        return
+    
+    pipe = [root]
+    next_level = []
+    
+    while pipe:
+        cur = pipe.pop(0)
+        
+        if cur.left:
+            next_level.append(cur.left)
+        if cur.right:
+            next_level.append(cur.right)
+        
+        if not pipe and next_level:
+            # Connecting...
+            for i in xrange(len(next_level) - 1):
+                next_level[i].next = next_level[i + 1]
+                
+            next_level[-1].next = None
+            
+            pipe = next_level
+            next_level = []
+*/
