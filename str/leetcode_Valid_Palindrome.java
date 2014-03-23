@@ -53,3 +53,30 @@ class leetcode_Valid_Palindrome {
         }
     }
 }
+
+
+/* Python Version
+def isPalindrome(self, s):
+    if not s:
+        return True
+    s = s.strip().lower()
+    head = 0
+    tail = len(s) - 1
+    
+    while head < tail:
+        while head < tail and not self.isNumAlphaBeta(s[head]):
+            head += 1
+        while head < tail and not self.isNumAlphaBeta(s[tail]):
+            tail -= 1
+        
+        if s[head] != s[tail]:
+            return False
+        head += 1
+        tail -= 1
+
+    return True
+
+def isNumAlphaBeta(self, c):
+    asc = ord(c)
+    return (asc >= 97 and asc <= 122) or (asc >= 48 and asc <= 57)
+*/
