@@ -56,3 +56,35 @@ class TreeNode {
         this.val = x;
     }
 }
+
+/* Python Version
+
+class Solution:
+    # @param root, a tree node
+    # @return an integer
+    def __init__(self):
+        self.max_sum = None
+    
+    def maxPathSum(self, root):
+        def postorder(root):
+            if not root:
+                return 0
+            left = postorder(root.left)
+            right = postorder(root.right)
+            
+            local_max = root.val
+            
+            if left > 0:
+                local_max += left
+            if right > 0:
+                local_max += right
+                
+            self.max_sum = max(self.max_sum, local_max)
+            return max(root.val, max(root.val + left, root.val + right))
+        if not root:
+            return 0
+
+        self.max_sum = root.val
+        postorder(root)
+        return self.max_sum
+*/
