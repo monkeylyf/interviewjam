@@ -35,3 +35,20 @@ class leetcode_Pascal_Triangle {
         return res;
     }
 }
+
+/* Python Version
+def generate(self, numRows):
+    ret = [ ]
+    for i in xrange(numRows):
+        cur = []
+        if i == 0:
+            cur.append(1)
+        else:
+            prev = ret[i - 1]
+            for j in xrange(i + 1):
+                item = 1 if j == 0 or j == i else prev[j - 1] + prev[j]
+                cur.append(item)
+        ret.append(cur)
+            
+    return ret
+*/
