@@ -93,3 +93,24 @@ class TreeNode {
         this.val = val;
     }
 }
+
+
+/* Python Version
+def flatten(self, root):
+    if not root:
+        return
+    
+    right = root.right
+    left = root.left
+    root.left = None
+    root.right = left
+    
+    cursor = root
+
+    while cursor.right:
+        cursor = cursor.right
+
+    cursor.right = right
+
+    self.flatten(root.right)
+*/
