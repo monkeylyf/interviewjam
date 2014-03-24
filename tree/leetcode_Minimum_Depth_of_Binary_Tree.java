@@ -34,3 +34,32 @@ public class leetcode_Minimum_Depth_of_Binary_Tree {
         }
     } 
 }
+
+/* Python Version
+class Solution:
+    # @param root, a tree node
+    # @return an integer
+    
+    def __init__(self):
+        self.min_depth = None
+    
+    def minDepth(self, root):
+        def dfs(root, depth):
+            if not root.left and not root.right:
+                if not self.min_depth:
+                    self.min_depth = depth + 1
+                else:
+                    self.min_depth = min(self.min_depth, depth + 1)
+				return
+            if self.min_depth and depth >= self.min_depth:
+                return # Pruning
+            if root.left:
+                dfs(root.left, depth + 1)
+            if root.right:
+                dfs(root.right, depth + 1)
+                
+        if not root:
+            return 0
+        dfs(root, 0)
+        return self.min_depth
+*/
