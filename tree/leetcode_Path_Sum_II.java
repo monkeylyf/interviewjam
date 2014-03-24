@@ -81,3 +81,31 @@ class TreeNode {
         this.val = val;
     }
 }
+
+/* Python Version
+class Solution:
+    # @param root, a tree node
+    # @param sum, an integer
+    # @return a list of lists of integers
+    def __init__(self):
+        self.container = []
+    
+    
+    def pathSum(self, root, sum):
+        def dfs(root, acc, path):
+            if not root:
+                return
+            
+            path.append(root.val)
+            if not root.left and not root.right and root.val == acc:
+                self.container.append(path[::1])
+            else:
+                # GO left.
+                dfs(root.left, acc - root.val, path)
+                # Go right.
+                dfs(root.right, acc - root.val, path)
+            path.pop()
+            
+        dfs(root, sum, [])
+        return self.container
+*/
