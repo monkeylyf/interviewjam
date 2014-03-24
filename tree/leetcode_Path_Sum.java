@@ -62,3 +62,17 @@ class TreeNode {
         this.val = x;
     }
 }
+
+/* Python Version
+def hasPathSum(self, root, sum):
+    def preorder(root, acc):
+        if not root:
+            return False
+            
+        if not root.left and not root.right:
+            return acc == root.val
+        
+        return preorder(root.left, acc - root.val) or preorder(root.right, acc - root.val)
+        
+    return preorder(root, sum)
+*/
