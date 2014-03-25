@@ -73,3 +73,30 @@ class TreeNode {
         this.val = x;
     }
 }
+
+
+/* Python Version
+def zigzagLevelOrder(self, root):
+    if not root:
+        return []
+    
+    pipe = [root]
+    nex = []
+    container = [[root.val]]
+    
+    while pipe:
+        cur = pipe.pop(0)
+        if cur.left:
+            nex.append(cur.left)
+        if cur.right:
+            nex.append(cur.right)
+        
+        if not pipe and nex:
+            if len(container) % 2 == 0:
+                container.append( [ node.val for node in nex ] )
+            else:
+                container.append( [ node.val for node in nex[::-1] ])
+            pipe = nex
+            nex = []
+    return container
+*/
