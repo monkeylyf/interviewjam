@@ -69,13 +69,13 @@ class TreeNode {
 
 
 /* Python Version
-def levelOrderBottom(self, root):
+def levelOrder(self, root):
     if not root:
         return []
     
     pipe = [root]
-    container = [[root.val]]
     nex = []
+    container = [[root.val]]
     
     while pipe:
         cur = pipe.pop(0)
@@ -85,8 +85,8 @@ def levelOrderBottom(self, root):
             nex.append(cur.right)
         
         if not pipe and nex:
-            container.append([ node.val for node in nex ])
+            container.append( [ node.val for node in nex ] )
             pipe = nex
             nex = []
-    return container[::-1]
+    return container
 */
