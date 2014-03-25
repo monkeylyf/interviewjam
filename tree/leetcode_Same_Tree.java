@@ -67,3 +67,16 @@ class TreeNode {
         this.val = x;
     }
 }
+
+
+/* Python Version
+def isSameTree(self, p, q):
+    if not p and not q:
+        return True
+    elif (p and not q) or (not p and q):
+        return False
+    elif p.val != q.val:
+        return False
+    else:
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+*/
