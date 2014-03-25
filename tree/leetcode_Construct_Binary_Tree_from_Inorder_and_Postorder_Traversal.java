@@ -58,3 +58,17 @@ class TreeNode {
         this.val = x;
     }
 }
+
+/* Python Version
+def buildTree(self, inorder, postorder):
+    if not inorder and not postorder:
+        return None
+    
+    val = postorder[-1]
+    idx = inorder.index(val)
+    
+    ret = TreeNode(val)
+    ret.left = self.buildTree(inorder[:idx], postorder[:idx])
+    ret.right = self.buildTree(inorder[idx + 1:], postorder[idx : -1])
+    return ret
+*/
