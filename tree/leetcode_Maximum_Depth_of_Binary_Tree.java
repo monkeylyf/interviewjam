@@ -19,3 +19,8 @@ public class leetcode_Maximum_Depth_of_Binary_Tree {
 		}
     }
 }
+
+/* Python Version
+def maxDepth(self, root):
+	return o if not root else max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
+*/
