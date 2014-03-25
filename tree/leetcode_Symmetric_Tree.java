@@ -111,3 +111,20 @@ class TreeNode {
         this.val = x;
     }
 }
+
+/* Python Version
+def isSymmetric(self, root):
+    def rec(left, right):
+        if not left and not right:
+            return True
+        elif (not left and right) or (left and not right):
+            return False
+        elif left.val != right.val:
+            return False
+        else:
+            return rec(left.left, right.right) and rec(left.right, right.left)
+    
+    if not root:
+        return True
+    return rec(root.left, root.right)
+*/
