@@ -66,3 +66,27 @@ class TreeNode {
         this.val = x;
     }
 }
+
+
+/* Python Version
+def levelOrderBottom(self, root):
+    if not root:
+        return []
+    
+    pipe = [root]
+    container = [[root.val]]
+    nex = []
+    
+    while pipe:
+        cur = pipe.pop(0)
+        if cur.left:
+            nex.append(cur.left)
+        if cur.right:
+            nex.append(cur.right)
+        
+        if not pipe and nex:
+            container.append([ node.val for node in nex ])
+            pipe = nex
+            nex = []
+    return container[::-1]
+*/
