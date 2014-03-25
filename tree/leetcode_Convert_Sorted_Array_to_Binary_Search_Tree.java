@@ -40,3 +40,20 @@ class TreeNode{
         this.val = val;
     }
 }
+
+
+/* Python Version
+def sortedArrayToBST(self, num):
+    def rec(head, tail, num):
+        if head > tail:
+            return None
+        
+        mid = head + (tail - head) / 2
+        
+        cur = TreeNode(num[mid])
+        cur.left = rec(head, mid - 1, num)
+        cur.right = rec(mid + 1, tail, num)
+        return cur
+    
+    return rec(0, len(num) - 1, num)
+*/
