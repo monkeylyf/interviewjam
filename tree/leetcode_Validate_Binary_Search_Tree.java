@@ -50,3 +50,16 @@ class TreeNode {
         this.val = val;
     }
 }
+
+/* Python Version
+def isValidBST(self, root):
+    def rec(node, up, lower):
+        if not node:
+            return True
+        if up > node.val and node.val > lower:
+            return rec(node.left, node.val, lower) and rec(node.right, up, node.val)
+        else:
+            return False
+    
+    return rec(root, 9999999999, -9999999999)
+*/
