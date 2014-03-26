@@ -36,3 +36,19 @@ public class leetcode_Generate_Parentheses {
         }
     }
 }
+
+/* Python Version
+def generateParenthesis(self, n):
+    def rec(left, right, acc, container, n):
+        if left == n and right == n:
+            container.append(acc)
+        else:
+            if left < n:
+                rec(left + 1, right, acc + '(', container, n)
+            if left > right:
+                rec(left, right + 1, acc + ')', container, n)
+            
+    container = []
+    rec(0, 0, '', container, n)
+    return container
+*/
