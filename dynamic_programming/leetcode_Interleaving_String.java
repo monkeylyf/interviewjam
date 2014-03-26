@@ -134,3 +134,26 @@ class leetcode_Interleaving_String {
         }
     }
 }
+
+/* Python Version
+def isInterleave(self, s1, s2, s3):
+    if len(s1) + len(s2) != len(s3):
+        return False
+    
+    dp = [ False for _ in xrange(len(s2) + 1) ]
+    dp[0] = True
+    for i in xrange(len(s2)):
+        if s2[i] == s3[i]:
+            dp[i + 1] = dp[i]
+    
+    for i in xrange(len(s1)):
+        nex = [ False for _ in xrange(len(s2) + 1) ]
+        nex[0] = s1[:i + 1] == s3[:i + 1]
+        for j in xrange(len(s2)):
+            use_s2 = nex[j] if s2[j] == s3[i + j + 1] else False
+            use_s3 = dp[j + 1] if s1[i] == s3[i + j + 1] else False
+            nex[j + 1] = use_s2 or use_s3
+        dp = nex
+    
+    return dp[-1]
+*/
