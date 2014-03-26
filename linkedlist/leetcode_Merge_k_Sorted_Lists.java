@@ -90,3 +90,48 @@ class ListNode {
         next = null;
     }
 }
+
+/* Python Version (alright, TLE)
+class Solution:
+    # @param a list of ListNode
+    # @return a ListNode
+    def mergeKLists(self, lists):
+        if not lists:
+            return None
+
+        while len(lists) > 1:
+            nex = []
+            for i in xrange(0, len(lists), 2):
+                try:
+                    nex.append(self.mergeTwo(lists[i], lists[i + 1]))
+                except IndexError:
+                    nex.append(lists[i])
+            lists = nex
+        return lists[-1]
+        
+    def mergeTwo(self, a, b):
+        if not a:
+            return b
+        if not b:
+            return a
+
+        # use a as base.
+        dummy = ListNode(-1)
+        dummy.next = a
+        prev = dummy
+        while a and b:
+            if b.val >= a.val:
+                print 'hit'
+                a = a.next
+                prev = prev.next
+            else:
+                nex = b.next
+                prev.next = b
+                b.next = a
+                b = nex
+                prev = prev.next
+
+        if b:
+            prev.next = b
+        return dummy.next
+*/
