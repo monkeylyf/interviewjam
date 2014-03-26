@@ -45,3 +45,23 @@ class ListNode {
         next = null;
     }
 }
+
+
+/* Python Version
+def removeNthFromEnd(self, head, n):
+    dummy = ListNode(-1)
+    dummy.next = head
+    prev = dummy
+    cur = head
+    
+    while n > 0:
+        cur = cur.next
+        n -= 1
+    
+    while cur:
+        cur = cur.next
+        prev = prev.next
+    
+    prev.next = prev.next.next
+    return dummy.next
+*/
