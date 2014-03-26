@@ -65,3 +65,22 @@ class TreeNode {
         this.val = x;
     }
 }
+
+/* Python Version
+def inorderTraversal(self, root):
+    if not root:
+        return []
+    
+    stack = []
+    ret = []
+    while root or stack:
+        if root:
+            stack.append(root)
+            root = root.left
+        else:
+            root = stack.pop()
+            ret.append(root.val)
+            root = root.right
+
+    return ret
+*/
