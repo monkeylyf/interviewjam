@@ -37,7 +37,7 @@ public class leetcode_Unique_Binary_Search_Trees {
         //  /    \
         // 2      1
         for (i = 0; i <= n; ++i) {
-			for (int j = 1; j <= i - 2; ++j) {
+			for (j = 1; j <= i - 2; ++j) {
 				// Consider node i as the intermediate node as a right child of some subtree.
 				// Then create another substree and append its root to node i.
 				// There is dp[j] different ways to construct first substree and dp[i - 1 - j] 
@@ -49,3 +49,20 @@ public class leetcode_Unique_Binary_Search_Trees {
         return dp[n];
     }
 }
+
+
+/* Python Version
+def numTrees(self, n):
+    if n == 0 or n == 1 or n == 2:
+        return n
+    
+    dp = [ 0 for _ in xrange(n + 1) ]
+    dp[1] = 1
+    dp[2] = 2
+    for i in xrange(3, n + 1):
+        for j in xrange(1, i - 1):
+            dp[i] += dp[j] * dp[i - j - 1]
+        dp[i] += 2 * dp[i - 1]
+
+    return dp[-1]
+*/
