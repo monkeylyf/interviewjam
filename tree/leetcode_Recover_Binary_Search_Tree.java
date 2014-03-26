@@ -65,3 +65,39 @@ class TreeNode {
         this.val = val;
     }
 }
+
+
+/* Python Version 
+def recoverTree(self, root):
+    def inorder(root, arr):
+        if not root:
+            return
+        inorder(root.left, arr)
+        arr.append(root.val)
+        inorder(root.right, arr)
+    arr = []
+    inorder(root, arr)
+
+    a = b = None
+    for i in xrange(len(arr) - 1):
+        if arr[i] > arr[i + 1]:
+            a = arr[i]
+            break
+    for i in reversed(xrange(1, len(arr))):
+        if arr[i - 1] > arr[i]:
+            b = arr[i]
+            break
+    self.swap(root, a, b)
+    return root
+    
+def swap(self, root, a, b):
+    if not root:
+        return
+    elif root.val == a:
+        root.val = b
+    elif root.val == b:
+        root.val = a
+        
+    self.swap(root.left, a, b)
+    self.swap(root.right, a, b)
+*/
