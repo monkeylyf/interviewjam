@@ -50,3 +50,40 @@ class leetcode_Restore_IP_Addresses {
         }
     }
 }
+
+
+/* Python Version
+def restoreIpAddresses(self, s):
+    def rec(idx, s, acc, container):
+        if len(acc) == 4 and idx < len(s):
+            return # Prune.
+        elif idx == len(s) and len(acc) == 4:
+            container.append('.'.join(acc))
+        else:
+            # Take one
+            if idx <= len(s) - 1:
+                num = int(s[idx])
+                if num >= 0 and num <= 9:
+                    acc.append(s[idx])
+                    rec(idx + 1, s, acc, container)
+                    acc.pop()
+            
+            # Take Two.
+            if idx + 1 <= len(s) - 1:
+                num = int(s[idx : idx + 2])
+                if num >= 10 and num <= 99:
+                    acc.append(s[idx : idx  + 2])
+                    rec(idx + 2, s, acc, container)
+                    acc.pop()
+            # Take Three.
+            if idx + 2 <= len(s) - 1:
+                num = int(s[idx : idx + 3])
+                if num >= 100 and num <= 255:
+                    acc.append(s[idx : idx + 3])
+                    rec(idx + 3, s, acc, container)
+                    acc.pop()
+        
+    container = []
+    rec(0, s, [], container)
+    return container
+*/
