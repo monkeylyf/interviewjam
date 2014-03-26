@@ -44,3 +44,30 @@ class ListNode {
         next = null;
     }
 }
+
+
+/* Python Version
+def swapPairs(self, head):
+    if not head or not head.next:
+        return head
+    
+    dummy = ListNode(-1)
+    dummy.next = head
+    
+    prev = dummy
+    first = head
+    second = head.next
+    
+    while first and second:
+        nex = second.next
+        
+        second.next = first
+        first.next = nex
+        prev.next = second
+        
+        prev = first            
+        first = nex
+        second = nex.next if nex else None
+    
+    return dummy.next
+*/
