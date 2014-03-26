@@ -39,3 +39,31 @@ class leetcode_Merge_Two_Sorted_Lists {
         return head.next;
     }
 }
+
+/* Python Version
+def mergeTwoLists(self, a, b):
+    if not a:
+        return b
+    if not b:
+        return a
+
+    # use a as base.
+    dummy = ListNode(-1)
+    dummy.next = a
+    prev = dummy
+    while a and b:
+        if b.val >= a.val:
+            a = a.next
+            prev = prev.next
+        else:
+            nex = b.next
+            prev.next = b
+            b.next = a
+            b = nex
+            prev = prev.next
+
+    if b:
+        prev.next = b
+
+    return dummy.next
+*/
