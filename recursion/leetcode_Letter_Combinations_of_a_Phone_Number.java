@@ -53,3 +53,24 @@ public class leetcode_Letter_Combinations_of_a_Phone_Number {
         }
     }
 }
+
+/* Python Version
+def letterCombinations(self, digits):
+    def dfs(idx, s, acc, mapping, container):
+        if idx == len(s):
+            container.append(''.join(acc))
+        else:
+            for c in mapping[s[idx]]:
+                acc.append(c)
+                dfs(idx + 1, s, acc, mapping, container)
+                acc.pop()
+        
+    mapping = {'1': [], '2': ['a', 'b', 'c'], '3': ['d', 'e', 'f'],
+               '4': ['g', 'h', 'i'], '5':['j', 'k', 'l'], '6': ['m', 'n', 'o'],
+               '7': ['p', 'q', 'r', 's'], '8': ['t', 'u', 'v'], '9': ['w', 'x', 'y', 'z']}
+
+    container = []
+    dfs(0, digits, [], mapping, container)
+    
+    return container
+*/
