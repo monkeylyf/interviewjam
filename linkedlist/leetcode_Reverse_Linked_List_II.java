@@ -84,3 +84,34 @@ class ListNode {
         next = null;
     }
 }
+
+/* Python Version
+def reverseBetween(self, head, m, n):
+    if not head or m == n:
+        return head
+        
+    dummy = ListNode(-1)
+    dummy.next = head
+    prev = head
+    cur = head.next
+    end = dummy
+    flag = 1
+    
+    while True:
+        if flag >= m and flag < n:
+            nex = cur.next
+            cur.next = prev
+            prev = cur
+            cur = nex
+        elif flag < m:
+            end = prev
+            prev = cur
+            cur = cur.next
+        elif flag == n:
+            end.next.next = cur
+            end.next = prev
+            break
+        flag += 1
+    
+    return dummy.next
+*/
