@@ -57,3 +57,28 @@ public class leetcode_Subsets {
         }
     }
 }
+
+
+/* Python Version
+def subsets(self, S):
+    def dfs(idx, S, acc, container):
+        if idx == len(S):
+            container.add(':'.join(acc))
+        else:
+            # Use it
+            acc.append(str(S[idx]))
+            dfs(idx + 1, S, acc, container)
+            acc.pop()
+            # Do not use it
+            dfs(idx + 1, S, acc, container)
+        
+    S = sorted(S)
+    container = set()
+    dfs(0, S, [], container)
+    
+    ret = [[]]
+    for item in container:
+        if item:
+            ret.append(map(int, item.split(':')))
+    return ret
+*/
