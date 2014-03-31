@@ -11,53 +11,48 @@ public class leetcode_Divide_Two_Integers {
     }
 
     public static int divide(int dividend, int divisor) {
-        int q = 1;
-        // Possible integer overflow here if dividend or divisor == minimum int
-        // A special case about java:
-        // Math.abs(Integer.MIN_VALUE == Integer.MIN_VALUE)
-        int a = Math.abs(dividend);
-        int b = Math.abs(divisor);
-        if (b == Integer.MIN_VALUE && a != b) {
-            return 0;
-        }
-        if (a == Integer.MIN_VALUE) {
-            if (divisor > 0) {
-                return -1 + divide(dividend + b, divisor);
-            }
-            else if (divisor < 0) {
-                return 1 + divide(dividend + b, divisor);
-            }
-        }
-        boolean neg = false;
-        if ((divisor > 0 && dividend < 0) || (divisor < 0 && dividend > 0)) {
-            neg = true;
-        }
-        if (b == 0) {
-            return Integer.MAX_VALUE;
-        }
-        if (a < b) {
-            return 0;
-        }
-        if (a == b) {
-			return (neg) ? -1 : 1;
-        }
-        //use a binary search to find the q
-        int product = b;
-        /*My original code as below. It has integer overflow
-          problem when a == 1 << 30 and b = 1. Because 1 << 31
-          is negative.
-        while (product <= a) {
-            product = product << 1;
-            q = q << 1;
-        }
-        product = product >> 1;
-        q = q >> 1;
-        */
-        while (product <= a - product) {
-            product = product << 1;
-            q = q << 1;
-        }
-        q = q + divide(a - product, b);
-		return (neg) ? -q : q;
+		// Edge cases.
+		if (dividend == 0) {
+			return 0;
+		}
+		if (divisor == 1) {
+			return dividend;
+		}
+		
+		if (dividend == divisor) {
+			return 1;
+		}
+	
+		// Math.abs(Integer.MIN_VALUE) == Integer.MIN_VALUE then the logic below will not work.
+		// Two's complement 10000000000000000000000000000000 -> (-1) 011111111111111111111111111111111
+		// -> (flip) 10000000000000000000000000000000 becomes itself.
+		// Hack the divident by increasing its value to avoid int overflow.	
+		if (dividend == Integer.MIN_VALUE) {
+			return (divisor > 0) ? divide(dividend + divisor, divisor) - 1 : divide(dividend - divisor, divisor) + 1;
+		}
+		if (divisor == Integer.MIN_VALUE) {
+			return 0;
+		}
+		boolean neg = (dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0);
+		long dividendLong = Math.abs(dividend);
+		long divisorLong = Math.abs(divisor);
+	
+		// Find the maximum idx that divisor << idx <= dividend
+		int idx = 0;
+		while ((divisorLong << (idx + 1) ) <= dividendLong) {
+			++idx;
+		}
+		
+		int res = 0;
+		for (; idx >= 0; --idx) {
+			long digitVal = divisorLong << idx;
+			// Process as binay digit.
+			if (digitVal <= dividendLong) {
+				res = res | (1 << idx);
+				dividendLong -= digitVal;
+			}
+		}
+		
+		return (neg) ? -res : res;
     }
 }
