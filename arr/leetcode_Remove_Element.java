@@ -21,3 +21,16 @@ class leetcode_Remove_Element {
         return processed; 
     }
 }
+
+/* Python Version
+def removeElement(self, A, elem):
+    processed = 0
+    cursor = 0
+    while cursor < len(A):
+        if A[cursor] != elem:
+            A[processed] = A[cursor]
+            processed += 1
+        cursor += 1
+            
+    return processed
+*/
