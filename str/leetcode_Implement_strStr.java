@@ -33,3 +33,20 @@ class leetcode_Implement_strStr {
         return null;
     }
 }
+
+/* Python Version
+This is KMP but you shouldn't be asked about KMP unless the interviewer
+is holding a grudge against ya..
+
+
+def strStr(self, haystack, needle):
+    if not needle:
+        return haystack
+        
+    if len(needle) > len(haystack):
+        return None
+    for i in xrange(0, len(haystack) - len(needle) + 1):
+        if haystack[i : i + len(needle)] == needle:
+            return haystack[i:]
+    return None
+*/
