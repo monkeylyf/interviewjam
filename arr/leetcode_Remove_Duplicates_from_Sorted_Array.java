@@ -30,3 +30,19 @@ class leetcode_Remove_Duplicates_from_Sorted_Array {
         return processed;
     }
 }
+
+/* Python Version
+def removeDuplicates(self, A):
+    if not A:
+        return 0
+
+    processed = 1 # Dup at least appears at index 1.
+    cursor = 1
+    
+    while cursor < len(A):
+        if A[cursor] != A[cursor - 1]:
+            A[processed] = A[cursor]
+            processed += 1
+        cursor += 1
+    return processed
+*/
