@@ -59,3 +59,33 @@ class leetcode_Longest_Valid_Parentheses {
         return max;
     }
 }
+
+
+/* Python Version
+
+def longestValidParentheses(self, s):
+    left = right = count = 0
+    
+    for val in s:
+        if val == '(':
+            left += 1
+        else:
+            right += 1
+        if left == right and left + right > count:
+            count = left + right
+        elif right > left:
+            left = right = 0 # Reset.
+    
+    left = right = 0
+    for val in reversed(s):
+        if val == '(':
+            left += 1
+        else:
+            right += 1
+        if left == right and left + right > count:
+            count = left + right
+        elif left > right:
+            left = right = 0
+            
+    return count
+*/
