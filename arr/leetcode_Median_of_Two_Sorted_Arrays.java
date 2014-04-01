@@ -74,3 +74,36 @@ class leetcode_Median_of_Two_Sorted_Arrays {
         }
     }
 }
+
+
+
+/* Python version 
+http://blog.csdn.net/sigh1988/article/details/12192299
+Time complexity O(lgm + lgn)
+
+def findMedianSortedArrays(self, A, B):
+    m = len(A)
+    n = len(B)
+    if (m + n) % 2  == 1:
+        return self.find(A, m, B, n, (m + n) / 2)
+    else:
+        right = (m + n) / 2
+        left = right - 1
+        return (self.find(A, m, B, n, left) + self.find(A, m, B, n, right)) / 2.0
+        
+def find(self, A, m, B, n, th):
+    if m == 0:
+        return B[th]
+    if n == 0:
+        return A[th]
+    
+    mida = (m - 1) / 2
+    midb = (n - 1) / 2
+    if A[mida] < B[midb]:
+        return self.find(B, n, A, m, th)
+    # else A[mida] >= B[mida]
+    if mida + 1 + midb + 1 <= th + 1:
+        return self.find(A, m, B[midb + 1:], n - (midb + 1), (th + 1) - (midb + 1) - 1)
+    else:
+        return self.find(A, mida, B, n, th)
+*/
