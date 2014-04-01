@@ -32,3 +32,9 @@ class leetcode_Length_of_Last_Word {
         else return arr[arr.length - 1].length();
     }
 }
+
+/* Python Version
+def lengthOfLastWord(self, s):
+    s = s.strip()
+    return len(s.split()[-1]) if s else 0
+*/
