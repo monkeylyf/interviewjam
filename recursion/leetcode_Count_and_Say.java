@@ -50,3 +50,25 @@ public class leetcode_Count_and_Say {
         return sequence;
     }
 }
+
+/* Python Version
+def countAndSay(self, n):
+    word = '1'
+    
+    while n > 1:
+        prev = word[0]
+        count = 1
+        say = ''
+        for i in xrange(1, len(word)):
+            if word[i] == prev:
+                count += 1
+            else:
+                say += '{0}{1}'.format(count, prev)
+                prev = word[i]
+                count = 1
+        # Check-in what's left over.
+        say += '{0}{1}'.format(count, prev)
+        word = say
+        n -= 1
+    return word
+*/
