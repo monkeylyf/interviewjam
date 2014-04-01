@@ -61,3 +61,18 @@ class leetcode_Simplify_Path {
         }
     }
 }
+
+/* Python Version
+def simplifyPath(self, path):
+    tokens = [ token for token in path.split('/') if token ]
+    stack = []
+    for token in tokens:
+        if token == '.':
+            pass
+        elif token == '..':
+            if stack:
+                stack.pop()
+        else:
+            stack.append(token)
+    return '/' + '/'.join(stack)
+*/
