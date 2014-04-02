@@ -20,3 +20,19 @@ class leetcode_Merge_Sorted_Array {
         while (n > 0) A[n - 1] = B[n-- - 1];
     }
 }
+
+/* Python Version
+def merge(self, A, m, B, n):
+    # length to index of last element.
+    m -= 1
+    n -= 1
+    while m >= 0 and n >= 0:
+        if A[m] > B[n]:
+            A[m + n + 1] = A[m]
+            m -= 1
+        else:
+            A[m + n + 1] = B[n]
+            n -= 1
+    for i in reversed(xrange(n + 1)):
+        A[i] = B[i]
+*/
