@@ -48,6 +48,7 @@ public class leetcode_Sort_Colors {
 }
 
 /* Python Version
+*Notes*: Three groups. Elements that are yet to be sorted fall between the middle and the top group.
 
 def sortColors(self, A):
     head = mid = 0
