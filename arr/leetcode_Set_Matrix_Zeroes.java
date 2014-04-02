@@ -66,3 +66,27 @@ class leetcode_Set_Matrix_Zeroes {
         }
     }
 }
+
+/* Python Version
+O(m+n) place solution.
+
+def setZeroes(self, matrix):
+    n = len(matrix)
+    m = len(matrix[0])
+
+    hor = [ False for _ in xrange(m) ]
+    ver = [ False for _ in xrange(n) ]
+    
+    for i in xrange(n):
+        for j in xrange(m):
+            if ver[i] and hor[j]:
+                continue
+            if matrix[i][j] == 0:
+                hor[j] = True
+                ver[i] = True
+            
+    for i in xrange(n):
+        for j in xrange(m):
+            if ver[i] or hor[j]:
+                matrix[i][j] = 0
+*/
