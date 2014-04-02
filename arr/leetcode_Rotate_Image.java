@@ -39,3 +39,23 @@ class leetcode_Rotate_Image {
         }
     }
 }
+
+/* Python Version
+def rotate(self, matrix):
+    n = len(matrix)
+    m = len(matrix[0])
+    # Upside down
+    for i in xrange((n + 1) / 2):
+        for j in xrange(m):
+            swap = matrix[i][j]
+            matrix[i][j] = matrix[n - 1 - i][j]
+            matrix[n - 1 - i][j] = swap
+
+    # down left to up right.
+    for i in xrange(n - 1):
+        for j in xrange(i + 1, m):
+            swap = matrix[i][j]
+            matrix[i][j] = matrix[j][i]
+            matrix[j][i] = swap
+    return matrix
+*/
