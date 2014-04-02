@@ -17,9 +17,10 @@ class leetcode_Jump_Game_II {
     public static void main(String[] args) {
         System.out.println(jump(new int[] {2, 1}));
     }
-    // Passed both.
+
     public static int myJump(int[] A] {
-        // dp-based
+        // dp-based. Did not pass OJ
+		// Time complexity O(n^2)
         int[] step = new int[A.length];
         step[A.length - 1] = 0;
         for (int i = A.length - 2; i >= 0; --i) {
@@ -41,22 +42,21 @@ class leetcode_Jump_Game_II {
         }
         return step[0];
     }
-    // Didn't pass the judge large.
-    public static int jump(int[] A) {
-        if (A.length < 2) return 0;
-        ArrayList<Integer> all = new ArrayList<Integer>();
-        nextJump(A, 0, 0, all);
-        int minSteps = Integer.MAX_VALUE;
-        for (int i : all) minSteps = Math.min(minSteps, i);
-        return minSteps;
-    }
-    public static void nextJump(int[] A, int steps, int index, ArrayList<Integer> all) {
-        if (index >= A.length - 1) all.add(steps);
-        else if (A[index] == 0) return; // Get trapped.
-        else {
-            for (int i = 1; i <= A[index]; ++i) {
-                nextJump(A, steps + 1, index + i, all);
-            }
-        }
-    }
 }
+
+/* Python Version
+
+def jump(self, A):
+	# cur is the largest distance with ret + 1 steps.
+	# 
+	cur = last = ret = 0
+	for i in xrange(len(A)):
+		if i > last:
+			last = cur
+			ret += 1
+		# Init cur when i == 0
+		# For each elem, update largest distance can be reached with last jump.
+		cur = max(cur, i + A[i])
+	
+	return ret
+*/
