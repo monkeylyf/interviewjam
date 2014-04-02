@@ -29,3 +29,14 @@ class leetcode_First_Missing_Positive {
         return 1;
     }
 }
+
+
+/* Python Version 
+def firstMissingPositive(self, A):
+    s = set([ i for i in xrange(1, len(A) + 1)])
+    for val in A:
+        if val in s:
+            s.remove(val)
+    
+    return min(list(s)) if s else len(A) + 1
+*/
