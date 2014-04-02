@@ -73,3 +73,55 @@ class leetcode_Text_Justification {
         }
     }
 }
+
+/* Python Version
+def fullJustify(self, words, L):
+    if not words:
+        return []
+    if not L:
+        return words
+
+    # Tokenize the input words.
+    ret = []
+    container = []
+    line_tokens = [words[0]]
+    size_acc = len(words[0])
+    for i in xrange(1, len(words)):
+        val = words[i]
+        if size_acc + len(val) + 1 <= L:
+            size_acc += len(val) + 1
+            line_tokens.append(val)
+        else:
+            # Change to a new line.
+            container.append(line_tokens)
+            # Init.
+            line_tokens = [val]
+            size_acc = len(val)
+    # Check-in what is left-over
+    if line_tokens:
+        container.append(line_tokens)
+    
+    # Justification.
+    for i in xrange(len(container) - 1):
+        tokens = container[i]
+        to_fill = reduce(lambda acc, it : acc - len(it), tokens, L)
+        if len(tokens) == 1:
+            ret.append(tokens[0] + to_fill * ' ')
+        else:                     
+            (div, mod) = divmod(to_fill, len(tokens) - 1)
+            acc = tokens[0]    
+            for i in xrange(1, len(tokens)):
+                acc += ' ' * (div + 1) if i <= mod else ' ' * div
+                acc += tokens[i]
+            ret.append(acc)
+    # Last line is special case.
+    tokens = container[-1] 
+    length = reduce(lambda x, y : x + len(y), tokens, 0)
+    acc = tokens[0]
+    for i in xrange(1, len(tokens)):
+        acc += ' ' + tokens[i]  
+    acc += ' ' * (L - len(acc))
+    ret.append(acc)
+
+    return ret
+*/
