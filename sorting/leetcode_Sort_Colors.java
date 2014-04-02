@@ -46,3 +46,27 @@ public class leetcode_Sort_Colors {
         A[j] = tmp;
     }
 }
+
+/* Python Version
+
+def sortColors(self, A):
+    head = mid = 0
+    last = len(A) - 1
+
+    while mid <= last:
+        if A[mid] == 2:
+            A[mid] = A[last]
+            A[last] = 2
+            last -= 1
+        elif A[mid] == 1:
+            mid += 1
+        else:
+            # A[mid] == 0:
+            A[mid] = A[head]
+            A[head] = 0
+            head += 1
+			# mid incre by 1
+			# Why? It's guaranteed that on left side of mid is all processed so A[head] is either
+			# 1 or 0. 
+            mid += 1
+*/
