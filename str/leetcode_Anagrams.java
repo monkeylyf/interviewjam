@@ -37,3 +37,22 @@ class leetcode_Anagrams {
         return ret;
     }
 }
+
+/* Python Version
+def anagrams(self, strs):
+    if not strs:
+        return []
+    d = {}
+    for val in strs:
+        key = ''.join(sorted(val))
+        try:
+            d[key].append(val)
+        except KeyError:
+            d[key] = [val]
+    
+    ret = []
+    for val in d.values():
+        if len(val) > 1:
+            ret += val
+    return ret
+*/
