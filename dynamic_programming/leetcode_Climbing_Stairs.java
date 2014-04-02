@@ -23,3 +23,15 @@ class leetcode_Climbing_Stairs {
         return retval;
     }
 }
+
+
+/* Python Version
+def climbStairs(self, n):
+    if n == 0:
+        return 0
+    c0 = c1 = 1
+    for _ in xrange(n - 1):
+        c1 += c0
+        c0 = c1 - c0
+    return c1
+*/
