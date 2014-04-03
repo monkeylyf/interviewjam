@@ -54,3 +54,37 @@ public class leetcode_Search_for_a_Range {
         }
     }
 }
+
+/* Python Version
+def searchRange(self, A, target):
+    if not A:
+        return -1
+
+    left = self.binarySearch(0, len(A) - 1, A, target)
+    right = self.binarySearch(0, len(A) - 1, A, target, leftBound=False)
+    return [left, right]
+
+def binarySearch(self, head, tail, A, target, leftBound=True):
+    if head > tail:
+        return -1
+
+    while head <= tail:
+        mid = head + (tail - head) / 2
+        if A[mid] == target:
+            if leftBound:
+                if mid != 0 and A[mid - 1] == target:
+                    return self.binarySearch(head, mid - 1, A, target)
+                else:
+                    return mid
+            else:   
+                if mid != len(A) - 1 and A[mid + 1] == target:
+                    return self.binarySearch(mid + 1, tail, A, target, leftBound=False)
+                else:
+                    return mid
+        elif A[mid] > target:
+            tail = mid - 1
+        else:
+            head = mid + 1
+            
+    return -1
+*/
