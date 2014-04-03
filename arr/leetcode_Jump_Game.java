@@ -29,3 +29,17 @@ class leetcode_Jump_Game {
         return true;
     }
 }
+
+/* Python Version
+def canJump(self, A):
+    if not A:
+        return False
+
+    idx = 0
+    while idx < len(A) - 1:
+        if A[idx] == 0:
+            return False
+        idx += A[idx]
+
+    return True
+*/
