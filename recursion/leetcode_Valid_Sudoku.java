@@ -74,3 +74,48 @@ public class leetcode_Valid_Sudoku {
         return true;
     }
 }
+
+
+/* Python Version
+def isValidSudoku(self, board):
+    # check row
+    for i in xrange(9):
+        s = set()
+        for j in xrange(9):
+            if board[i][j] == '.':
+                continue
+            if board[i][j] in s:
+                return False
+            else:
+                s.add(board[i][j])
+    
+    # check column
+    for j in xrange(9):
+        s = set()
+        for i in xrange(9):
+            if board[i][j] == '.':
+                continue
+            if board[i][j] in s:
+                return False
+            else:
+                s.add(board[i][j])
+        
+    # check submatrix
+    centers = ((1, 1), (1, 4), (1, 7),
+               (4, 1), (4, 4), (4, 7),
+               (7, 1), (7, 4), (7, 7))
+    shift = ((-1, -1), (-1, 0), (-1, 1),
+             (0, -1), (0, 0), (0, 1),
+             (1, -1), (1, 0), (1, 1))
+    for x, y in centers:
+        s = set()
+        for i, j in shift:
+            if board[x + i][y + j] == '.':
+                continue
+            if board[x + i][y + j] in s:
+                return False
+            else:
+                s.add(board[x + i][y + j])
+    
+    return True
+*/
