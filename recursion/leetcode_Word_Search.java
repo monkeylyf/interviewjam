@@ -1,73 +1,106 @@
 /*Word_Search
 
-Given a 2D board and a word, find if the word exists in the grid.
-The word can be constructed from letters of sequentially adjacent cell, where
-"adjacent" cells are those horizontally or vertically neighboring. The same
-letter cell may not be used more than once.
-For example,
-Given board =
+  Given a 2D board and a word, find if the word exists in the grid.
+  The word can be constructed from letters of sequentially adjacent cell, where
+  "adjacent" cells are those horizontally or vertically neighboring. The same
+  letter cell may not be used more than once.
+  For example,
+  Given board =
 
-[
+  [
   ["ABCE"],
   ["SFCS"],
   ["ADEE"]
-]
-word = "ABCCED", -> returns true,
-word = "SEE", -> returns true,
-word = "ABCB", -> returns false.
-*/
+  ]
+  word = "ABCCED", -> returns true,
+  word = "SEE", -> returns true,
+  word = "ABCB", -> returns false.
+ */
 
 
 import java.util.ArrayList;
 
 public class leetcode_Word_Search {
 
-    public static void main(String[] args) {
-    }
+  public static void main(String[] args) {
+	char[][] board = new char[][] {"ABCE".toCharArray(),
+	  							   "SFCS".toCharArray(),
+	  							   "ADEE".toCharArray()};
+	System.out.println(exist(board, "ABCCED"));
+  }
 
-    public static boolean exist(char[][] board, String word) {
-        return findNextChar(-1, -1, board, word);
-    }
+  public static boolean exist(char[][] board, String word) {
+	int n = board.length;
+	int m = board[0].length;
 
-    public static boolean findNextChar(int row, int col, char[][] board, String word) {
-        if (word.length() == 0) {
-            return true; // Reach the end of string, return true.
-        } else {
-            char cur = word.charAt(0);
-            if (row != -1 && col != -1) {
-                // check four ajadents.
-                int[][] shift = new int[][] {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
-                for (int k = 0; k < shift.length; ++k) {
-                    int i = row + shift[k][0];
-                    int j = col + shift[k][1];
-                    if (i >= 0 && i < board.length && j >= 0 && j < board[0].length) {
-                        if (board[i][j] == cur) {
-                            board[i][j] = '.'; // '.' means used.
-                            if (findNextChar(i, j, board, word.substring(1, word.length()))) {
-                                return true;
-                            } else {
-                                // Reset the current char and keep iterating.
-                                board[i][j] = cur;
-                            }
-                        }
-                    }
-                }
-            } else {
-                // get the locations of initial.
-                for (int i = 0; i < board.length; ++i) {
-                    for (int j = 0; j < board[i].length; ++j) {
-                        if (board[i][j] == cur) {
-                            board[i][j] = '.';
-                            if (findNextChar(i, j, board, word.substring(1, word.length()))) {
-                                return true;
-                            } else {
-                                board[i][j] = cur;
-                            }
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-    }
+	boolean[][] visited = new boolean[n][m];
+
+	for (int i = 0; i < n; ++i) {
+	  for (int j = 0; j < m; ++j) {
+		if (dfs(i, j, word, visited, board, n, m)) {
+		  return true;
+		}
+	  }
+	}
+
+	return false;
+  }
+
+  public static boolean dfs(int i, int j, String word, boolean[][] visited, char[][] board, int n, int m) {
+	if (word.length() == 0) {
+	  return true;
+	} else if (i < 0 || i >= n || j < 0 || j >= m || visited[i][j] || word.charAt(0) != board[i][j]) {
+	  return false;
+	} else {
+	  visited[i][j] = true;
+	  if (dfs(i + 1, j, word.substring(1), visited, board, n, m)) {
+		return true;
+	  }
+	  if (dfs(i - 1, j, word.substring(1), visited, board, n, m)) {
+		return true;
+	  }
+	  if (dfs(i, j + 1, word.substring(1), visited, board, n, m)) {
+		return true;
+	  }
+	  if (dfs(i, j - 1, word.substring(1), visited, board, n, m)) {
+		return true;
+	  }
+	  visited[i][j] = false;
+	  return false;
+	}
+  }
 }
+
+/* Python Version
+FYI leetcode OJ for python, the input format is totally fucked up.
+
+def exist(self, board, word):
+    def dfs(i, j, word):
+        if not word:
+            return True
+        elif i >= n or i < 0 or j >= m or j < 0 or visited[i][j] or board[i][0][j] != word[0]:
+            return False
+        else:
+            visited[i][j] = True
+            if dfs(i + 1, j, word[1:]):
+                return True
+            if dfs(i - 1, j, word[1:]):
+                return True
+            if dfs(i, j + 1, word[1:]):
+                return True
+            if dfs(i, j - 1, word[1:]):
+                return True
+            visited[i][j] = False
+            return False
+
+    n = len(board)
+    m = len(board[0][0])
+    visited = [ [False for _ in xrange(m) ] for _ in xrange(n) ]
+
+    for i in xrange(n):
+        for j in xrange(m):
+            if dfs(i, j, word):
+                return True
+
+    return False
+*/
