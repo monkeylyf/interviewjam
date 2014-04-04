@@ -59,3 +59,36 @@ class ListNode {
         next = null;
     }
 }
+
+/* Python Version
+def rotateRight(self, head, k):
+    if not head or not head.next or k == 0:
+        return head
+    
+    length = 1
+    cursor = head
+    
+    while cursor.next:
+        length += 1
+        cursor = cursor.next
+    
+    k = k % length
+    if k == 0:
+        return head
+    
+    tail = head
+    for _ in xrange(k):
+        tail = tail.next
+    
+    cursor = head
+    
+    while tail.next:
+        tail = tail.next
+        cursor = cursor.next
+        
+    ret = cursor.next
+    cursor.next = None
+    tail.next = head
+    
+    return ret
+*/
