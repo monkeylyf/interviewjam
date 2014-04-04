@@ -46,3 +46,19 @@ public class leetcode_Combinations {
         }
     }
 }
+
+/* Python Version
+def combine(self, n, k):
+    def dfs(idx, n, k, acc, container):
+        if len(acc) == k:
+            container.append(acc[::])
+        else:
+            for i in xrange(idx, n + 1):
+                acc.append(i)
+                dfs(i + 1, n, k, acc, container)
+                acc.pop()
+        
+    container = []
+    dfs(1, n, k, [], container)
+    return container
+*/
