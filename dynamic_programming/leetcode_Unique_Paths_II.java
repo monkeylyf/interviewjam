@@ -50,3 +50,27 @@ class leetcode_Unique_Paths_II {
         return prev[prev.length - 1];
     }
 }
+
+/* Python Version
+def uniquePathsWithObstacles(self, obstacleGrid):
+    n = len(obstacleGrid)
+    m = len(obstacleGrid[0])
+    
+    cur = [ 0 ] * m
+    for i in xrange(m):
+        if obstacleGrid[0][i] == 1:
+            break
+        else:
+            cur[i] = 1
+    
+    for i in xrange(1, n):
+        nex = [ 0 ] * m
+        for j in xrange(m):
+            if obstacleGrid[i][j] == 1:
+                nex[j] = 0
+            else:
+                nex[j] = cur[0] if j == 0 else cur[j] + nex[j - 1]
+        cur = nex
+    
+    return cur[-1]
+*/
