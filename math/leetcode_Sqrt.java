@@ -31,3 +31,23 @@ public class leetcode_Sqrt {
         return res;
     }
 }
+
+/* Python Version
+def sqrt(self, x):
+    if x == 0 or x == 1:
+        return x
+    
+    head = 1
+    tail = x
+    
+    while head <= tail:
+        mid = head + (tail - head) / 2
+        if mid * mid <= x and (mid + 1) * (mid + 1) > x:
+            return mid
+        elif mid * mid > x:
+            tail = mid - 1
+        else:
+            head = mid + 1
+
+    return head
+*/
