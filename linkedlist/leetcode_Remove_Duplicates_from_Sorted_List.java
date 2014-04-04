@@ -42,3 +42,25 @@ class ListNode {
         next = null;
     }
 }
+
+/* Python Version
+def deleteDuplicates(self, head):
+    if not head:
+        return head
+
+    processed = head
+    cursor = head.next
+    prev = head # Only need one pointer instead cursor and prev both, but having two is clearer.
+    
+    while cursor:
+        if cursor.val != prev.val:
+            processed.next.val = cursor.val
+            processed = processed.next
+        cursor = cursor.next
+        prev = prev.next
+    
+	# Remove the rest    
+    processed.next = None
+
+    return head
+*/
