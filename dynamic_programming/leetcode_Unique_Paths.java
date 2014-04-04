@@ -34,3 +34,16 @@ class leetcode_Unique_Paths {
         return prev[prev.length - 1];
     }
 }
+
+
+/* Python Version
+def uniquePaths(self, m, n):
+    cur = [ 1 ] * n
+    
+    for _ in xrange(m - 1):
+        nex = [ 0 ] * n
+        for i in xrange(n):
+            nex[i] = cur[0] if i == 0 else nex[i - 1] + cur[i]
+        cur = nex
+    return cur[-1]
+*/
