@@ -49,3 +49,33 @@ class ListNode {
         next = null;
     }
 }
+
+/* Python Version
+*Note* Dummy head is necessary in such case since you do not know
+if the head will be partitioned or not.
+
+def partition(self, head, x):
+    if not head:
+        return head
+    
+    # Create dummy head for head
+    less = ListNode(-1)
+    cursor_less = less
+    
+    # Create dummy head for right part
+    more = ListNode(-1)
+    more.next = head
+    cursor_more = more
+    
+    while cursor_more.next:
+        if cursor_more.next.val >= x:
+            cursor_less.next = cursor_more.next
+            cursor_more.next = cursor_more.next.next
+            cursor_less = cursor_less.next
+            cursor_less.next = None
+        else:
+            cursor_more = cursor_more.next
+    
+    cursor_more.next = less.next
+    return more.next
+*/
