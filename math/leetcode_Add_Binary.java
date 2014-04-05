@@ -51,3 +51,43 @@ public class leetcode_Add_Binary {
 		return (offset) ? "1" + retval : retval;
     }
 }
+
+/* Python Version
+
+def addBinary(self, a, b):
+    n = len(a)
+    m = len(b)
+    if m > n:
+        a = '0' * (m - n) + a
+    else:
+        b = '0' * (n - m) + b
+
+    idx = len(a) - 1     
+    carry = False
+    s = ''
+    
+    while idx >= 0:
+        if a[idx] == '1' and b[idx] == '1':
+            if carry:
+                s = '1' + s
+            else:
+                s = '0' + s
+                carry = True
+        elif a[idx] == '0' and b[idx] == '0':
+            if carry:
+                s = '1' + s
+                carry = False
+            else:
+                s = '0' + s
+        else:
+            if carry:
+                s = '0' + s
+            else:
+                s = '1' + s
+        idx -= 1
+    
+    if carry:
+        s = '1' + s
+    
+    return s
+*/
