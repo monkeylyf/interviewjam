@@ -93,3 +93,39 @@ public class leetcode_N_Queens {
 		System.out.println();
 	}
 }
+
+
+/* Python Version
+
+def solveNQueens(self, n):
+    container = []
+    board = [ -1 ] * n
+    self.backtrack(board, 0, container)
+
+    return [ self.toBoard(sol) for sol in container ]
+
+def backtrack(self, board, i, container):
+    if i == len(board):
+        container.append(board[::])
+    else:
+        for idx in xrange(len(board)):
+            board[i] = idx
+            if self.isValidQueens(board, i):
+                self.backtrack(board, i + 1, container)
+        board[i] = -1
+
+def toBoard(self, board):
+    ret = []
+    for val in board:
+        line = [ 'Q' if j == val else '.' for j in xrange(len(board)) ]
+        ret.append(''.join(line))
+    return ret
+
+def isValidQueens(self, board, i):
+    for x in xrange(i):
+        if board[x] == board[i]:
+            return False
+        if abs(i - x) == abs(board[i] - board[x]):
+            return False
+    return True
+*/
