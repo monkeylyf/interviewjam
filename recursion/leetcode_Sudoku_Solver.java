@@ -141,3 +141,70 @@ public class leetcode_Sudoku_Solver {
         return true;
     }
 }
+
+/* Python Version (TLE and I do not know how to optimize it)
+
+class Solution:
+    # @param board, a 9x9 2D array
+    # Solve the Sudoku by modifying the input board in-place.
+    # Do not return any value.
+    def solveSudoku(self, board):
+        location = []
+        for i in xrange(9):
+            for j in xrange(9):
+                if board[i][j] == '.':
+                    location.append((i, j))
+                    
+        board = [ list(line) for line in board ]
+        self.backtrack(0, location, board)
+        board = [ ''.join(line) for line in board ]
+
+    def backtrack(self, idx, loc, board):
+        if idx == len(loc):
+            return True
+        else:
+            (x, y) = loc[idx]
+            for fill in xrange(1, 10):
+                board[x][y] = str(fill)
+                if self.isValidSudoku(board, x, y):
+                    if self.backtrack(idx + 1, loc, board):
+                        return True
+            board[x][y] = '.'
+            return False
+            
+    def isValidSudoku(self, board, x, y):
+        # check row
+        s = set()
+        for i in xrange(9):
+            if board[x][i] == '.':
+                continue
+            if board[x][i] in s:
+                return False
+            else:
+                s.add(board[x][i])
+        
+        # check column
+        s = set()
+        for i in xrange(9):
+            if board[i][y] == '.':
+                continue
+            if board[i][y] in s:
+                return False
+            else:
+                s.add(board[i][y])
+            
+        # check submatrix
+        x = x / 3 * 3
+        y = y / 3 * 3
+        s = set()
+        for i in xrange(3):
+            for j in xrange(3):
+                char = board[x + i][y + j]
+                if char == '.':
+                    continue
+                if char in s:
+                    return False
+                else:
+                    s.add(char)
+        return True
+*/
