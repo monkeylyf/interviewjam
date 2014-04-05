@@ -31,3 +31,15 @@ public class leetcode_Plus_One {
         return digits;
     }
 }
+
+/* Python Version
+def plusOne(self, digits):
+    carry = 1
+    for i in reversed(xrange(len(digits))):
+        val = digits[i] + carry
+        carry = val / 10
+        digits[i] = val % 10
+    if carry == 1:
+        digits = [1] + digits
+    return digits
+*/
