@@ -38,3 +38,28 @@ class leetcode_Remove_Duplicates_from_Sorted_List_II {
         return res.next;
     }
 }
+
+/* Python Version
+def deleteDuplicates(self, head):
+    if not head:
+        return head
+    # Dummy head needed
+    dummy = ListNode(-1)
+    dummy.next = head
+    
+    prev = dummy
+    cursor = head
+    
+    while cursor.next:
+        if cursor.val != cursor.next.val:
+            if prev.next == cursor:
+                prev = prev.next
+            else:
+                prev.next = cursor.next
+        cursor = cursor.next
+    
+    if prev.next != cursor:
+        prev.next = None
+    
+    return dummy.next
+*/
