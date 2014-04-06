@@ -53,3 +53,48 @@ public class leetcode_Spiral_Matrix {
         }
     }
 }
+
+/* Python Version
+
+def spiralOrder(self, matrix):
+    if not matrix:
+        return []
+
+    n = len(matrix)
+    m = len(matrix[0])
+
+    ret = []
+    x = y = 0
+
+    while m >= 1 and n >= 1:
+        if m == 1:
+            # Tall.
+            for i in xrange(x, x + n):
+                ret.append(matrix[i][y + m - 1])
+        elif n == 1:
+            # flattened
+            ret += matrix[x][y : y + m]
+        else:
+			# Common cases.
+
+            # up
+            ret += matrix[x][y : y + m]
+
+            # right
+            for i in xrange(x + 1, x + n - 1):
+                ret.append(matrix[i][y + m - 1])
+
+            # down
+            ret += matrix[y + n - 1][y : y + m][::-1]
+
+            # left
+            for i in reversed(xrange(x + 1, x + n - 1)):
+                ret.append(matrix[i][y])
+
+        x += 1
+        y += 1
+        n -= 2
+        m -= 2
+
+    return ret
+*/
