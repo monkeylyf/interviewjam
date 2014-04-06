@@ -72,3 +72,26 @@ class leetcode_Edit_Distance {
         return Math.min(Math.min(a, b), c);
     }
 }
+
+/* Python Version
+
+def minDistance(self, word1, word2):
+    n = len(word1)
+    m = len(word2)
+    
+    dp = [ i for i in xrange(m + 1) ]
+    
+    for i in xrange(1, n + 1):
+        c1 = word1[i - 1]
+        nex = [ 0 ] * (m + 1)
+        nex[0] = i
+        for j in xrange(1, m + 1):
+            c2 = word2[j - 1]
+            if c1 == c2:
+                nex[j] = dp[j - 1]
+            else:
+                nex[j] = min(nex[j - 1], dp[j], dp[j - 1]) + 1
+        dp = nex
+
+    return dp[-1]
+*/
