@@ -62,3 +62,39 @@ class ListNode {
         next = null;
     }
 }
+
+/* Python Version
+
+def reverseKGroup(self, head, k):
+    if not head or k == 1:
+        return head
+    
+    dummy = ListNode(-1)
+    dummy.next = head
+    
+    step = 0
+    prev = dummy
+    cursor = head
+    
+    while cursor:
+        if (step + 1) % k == 0:
+            prev = self.reverse(prev, cursor.next)
+            cursor = prev.next
+        else:
+            cursor = cursor.next
+        step += 1
+    
+    return dummy.next
+
+def reverse(self, prev, nex):
+    last = prev.next
+    cur = last.next
+    while cur != nex:
+        last.next = cur.next;
+        cur.next = prev.next
+        prev.next = cur
+        
+        cur = last.next
+    
+    return last
+*/
