@@ -51,3 +51,31 @@ public class leetcode_N-Queens_II {
         return true;
     }
 }
+
+
+/* Python Version
+*Notes* this one is pretty much the same with NQueue.
+There is a bit operation based solution but it will be overkill in an interview.
+
+def totalNQueens(self, n):
+    def backtrack(board, idx, cnt):
+        if idx == len(board):
+            cnt.append(0)
+        else:
+            for i in xrange(len(board)):
+                board[idx] = i
+                if self.isValid(board, idx):
+                    backtrack(board, idx + 1, cnt)
+                board[idx] = -1
+    
+    board = [ -1 ] * n
+    cnt = []
+    backtrack(board, 0, cnt)
+    return len(cnt)
+
+def isValid(self, board, idx):
+    for i in xrange(idx):
+        if board[idx] == board[i] or abs(idx - i) == abs(board[idx] - board[i]):
+            return False
+    return True
+*/
