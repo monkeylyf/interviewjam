@@ -22,3 +22,26 @@ class leetcode_Minimum_Path_Sum {
         return nextCost[nextCost.length - 1];
     }
 }
+
+/* Python Version
+
+def minPathSum(self, grid):
+    if not grid:
+        return 0
+        
+    n = len(grid)
+    m = len(grid[0])
+    
+    dp = [ 0 ] * m
+    for i in xrange(m):
+        dp[i] = grid[0][0] if i == 0 else dp[i - 1] + grid[0][i]
+    
+    for i in xrange(1, n):
+        nex = [ 0 ] * m
+        nex[0] = dp[0] + grid[i][0]
+        for j in xrange(1, m):
+            nex[j] = min(nex[j - 1], dp[j]) + grid[i][j]
+        dp = nex
+
+    return dp[-1]
+*/
