@@ -32,7 +32,7 @@ public class leetcode_Multiply_Strings {
         int carry = 0;
         for (int i = 0; i < Math.abs(num1.length() - num2.length()); ++i) {
             addOn += "0";
-        {
+		} 
         if (num1.length() > num2.length()) {
             num2 = addOn + num2;
         } else {
@@ -69,3 +69,76 @@ public class leetcode_Multiply_Strings {
         return res;
     }
 }
+
+/* Python Verson (TLE with one test case.)
+Of course you can cheat with Python.
+lambda x, y : str(long(x) * long(y))
+However, I don't cheat.
+
+class Solution:
+    # @param num1, a string
+    # @param num2, a string
+    # @return a string
+    def multiply(self, num1, num2):
+        if num1 == '0' or num2 == '0':
+            return '0'
+        
+        if len(num1) > len(num2):
+            swap = num1
+            num1 = num2
+            num2 = swap
+        
+        ret = '0'
+        tail = ''
+        
+        cache = {}
+        
+        
+        for i in reversed(xrange(len(num2))):
+            digit = num2[i]
+            try:
+                res = cache[digit]
+            except KeyError:
+                res = self.multiplyByOne(num1, digit)
+                cache[digit] = res
+            ret = self.add(ret, res + tail)
+            tail += '0'
+        return ret
+    
+    def add(self, num1, num2):
+        n = len(num1)
+        m = len(num2)
+        num1 = num1.zfill(max(m, n))
+        num2 = num2.zfill(max(m, n))
+        carry = 0
+        ret = []
+        for i in reversed(xrange(len(num1))):
+            s = int(num1[i]) + int(num2[i]) + carry
+            ret.append(str(s % 10))
+            carry = s / 10
+        
+        if carry != 0:
+            ret.append(str(carry))
+            
+        return ''.join(reversed(ret))
+        
+    def multiplyByOne(self, num, digit):
+        if digit == '0':
+            return '0'
+        if digit == '1':
+            return num
+        
+        carry = 0
+        
+        ret = []
+        digit = int(digit)
+        for i in reversed(xrange(len(num))):
+            x = digit * int(num[i]) + carry
+            ret.append(str(x % 10))
+            carry = x / 10
+        
+        if carry != 0:
+            ret.append(str(carry))
+            
+        return ''.join(reversed(ret))
+*/
