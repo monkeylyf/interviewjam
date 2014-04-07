@@ -29,6 +29,45 @@ public class leetcode_Combination_Sum_II {
     }
 
     public static ArrayList<ArrayList<Integer>> combinationSum2(int[] num, int target) {
+        ArrayList<ArrayList<Integer>> container = new ArrayList<ArrayList<Integer>>();
+        
+        if (num == null || num.length == 0) {
+            return container;
+        }
+        
+        Arrays.sort(num);
+        ArrayList<Integer> acc = new ArrayList<Integer>();
+        dfs(0, target, acc, num, container);
+        
+        return container;
+    }
+    
+    public static void dfs(int idx, int target, ArrayList<Integer> acc, int[] num, ArrayList<ArrayList<Integer>> container) {
+        if (target == 0) {
+            ArrayList<Integer> token = new ArrayList<Integer>();
+            for (int i : acc) {
+                token.add(i);
+            }
+            container.add(token);
+        } else if (target > 0) {
+            int i = idx;
+            while (i < num.length) {
+                acc.add(num[i]);
+                dfs(i + 1, target - num[i], acc, num, container);
+                acc.remove(acc.size() - 1);
+                i += 1;
+                
+                while (i < num.length && num[i - 1] == num[i]) {
+                    i += 1;
+                }
+            }
+        } else {
+            return;
+        }
+    }
+
+	/* The solution below is obsolete.*/
+    public static ArrayList<ArrayList<Integer>> combinationSum2(int[] num, int target) {
         HashSet<ArrayList<Integer>> all = new HashSet<ArrayList<Integer>>();
         ArrayList<Integer> tmp = new ArrayList<Integer>();
         nextInt(num, all, tmp, 0, target);
@@ -56,3 +95,36 @@ public class leetcode_Combination_Sum_II {
         } 
     }
 }
+
+
+/* Python Version
+class Solution:
+    # @param candidates, a list of integers
+    # @param target, integer
+    # @return a list of lists of integers
+    def combinationSum2(self, candidates, target):
+        def dfs(idx, candidates, target, acc, container):
+            if target == 0:
+                container.append(acc[::])
+            elif target > 0:
+                i = idx
+                while i < len(candidates):
+                    acc.append(candidates[i])
+                    dfs(i + 1, candidates, target - candidates[i], acc, container)
+                    acc.pop()
+                    i += 1
+                    
+                    while i < len(candidates) and candidates[i - 1] == candidates[i]:
+                        i += 1
+            else:
+                return
+        
+        if not candidates:
+            return []
+        
+        container = []
+        candidates = sorted(candidates)
+        dfs(0, candidates, target, [], container)
+        
+        return container
+*/
