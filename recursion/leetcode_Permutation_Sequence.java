@@ -46,3 +46,34 @@ public class leetcode_Permutation_Sequence {
         return res;        
     }
 }
+
+/* Python Version
+class Solution:
+    # @return a string
+    def getPermutation(self, n, k):
+        #print self.factorial(n)
+        #print self.factorial(k)
+        tokens = range(1, n + 1)
+        k -= 1 # 0-based index.
+        num_comb = self.factorial(n)
+        ret = []
+        for i in reversed(xrange(1, n + 1)):
+            repeat = num_comb / i
+            idx = k / repeat
+            ret.append(tokens.pop(idx))
+
+            num_comb = repeat
+            k = k % repeat
+        return ''.join(map(str, ret))
+
+    def factorial(self, n):
+        if n == 0:
+            return 1
+
+        ret = 1
+
+        for i in xrange(1, n + 1):
+            ret *= i
+
+        return ret
+*/
