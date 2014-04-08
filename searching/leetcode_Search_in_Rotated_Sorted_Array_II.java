@@ -45,3 +45,30 @@ public class leetcode_Search_in_Rotated_Sorted_Array_II {
         return false;
     }
 }
+
+/* Python Version
+
+def search(self, A, target):
+    def bs(A, target, head, tail):
+        while head <= tail:
+            mid = head + (tail - head) / 2
+            if A[mid] == target:
+                return True
+            elif A[head] == A[mid]:
+                return bs(A, target, head, mid - 1) or bs(A, target, mid + 1, tail)
+            elif A[head] < A[mid]:
+                if A[head] <= target and target <= A[mid]:
+                    tail = mid - 1
+                else:
+                    head = mid + 1
+            else:
+                #A[head] > A[mid]
+                if A[mid] <= target and target <= A[tail]:
+                    head = mid + 1
+                else:
+                    tail = mid - 1
+        return False
+    
+	return bs(A, target, 0, len(A) - 1) if A else False
+
+*/
