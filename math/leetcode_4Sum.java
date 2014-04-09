@@ -168,3 +168,62 @@ public class leetcode_4Sum {
         return res;
     } 
 }
+
+/* Python Version (AC)
+class Solution:
+    # @return a list of lists of length 4, [[val1,val2,val3,val4]]
+    def fourSum(self, num, target):
+        if not num or len(num) <= 3:
+            return []
+            
+        container = set()
+        arr = []
+
+        for i in xrange(len(num)):
+            for j in xrange(i + 1, len(num)):
+                arr.append(Token(num[i], num[j], i, j))
+
+        d = {}
+        for token in arr:
+            try:
+                d[token.s].append(token)
+            except KeyError:
+                d[token.s] = [token]
+        #print group
+        group = []
+        for s in sorted(d.keys()):
+            group.append(d[s])
+
+        head = 0
+        tail = len(group) - 1
+        while head <= tail:
+            if group[head][0].s + group[tail][0].s == target:
+                for h in group[head]:
+                    for t in group[tail]:
+                        if not h.overlap(t):
+                            container.add(':'.join(map(str, sorted(map(lambda x : num[x], [h.idx_a, h.idx_b, t.idx_a, t.idx_b])))))
+                head += 1
+                tail -= 1
+            elif group[head][0].s + group[tail][0].s > target:
+                tail -= 1
+            else:
+                head += 1
+
+        return [ map(int, item.split(':')) for item in container ]
+
+
+class Token:
+    
+    __slots__ = ('s', 'idx_a', 'idx_b')
+    
+    def __init__(self, a, b, idx_a, idx_b):
+        self.s = a + b
+        self.idx_a = idx_a
+        self.idx_b = idx_b
+
+    def __cmp__(self, that):
+        return self.s - that.s
+
+    def overlap(self, that):
+        return set([that.idx_a, that.idx_b]) & set([self.idx_a, self.idx_b])
+*/
