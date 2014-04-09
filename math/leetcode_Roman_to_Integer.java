@@ -63,3 +63,29 @@ public class leetcode_Roman_to_Integer {
 		}
 	}
 }
+
+/* Python Version
+def romanToInt(self, s):
+    mapping = { 'I': 1, 'V': 5, 'X': 10, 'L':50, 'C': 100, 'D': 500, 'M': 1000 }
+    if not s:
+        return 0
+    
+    arabic = 0
+    i = 0
+
+    while i < len(s):
+        num = mapping[s[i]]
+        i += 1
+        
+        if i == len(s):
+            arabic += num
+        else:
+            nextNum = mapping[s[i]]
+            if nextNum > num:
+                arabic += (nextNum - num)
+                i += 1
+            else:
+                arabic += num
+
+    return arabic
+*/
