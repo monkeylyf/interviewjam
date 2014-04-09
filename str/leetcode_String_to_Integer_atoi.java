@@ -84,3 +84,39 @@ class leetcode_String_to_Integer_atoi {
         }
     }
 }
+
+/* Python Version
+
+def atoi(self, str):
+    if not str:
+        return 0
+    
+    pool = ('1', '2', '3', '4', '5', '6', '7', '8', '9', '0')    
+    neg = False
+    str = str.strip()
+    i = 0
+    if str[i] == '-':
+        neg = True
+        i += 1
+    elif str[i] == '+':
+        i += 1
+    elif str[i] in pool:
+        pass
+	else:
+		return 0
+
+    ret = 0
+    while i < len(str):
+        if str[i] in pool:
+            ret = ret * 10 + int(str[i])
+            if ret > 2147483647:
+                break
+            i += 1
+        else:
+            break
+
+    if ret > 2147483647:
+        return 2147483647 if not neg else -2147483648
+    else:
+        return ret if not neg else -ret
+*/
