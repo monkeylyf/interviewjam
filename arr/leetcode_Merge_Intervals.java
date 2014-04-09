@@ -59,3 +59,40 @@ class Interval {
         end = e;
     }
 }
+
+
+/* Python Version
+def merge(self, intervals):
+    ret = []
+    for interval in intervals:
+        ret = self.mergeOne(ret, interval)
+    return ret
+
+def mergeOne(self, intervals, newInterval):
+    if not intervals:
+        return [newInterval]
+    
+    if not newInterval:
+        return intervals
+    
+    s = -1
+    e = -1
+    
+    for i in xrange(len(intervals)):
+        if s == -1 and intervals[i].end >= newInterval.start:
+            s = i
+        if intervals[i].start <= newInterval.end:
+            e = i
+    
+    if s == -1:
+        intervals.append(newInterval)
+    elif e == -1:
+        intervals.insert(0, newInterval)
+    else:
+        newStart = min(newInterval.start, intervals[s].start)
+        newEnd = max(newInterval.end, intervals[e].end)
+        
+        del intervals[s : e + 1]
+        intervals.insert(s, Interval(newStart, newEnd))
+    return intervals
+*/
