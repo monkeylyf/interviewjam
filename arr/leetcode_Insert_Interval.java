@@ -63,3 +63,47 @@ class Interval {
         end = e;
     }
 }
+
+/* Python Version
+# Definition for an interval.
+# class Interval:
+#     def __init__(self, s=0, e=0):
+#         self.start = s
+#         self.end = e
+
+class Solution:
+    # @param intervals, a list of Intervals
+    # @param newInterval, a Interval
+    # @return a list of Interval
+    def insert(self, intervals, newInterval):
+        if not intervals:
+            return [newInterval]
+        
+        if not newInterval:
+            return intervals
+
+        s = -1
+        e = -1
+
+		# It is, at least for me, not easy to get this part right in a short time.
+        for i in xrange(len(intervals)):
+            # Locate insert head
+            if s == -1 and intervals[i].end >= newInterval.start:
+                s = i
+			# Locate insert tail
+            if intervals[i].start <= newInterval.end:
+                e = i
+
+        if s == -1:
+            intervals.append(newInterval)
+        elif e == -1:
+            intervals.insert(0, newInterval)
+        else:
+            newStart = min(newInterval.start, intervals[s].start)
+            newEnd = max(newInterval.end, intervals[e].end)
+
+            del intervals[s : e + 1]
+            intervals.insert(s, Interval(newStart, newEnd))
+
+        return intervals
+*/
