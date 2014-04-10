@@ -57,3 +57,37 @@ public class leetcode_Next_Permutation {
         }
     }
 }
+
+/* Python Version
+
+def nextPermutation(self, num):
+    if not num or len(num) == 1:
+        return num
+
+    n = len(num)
+    # find the first offset from right to left
+    i = n - 1
+    while i > 0 and num[i - 1] >= num[i]:
+        i -= 1
+
+    if i == 0:
+        return num[::-1]
+    else:
+        j = i
+        while j < n and num[j] > num[i - 1]:
+            j += 1
+        self.swap(i - 1, j - 1, num)
+        self.reverse(i, n - 1, num)
+        return num
+        
+def swap(self, i, j, arr):
+    swap = arr[i] 
+    arr[i] = arr[j]
+    arr[j] = swap
+    
+def reverse(self, i, j, arr):
+    while i < j:
+        self.swap(i, j, arr)
+        i += 1
+        j -= 1
+*/
