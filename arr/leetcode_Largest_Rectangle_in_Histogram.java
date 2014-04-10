@@ -67,7 +67,7 @@ def largestRectangleArea(self, height):
         if not h or h[-1] < height[i]:
             h.append(height[i])
             idx.append(i)
-		＃ Update ret. Backtracing.
+		# Update ret. Backtracing.
         elif h[-1] > height[i]:
             while h and h[-1] > height[i]:
                 lastIdx = idx.pop()

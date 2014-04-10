@@ -68,3 +68,59 @@ class leetcode_Maximal_Rectangle {
         return result;
     }
 }
+
+
+/* Python Version
+
+def maximalRectangle(self, matrix):
+    if not matrix:
+        return 0
+    
+    hist = map(int, matrix[0])
+    ret = self.largestRectangleArea(hist)
+
+	# Accumulating histogram.
+    for i in xrange(1, len(matrix)):
+        for j in xrange(len(matrix[i])):
+            if matrix[i][j] == '1':
+                hist[j] += 1
+            else:
+                hist[j] = 0
+        ret = max(self.largestRectangleArea(hist), ret)
+        
+    return ret
+
+def largestRectangleArea(self, height):
+    if not height:
+        return 0
+    
+    idx = []
+    h = []
+    # index and height are tracked seperately.
+    ret = lastIdx = lastHeight = 0
+    
+    for i in xrange(len(height)):
+        # Monotone increasing, push into stack.
+        if not h or h[-1] < height[i]:
+            h.append(height[i])
+            idx.append(i)
+        #Update ret. Backtracing.
+        elif h[-1] > height[i]:
+            while h and h[-1] > height[i]:
+                lastIdx = idx.pop()
+                lastHeight = h.pop()
+                # Normally it should be min(lastHeight, lastlastHeight) * (i - lastIdx)
+                # Since it is already monotone increasing then there is no need for min op
+                ret = max(ret, lastHeight * (i - lastIdx))
+            # All element larger than height[i] has been processed
+            # Push height[i] to monotone stack and still keep its monotone increasing feature.
+            h.append(height[i])
+            idx.append(lastIdx)
+    # Process what's left in the stacks
+    
+    while h:
+        # The right border is the length of height.
+        ret = max(ret, h.pop() * (len(height) - idx.pop()))
+    
+    return ret
+*/
