@@ -55,3 +55,27 @@ class leetcode_Container_With_Most_Water {
         return max;
     }
 }
+
+/* Python Version
+Another classic two pointers case.
+
+def maxArea(self, height):
+    if not height or len(height) == 1:
+        return 0
+    
+    head = 0
+    tail = len(height) - 1
+    ret = min(height[0], height[-1]) * tail
+    
+    while head < tail:
+		# Update local max
+        ret = max(ret, min(height[head], height[tail]) * (tail - head))
+        if height[head] > height[tail]:
+            tail -= 1
+        elif height[head] < height[tail]:
+            head += 1
+        else:
+            head += 1
+            tail -= 1
+    return ret
+*/
