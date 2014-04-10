@@ -42,3 +42,22 @@ public class leetcode_Integer_to_Roman {
 		return res.toString();
 	}
 }
+
+
+/* Python Version
+1-3999 is a small range. Enumerating all basic unit of roman char is easier
+and faster solution during interview.
+
+def intToRoman(self, num):
+    symbol = ("M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I")
+    value =  (1000,900,500,400, 100, 90,  50, 40,  10, 9,   5,  4,   1)
+    i = 0
+    roman = ''
+    while num > 0:
+        if num >= value[i]:
+            roman += symbol[i]
+            num -= value[i]
+        else:
+            i += 1
+    return roman
+*/
