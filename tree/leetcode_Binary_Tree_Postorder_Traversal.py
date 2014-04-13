@@ -8,25 +8,24 @@ class Solution:
         """Using two stacks.
         
         Bacially it is same as preorder traversal.
-        
         There is the solution using one stack but more complicated and meaningless:
         http://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/
         """
         if not root:
             return []
             
-        s1 = [root]
-        s2 = []
+        s = [root]
+        ret = []
         
-        while s1:
-            cur = s1.pop()
-            s2.append(cur)
+        while s:
+            cur = s.pop()
+            ret.append(cur.val)
             if cur.left:
-                s1.append(cur.left)
+                s.append(cur.left)
             if cur.right:
-                s1.append(cur.right)
+                s.append(cur.right)
             
-        return [ node.val for node in s2 ][::-1]
+        return list(reversed(ret))
 
     def run(self):
         print '1'
