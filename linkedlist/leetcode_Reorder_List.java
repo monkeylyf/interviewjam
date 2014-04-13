@@ -63,25 +63,15 @@ public class leetcode_Reorder_List {
   }
 
   public static ListNode reverseSLL(ListNode head) {
-	if (head == null || head.next == null) {
-	  return head;
+	ListNode prev = null;
+	while (head != null) {
+	  ListNode next = head.next;
+	  head.next = prev;
+	  prev = head;
+	  head = next;
 	}
 
-	ListNode dummy = new ListNode(-1);
-	dummy.next = head;
-
-	head = dummy;
-
-	ListNode cursor = dummy.next;
-
-	while (cursor.next != null) {
-	  ListNode tmp = cursor.next;
-	  cursor.next = tmp.next;
-	  tmp.next = dummy.next;
-	  dummy.next = tmp;
-	}
-
-	return dummy.next;
+	return prev;
   }
 
   static class ListNode {
@@ -104,3 +94,49 @@ public class leetcode_Reorder_List {
 	System.out.println("null");
   }
 }
+
+
+/* Python Version
+def reorderList(self, head):
+    if not head or not head.next or not head.next.next:
+        return head
+    
+    slow = head
+    fast = head
+    cursor = head
+    
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+
+    # Cut in the middle.
+    second_head = slow.next
+    slow.next = None
+    
+    second_head = self.reserveSLL(second_head)
+    
+    # Intertwine two linkedlist.
+    while cursor:
+        first_next = cursor.next
+        second_next = second_head.next
+        
+        second_head.next = first_next
+        cursor.next = second_head
+        
+        cursor = cursor.next.next
+        second_head = second_next
+        if not second_next:
+			# Second linked list might be one node short than the first.
+            break
+        
+    return head
+
+def reserveSLL(self, head):
+    prev = None
+    while head:
+        nex = head.next
+        head.next = prev
+        prev = head
+        head = nex
+    return prev
+*/
