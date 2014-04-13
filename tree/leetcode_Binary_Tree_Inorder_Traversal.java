@@ -68,9 +68,6 @@ class TreeNode {
 
 /* Python Version
 def inorderTraversal(self, root):
-    if not root:
-        return []
-    
     stack = []
     ret = []
     while root or stack:
