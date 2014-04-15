@@ -71,13 +71,12 @@ class Solution {
   }
     
   public void dfs(ArrayList<ArrayList<Integer>> trace, String acc, int head, ArrayList<String> container, String s) {
-    for (int tail : trace.get(head)) {
-      String substr = s.substring(head, tail);
-      String acced = acc + ((head == 0) ? substr : " " + substr);
-      if (tail == s.length()) {
-        container.add(acced);
-      } else {
-        dfs(trace, acced, tail, container, s);
+    if (head == s.length()) {
+      container.add(acc);
+    } else {
+      for (int tail : trace.get(head)) {
+        String sub = s.substring(head, tail);
+        dfs(trace, (head == 0) ? sub : acc + " " + sub, tail, container, s);
       }
     }
   }
