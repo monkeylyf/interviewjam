@@ -25,6 +25,54 @@ class leetcode_Wildcard_Matching {
     public static void main(String[] args) {
         isMatch("", "*");
     }
+
+	public static boolean isMatch(String s, String p) {
+	  int ss = 0;
+	  int pp = 0;
+	  int prevS = 0;
+	  int prevP = 0;
+	  boolean seenStar = false;
+
+	  while (ss < s.length()) {
+		char S = s.charAt(ss);
+		char P = (pp < p.length()) ? p.charAt(pp) : '\0';
+		if (S == P || P == '?') {
+		  // If two char are equal move both index.
+		  // '?' match any single char.
+		  ++ss;
+		  ++pp;
+		} else {
+		  if (P == '*') {
+			seenStar = true;
+			while (pp < p.length() && p.charAt(pp) == '*') {
+			  // Star match any sequence of character. Mutliple stars is same as one start.
+			  ++pp;
+			}
+			if (pp == p.length()) {
+			  // If p has one or many stars at the end, it will match what's left in s.
+			  return true;
+			}
+			// Mark the last seen star index.
+			prevS = ss;
+			prevP = pp;
+		  } else if (seenStar) {
+			++prevS;
+			ss = prevS;
+			pp = prevP;
+		  } else {
+			return false;
+		  }
+		}
+	  }
+
+	  while (pp < p.length() && p.charAt(pp) == '*') {
+		++pp;
+	  }
+
+	  return pp == p.length();
+	}
+
+	/*Obsolete.*/
     public static boolean isMatch(String s, String p) {
         // The idea behind this is basically same as Regular_Expression_Matching.
         boolean[] prev = new boolean[p.length() + 1];
