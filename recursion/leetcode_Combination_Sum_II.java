@@ -24,76 +24,75 @@ import java.util.HashSet;
 
 public class leetcode_Combination_Sum_II {
 
-    public static void main(String[] args) {
-        combinationSum2(new int[] {8, 7, 4, 3}, 11);
-    }
+  public static void main(String[] args) {
+	combinationSum2(new int[] {8, 7, 4, 3}, 11);
+  }
 
-    public static ArrayList<ArrayList<Integer>> combinationSum2(int[] num, int target) {
-        ArrayList<ArrayList<Integer>> container = new ArrayList<ArrayList<Integer>>();
-        
-        if (num == null || num.length == 0) {
-            return container;
-        }
-        
-        Arrays.sort(num);
-        ArrayList<Integer> acc = new ArrayList<Integer>();
-        dfs(0, target, acc, num, container);
-        
-        return container;
-    }
-    
-    public static void dfs(int idx, int target, ArrayList<Integer> acc, int[] num, ArrayList<ArrayList<Integer>> container) {
-        if (target == 0) {
-            ArrayList<Integer> token = new ArrayList<Integer>();
-            for (int i : acc) {
-                token.add(i);
-            }
-            container.add(token);
-        } else if (target > 0) {
-            int i = idx;
-            while (i < num.length) {
-                acc.add(num[i]);
-                dfs(i + 1, target - num[i], acc, num, container);
-                acc.remove(acc.size() - 1);
-                i += 1;
-                
-                while (i < num.length && num[i - 1] == num[i]) {
-                    i += 1;
-                }
-            }
-        } else {
-            return;
-        }
-    }
+  public static ArrayList<ArrayList<Integer>> combinationSum2(int[] num, int target) {
+	ArrayList<ArrayList<Integer>> container = new ArrayList<ArrayList<Integer>>();
 
-	/* The solution below is obsolete.*/
-    public static ArrayList<ArrayList<Integer>> combinationSum2(int[] num, int target) {
-        HashSet<ArrayList<Integer>> all = new HashSet<ArrayList<Integer>>();
-        ArrayList<Integer> tmp = new ArrayList<Integer>();
-        nextInt(num, all, tmp, 0, target);
-        for (ArrayList<Integer> i : all) {
-			System.out.println(i);
+	if (num == null || num.length == 0) {
+	  return container;
+	}
+
+	Arrays.sort(num);
+	ArrayList<Integer> acc = new ArrayList<Integer>();
+	dfs(0, target, acc, num, container);
+
+	return container;
+  }
+
+  public static void dfs(int i, int target, ArrayList<Integer> acc, int[] num, ArrayList<ArrayList<Integer>> container) {
+	if (target == 0) {
+	  ArrayList<Integer> token = new ArrayList<Integer>();
+	  for (int val : acc) {
+		token.add(val);
+	  }
+	  container.add(token);
+	} else if (target > 0) {
+	  while (i < num.length) {
+		acc.add(num[i]);
+		dfs(i + 1, target - num[i], acc, num, container);
+		acc.remove(acc.size() - 1);
+		i += 1;
+
+		while (i < num.length && num[i - 1] == num[i]) {
+		  i += 1;
 		}
-        return new ArrayList<ArrayList<Integer>>(all);
-    }
+	  }
+	} else {
+	  return; // target < 0
+	}
+  }
 
-    public static void nextInt(int[] num, HashSet<ArrayList<Integer>> all, ArrayList<Integer> tmp, int sum, int target) {
-        for (int i : num) System.out.print(i + " ");
-        System.out.println();
-        if (sum == target) {
-            ArrayList<Integer> res = new ArrayList<Integer>(tmp);
-            Collections.sort(res);
-			all.add(res);
-        } else if (sum < target) {
-            for (int i = 0; i < num.length; ++i) {
-                tmp.add(num[i]);
-				// Since every element can be used only once.
-				// Remove trim the array and pass it to next recursion.
-                nextInt(Arrays.copyOfRange(num, i + 1, num.length), all, tmp, sum + num[i], target);
-                tmp.remove(tmp.size() - 1);
-            }
-        } 
-    }
+  /* The solution below is obsolete.*/
+  public static ArrayList<ArrayList<Integer>> combinationSum2(int[] num, int target) {
+	HashSet<ArrayList<Integer>> all = new HashSet<ArrayList<Integer>>();
+	ArrayList<Integer> tmp = new ArrayList<Integer>();
+	nextInt(num, all, tmp, 0, target);
+	for (ArrayList<Integer> i : all) {
+	  System.out.println(i);
+	}
+	return new ArrayList<ArrayList<Integer>>(all);
+  }
+
+  public static void nextInt(int[] num, HashSet<ArrayList<Integer>> all, ArrayList<Integer> tmp, int sum, int target) {
+	for (int i : num) System.out.print(i + " ");
+	System.out.println();
+	if (sum == target) {
+	  ArrayList<Integer> res = new ArrayList<Integer>(tmp);
+	  Collections.sort(res);
+	  all.add(res);
+	} else if (sum < target) {
+	  for (int i = 0; i < num.length; ++i) {
+		tmp.add(num[i]);
+		// Since every element can be used only once.
+		// Remove trim the array and pass it to next recursion.
+		nextInt(Arrays.copyOfRange(num, i + 1, num.length), all, tmp, sum + num[i], target);
+		tmp.remove(tmp.size() - 1);
+	  }
+	} 
+  }
 }
 
 
