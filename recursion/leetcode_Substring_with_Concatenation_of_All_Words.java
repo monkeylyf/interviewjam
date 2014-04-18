@@ -11,50 +11,103 @@ You should return the indices: [0,9].
 */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 
 public class leetcode_Substring_with_Concatenation_of_All_Words {
 
-    public static void main(String[] args) {
-        findSubstring("sheateateseatea", new String[] {"sea","tea","ate"});
-    }
+  public static void main(String[] args) {
+	findSubstring("sheateateseatea", new String[] {"sea","tea","ate"});
+  }
 
-    public static ArrayList<Integer> findSubstring(String S, String[] L) {
-        // The idea behind this is to get all possible permutations of given set.
-        ArrayList<Integer> res = new ArrayList<Integer>();
-        HashSet<String> all = new HashSet<String>();
-        int len = L[0].length() * L.length; // The length of given words do not need to be same.
-        nextString(L, all, "" );
-        for (int i = 0; i <= S.length() - len; ++i) {
-            if (all.contains(S.substring(i, i + len))) {
-                res.add(i);
-            }
-        }
-        return res;
-    }
+  public ArrayList<Integer> findSubstring(String S, String[] L) {
+	ArrayList<Integer> ret = new ArrayList<Integer>();
+	HashMap<String, Integer> dict = new HashMap<String, Integer>();
+	for (String str : L) {
+	  if (dict.containsKey(str)) {
+		dict.put(str, dict.get(str) + 1);
+	  } else {
+		dict.put(str, 1);
+	  }
+	}
 
-    public static void nextString(String[] L, HashSet<String> all, String acc) {
-        if (L.length == 0) {
-            all.add(acc);
-        } else {
-            for (int i = 0; i < L.length; ++i) {
-                nextString(removedEle(L, i), all, acc + L[i]);
-            }
-        }
-    }
+	HashMap<String, Integer> map = copy(dict);
 
-    public static String[] removedEle(String[] L, int index) {
-        String[] res = new String[L.length - 1];
-        int j = 0;
-        for (int i = 0; i < L.length; ++i) {
-            if (i != index) {
-                res[j] = L[i];
-                ++j;
-            }
-        }
-        return res;
-    }
+	int strLen = L[0].length();
+	for (int i = 0; i <= S.length() - L.length * strLen; ++i) {
+	  for (int j = 0; j < L.length; ++j) {
+		String str = S.substring(i + j * strLen, i + (j + 1) * strLen);
+		if (map.containsKey(str)) {
+		  Integer count = map.get(str);
+		  if (count < 0) {
+			break;
+		  } else {
+			map.put(str, count - 1);
+		  }
+		}
+	  }
+	  boolean zero = true;
+	  for (Integer val : map.values()) {
+		if (val != 0) {
+		  zero = false;
+		  break;
+		}
+	  }
+	  if (zero) {
+		ret.add(i);
+	  }
+	  map = copy(dict);
+	}
+
+	return ret;
+  }
+
+  public HashMap<String, Integer> copy(HashMap<String, Integer> map) {
+	HashMap<String, Integer> ret = new HashMap<String, Integer>();
+	for (String key : map.keySet()) {
+	  ret.put(key, map.get(key));
+	}
+
+	return ret;
+  }
+
+  /*The solution below is obsolete.*/
+  public static ArrayList<Integer> findSubstring(String S, String[] L) {
+	// The idea behind this is to get all possible permutations of given set.
+	ArrayList<Integer> res = new ArrayList<Integer>();
+	HashSet<String> all = new HashSet<String>();
+	int len = L[0].length() * L.length; // The length of given words do not need to be same.
+	nextString(L, all, "" );
+	for (int i = 0; i <= S.length() - len; ++i) {
+	  if (all.contains(S.substring(i, i + len))) {
+		res.add(i);
+	  }
+	}
+	return res;
+  }
+
+  public static void nextString(String[] L, HashSet<String> all, String acc) {
+	if (L.length == 0) {
+	  all.add(acc);
+	} else {
+	  for (int i = 0; i < L.length; ++i) {
+		nextString(removedEle(L, i), all, acc + L[i]);
+	  }
+	}
+  }
+
+  public static String[] removedEle(String[] L, int index) {
+	String[] res = new String[L.length - 1];
+	int j = 0;
+	for (int i = 0; i < L.length; ++i) {
+	  if (i != index) {
+		res[j] = L[i];
+		++j;
+	  }
+	}
+	return res;
+  }
 }
 
 
@@ -89,7 +142,7 @@ class Solution:
             #print used.values()
             if not any(used.values()):
                 ret.append(i)
-                i += length
+                i += length # Why step is length or 1?? Looks like length works. How to prove?
             else:
                 i += 1
             used = self.copy(c)
