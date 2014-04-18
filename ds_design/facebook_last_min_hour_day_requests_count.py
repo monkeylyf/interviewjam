@@ -44,19 +44,19 @@ class Counters(object):
         """Update circular array and counts. O(1)."""
         # Update minute circle
         minute_idx = ts % self.minute_capacity
-        self._last_minute_count -= self.minute_capacity[minute_idx]
+        self._last_minute_count -= self.minute_circle[minute_idx]
         self.minute_circle[minute_idx] = count
         self._last_minute_count += count
 
         # Update hour circle
         hour_idx = ts % self.hour_capacity
-        self._last_hour_count -= self.hour_capacity[hour_idx]
+        self._last_hour_count -= self.hour_circle[hour_idx]
         self.hour_circle[hour_idx] = count
         self._last_hour_count += count
 
         # Update day circle
         day_idx = ts % self.day_capacity
-        self._last_day_count -= self.hour_capacity[day_idx]
+        self._last_day_count -= self.hour_circle[day_idx]
         self.day_circle[day_idx] = count
         self._last_day_count += count
 

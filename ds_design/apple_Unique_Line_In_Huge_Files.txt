@@ -1,0 +1,120 @@
+apple_Unique_Line_In_Huge_Files.txt
+apple
+
+Compute total number of unique lines across a data set of 1,000 gzipped text files.
+
+Example: If every file has two lines,  "this is line1" and "this a line2", then
+the total count of lines is 2000, and total number of unique lines is 2.
+
+Details:
+We have 1000 machines where each machine has one gzipped text file with an
+approximate size of 50GB. The file on each machine is /0/data/foo.txt.gz
+The 1000 machines are named data1, data2,..data1000.
+Data is ASCII text. 
+Additionally, we have 11 machines named res1, res2…res11
+Each of 1011 machines has 12 1TB disk drives mounted (/0/data, /1/data,../11/data).
+/1/data to /11/data mount points are empty on all machines. 
+Each machine has 128GB of RAM
+Each machine can 'talk' to each other via ssh without login credentials.
+Assume that each machine runs same linux/unix OS of your choosing.
+You can use any programming language/technology
+
+
+Approach:
+
+Part I: Local mapper.
+1. Estimate how large the file gonna be after decompression so you could have some
+   ideas if the 50GB file one each machine can fit into the memory (128GB) and
+   disk (12 x 1TB mounted but there is only /0/data with mount point.)
+
+   Unix command line:
+   gunzip -c <filename> | wc -c
+   It will show you how many bytes of the unzipped one.
+
+   The worst scenario is in the gzipped file, every line is unique then when you use
+   HashMap sort of mapping data structure you will hold every single line in memory
+   and that will consume all of the memory, which will cause extreme slowness or
+   even bring down the machine. 
+   After counting the line locally (details will be mentioned below), the output will
+   be store on disk in a key/value pair style. For example, ('this is line1': 3). Given
+   the 50GB size of gzip file, it is completely possible the whole output of key value
+   pairs will be more than 1TB. Then partitioning is needed for /0/data and /1/data (It
+   will need as much /x/data dir as it might take due to the decompressed size.)
+
+   More comments one the RAM/Disk estimate: Machine itself needs ~3GB for OS and probably
+   3GB for other necessary daemon/processes. So is for disk to store OS files and other
+   stuffs.
+
+2. If 128GB RAM(120GB available for the task, let's assume), read the file line by line
+   to do a local count. Here is some sample code in Python:
+
+"""
+#! /usr/bin/python
+
+import gzip
+from collections import defaultdict
+
+
+def main():
+    dic = defaultdict(int)
+    fh = gzip.open('filename', 'r')
+    for line in f:
+        dic[line.strip()] += 1
+            
+    with open('unique_key.txt', 'w') as f:
+        for line, val in dic.iteritems():
+            f.write('{0}\n'.format(line))
+            
+
+if __name__ == '__main__':
+    main()
+"""
+
+  As mentioned above, for the worst scenario, the output might take up all available
+  volume in /0/data, then it needs to continue to write to /1/data and so on.
+
+
+Part II: Sorting & Combine
+1. Let's assume that the output in Part I is 1,000 files, say output_step_one_[1-1000]
+   stored on 1,000 which contain unique keys. We need to merge them. Since it's
+   impossible to load all of them into 128GB RAM, external merge sort will be chosen
+   to to merge them.
+
+   I'd start with machine data1 and data2, data3 and data4, ..., data999 and data1000 in
+   parallels. The merged result of data1 and data2 will be stored on data1 and data2. At
+   same time, the same key can be combined. When it's done, those files
+   output_step_one_[1-1000] can be deleted to save disk space.
+   Then external merge sort the result of data1 and data2 and the result of data3 and
+   data4. Others can be done in parallels. The idea is merge 1000 to 500, 500 to 250, ...
+   eventually to 1 file stored all crossed data1 to data 1000 as a whole sorted file.
+   Each machine will hold a key range, say data1 holds 'a' - 'b', and data2 holds 'b'
+   to 'c'. All intermediate files can be deleted after new merged files are generated.
+
+Part III: Reducing
+1. Given the all data is ASCII text, and the unque lines number is wanted, the reducer
+   and be done in parallels. Let's assume that the first characters in each line is 
+   close to even distribution, the unique number be calculated by add the unique line
+   number of those lines start with character 'a', and 'b', ..., to 'z' due to they
+   are independent. If sorted files, say line starts with character 'b', are stored
+   across data3, data4 and data5 when files should be streamed in sequentially to get
+   the number.
+
+
+
+Additional comments:
+1. Don't see heavy computation so CPU load is fine. The memory is limited but the real
+   bottleneck is disk I/O. External merge sort is most of the disk read/write.
+   Assuming these 1011 machines are in the same data center and each rack contains 20
+   to 30 machines then we are looking at 35 - 50 racks. Rack switchers will handle a 
+   lot of network traffic.
+2. I think the very core of this technical practice is to understand how mapreduce works
+   under the hood and the challenge is to optimize the external merge sort to reduce the
+   I/O. If Hadoop framework is avaiable then it is trivial to write a unique count MR
+   job to get the answer. But I guess it is not want you are looking for.
+3. It would be hard to guarantee the data consistency with such large read/write ops.
+   A single line it corrupted during the process will preventing you from getting the
+   right answer.
+4. Given 1011 machines, it's a quite a probability that one or more than one machines
+   can have issues during the process. Without proper mechanism to recover from failover,
+   the job will be very unlike to get done...
+5. Couldn't figure out the usage of res1 to res11.
