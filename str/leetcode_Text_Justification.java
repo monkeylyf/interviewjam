@@ -26,52 +26,60 @@ import java.util.ArrayList;
 
 
 class leetcode_Text_Justification {
-    public static void main(String[] args) {
-        String[] words = new String[] {"Here", "is", "an", "example", "of", "text", "justification."};
-        fullJustify(new String[] {"What","must","be","shall","be."}, 12);
-    }
-    public static ArrayList<String> fullJustify(String[] words, int L) {
-        ArrayList<String> res = new ArrayList<String>();
-        ArrayList<String> str = new ArrayList<String>();
-        String layer = words[0];
-        str.add(words[0]);
-        for (int i = 1; i < words.length; ++i) {
-            if (layer.length() + 1 + words[i].length() <= L) {
-                // As many as words with one space between each two word in a line.
-                layer += " " + words[i];
-                str.add(words[i]);
-            } else {
-                res.add(evenlyDistributed(str, L));
-                layer = words[i];
-                str = new ArrayList<String>();
-                str.add(words[i]);
-            }
-        }
-        // For the last line of text, it should be left justified and no extra space is
-        // inserted between words.
-        res.add(layer + new String(new char[L - layer.length()]).replace('\0', ' '));
-        return res;
-    }
-    public static String evenlyDistributed(ArrayList<String> str, int L) {
-        for (String word : str) {
-            L -= word.length(); // How manay spaces.
-        }
-        if (str.size() == 1) {
-            // A line other than the last line might contain only one word,
-            // in this case, that line should be left-justified.
-            return str.get(0) + new String(new char[L]).replace('\0', ' ');
-        } else {
-            int numOfSpace = str.size() - 1;
-            int even = L / numOfSpace;
-            int mod = L % numOfSpace;
-            String res = "";
-            for (int i = 0; i < numOfSpace; ++i) {
-                int space = (i < mod) ? even + 1 : even; // How many trailing spaces current word should have.
-                res += str.get(i) + new String(new char[space]).replace('\0', ' ');
-            }
-            return res + str.get(numOfSpace); // Last word have no trailing spaces.
-        }
-    }
+
+  public static void main(String[] args) {
+	String[] words = new String[] {"Here", "is", "an", "example", "of", "text", "justification."};
+	System.out.println(fullJustify(new String[] {"What","must","be","shall","be."}, 12));
+  }
+
+  public static ArrayList<String> fullJustify(String[] words, int L) {
+	ArrayList<String> res = new ArrayList<String>();
+	ArrayList<String> tokens = new ArrayList<String>();
+	StringBuilder acc = new StringBuilder(words[0]);
+	tokens.add(words[0]);
+	for (int i = 1; i < words.length; ++i) {
+	  if (acc.length() + 1 + words[i].length() <= L) {
+		// As many as words with one space between each two word in a line.
+		acc.append(" ");
+		acc.append(words[i]);
+		tokens.add(words[i]);
+	  } else {
+		res.add(evenlyDistributed(tokens, L));
+		acc = new StringBuilder(words[i]);
+		tokens = new ArrayList<String>();
+		tokens.add(words[i]);
+	  }
+	}
+	// For the last line of text, it should be left justified and no extra space is
+	// inserted between words.
+	res.add(acc.toString() + new String(new char[L - acc.length()]).replace('\0', ' '));
+
+	return res;
+  }
+
+  public static String evenlyDistributed(ArrayList<String> tokens, int L) {
+	for (String word : tokens) {
+	  L -= word.length(); // How many whitespaces.
+	}
+	if (tokens.size() == 1) {
+	  // A line other than the last line might contain only one word,
+	  // in this case, that line should be left-justified.
+	  return tokens.get(0) + new String(new char[L]).replace('\0', ' ');
+	} else {
+	  int numOfSpace = tokens.size() - 1;
+	  int div = L / numOfSpace;
+	  int mod = L % numOfSpace;
+	  StringBuilder sb = new StringBuilder();
+	  for (int i = 0; i < numOfSpace; ++i) {
+		int space = (i < mod) ? div + 1 : div; // How many trailing spaces current word should have.
+		sb.append(tokens.get(i));
+		sb.append(new String(new char[space]).replace('\0', ' '));
+	  }
+	  sb.append(tokens.get(numOfSpace));// Last word have no trailing spaces.
+
+	  return sb.toString();
+	}
+  }
 }
 
 /* Python Version
