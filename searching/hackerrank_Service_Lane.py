@@ -38,18 +38,31 @@ class SegTree(object):
         """Given start/end index, query the min value in this range."""
         if (start < 0 or end >= self.length or start > end):
             raise ValueError
-        return self.query_util(0, self.length - 1, start, end, 0)
+        return self._query_util(0, self.length - 1, start, end, 0)
     
-    def query_util(self, start, end , qStart, qEnd, index):
-        if qStart <= start and qEnd >= end:
+    def _query_util(self, start, end , qStart, qEnd, index):
+        """Recursively query the min value in given range.
+
+        From a high level, it searches for the node right with boundary (a, b)
+        that falls in query range.
+        
+        :param start: staring of the segment represented by current node.
+        :param end: ending of the segment represented by current node.
+        :param qStart: starting of the range query.
+        :param qEnd: ending of the range query.
+        :param index: index of current node in the segment tree represented by an array.
+        """
+        if qStart <= start and end <= qEnd:
+            # Node range within query range.
             return self.tree[index]
         elif end < qStart or start > qEnd:
+            # Node range has no overlapping with query range.
             return 10000000007 # The range falls out, return a very large number for min op.
         else:
             mid = start + (end - start) / 2
             # Left/right child relation in tree array is 2 * idx + 1 and 2 * idx + 2.
-            return min(self.query_util(start, mid, qStart, qEnd, 2 * index + 1),
-                       self.query_util(mid + 1, end, qStart, qEnd, 2 * index + 2))
+            return min(self._query_util(start,   mid, qStart, qEnd, 2 * index + 1),
+                       self._query_util(mid + 1, end, qStart, qEnd, 2 * index + 2))
 
 
 def main():
