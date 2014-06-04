@@ -14,13 +14,11 @@ Given n = 3, there are a total of 5 unique BST's.
 */
 
 
-import java.util.*;
-
 
 public class leetcode_Unique_Binary_Search_Trees {
 
     public static void main(String[] args) {
-        System.out.println(numTrees(4));
+        System.out.println(numTrees(10));
     }
 
     public static int numTrees(int n) {
@@ -30,14 +28,14 @@ public class leetcode_Unique_Binary_Search_Trees {
         if(n == 0 || n == 1 || n == 2) {
             return n;
         }
-		int i, j;
         int dp[] = new int[n + 1];
-		dp[0] = 1; dp[1] = 1; dp[2] = 2;
+		dp[1] = 1;
+		dp[2] = 2;
         //   1  2
         //  /    \
         // 2      1
-        for (i = 0; i <= n; ++i) {
-			for (j = 1; j <= i - 2; ++j) {
+        for (int i = 3; i <= n; ++i) {
+			for (int j = 1; j <= i - 2; ++j) {
 				// Consider node i as the intermediate node as a right child of some subtree.
 				// Then create another substree and append its root to node i.
 				// There is dp[j] different ways to construct first substree and dp[i - 1 - j] 
@@ -46,6 +44,7 @@ public class leetcode_Unique_Binary_Search_Trees {
 			}
 			dp[i] += 2 * dp[i - 1];
         }
+
         return dp[n];
     }
 }
