@@ -3,17 +3,12 @@
 https://www.hackerrank.com/challenges/red-john-is-back
 """
 
-import math
 
+def solve(n):
+    dp = [0] * (n + 1)
 
-def solve(N):
-    dp = [ 0 ] * (N + 1)
-
-    for i in xrange(N + 1):
-        if i < 4:
-            dp[i] = 1
-        else:
-            dp[i] = dp[i - 4] + dp[i - 1]
+    for i in xrange(n + 1):
+        dp[i] = 1 if i < 4 else dp[i - 4] + dp[i - 1]
 
     return dp[-1]
 
@@ -33,7 +28,7 @@ def is_prime(n):
         return False
     if n == 2:
         return True
-    root = int(math.sqrt(n))
+    root = int(n ** 0.5)
     for i in xrange(2, root + 1):
         if n % i == 0:
             return False
@@ -43,8 +38,8 @@ def is_prime(n):
 
 def main():
     count = get_prime()
-    T = int(raw_input())
-    for _ in xrange(T):
+    t = int(raw_input())
+    for _ in xrange(t):
         N = int(raw_input())
         num = solve(N)
         print count[num]
