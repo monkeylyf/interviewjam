@@ -12,32 +12,35 @@ Output: index1=1, index2=2
 
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class leetcode_Two_Sum {
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
+  }
+
+  /**
+   * Using hashmap to cache value/index pair.
+   *
+   * Iterate through arr once. For each value check if target - value is cached.
+   * If yes, return map.get(target - curValue) + 1, curIndex + 1. If no, cache
+   * current value and index.
+   */
+  public static int[] twoSum(int[] numbers, int target) {
+    Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+    int[] ret = new int[2];
+    for (int i = 0; i < arr.length; ++i) {
+      if (map.containsKey(target - arr[i])) {
+        return new int[] {map.get(target - arr[i]) + 1, i + 1};
+      } else {
+        map.put(arr[i], i);
+      }
     }
 
-    public static int[] twoSum(int[] numbers, int target) {
-        // Using hashmap to cache value/index pair.
-        // Iterate through arr once. For each value check if target - value is cached.
-        // If yes, return map.get(target - curValue) + 1, curIndex + 1. If no, cache
-        // current value and index.
-        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-        int i;
-        int[] ret = new int[2];
-        for (i = 0; i < arr.length; ++i) {
-            if (map.containsKey(target - arr[i])) {
-                ret = new int[] {map.get(target - arr[i]) + 1, i + 1};
-                break;        
-            } else {
-                map.put(arr[i], i);
-            }
-        }
-        return ret;
-    }
+    return ret;
+  }
 }
 
 /*Python version.

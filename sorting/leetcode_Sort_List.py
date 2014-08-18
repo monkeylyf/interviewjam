@@ -1,12 +1,17 @@
-#leetcode_Sort_List
-#
-#
+"""leetcode_Sort_List
+"""
+
+from random import randint
 
 
 class Solution:
-    
+
     def sortList(self, head):
-        """Using merge sort."""
+        """Using merge sort.
+
+        Time complexity: O(nlgn)
+        Space complexity: O(1)
+        """
         # Closed functions.
         def sort(head, length):
             if length <= 1:
@@ -30,7 +35,7 @@ class Solution:
         def merge(a, b):
             dummy = ListNode(-1)
             cur = dummy
-            
+
             while a and b:
                 if a.val <= b.val:
                     cur.next = a
@@ -40,13 +45,13 @@ class Solution:
                     b = b.next
 
                 cur = cur.next
-           
+
             tail = a if a else b
             cur.next = tail
 
-            return dummy.next                
-        
-        # Content of function sortList. 
+            return dummy.next
+
+        # Content of function sortList.
         length = 0
         cursor = head
 
@@ -55,7 +60,31 @@ class Solution:
             cursor = cursor.next
 
         return sort(head, length)
-        
+
+    def quickSort(self, head):
+        """Quicksort linkedlist.
+
+        Time complexity: average O(nlgn), worst case O(n^2)
+        """
+        # Nested function.
+        def quickSortUtil(self, head, length):
+            if length < 2:
+                return head
+            pivot = length / 2
+
+            cursor = head
+
+
+        # Content of function quickSort
+        length = 0
+        cursor = head
+
+        while cursor:
+            head += 1
+            cursor = cursor.next
+
+        self.quickSortUtil(head, length)
+
     def run(self):
         # Test case 1
         head = ListNode(3)
@@ -76,7 +105,7 @@ class Solution:
 
 
 class ListNode:
-    
+
     def __init__(self, x):
         self.val = x
         self.next = None
