@@ -16,19 +16,21 @@ A solution set is:
 
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.Collections;
 
 public class leetcode_3Sum {
 
     public static void main(String[] args) {
         int[] S = new int[] {-1, 0, 1, 2, -1, -4};
-        threeSum(S);
+        System.out.println(threeSum(S));
     }
 
     public static ArrayList<ArrayList<Integer>> threeSum(int[] num) {
         Arrays.sort(num); // O(n logn).
-        HashSet<ArrayList<Integer>> all = new HashSet<ArrayList<Integer>>();
+        Set<ArrayList<Integer>> all = new HashSet<ArrayList<Integer>>();
         ArrayList<Integer> tmp = new ArrayList<Integer>();
         for (int i = 0; i < num.length - 2; ++i) {
             int j = i + 1;
@@ -61,16 +63,16 @@ def threeSum(self, num):
         return []
     if len(num) == 3:
         return [] if sum(num) != 0 else num
-        
+
     head = 0
     res = set()
-    
+
     while head < len(num) - 2:
         middle = head + 1
         tail = len(num) - 1
-        
+
         s = -num[head]
-        
+
         while middle < tail:
             if num[middle] + num[tail] == s:
                 res.add((num[head], num[middle], num[tail]))
@@ -81,6 +83,6 @@ def threeSum(self, num):
             else:
                 middle += 1
         head += 1
-        
+
     return list(res)
 */

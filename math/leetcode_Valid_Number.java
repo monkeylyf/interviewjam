@@ -52,18 +52,17 @@ public class leetcode_Valid_Number {
 	  return false; // Double check after trim.
 	}
 
-	char cur;
 	boolean eExist = false;
 	boolean	dotExist = false;
 	boolean	firstPart = false;
 	boolean	secondPart = false;
 
 	// Check the tailing sign.
-	int i = (s.charAt(i) == '+' || s.charAt(i) == '-') ? 1 : 0;
+	int i = (s.charAt(0) == '+' || s.charAt(0) == '-') ? 1 : 0;
 
 	// While loop to iterate each char.
 	while (i < s.length()) {
-	  cur = s.charAt(i);
+	  char cur = s.charAt(i);
 	  if (cur == '+' || cur == '-') { // more sign must be right after 'e'/'E'
 		// '+'/'-' can exist only after 'e'/'E'
 		if (!eExist || (s.charAt(i - 1) != 'e' && s.charAt(i - 1) != 'E')) {
@@ -85,12 +84,12 @@ public class leetcode_Valid_Number {
 		if (!eExist) {
 		  firstPart = true; // Digit detected. flag first or second part.
 		} else {
-		  secondPart = true;	
+		  secondPart = true;
 		}
 	  } else { // Whitespace or other char, illegal.
-		return false;	
+		return false;
 	  }
-	  ++i;	
+	  ++i;
 	}
 	// Must have firstPart, and if not e, return true, if e, must have secondPart.
 	return (firstPart) && (!eExist || secondPart);
@@ -103,13 +102,13 @@ def isNumber(self, s):
     s = s.strip();
     if not s:
         return False
-    
+
     sign = ('+', '-')
     e = ('e', 'E')
     i = 1 if s[0] in sign else 0
-    
+
     has_dot = has_e = first_part = second_part = False
-    
+
     while i < len(s):
         c = s[i]
         if c in sign:
@@ -132,8 +131,8 @@ def isNumber(self, s):
                 second_part = True
         else:
             return False
-        
+
         i += 1
-    
+
     return first_part and (not has_e or second_part)
 */
