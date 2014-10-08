@@ -17,7 +17,7 @@ def strange_num_generator(n, batch=None):
     :param n:int, the number of digits of a number, which represents a range.
     :param batch;list, all the strange numbers with n - 1 length.
 
-    :return pool:list, all the strange numbers with n length.
+    :return numbers:list, all the strange numbers with n length.
     """
     if n == 1:
         return range(10)
@@ -25,7 +25,7 @@ def strange_num_generator(n, batch=None):
     if not batch:
         return []
 
-    pool = []
+    numbers = []
     threshold = 10 ** (n - 1) / n
     batch = filter(lambda x : x >= threshold, batch)
 
@@ -34,12 +34,12 @@ def strange_num_generator(n, batch=None):
     while 1:
         batch = map(lambda x : x * n, batch)
         if batch[-1] > uplimit:
-            pool += filter(lambda x : x < uplimit, batch)
+            numbers += filter(lambda x : x < uplimit, batch)
             break
         else:
-            pool += batch
+            numbers += batch
 
-    return pool
+    return numbers
 
 
 def main():
@@ -47,10 +47,9 @@ def main():
     as well but it's not elegent.
     """
     strange_number_pool = []
-    pool = None
     for i in xrange(1, 18 + 1):
         # length of the numnber is in [1, 18]
-        pool = strange_num_generator(i, batch=pool)
+        pool = strange_num_generator(i, batch=strange_number_pool)
         strange_number_pool += pool
 
     for _ in xrange(int(raw_input())):
