@@ -46,9 +46,8 @@ class SCCGraph {
 	public void printSCC() {
 		boolean[] visited = new boolean[this.V];
 		Stack<Integer> s = new Stack<Integer>();
-		int i, v;
-		// 
-		for (i = 0; i < V; ++i) {
+		//
+		for (int i = 0; i < this.V; ++i) {
 			if (!visited[i]) {
 				fillOrder(i, visited, s);
 			}
@@ -59,9 +58,9 @@ class SCCGraph {
 		//  1 <-- 0 <--- 3
 		//  |   ^        ^
 		//  |  /         |
-		// \/ /          | 
+		// \/ /          |
 		//  2            4
-		
+
 
 		// The points of reversing graph is that a reversed SCC
 		// is still a SCC.
@@ -69,8 +68,8 @@ class SCCGraph {
 		SCCGraph reversed = this.getTranspose();
 		visited = new boolean[this.V];
 		while (!s.isEmpty()) {
-			v = s.pop();
-			
+			int v = s.pop();
+
 			if (!visited[v]) {
 				reversed.dfs(v, visited);
 				// STDOUT SCC group by group.
@@ -78,7 +77,7 @@ class SCCGraph {
 			}
 		}
 	}
-	
+
 	// Helper function to add a edge to graph.
 	public void addEdge(int v, int w) {
 		this.adj.get(v).add(w);
@@ -102,16 +101,15 @@ class SCCGraph {
 	// Create the reversed version of cur Graph.
 	public SCCGraph getTranspose() {
 		SCCGraph transposed = new SCCGraph(this.V);
-		int i, j;
-		ArrayList<Integer> arr;
-		for (i = 0; i < this.V; ++i) {
-			arr = this.adj.get(i);
-			for (j = 0; j < arr.size(); ++j) {
+		for (int i = 0; i < this.V; ++i) {
+		    ArrayList<Integer> arr = this.adj.get(i);
+			for (int j = 0; j < arr.size(); ++j) {
 				// In original graph node i point to node j,
 				// then in reversed graph node j points to i.
 				transposed.addEdge(arr.get(j), i);
 			}
 		}
+
 		return transposed;
 	}
 
