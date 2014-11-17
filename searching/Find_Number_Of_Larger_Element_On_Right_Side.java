@@ -22,16 +22,103 @@ public class Find_Number_Of_Larger_Element_On_Right_Side {
 
     arr = new int[] {3, 2, 1, 4};
     System.out.println(Arrays.toString(solution.solveByBST(arr)));
+    System.out.println(Arrays.toString(solution.solveByMergeSort(arr)));
 
     arr = new int[] {1, 1, 1, 4};
     System.out.println(Arrays.toString(solution.solveByBST(arr)));
+    System.out.println(Arrays.toString(solution.solveByMergeSort(arr)));
   }
 
-
-  public int[] solveByMergeSort(int[] arr) {
+  /**
+   * Variation of merge sort.
+   */
+  public Item[] solveByMergeSort(int[] arr) {
     int[] count = new int[arr.length];
 
-    return count;
+    Item[] items = new Item[arr.length];
+    for (int i = 0; i < arr.length; ++i) {
+      items[i] = new Item(arr[i]);
+    }
+
+    return mergeSortAndCount(items);
+  }
+
+  private Item[] mergeSortAndCount(Item[] items) {
+    if (items.length == 0 || items.length == 1) {
+      return items;
+    }
+
+    int mid = items.length / 2;
+
+    Item[] left = Arrays.copyOfRange(items, 0, mid);
+    Item[] right = Arrays.copyOfRange(items, mid, items.length);
+
+    Item[] sortedLeft = mergeSortAndCount(left);
+    Item[] sortedRight = mergeSortAndCount(right);
+
+    Item[] rv =  merge(sortedLeft, sortedRight);
+
+    return rv;
+  }
+
+  /**
+   * The part where magic happens...
+   *
+   * 1 3 5     2 4 6  -->>  1 2 3 4 5 6
+   * 2 1 0     2 1 0        5 4 3 2 1 0
+   *
+   *
+   */
+  private Item[] merge(Item[] left, Item[] right) {
+    Item[] ret = new Item[left.length + right.length];
+
+    int i = 0;
+    int j = 0;
+
+    while (i < left.length && j < right.length) {
+      if (left[i].num < right[j].num) {
+        ret[i + j] = new Item(left[i].num, left[i].count + right[j].count + 1);
+        i += 1;
+      } else if (left[i].num == right[j].num) {
+        ret[i + j] = new Item(left[i].num, left[i].count + right[j].count);
+        i += 1;
+      } else {
+        ret[i + j] = new Item(right[i].num, right[i].count);
+        j += 1;
+      }
+    }
+
+    while (i < left.length) {
+      ret[i + j] = left[i];
+      i += 1;
+    }
+
+    while (j < left.length) {
+      ret[i + j] = right[j];
+      j += 1;
+    }
+
+    return ret;
+  }
+
+  private static class Item {
+
+    public final int num;
+    public int count;
+
+    public Item(final int num) {
+      this.num = num;
+      this.count = 0;
+    }
+
+    public Item(final int num, final int count) {
+      this.num = num;
+      this.count = count;
+    }
+
+    public String toString() {
+      return "<num: " + this.num + " count: " + this.count + ">";
+    }
   }
 
   /**
@@ -100,9 +187,7 @@ public class Find_Number_Of_Larger_Element_On_Right_Side {
 
       while (root != null) {
         root.increCount();
-        if (root.val == i) {
-          return root;
-        } else if (root.val > i) {
+        if (root.val >= i) {
           // Go left.
           if (root.left == null) {
             root.left = new TreeNode(i);
