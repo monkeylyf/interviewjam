@@ -7,10 +7,12 @@ def solve(n):
 
     If the pattner has even length, say 4. In order to get as many as nines
     there is only one way to sum them to 9, which does not matter.
-    If the length is odd, then we have multiple way to sum the nines meanwhiling
-    guaranteeing as many as nines. for example, 1, 8, 1, 8, 1. You want get 2 pairs
-    of nine, and that means you can get rid of one 1. There are three 1s in it. Thus
-    there are 3 ways to transform the sequence with as many as nines possible.
+    If the length is odd (except length 1), then we have multiple ways to sum
+    the nines meanwhile guaranteeing as many as nines. for example:
+    1, 8, 1, 8, 1.
+    You want to get 2 pairs of nine, and that means you can get rid of one 1.
+    There are three 1s in it. Thus there are 3 ways to transform the sequence
+    with as many as nines possible.
     """
     pattern_length = 1
     prev = n[0]
