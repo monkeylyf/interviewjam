@@ -65,4 +65,34 @@ def trap(self, A):
         s.append(i)
 
     return ret
+
+def trap(self, A):
+    """Way better solution than previous one.
+
+    Using two pointers to maintain a max_left and max_right value to calculate
+    water volume. High-low-high scenario is guaranteed to have water wrapped.
+    """
+    if not A:
+        return 0
+
+    head, tail = 0, len(A) - 1
+    max_l, max_r = A[head], A[tail]
+
+    volume = 0
+
+    while tail > head :
+        if max_l < max_r:
+            head += 1
+            if A[head] >= max_l:
+                max_l = A[head]
+            else:
+                volume += max_l - A[head]
+        else:
+            tail -= 1
+            if A[tail] >= max_r:
+                max_r = A[tail]
+            else:
+                volume += max_r - A[tail]
+
+    return volume
 */
