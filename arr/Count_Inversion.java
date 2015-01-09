@@ -1,30 +1,36 @@
-/*Count_Inversion
-
-Inversion Count for an array indicates – how far (or close) the array is from
-being sorted. If array is already sorted then inversion count is 0. If array is
-sorted in reverse order that inversion count is the maximum.
-Formally speaking, two elements a[i] and a[j] form an inversion if a[i] > a[j]
-and i < j
-
-
-Follow-up:
-if you want pairs that a[i] > a[j] and i > j, then you only need to change the
-stdout part to:
-for (i = index + 1; i < sorted.length; ++i) {
-  System.out.println(cur + "/" + sorted[i]);
-}
-
-*/
+/**
+ * Count_Inversion.
+ *
+ * Inversion Count for an array indicates – how far (or close) the array is from
+ * being sorted. If array is already sorted then inversion count is 0. If array is
+ * sorted in reverse order that inversion count is the maximum.
+ * Formally speaking, two elements a[i] and a[j] form an inversion if a[i] > a[j]
+ * and i < j
+ *
+ *
+ * Follow-up:
+ * if you want pairs that a[i] > a[j] and i > j, then you only need to change the
+ * stdout part to:
+ * for (i = index + 1; i < sorted.length; ++i) {
+ *   System.out.println(cur + "/" + sorted[i]);
+ * }
+ *
+ */
 
 import java.util.Arrays;
 
 public class Count_Inversion {
 
   public static void main(String[] args) {
+    Count_Inversion solution = new Count_Inversion();
+    solution.test();
+  }
+
+  public void test() {
     solve(new int[] {6, 9, 1, 14, 8, 12, 3, 2});
   }
 
-  public static void solve(int[] arr) {
+  public void solve(int[] arr) {
     // Get a deep copy of array and sort it.
     int[] sorted = Arrays.copyOfRange(arr, 0, arr.length);
     Arrays.sort(sorted);
@@ -33,7 +39,7 @@ public class Count_Inversion {
       int cur = arr[0];
       int index = binarySearch(sorted, cur);
       if (index == -1) {
-        throw new IllegalArgumentException(Cur + " not found in array.");
+        throw new IllegalArgumentException(cur + " not found in array.");
       }
       for (int i = 0; i < index; ++i) {
         //for (i = index + 1; i < sorted.length; ++i) {
@@ -48,7 +54,7 @@ public class Count_Inversion {
   /**
    * Remove element with index n from array.
    */
-  public static int[] removeIndex(int[] arr, int index) {
+  public int[] removeIndex(int[] arr, int index) {
     int[] ret = new int[arr.length - 1];
 
     for (int i = 0, ptr = 0; i < arr.length; ++i) {
@@ -64,7 +70,7 @@ public class Count_Inversion {
   /**
    * Binary Search Util.
    */
-  public static int binarySearch(int[] arr, int target) {
+  public int binarySearch(int[] arr, int target) {
     int head = 0;
     int tail = arr.length - 1;
     while (head <= tail) {
@@ -82,7 +88,7 @@ public class Count_Inversion {
   }
 
   // Helper function to print out array.
-  public static void print(int[] arr) {
+  public void print(int[] arr) {
     for (int i : arr) System.out.print(i + " ");
     System.out.println();
   }
