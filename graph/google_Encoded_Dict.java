@@ -28,12 +28,12 @@ import java.util.*;
 public class google_Encoded_Dict {
 
 	static final int charNum = 26;
-	
+
 	public static void main(String[] args) {
-		// Test case		
+		// Test case
 		String[] dict = new String[] {"dkc", "dbhhzz", "dbllbq"};
 		decode(dict);
-	}	
+	}
 
 	public static void decode(String[] dict) {
 		int n = dict.length, index = 0, i;
@@ -47,9 +47,10 @@ public class google_Encoded_Dict {
 				if (index < dict[i].length()) {
 					cur = dict[i].charAt(index);
 					if (prev == '\0') {
-						prev = cur;	
+						prev = cur;
 					} else if (prev != cur) {
 						// Build graph node
+                        System.out.println("prev: " + prev + " cur: " + cur);
 						relation.add(String.format("%s:%s", prev, cur));
 						prev = cur;
 					} else {
@@ -80,6 +81,8 @@ public class google_Encoded_Dict {
 			//System.out.println(String.format("%s %s", nodes[0], nodes[1]));
 			graph[v][t] = 1;
 		}
+
+        printMatrix(graph);
 		return graph;
 	}
 
@@ -125,7 +128,7 @@ public class google_Encoded_Dict {
 
 	// Helper function to print.
 	public static void print(int[] arr) {
-		for (int i : arr) System.out.print(i + " ");	
+		for (int i : arr) System.out.print(i + " ");
 		System.out.println();
 	}
 
