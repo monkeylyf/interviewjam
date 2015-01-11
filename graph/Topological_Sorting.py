@@ -20,8 +20,7 @@ def toposort_iterative(adj_list):
             in_degree[neighbor] += 1
 
     visited = [False] * n
-    topo_order = [None] * n
-    idx = 0
+    topo_order = []
 
     for i in xrange(n):
         v = -1
@@ -34,14 +33,12 @@ def toposort_iterative(adj_list):
             break
 
         visited[v] = True
-        topo_order[idx] = v
-        idx += 1
+        topo_order.append(v)
 
         for j in adj_list[v]:
             in_degree[j] -= 1
 
     return topo_order
-
 
 
 def toposort_recursive(adj_list):
