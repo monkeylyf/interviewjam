@@ -1,6 +1,6 @@
-"""Toposort.
+"""Topological_Sorting
 
-Author: yifeng
+Find the topological order of a directed graph.
 """
 
 def toposort_iterative(adj_list):
@@ -23,13 +23,14 @@ def toposort_iterative(adj_list):
     topo_order = []
 
     for i in xrange(n):
-        v = -1
+        v = None
+        # Find the node of zero indegree.
         for j in xrange(n):
-            if v >= 0:
-                break
             if in_degree[j] == 0 and not visited[j]:
                 v = j
-        if v < 0:
+                break
+        if v is None:
+            # Either all nodes visited or this graph has multiple 0-indegree node.
             break
 
         visited[v] = True
