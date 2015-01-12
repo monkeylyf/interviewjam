@@ -1,4 +1,4 @@
-"""google_Maximum_Submatrix_Producto
+"""google_Maximum_Submatrix_Product
 google
 
 Given a matrix which contains both positive and non-positve numbers.

@@ -28,11 +28,13 @@ class Solution:
                 # Non-negative.
                 (pos_acc, neg_acc) = (pos_acc * i, neg_acc * i)
             else:
+                # acc flipped since i is negative.
                 (pos_acc, neg_acc) = (neg_acc * i, pos_acc * i)
 
             # Update local_max.
             local_max = max(local_max, pos_acc)
-            # reset accumulators.
+
+            # Reset accumulators.
             if pos_acc < 1:
                 pos_acc = 1
             if neg_acc > -1:
