@@ -32,8 +32,12 @@ def quick_select(arr, n):
         return randrange(right - left + 1) + left
         #return left
 
-    def partition(arr, left, right, pivot_idx):
+    def swap(arr, i, j):
+        arr[i], arr[j] = arr[j], arr[i]
+
+    def partition(arr, left, right):
         """Partition the array given pivot."""
+        pivot_idx = rand(left, right)
         pivot_val = arr[pivot_idx]
         swap(arr, pivot_idx, right)
         store_idx = left
@@ -47,30 +51,26 @@ def quick_select(arr, n):
 
         return store_idx
 
-    def select(arr, left, right, n):
-        """"""
-        if left == right:
-            return arr[left]
-
-        while left <= right:
-            pivot_idx = rand(left, right)
-            pivot_idx = partition(arr, left, right, pivot_idx)
-            if n == pivot_idx:
-                return arr[n]
-            elif n < pivot_idx:
-                right = pivot_idx - 1
-            else:
-                left = pivot_idx + 1
-
+    # Sanity check.
     if not arr:
         raise ValueError("Empty input array")
-    return select(arr, 0, len(arr) - 1, n)
 
+    if n > len(arr):
+        raise ValueError("n cannot be larger than the length of arr")
 
-def swap(arr, i, j):
-    """"""
-    arr[i], arr[j] = arr[j], arr[i]
+    left = 0
+    right = len(arr) - 1
 
+    while left <= right:
+        pivot_idx = partition(arr, left, right)
+        if n == pivot_idx:
+            return arr[n]
+        elif n < pivot_idx:
+            right = pivot_idx - 1
+        else:
+            left = pivot_idx + 1
+
+    return left
 
 
 def solve(points):
