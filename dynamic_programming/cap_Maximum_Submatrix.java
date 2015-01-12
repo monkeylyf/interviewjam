@@ -19,21 +19,21 @@ public class cap_Maximum_Submatrix {
       {1, 2, -3},
       {3, -2, 1},
       {1, -1, 1}};
-    //System.out.println(getMaxMatrix(input));
+    System.out.println(getMaxMatrix(input) == 5);
 
     // test case 2.
     int[][] input1 = {
       {1,  1,  1},
       {-1, -1, -1},
       {-2, -2, -2}};
-    //System.out.println(getMaxMatrix(input1));
+    System.out.println(getMaxMatrix(input1) == 3);
 
     // test case 3.
     int[][] input2 = {{1, 2, -3},
       {3, -2, 1},
       {1, -1, 1},
       {3, 0, 4}};
-    //System.out.println(getMaxMatrix(input2));
+    System.out.println(getMaxMatrix(input2) == 10);
 
     // test case 4.
     int[][] input3 = {
@@ -42,7 +42,14 @@ public class cap_Maximum_Submatrix {
       {3, 8, 10, 1, 3},
       {-4, -1, 1, 7, -6},
     };
-    System.out.println(getMaxMatrix(input3));
+    System.out.println(getMaxMatrix(input3) == 29);
+
+    // test case 5.
+    int[][] input4 = {
+      {-1, -1, -1, -1},
+      {-1, -1, -1, -1},
+    };
+    System.out.println(getMaxMatrix(input4) == -1);
   }
 
   /** Dynamic programming.
@@ -55,7 +62,7 @@ public class cap_Maximum_Submatrix {
   public int getMaxMatrix(int[][] mtx) {
     int n = mtx.length;
     int m = mtx[0].length;
-    int max = 0;
+    int max = Integer.MIN_VALUE;
     for (int i = 0; i < n; ++i) {
       int[] accumulator = new int[m];
       for (int j = i; j < n; ++j) {
@@ -78,7 +85,9 @@ public class cap_Maximum_Submatrix {
   private int maxSumOfArray(int[] arr) {
     int max = 0;
     int sum = 0;
+    boolean allNegative = true;
     for (int i = 0; i < arr.length; ++i) {
+      allNegative = (allNegative && arr[i] >= 0) ? false : allNegative;
       sum += arr[i];
       if (sum > max) {
         max = sum;
@@ -89,6 +98,15 @@ public class cap_Maximum_Submatrix {
       }
     }
 
-    return max;
+    if (allNegative) {
+      // If all element are negative, then return max.
+      int maxNeg = Integer.MIN_VALUE;
+      for (int i : arr) {
+        maxNeg = Math.max(maxNeg, i);
+      }
+      return maxNeg;
+    } else {
+      return max;
+    }
   }
 }
