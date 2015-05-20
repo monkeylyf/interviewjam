@@ -20,7 +20,7 @@ class Solution:
         if len(nums) == 1:
             return nums[0]
 
-        prev, cur = nums[0], nums[0:2]
+        prev, cur = nums[0], max(nums[0:2])
 
         for i in nums[2:]:
             prev, cur = cur, max((prev + i), cur)
