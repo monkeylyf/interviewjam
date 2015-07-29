@@ -26,4 +26,5 @@ number_of_lines() {
     wc -l
 }
 
+
 main
