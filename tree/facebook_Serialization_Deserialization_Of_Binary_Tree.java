@@ -1,5 +1,5 @@
 /** facebook_Serialization_Deserialization_Of_Binary_Tree.
- * 
+ *
  * Marked as duplicates ofgoogle_BST_Serialization_Deserialization.java
  * The diff is serialize can be implemented with iterative way.
  *
@@ -7,18 +7,19 @@
  */
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
 
 public class facebook_Serialization_Deserialization_Of_Binary_Tree {
-	
+
 	public static void main(String[] args) {
 		facebook_Serialization_Deserialization_Of_Binary_Tree instance = new facebook_Serialization_Deserialization_Of_Binary_Tree();
 		instance.solve();
 	}
-	
+
 	public void solve() {
 		TreeNode root = new TreeNode(30);
 		root.left = new TreeNode(10);
@@ -27,9 +28,15 @@ public class facebook_Serialization_Deserialization_Of_Binary_Tree {
 		root.right.left = new TreeNode(45);
 		root.right.right = new TreeNode(35);
 		System.out.println(serialize(root));
+		System.out.println(serialize(null));
 	}
-	
-	public TreeNode deserialize(ArrayList<String> serial) {
+
+    /**
+     * Deserialize a List of String to a BST.
+     *
+     * @param serial, Queue<String>
+     */
+	public TreeNode deserialize(List<String> serial) {
 		if (serial == null || serial.size() == 0 || serial.get(0).equals("#")) {
 			return null;
 		} else {
@@ -37,7 +44,7 @@ public class facebook_Serialization_Deserialization_Of_Binary_Tree {
 			return deserializeUtil(q);
 		}
 	}
-	
+
 	private TreeNode deserializeUtil(Queue<String> serial) {
 		String str = serial.poll();
 		if (str.equals("#")) {
@@ -53,16 +60,16 @@ public class facebook_Serialization_Deserialization_Of_Binary_Tree {
 			}
 			return node;
 		}
-	}	
-	
-	public ArrayList<String> serialize(TreeNode root) {
-		ArrayList<String> serial = new ArrayList<String>();
-		
-		if (root == null) {
-			serial.add("#");
-			return serial;
-		}
-		
+	}
+
+    /**
+     * Serialize a BST to List of String.
+     *
+     * @param root, TreeNode
+     */
+	public List<String> serialize(TreeNode root) {
+		List<String> serial = new ArrayList<String>();
+
 		Stack<TreeNode> s = new Stack<TreeNode>();
 		s.push(root);
 		while (!s.isEmpty()) {
@@ -75,15 +82,21 @@ public class facebook_Serialization_Deserialization_Of_Binary_Tree {
 			s.push(cur.right);
 			s.push(cur.left);
 		}
-		
+
 		return serial;
 	}
-	
+
+    /**
+     * Private TreeNode class.
+     *
+     * @param val, int
+     */
 	static class TreeNode {
+
 		TreeNode left;
 		TreeNode right;
 		int val;
-		
+
 		TreeNode(int val) {
 			this.left = null;
 			this.right = null;
