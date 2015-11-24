@@ -1,10 +1,11 @@
-""""""
+"""google
+
+find most frequent elemnt in a binary tree path
+"""
 
 import unittest
 
 from collections import Counter
-from copy import deepcopy
-
 
 
 class TreeNode(object):
@@ -34,12 +35,11 @@ def solve(root):
             else:
                 return most_frequent[0]
         else:
-            counter[root.val] += 1
             # Update counter with local val.
-            left_counter = deepcopy(counter)
-            right_counter = deepcopy(counter)
-            left_number, left_frequency = find(root.left, left_counter)
-            right_number, right_frequency = find(root.right, right_counter)
+            counter[root.val] += 1
+
+            left_number, left_frequency = find(root.left, counter)
+            right_number, right_frequency = find(root.right, counter)
 
             # Handel leaf nodes.
             if left_number is None:
@@ -53,6 +53,8 @@ def solve(root):
             else:
                 # Also handel equal case.
                 return right_number, right_frequency
+
+            counter[root.val] += 1
 
     number, frequency = find(root, Counter())
     return number
@@ -76,11 +78,23 @@ class TestSuite(unittest.TestCase):
         root.right.right.right = TreeNode(2)
         self.assertEqual(solve(root), 2)
 
-
     def test_find_case_three(self):
         """"""
         root = None
         self.assertIsNone(solve(root))
+
+    def test_find_case_four(self):
+        """"""
+        root = TreeNode(1)
+        root.left = TreeNode(2)
+        root.right = TreeNode(2)
+        root.left.left = TreeNode(2)
+        root.left.right = TreeNode(2)
+        root.right.right = TreeNode(1)
+        root.right.right.right = TreeNode(1)
+        root.right.right.right.right = TreeNode(1)
+        root.right.right.right.right.right = TreeNode(1)
+        self.assertEqual(solve(root), 1)
 
 
 def main():
