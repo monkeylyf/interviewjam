@@ -24,7 +24,7 @@ class Solution {
     vector<int> twoSum(vector<int>& nums, int target) {
         map<int, int> mapping;
 
-        int idx = 0;
+        int idx = 1;
 
         for (int val : nums) {
             auto iter = mapping.find(target - val);
