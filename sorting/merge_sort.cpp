@@ -13,12 +13,6 @@ typedef std::vector<int>::const_iterator const_it;
 typedef std::vector<int>::iterator it;
 
 
-template<typename T>
-int length_of_vector(vector<T> & vect) {
-    return sizeof(vect) / sizeof(T);
-}
-
-
 void print_vector(vector<int> vect) {
     for (vector<int>::const_iterator i = vect.begin(); i != vect.end(); ++i) {
         printf("%d ", *i);
@@ -35,11 +29,6 @@ template <class T> class mergeSort {
         if (vect.size() <= 1) {
             return;
         }
-
-        // To sipangzi, if I uncomment the next line and replace it with the
-        // second line, it gives me segmentation fault. Why? What's the magic with
-        // size_type?
-        //int mid = length_of_vector(vect) / 2;
         typename std::vector<T>::size_type mid = vect.size() / 2;
         typename std::vector<T> left (vect.begin(), vect.begin() + mid);
         typename std::vector<T> right (vect.begin() + mid, vect.end());
@@ -84,7 +73,7 @@ template <class T> class mergeSort {
 
 
 int main() {
-    vector<int> vect {2, 3, 2, 1, 5, -1, 0};
+    vector<int> vect {2, 3, 2, 1, 5, -1, 0, 10, 8, 3, 4, -2};
 
     printf("Before sort: ");
     print_vector(vect);
