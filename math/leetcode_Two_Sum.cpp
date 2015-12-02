@@ -1,5 +1,7 @@
 /*
- * leet code Two Sum
+ * Copyright 2015
+ * Author: Ouroboros
+ * leetcode Two Sum
  */
 
 #include <stdio.h>
@@ -10,49 +12,41 @@ using std::vector;
 using std::map;
 
 
-void print_vector(const vector<int> *v) {
-    for (int val : *v) {
-        printf("%d ", val);
-    }
-    printf("\n");
+void print_vector(const vector<int> &v) {
+  for (int val : v) {
+    printf("%d ", val);
+  }
+  printf("\n");
 }
 
 
 class Solution {
-    public:
-
-    vector<int> twoSum(vector<int>& nums, int target) {
-        map<int, int> mapping;
-
-        int idx = 1;
-
-        for (int val : nums) {
-            auto iter = mapping.find(target - val);
-
-            if (iter != mapping.end()) {
-                // Find match.
-                int known_idx = iter->second;
-
-                vector<int> res {known_idx, idx};
-                return res;
-            }
-
-            mapping[val] = idx;
-            ++idx;
+ public:
+    vector<int> twoSum(const vector<int>& nums, int target) {
+      map<int, int> mapping;
+      int idx = 1;
+      for (int val : nums) {
+        int needed = target - val;
+        if (mapping.find(needed) != mapping.end()) {
+          // Find match.
+          vector<int> res {mapping[needed], idx};
+          return res;
         }
+        mapping[val] = idx;
+        ++idx;
+      }
 
-        vector<int> res;
-        return res;
+      return vector<int>();
     }
 };
 
 
 int main() {
-    Solution sol = Solution();
+  Solution sol = Solution();
 
-    vector<int> nums {2, 3, 1, 6, 8};
-    int target = 8;
-    vector<int> res = sol.twoSum(nums, target);
-    print_vector(&res);
-    return 0;
+  vector<int> nums {2, 3, 1, 6, 8};
+  int target = 8;
+  vector<int> res = sol.twoSum(nums, target);
+  print_vector(res);
+  return 0;
 }
