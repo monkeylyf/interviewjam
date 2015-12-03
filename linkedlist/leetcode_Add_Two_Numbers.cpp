@@ -11,12 +11,17 @@
 
 using std::vector;
 
-#define int_v vector<int>
+typedef vector<int> int_v;
 
 struct ListNode {
   int val;
   ListNode *next;
   explicit ListNode(int x) : val(x), next(NULL) {}
+
+  static void operator delete(void* ptr, std::size_t sz) {
+    //printf("custom delete for size %lu\n", sz);
+    ::operator delete(ptr);
+  }
 };
 
 
@@ -43,7 +48,8 @@ void destroyLinkedList(ListNode* head) {
   ListNode *next;
   while (head) {
     next = head->next;
-    delete[] head;
+    //printf("Deleting node: %d\n", head->val);
+    delete head;
     head = next;
   }
 }
@@ -138,8 +144,8 @@ void test(const int_v &num1, const int_v &num2, const int_v &expected) {
   Solution sol;
   ListNode *res = sol.addTwoNumbers(l1, l2);
 
-  printList(expected_l);
-  printList(res);
+  //printList(expected_l);
+  //printList(res);
   if (!isSameLinkedList(res, expected_l)) {
     throw 1;
   } else {
