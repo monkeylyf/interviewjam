@@ -14,27 +14,27 @@ using std::max;
 
 class Solution {
  public:
-    int lengthOfLongestSubstring(string s) {
-      bool seen[256] = { false };
-      int start = 0;
-      int end = 0;
-      int ret = 0;
-      while (end < s.length()) {
-        if (seen[s[end]]) {
-          ret = max(ret, end - start);
-          while (s[start] != s[end]) {
-            seen[s[start]] = false;
-            ++start;
-          }
+  int lengthOfLongestSubstring(string s) {
+    bool seen[256] = { false };
+    int start = 0;
+    int end = 0;
+    int ret = 0;
+    while (end < s.length()) {
+      if (seen[s[end]]) {
+        ret = max(ret, end - start);
+        while (s[start] != s[end]) {
+          seen[s[start]] = false;
           ++start;
-        } else {
-          seen[s[end]] = true;
         }
-
-        ++end;
+        ++start;
+      } else {
+        seen[s[end]] = true;
       }
-      return max(ret, end - start);
+
+      ++end;
     }
+    return max(ret, end - start);
+  }
 };
 
 

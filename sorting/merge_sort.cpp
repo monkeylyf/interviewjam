@@ -24,50 +24,50 @@ void print_vector(const vector<int> &vect) {
 
 template <class T> class mergeSort {
  public:
-    static void merge_sort_vector(vector<T> *vect) {
-      if (vect->size() <= 1) {
-        return;
+  static void merge_sort_vector(vector<T> *vect) {
+    if (vect->size() <= 1) {
+      return;
+    }
+    typename std::vector<T>::size_type mid = vect->size() / 2;
+    typename std::vector<T> left(vect->begin(), vect->begin() + mid);
+    typename std::vector<T> right(vect->begin() + mid, vect->end());
+
+    merge_sort_vector(&left);
+    merge_sort_vector(&right);
+
+    merge(
+      left.begin(), left.end(), right.begin(), right.end(), vect->begin());
+  }
+
+  static void merge(const_it left, const_it left_end, const_it right,
+      const_it right_end, it orig) {
+    while (left != left_end && right != right_end) {
+      if (*left > *right) {
+        *orig = *right;
+        ++right;
+      } else {
+        *orig = *left;
+        ++left;
       }
-      typename std::vector<T>::size_type mid = vect->size() / 2;
-      typename std::vector<T> left(vect->begin(), vect->begin() + mid);
-      typename std::vector<T> right(vect->begin() + mid, vect->end());
-
-      merge_sort_vector(&left);
-      merge_sort_vector(&right);
-
-      merge(
-        left.begin(), left.end(), right.begin(), right.end(), vect->begin());
+      ++orig;
     }
 
-    static void merge(const_it left, const_it left_end, const_it right,
-        const_it right_end, it orig) {
-      while (left != left_end && right != right_end) {
-        if (*left > *right) {
-          *orig = *right;
-          ++right;
-        } else {
-          *orig = *left;
-          ++left;
-        }
-        ++orig;
-      }
+    merge_all(left, left_end, orig);
+    merge_all(right, right_end, orig);
+  }
 
-      merge_all(left, left_end, orig);
-      merge_all(right, right_end, orig);
-    }
-
-    static T* merge_sort_array(T* array) {
-      return array;
-    }
+  static T* merge_sort_array(T* array) {
+    return array;
+  }
 
  private:
-    static void merge_all(const_it begin, const_it end, it orig) {
-      while (begin != end) {
-        *orig = *begin;
-        ++begin;
-        ++orig;
-      }
+  static void merge_all(const_it begin, const_it end, it orig) {
+    while (begin != end) {
+      *orig = *begin;
+      ++begin;
+      ++orig;
     }
+  }
 };
 
 

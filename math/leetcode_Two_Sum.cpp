@@ -22,22 +22,22 @@ void print_vector(const vector<int> &v) {
 
 class Solution {
  public:
-    vector<int> twoSum(const vector<int>& nums, int target) {
-      map<int, int> mapping;
-      int idx = 1;
-      for (int val : nums) {
-        int needed = target - val;
-        if (mapping.find(needed) != mapping.end()) {
-          // Find match.
-          vector<int> res {mapping[needed], idx};
-          return res;
-        }
-        mapping[val] = idx;
-        ++idx;
+  vector<int> twoSum(const vector<int>& nums, int target) {
+    map<int, int> mapping;
+    int idx = 1;
+    for (int val : nums) {
+      int needed = target - val;
+      if (mapping.find(needed) != mapping.end()) {
+        // Find match.
+        vector<int> res {mapping[needed], idx};
+        return res;
       }
-
-      return vector<int>();
+      mapping[val] = idx;
+      ++idx;
     }
+
+    return vector<int>();
+  }
 };
 
 
