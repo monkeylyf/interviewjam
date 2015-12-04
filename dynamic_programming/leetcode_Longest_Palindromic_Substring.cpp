@@ -15,13 +15,13 @@ class Solution {
  public:
   string longestPalindrome(string s) {
     int length = s.size();
-    if (length == 0 || length == 1) {
+    if (length <= 1) {
       return s;
     }
 
     // Init dp state matrix. Note that default value is true when
     // you init a bool[][]
-    int dp[length][length];
+    bool dp[length][length];
     for (int i = 0; i < length; ++i) {
       for (int j = 0; j < length; ++j) {
         dp[i][j] = i == j;
