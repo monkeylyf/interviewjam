@@ -7,18 +7,11 @@
 
 #include <stdio.h>
 #include <string>
-#include <vector>
 
 using std::string;
-using std::vector;
 
 
 class Solution {
- private:
-  const vector<string> symbol { "M", "CM", "D", "CD", "C", "XC", "L",
-    "XL", "X", "IX", "V", "IV", "I" };
-  const vector<int> value { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
-
  public:
   /*
    * I was over-thinking. I thought IIV represents 3, which is incorrect. It
@@ -35,7 +28,6 @@ class Solution {
    * } else {
    *   res -+ window[1];
    * }
-   *
    */
   int romanToInt(string s) {
     // Pre-precessing for char to value mapping.
@@ -61,7 +53,6 @@ class Solution {
 
     // Process last char.
     res += mapping[s[s.size() - 1] - 'A'];
-
     return res;
   }
 };
@@ -69,7 +60,7 @@ class Solution {
 
 int main() {
   Solution sol;
-  //const int res = sol.romanToInt("MMMCMXCIX");
+  // const int res = sol.romanToInt("MMMCMXCIX");
   const int res = sol.romanToInt("IV");
   printf("Result: %d\n", res);
 }
