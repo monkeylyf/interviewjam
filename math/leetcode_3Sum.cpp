@@ -5,8 +5,8 @@
  * leetcode threesome
  */
 
-#include <algorithm>
 #include <stdio.h>
+#include <algorithm>
 #include <vector>
 
 using std::vector;
@@ -61,23 +61,23 @@ class Solution {
     return res;
   }
 
-  int binarySearch(vector<int>& nums, int head, int tail, int target) {
-    int idx = -1;
-    bool found = false;
-    while (!found && head <= tail) {
-      int mid = (tail - head) / 2 + head; // Avoid int overflow.
-      if (nums.at(mid) == target) {
-        found = true;
-        idx = mid;
-      } else if (nums.at(mid) > target) {
-        tail = mid - 1;
-      } else {
-        head = mid + 1;
-      }
-    }
+  //int binarySearch(const vector<int>& nums, int head, int tail, int target) {
+  //  int idx = -1;
+  //  bool found = false;
+  //  while (!found && head <= tail) {
+  //    int mid = (tail - head) / 2 + head;  // Avoid int overflow.
+  //    if (nums.at(mid) == target) {
+  //      found = true;
+  //      idx = mid;
+  //    } else if (nums.at(mid) > target) {
+  //      tail = mid - 1;
+  //    } else {
+  //      head = mid + 1;
+  //    }
+  //  }
 
-    return idx;
-  }
+  //  return idx;
+  //}
 };
 
 
@@ -85,11 +85,11 @@ class Solution {
 int main() {
   Solution sol;
 
-  //vector<int> nums {-1, 0, 0, 1, 2, -1, -4, -4};
-  //vector<int> nums {0, 0, 0};
+  // vector<int> nums {-1, 0, 0, 1, 2, -1, -4, -4};
+  // vector<int> nums {0, 0, 0};
   vector<int> nums {0, 0, 0, 0};
-  //printVector(nums);
-  //printVector(sol.dedup(nums));
+  // printVector(nums);
+  // printVector(sol.dedup(nums));
   vector<vector<int>> res = sol.threeSum(nums);
 
   printf("Results:\n");
