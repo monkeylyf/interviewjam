@@ -5,6 +5,9 @@
  * leetcode generate parentheses
  */
 
+#include "gmock/gmock-matchers.h"
+#include <gtest/gtest.h>
+
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -48,11 +51,17 @@ class Solution {
 };
 
 
-int main() {
+TEST(TestSuite, TestEqual) {
   Solution sol;
-
   vector<string> res = sol.generateParenthesis(3);
-  for (string s : res) {
-    printf("%s\n", s.c_str());
-  }
+
+  vector<string> expected {
+    "((()))",
+    "(()())",
+    "(())()",
+    "()(())",
+    "()()()",
+  };
+
+  EXPECT_THAT(res, ::testing::ContainerEq(expected));
 }
