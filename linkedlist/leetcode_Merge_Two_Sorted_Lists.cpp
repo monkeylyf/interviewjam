@@ -38,32 +38,27 @@ class Solution {
       return l1;
     }
 
-    ListNode* dummy = new ListNode(0);
-    ListNode* cursor = dummy;
+    ListNode dummy(0);
+    ListNode* cursor = &dummy;
 
     while (l1 != NULL && l2 !=NULL) {
-      int val;
       if (l1->val > l2->val) {
-        val = l2->val;
+        cursor->next = l2;
         l2 = l2->next;
       } else {
-        val = l1->val;
+        cursor->next = l1;
         l1 = l1->next;
       }
-      ListNode* node = new ListNode(val);
-      cursor->next = node;
-      cursor = node;
+      cursor = cursor->next;
     }
 
-    ListNode* left = (l1 == NULL) ? l2 : l1;
-    while (left != NULL) {
-      ListNode* node = new ListNode(left->val);
-      cursor->next = node;
-      cursor = node;
-      left = left->next;
+    if (l1 != NULL) {
+      cursor->next = l1;
+    } else {
+      cursor->next = l2;
     }
 
-    return dummy->next;
+    return dummy.next;
   }
 };
 
