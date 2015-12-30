@@ -1,29 +1,38 @@
-/*Substring_with_Concatenation_of_All_Words
-
-You are given a string, S, and a list of words, L, that are all of the same
-length. Find all starting indices of substring(s) in S that is a concatenation
-of each word in L exactly once and without any intervening characters.
-For example, given:
-S: "barfoothefoobarman"
-L: ["foo", "bar"]
-You should return the indices: [0,9].
-(order does not matter).
-*/
+/*
+ * Substring_with_Concatenation_of_All_Words
+ *
+ * You are given a string, S, and a list of words, L, that are all of the same
+ * length. Find all starting indices of substring(s) in S that is a concatenation
+ * of each word in L exactly once and without any intervening characters.
+ * For example, given:
+ * S: "barfoothefoobarman"
+ * L: ["foo", "bar"]
+ * You should return the indices: [0,9].
+ * (order does not matter).
+ */
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 
 public class leetcode_Substring_with_Concatenation_of_All_Words {
 
   public static void main(String[] args) {
-	findSubstring("sheateateseatea", new String[] {"sea","tea","ate"});
+    leetcode_Substring_with_Concatenation_of_All_Words solution = new
+      leetcode_Substring_with_Concatenation_of_All_Words();
+	List<Integer> res = solution.findSubstring(
+      "sheateateseatea", new String[] {"sea","tea","ate"});
+
+    System.out.println(res);
   }
 
-  public ArrayList<Integer> findSubstring(String S, String[] L) {
-	ArrayList<Integer> ret = new ArrayList<Integer>();
-	HashMap<String, Integer> dict = new HashMap<String, Integer>();
+  public List<Integer> findSubstring(String S, String[] L) {
+	List<Integer> ret = new ArrayList<>();
+	Map<String, Integer> dict = new HashMap<>();
 	for (String str : L) {
 	  if (dict.containsKey(str)) {
 		dict.put(str, dict.get(str) + 1);
@@ -32,7 +41,7 @@ public class leetcode_Substring_with_Concatenation_of_All_Words {
 	  }
 	}
 
-	HashMap<String, Integer> map = copy(dict);
+	Map<String, Integer> map = copy(dict);
 
 	int strLen = L[0].length();
 	for (int i = 0; i <= S.length() - L.length * strLen; ++i) {
@@ -63,8 +72,8 @@ public class leetcode_Substring_with_Concatenation_of_All_Words {
 	return ret;
   }
 
-  public HashMap<String, Integer> copy(HashMap<String, Integer> map) {
-	HashMap<String, Integer> ret = new HashMap<String, Integer>();
+  public Map<String, Integer> copy(Map<String, Integer> map) {
+	Map<String, Integer> ret = new HashMap<>();
 	for (String key : map.keySet()) {
 	  ret.put(key, map.get(key));
 	}
@@ -72,11 +81,11 @@ public class leetcode_Substring_with_Concatenation_of_All_Words {
 	return ret;
   }
 
-  /*The solution below is obsolete.*/
-  public static ArrayList<Integer> findSubstring(String S, String[] L) {
+  /*The solution below is obsolete.
+  public List<Integer> findSubstring(String S, String[] L) {
 	// The idea behind this is to get all possible permutations of given set.
-	ArrayList<Integer> res = new ArrayList<Integer>();
-	HashSet<String> all = new HashSet<String>();
+	List<Integer> res = new ArrayList<>();
+	Set<String> all = new HashSet<String>();
 	int len = L[0].length() * L.length; // The length of given words do not need to be same.
 	nextString(L, all, "" );
 	for (int i = 0; i <= S.length() - len; ++i) {
@@ -87,7 +96,7 @@ public class leetcode_Substring_with_Concatenation_of_All_Words {
 	return res;
   }
 
-  public static void nextString(String[] L, HashSet<String> all, String acc) {
+  public static void nextString(String[] L, Set<String> all, String acc) {
 	if (L.length == 0) {
 	  all.add(acc);
 	} else {
@@ -108,6 +117,7 @@ public class leetcode_Substring_with_Concatenation_of_All_Words {
 	}
 	return res;
   }
+  */
 }
 
 
@@ -148,13 +158,13 @@ class Solution:
             used = self.copy(c)
 
         return ret
-    
+
     def copy(self, d):
         ret = {}
         for key, value in d.iteritems():
             ret[key] = value
         return ret
-    
+
     def count(self, L):
         used = {}
         for item in L:
