@@ -39,20 +39,20 @@ class Solution {
       nextUnfilledCell(cell, *board);
     } catch (int e) {
       // Invalid
-      return isValidSudoku(cur_cell, *board);
+      return isValidSudoku(*board, cur_cell);
     }
 
     for (char i = '1'; i <= '9'; ++i) {
       (*board)[cell->first][cell->second] = i;
-      if (isValidSudoku(*cell, *board)) {
+      if (isValidSudoku(*board, *cell)) {
         bool res = solveSudokuRecursive(cell, board);
         if (res) {
-          // Board is filled, Stop trying.
+          // Board is all filled, Stop trying.
           return true;
         }
       }
     }
-    // Reset to unfilled state.
+    // Reset to previos state with this cell unfilled.
     (*board)[cell->first][cell->second] = '.';
     cell->first = cur_cell.first;
     cell->second = cur_cell.second;
@@ -85,8 +85,8 @@ class Solution {
     }
   }
 
-  bool isValidSudoku(const pair<int, int>& cell, const vector<vector<char>>& board) {
-    bool mask[10] {};
+  bool isValidSudoku(const vector<vector<char>>& board, const pair<int, int>& cell) {
+    vector<bool> mask(10, false);
     // Check row.
     for (int j = 0; j < 9; ++j) {
       if (board[cell.first][j] != '.') {
@@ -98,7 +98,7 @@ class Solution {
         }
       }
     }
-    memset(mask, false, sizeof(mask));
+    std::fill(mask.begin(), mask.end(), false);
 
     // Check column.
     for (int i = 0; i < 9; ++i) {
@@ -111,7 +111,7 @@ class Solution {
         }
       }
     }
-    memset(mask, false, sizeof(mask));
+    std::fill(mask.begin(), mask.end(), false);
 
     // Check sub square.
     int x = cell.first / 3 * 3;
@@ -128,7 +128,6 @@ class Solution {
         }
       }
     }
-    memset(mask, false, sizeof(mask));
 
     return true;
   }
