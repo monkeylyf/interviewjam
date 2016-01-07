@@ -1,42 +1,47 @@
-/*First_Missing_Positive
-
-Given an unsorted integer array, find the first missing positive integer.
-For example,
-Given [1,2,0] return 3,
-and [3,4,-1,1] return 2.
-Your algorithm should run in O(n) time and uses constant space.
-*/
+/* First_Missing_Positive
+ *
+ * Given an unsorted integer array, find the first missing positive integer.
+ * For example,
+ * Given [1,2,0] return 3,
+ * and [3,4,-1,1] return 2.
+ * Your algorithm should run in O(n) time and uses constant space.
+  */
 
 class leetcode_First_Missing_Positive {
-    public static void main(String[] args) {
-        firstMissingPositive(new int[] {1});
+
+  public static void main(String[] args) {
+    firstMissingPositive(new int[] {1});
+  }
+
+  public static int firstMissingPositive(int[] A) {
+    for (int i = 0; i < A.length; ++i) {
+      int belonging_idx = A[i] - 1;
+      while (i != belonging_idx &&
+          0 <= belonging_idx &&
+          belonging_idx < A.length &&
+          A[i] != A[belonging_idx]) {
+        int tmp = A[i];
+        A[i] = A[belonging_idx];
+        A[belonging_idx] = tmp;
+        belonging_idx = A[i] - 1;
+      }
     }
-    public static int firstMissingPositive(int[] A) {
-        // The idea is declare a boolean array with length A.length + 2
-        // bool[0] is wasted because here the index is considered as potential missing int.
-        // bool[len + 1] is for the case that {1,2,3,4,5} the missing one is 6.
-        boolean[] arr = new boolean[A.length + 2];
-        for (int i = 0; i < A.length; ++i) {
-            if (A[i] <= A.length && A[i] > 0) {
-                arr[A[i]] = true;
-            }
-        }
-        for (int i = 1; i < arr.length; ++i) {
-            if (!arr[i]) {
-                return i;
-            }
-        }
-        return 1;
+
+    int idx = 0;
+    while (idx < A.length && idx == A[idx] - 1) {
+      ++idx;
     }
+    return idx + 1;
+  }
 }
 
 
-/* Python Version 
+/* Python Version
 def firstMissingPositive(self, A):
     s = set([ i for i in xrange(1, len(A) + 1)])
     for val in A:
         if val in s:
             s.remove(val)
-    
+
     return min(list(s)) if s else len(A) + 1
 */
