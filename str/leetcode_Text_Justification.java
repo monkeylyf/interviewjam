@@ -1,25 +1,26 @@
-/*Text_Justification
-
-Given an array of words and a length L, format the text such that each line has
-exactly L characters and is fully (left and right) justified.
-You should pack your words in a greedy approach; that is, pack as many words as
-you can in each line. Pad extra spaces ' ' when necessary so that each line has
-exactly L characters.
-Extra spaces between words should be distributed as evenly as possible. If the
-number of spaces on a line do not divide evenly between words, the empty slots
-on the left will be assigned more spaces than the slots on the right.
-For the last line of text, it should be left justified and no extra space is
-inserted between words.
-For example,
-words: ["This", "is", "an", "example", "of", "text", "justification."]
-L: 16.
-Return the formatted lines as:
-[
-   "This    is    an",
-    "example  of text",
-    "justification.  "
-]
-*/
+/**
+ * Text_Justification.
+ *
+ * Given an array of words and a length L, format the text such that each line has
+ * exactly L characters and is fully (left and right) justified.
+ * You should pack your words in a greedy approach; that is, pack as many words as
+ * you can in each line. Pad extra spaces ' ' when necessary so that each line has
+ * exactly L characters.
+ * Extra spaces between words should be distributed as evenly as possible. If the
+ * number of spaces on a line do not divide evenly between words, the empty slots
+ * on the left will be assigned more spaces than the slots on the right.
+ * For the last line of text, it should be left justified and no extra space is
+ * inserted between words.
+ * For example,
+ * words: ["This", "is", "an", "example", "of", "text", "justification."]
+ * L: 16.
+ * Return the formatted lines as:
+ * [
+ *    "This    is    an",
+ *     "example  of text",
+ *     "justification.  "
+ * ]
+ */
 
 
 import java.util.ArrayList;
@@ -43,8 +44,8 @@ public class leetcode_Text_Justification {
   }
 
   public List<String> fullJustify(String[] words, int L) {
-    List<String> res = new ArrayList<String>();
-    List<String> tokens = new ArrayList<String>();
+    List<String> res = new ArrayList<>();
+    List<String> tokens = new ArrayList<>();
     StringBuilder acc = new StringBuilder(words[0]);
     tokens.add(words[0]);
 
@@ -59,7 +60,7 @@ public class leetcode_Text_Justification {
       } else {
         res.add(evenlyDistributed(tokens, L - len));
         acc = new StringBuilder(words[i]);
-        tokens = new ArrayList<String>();
+        tokens = new ArrayList<>();
         tokens.add(words[i]);
         len = words[i].length();
       }
