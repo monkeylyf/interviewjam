@@ -16,7 +16,7 @@ using std::vector;
 class Solution {
  public:
   vector<vector<int>> subsets(vector<int>& nums) {
-    vector<vector<int>> container;
+    vector<vector<int>> container {vector<int> (0)};
     vector<int> acc;
     subsetsRecursive(&acc, &container, 0, nums);
     return container;
@@ -24,17 +24,13 @@ class Solution {
 
  private:
   void subsetsRecursive(vector<int>* acc, vector<vector<int>>* container,
-    int i, const vector<int>& nums) {
-    if (i == nums.size()) {
-      vector<int> subset (acc->begin(), acc->end());
-      sort(subset.begin(), subset.end());
-      container->push_back(subset);
-    } else {
-      // Don't pick current val
-      subsetsRecursive(acc, container, i + 1, nums);
-      // Pick current val
+    int start, const vector<int>& nums) {
+    for (int i = start; i < nums.size(); ++i) {
+      // Pick current val.
       acc->push_back(nums[i]);
+      container->push_back(vector<int> (acc->begin(), acc->end()));
       subsetsRecursive(acc, container, i + 1, nums);
+      // Pop the current val out so next iteration won't include it.
       acc->pop_back();
     }
   }

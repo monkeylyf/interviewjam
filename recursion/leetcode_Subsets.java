@@ -20,8 +20,8 @@
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Collections;
 
 
 public class leetcode_Subsets {
@@ -31,30 +31,22 @@ public class leetcode_Subsets {
     System.out.println(subsets(new int[] {1, 2, 3}));
   }
 
-  public static List<ArrayList<Integer>> subsets(int[] S) {
-    // The idea behind this is all(1,2,3) = set contains 1 + set contains no 1.
-    // When we recurse through the array, we do two steps.
-    // 1: Put the current element in the pocket, move on.
-    // 2: Pass the current element, move on. (You have to remove the element you put in your pocket in step 1
-    // since var acc is used as the pocket, which is called by reference.)
-    List<ArrayList<Integer>> all = new ArrayList<>();
+  public static List<List<Integer>> subsets(int[] S) {
+    Arrays.sort(S);
+    List<List<Integer>> all = new ArrayList<>();
+    all.add(new ArrayList<Integer>());
     List<Integer> acc = new ArrayList<>();
     nextSubset(S, 0, all, acc);
     return all;
   }
 
-  public static void nextSubset(int[]S, int n, List<ArrayList<Integer>> all, List<Integer> acc) {
-    if (S.length == n) {
-      List<Integer> res = new ArrayList<>(acc);
-      Collections.sort(res);
-      all.add(res);
-    } else {
-      // With S[n].
-      acc.add(S[n]);
-      nextSubset(S, n + 1, all, acc);
+  public static void nextSubset(int[] S, int start, List<List<Integer>> all, List<Integer> acc) {
+    for (int i = start; i < S.length; ++i) {
+      // With S[i].
+      acc.add(S[i]);
+      all.add(new ArrayList<Integer>(acc));
+      nextSubset(S, i + 1, all, acc);
       acc.remove(acc.size() - 1);
-      // Withough S[n].
-      nextSubset(S, n + 1, all, acc);
     }
   }
 }
