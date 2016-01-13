@@ -1,58 +1,57 @@
-/*Subsets_II
-
-Given a collection of integers that might contain duplicates, S, return all
-possible subsets.
-Note:
-Elements in a subset must be in non-descending order.
-The solution set must not contain duplicate subsets.
-For example,
-If S = [1,2,2], a solution is:
-[
-  [2],
-  [1],
-  [1,2,2],
-  [2,2],
-  [1,2],
-  []
-]
-*/
+/**
+ * Subsets_II.
+ *
+ * Given a collection of integers that might contain duplicates, S, return all
+ * possible subsets.
+ * Note:
+ * Elements in a subset must be in non-descending order.
+ * The solution set must not contain duplicate subsets.
+ * For example,
+ * If S = [1,2,2], a solution is:
+ * [
+ *   [2],
+ *   [1],
+ *   [1,2,2],
+ *   [2,2],
+ *   [1,2],
+ *   []
+ * ]
+ */
 
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class leetcode_Subsets_II {
 
-    public static void main(String[] args) {
-        System.out.println(subsetsWithDup(new int[] {1, 2, 2, 3, 4, 4}));
-        System.out.println(subsetsWithDup(new int[] {1, 2, 2}));
-    }
+  public static void main(String[] args) {
+    System.out.println(subsetsWithDup(new int[] {1, 2, 2, 3, 4, 4}));
+    System.out.println(subsetsWithDup(new int[] {1, 2, 2}));
+  }
 
-    public static ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
-        // The idea behind this is almost same as Subsets.
-        // The only different is we used HashSet as the accumulator to avoid duplicates.
-        HashSet<ArrayList<Integer>> all = new HashSet<ArrayList<Integer>>();
-        ArrayList<Integer> tmp = new ArrayList<Integer>();
-        nextSubset(num, 0, all, tmp);
-        return new ArrayList<ArrayList<Integer>>(all);
-    }
+  public static List<List<Integer>> subsetsWithDup(int[] num) {
+    Arrays.sort(num);
+    List<List<Integer>> all = new ArrayList<>();
+    all.add(new ArrayList<Integer>());
+    List<Integer> acc = new ArrayList<>();
+    nextSubset(num, 0, all, acc);
+    return all;
+  }
 
-    public static void nextSubset(int[]num, int n, HashSet<ArrayList<Integer>> all, ArrayList<Integer> tmp) {
-        if (num.length == n) {
-            ArrayList<Integer> res = new ArrayList<Integer>(tmp);
-            Collections.sort(res);
-            all.add(res);
-        } else {
-            // With num[n].
-            tmp.add(num[n]);
-            nextSubset(num, n + 1, all, tmp);
-            tmp.remove(tmp.size() - 1);
-            // Withough num[n].
-            nextSubset(num, n + 1, all, tmp);
-        }
+  public static void nextSubset(int[]num, int start, List<List<Integer>> all, List<Integer> acc) {
+    for (int i = start; i < num.length; ++i) {
+      if (start < i && num[i - 1] == num[i]) {
+        continue;
+      }
+      // With num[i].
+      acc.add(num[i]);
+      all.add(new ArrayList(acc));
+      nextSubset(num, i + 1, all, acc);
+      acc.remove(acc.size() - 1);
     }
+  }
 }
 
 
@@ -71,11 +70,11 @@ def subsetsWithDup(self, S):
             acc.pop()
             # Do not use it
             dfs(idx + 1, S, acc, container)
-        
+
     S = sorted(S)
     container = set()
     dfs(0, S, [], container)
-    
+
     ret = [[]]
     for item in container:
         if item:
