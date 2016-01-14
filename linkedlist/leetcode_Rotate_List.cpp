@@ -11,19 +11,19 @@
  * Definition for singly-linked list.
  */
 struct ListNode {
-    int val;
-    ListNode* next;
-    ListNode(int x) : val(x), next(NULL) {}
+  int val;
+  ListNode* next;
+  ListNode(int x) : val(x), next(NULL) {}
 
-    void printAll() {
-      printf("%d -> ", val);
-      ListNode* cur = next;
-      while (cur) {
-        printf("%d -> ", cur->val);
-        cur = cur->next;
-      }
-      printf("NULL\n");
+  void printAll() {
+    printf("%d -> ", val);
+    ListNode* cur = next;
+    while (cur) {
+      printf("%d -> ", cur->val);
+      cur = cur->next;
     }
+    printf("NULL\n");
+  }
 };
 
 
