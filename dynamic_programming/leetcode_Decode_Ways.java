@@ -46,12 +46,12 @@ class leetcode_Decode_Ways {
         // can be decoded.
         c1 += c0; // new c1 = c1 + c0
         c0 = c1 - c0; //new c0 = old c1 = new c1 - c0
-      } else if (two == true && one == false) {
+      } else if (two && !one) {
         // Can only decode previous two digits.
         int swap = c1; // new c1 = old c0
         c1 = c0; // new c0 = old c1
         c0 = swap;
-      } else if (two == false && one == true) {
+      } else if (!two && one) {
         // Can only decode previous one digit.
         c0 = c1;
       } else {
