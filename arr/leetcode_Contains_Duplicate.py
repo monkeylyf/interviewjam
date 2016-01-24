@@ -12,13 +12,13 @@ class Solution(object):
         :rtype: bool
         """
         #return len(nums) != len(set(nums))
-        seen = {}
+        seen = set()
         for num in nums:
             if num in seen:
-                return False
+                return True
             else:
                 seen.add(num)
-        return True
+        return False
 
 
 def main():
