@@ -31,8 +31,26 @@ def all_solutions(n):
     return container
 
 
+def rand(n):
+    """Randomly generate the gifts."""
+    import random
+    s = {i for i in xrange(n)}
+
+    ret = []
+
+    for i in xrange(n):
+        s.remove(i)
+        gift_from = random.choice(list(s))
+        ret.append(gift_from)
+        s.add(i)
+
+    return ret
+
+
 def main():
-    p(all_solutions(4))
+    #p(all_solutions(4))
+    for _ in xrange(10):
+        print rand(5)
 
 
 if __name__ == '__main__':
