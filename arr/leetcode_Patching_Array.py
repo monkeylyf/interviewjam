@@ -51,16 +51,18 @@ class Solution(object):
         reach = 0 # longest reach that numbers in [1, reach] can be formed.
         patch = 0 # number of patches needed
         i = 0
-        satisfied = False
-        while not satisfied and i < len(nums):
-            while not satisfied and nums[i] > reach + 1:
+        while i < len(nums):
+            while nums[i] > reach + 1:
                 # For the first loop, nums[0] must be 1 otherwise it will be
                 # added as a patch.
                 reach += reach + 1 # add reach + 1 as patch
                 patch += 1
-                satisfied = reach >= n
+                if reach >= n:
+                    return patch
 
             reach += nums[i]
+            if reach >= n:
+                return patch
             i += 1
 
         # After taking care of all given numbers we can do 1, 2, 4, 8..tricks
@@ -75,6 +77,8 @@ def main():
     assert sol.minPatches([1, 5, 10], 20) == 2
     assert sol.minPatches([1, 5, 10], 0) == 0
     assert sol.minPatches([1, 3], 6) == 1
+    assert sol.minPatches([1, 2, 2], 5) == 0
+    assert sol.minPatches([1, 7, 21, 31, 34, 37, 40, 43, 49, 87, 90, 92, 93, 98, 99], 12) == 2
 
 
 if __name__ == '__main__':
