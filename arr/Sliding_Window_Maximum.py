@@ -28,30 +28,32 @@ just passed.
 There is a solution with amortized O(n) time complexity.
 """
 
+from collections import deque
+
 
 def max_sliding_window(arr, w):
     """"""
     assert w > 0, 'Invalid window size {0}'.format(w)
-    Q = []
+    queue = deque()
     ret = []
 
     # Init sliding window queue with first w values. All elements in queue are indexes.
-    # Q[0] is the index of largest element in current window.
-    # Q[i] means min(window[i:w]), so we know what's the max when you pop a maximum in 
+    # queue[0] is the index of largest element in current window.
+    # queue[i] means min(window[i:w]), so we know what's the max when you pop a maximum in
     # the current window.
     # Imagine that the sliding window starts at [-w, 0]
-    
-    for i, elem in enumerate(arr):
-        # current element is larger that the maximum in current sliding window, pop it. 
-        while Q and elem >= arr[Q[-1]]:
-            Q.pop()
-        # When the sliding window pass one element and this one is the , check 
-        while i >= w and Q and Q[0] <= i - w:
-            Q.pop(0)
 
-        Q.append(i) # Approval of O(n). N append thus N pop.
+    for i, elem in enumerate(arr):
+        # current element is larger that the maximum in current sliding window, pop it.
+        while queue and elem >= arr[queue[-1]]:
+            queue.popleft()
+        # When the sliding window pass one element and this one is the , check
+        while i >= w and queue and queue[0] <= i - w:
+            queue.popleft()
+
+        queue.append(i) # Approval of O(n). N append thus N pop.
         # Append the maximum of current sliding window.
-        ret.append(arr[Q[0]])
+        ret.append(arr[queue[0]])
     return ret[w - 1:]
 
 

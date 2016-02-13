@@ -1,19 +1,20 @@
-/** facebook_Find_Longest_Subarray_With_Sum_K.
- *  facebook
+/**
+ * facebook_Find_Longest_Subarray_With_Sum_K.
+ * facebook
  *
- *  Given an int array and int k, find the longest subarray that sums up to k.
- *  If such subarray does not exist, return empty array.
+ * Given an int array and int k, find the longest subarray that sums up to k.
+ * If such subarray does not exist, return empty array.
  */
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 
-public class facebook_Find_Subarray_With_Sum_K {
+public class facebook_Find_Longest_Subarray_With_Sum_K {
 
   public static void main(String[] args) {
-	facebook_Find_Subarray_With_Sum_K instance = new facebook_Find_Subarray_With_Sum_K();
+	facebook_Find_Longest_Subarray_With_Sum_K instance = new facebook_Find_Longest_Subarray_With_Sum_K();
 	instance.solve();
   }
 
@@ -44,7 +45,7 @@ public class facebook_Find_Subarray_With_Sum_K {
 	  }
 	}
 
-	HashMap<Integer, Integer> indices = new HashMap<Integer, Integer>();
+	Map<Integer, Integer> indices = new HashMap<>();
 	for (int i = 0; i < n; ++i) {
 	  Integer index = indices.get(acc[i]);
 	  if (index == null) {

@@ -40,9 +40,9 @@ class Solution {
     for (int i = 0; i < len; ++i) {
       int belonging_idx = nums.at(i) - 1;
       while (i != belonging_idx &&
-          0 <= belonging_idx &&
-          belonging_idx < len &&
-          nums.at(i) != nums.at(belonging_idx)) {
+             0 <= belonging_idx &&
+             belonging_idx < len &&
+             nums.at(i) != nums.at(belonging_idx)) {
         swap(&nums, i, belonging_idx);
         belonging_idx = nums.at(i) - 1;
       }
