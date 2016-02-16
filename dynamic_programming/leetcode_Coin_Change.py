@@ -16,8 +16,7 @@ class Solution(object):
         :rtype: int
         """
         coins.sort()
-        max_int = 99999999
-        dp = [max_int] * (amount + 1)
+        dp = [float('+inf')] * (amount + 1)
         dp[0] = 0
 
         for coin in coins:
@@ -25,7 +24,7 @@ class Solution(object):
                 if i >= coin:
                     dp[i] = min(dp[i], dp[i - coin] + 1)
 
-        if dp[-1] == max_int:
+        if dp[-1] == float('+inf'):
             return -1
         else:
             return dp[-1]
