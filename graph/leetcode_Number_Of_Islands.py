@@ -10,7 +10,7 @@ class Solution:
 
     """Graph or union-find."""
 
-    def numIslands(self, grid):
+    def numIslandsGraph(self, grid):
         """BFS approach(coloring)."""
         # Edge case.
         if not grid:
@@ -48,6 +48,49 @@ class Solution:
 
         return 1, visited
 
+    def numIslands(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        if not grid:
+            return 0
+        n = len(grid)
+        m = len(grid[0])
+
+        cells = []
+
+        for i in xrange(n):
+            for j in xrange(m):
+                if grid[i][j] == '1':
+                    cells.append((i, j))
+
+        total = len(cells)
+        parents = range(total)
+        size = [1] * total
+        mapping = {}
+        delta = ((-1, 0), (0, -1), (1, 0), (0, 1))
+        for i, (x, y) in enumerate(cells):
+            for dx, dy in delta:
+                xx = x + dx
+                yy = y + dy
+                pos = (xx, yy)
+                if xx >= 0 and xx < n and yy >= 0 and yy < m and pos in mapping:
+                    idx = mapping[pos]
+                    i_parent = self.find(parents, i)
+                    j_parent = self.find(parents, idx)
+                    if i_parent != j_parent:
+                        parents[i_parent] = j_parent
+                        size[i_parent] = 0
+            mapping[(x, y)] = i
+        return sum(size)
+
+    def find(self, parents, i):
+        if i != parents[i]:
+            parents[i] = parents[parents[i]]
+            i = parents[i]
+        return i
+
 
 def main():
     s = Solution()
@@ -57,14 +100,14 @@ def main():
         '11000',
         '00000',
     ]
-    print s.numIslands(grid)
+    assert s.numIslands(grid) == 1
     grid = [
         '11000',
         '11000',
         '00100',
         '00011',
     ]
-    print s.numIslands(grid)
+    assert s.numIslands(grid) == 3
 
 
 
