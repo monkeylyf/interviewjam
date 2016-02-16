@@ -43,7 +43,7 @@ class Solution(object):
 
     NONE = '#'
 
-    def isValidSerialization(self, preorder):
+    def isValidSerializationRec(self, preorder):
         """
 
         :type preorder: str
@@ -64,6 +64,27 @@ class Solution(object):
         except IndexError:
             # Running out of node to recontruct. Invalid of course.
             return False
+
+    def isValidSerialization(self, preorder):
+        """For a valid bianry tree, when you introduce a node, another two
+        empty node is introduced, as empty left/right child, as well. That
+        means, for any valid binary tree, # of node + 1 must equal to # of
+        emtpy node.
+
+        :type preorder: str
+        :rtype: bool
+        """
+        open_slots = 1
+        for node in preorder.split(','):
+            if not open_slots:
+                # No open slots in middle of loop, meaning the current tree
+                # is valid but there is more to fill.
+                return False
+            elif node == Solution.NONE:
+                open_slots -= 1
+            else:
+                open_slots += 1
+        return open_slots == 0 # All slots are filled.
 
 
 def main():
