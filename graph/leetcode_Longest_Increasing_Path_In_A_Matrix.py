@@ -49,8 +49,8 @@ class Solution(object):
         m = len(matrix[0])
         total = n * m
         deltas = ((-1, 0), (1, 0), (0, -1), (0, 1))
-        graph = {}
-        in_degree = {i: 0 for i in xrange(n * m)}
+        graph = {i: [] for i in range(total)}
+        in_degree = {i: 0 for i in xrange(total)}
 
         # Build graph.
         for x in xrange(n):
@@ -68,6 +68,8 @@ class Solution(object):
                         # Count in-degree to find the sources for this graph.
                         in_degree[m * xx + yy] += 1
 
+        # Now convert the problem into:
+        # https://en.wikipedia.org/wiki/Longest_path_problem#Acyclic_graphs_and_critical_paths
         stack = []
         visited = [False] * total
 
@@ -84,11 +86,7 @@ class Solution(object):
 
         while stack:
             node = stack.pop()
-
-            if paths[node] == float('-inf'):
-                continue
-
-            for neighbor in graph.get(node, []):
+            for neighbor in graph[node]:
                 paths[neighbor] = max(paths[neighbor], paths[node] + 1)
 
         return max(paths)
