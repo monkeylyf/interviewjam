@@ -47,18 +47,27 @@ class Solution(object):
         for span in xrange(2, n):
             for left in xrange(0, n - span):
                 right = left + span
-                for i in xrange(left + 1, right):
+                for pivot in xrange(left + 1, right):
+                    # pivot is in [left + 1, right] so then you pick the pivot
+                    # you will get coin nums[left] * nums[pivot] * nums[right]
+                    # nums[left] and nums[right] is the buffer on the sides.
                     dp[left][right] = max(
                         dp[left][right],
-                        nums[left] * nums[i] * nums[right] + dp[left][i] + dp[i][right])
+                        nums[left] * nums[pivot] * nums[right] + dp[left][pivot] + dp[pivot][right])
 
+        from pprint import pprint as p
+        p(dp)
+
+        print
+        print nums
         return dp[0][-1]
 
 
 def main():
     sol = Solution()
-    assert sol.maxCoins([3, 1, 5, 8]) == 167
-    assert sol.maxCoins([9, 76, 64, 21]) == 116718
+    print sol.maxCoins([3, 1, 5])
+    #assert sol.maxCoins([3, 1, 5, 8]) == 167
+    #assert sol.maxCoins([9, 76, 64, 21]) == 116718
 
 
 if __name__ == '__main__':
