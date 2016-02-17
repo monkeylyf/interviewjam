@@ -6,6 +6,7 @@ so that every letter appear once and only once. You must make sure your result
 is the smallest in lexicographical order among all possible results.
 """
 
+from string import ascii_lowercase
 
 
 class Solution(object):
@@ -15,7 +16,7 @@ class Solution(object):
         :rtype: str
         """
         # char to index mapping. 0-based.
-        mapping = {c: ord(c) - ord('a') for c in 'abcdefghijklmnopqrstuvwxyz'}
+        mapping = {c: ord(c) - ord('a') for c in ascii_lowercase}
         counter = [0] * 26
         used = [False] * 26
         for char in s:
