@@ -56,10 +56,8 @@ class Solution(object):
         num = len(positions)
         parents = range(num)
         seen = {}
-        i = 0
         count = 0
-        while i < num:
-            x, y = positions[i]
+        for i, (x, y) in enumerate(positions):
             count += 1
             for dx, dy in Solution.DELTA:
                 xx = x + dx

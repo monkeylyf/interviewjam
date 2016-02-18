@@ -35,31 +35,26 @@ class Solution(object):
         :rtype: List[int]
         """
         if n == 1:
-            # Non
+            # One node.
             return [0]
 
-        tree = {}
+        # Build graph with adj set.
+        tree = defaultdict(set)
         for node1, node2 in edges:
-            tree.setdefault(node1, set()).add(node2)
-            tree.setdefault(node2, set()).add(node1)
+            tree[node1].add(node2)
+            tree[node2].add(node1)
 
-        while len(tree.keys()) > 4:
+        # Peeling leaves util it's a two or one node tree.
+        while len(tree.keys()) > 2:
             leaves = [node for node in tree if len(tree[node]) == 1]
             for leaf in leaves:
                 for sub_leaf in tree[leaf]:
                     sub_leaf_neighbor = tree[sub_leaf]
-                    if len(sub_leaf_neighbor) > 1:
-                        tree[sub_leaf].remove(leaf)
-                    else:
-                        tree.pop(sub_leaf)
+                    tree[sub_leaf].remove(leaf) # Remove edge.
+                # Peel node.
                 tree.pop(leaf)
 
-        if len(tree) >= 3:
-            # Still has leaves to get rid of but it will also removed the
-            # desired root. Pick those node that has more than one connections.
-            return [node for node, connections in tree.iteritems() if len(connections) > 1]
-        else:
-            return tree.keys()
+        return tree.keys()
 
 
 def main():
