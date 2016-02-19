@@ -34,16 +34,19 @@ class Solution(object):
         Dead cell:
         # of neighbors == 3 -> 1
 
-        0: it was dead and will remain dead
-        1: it was live and will remain live
-        2: it was dead but will be live
-        3: it was live but will be dead
+        0: it was dead and now is dead
+        1: it was live and now is live
+        2: it was dead and now is live
+        3: it was live and now is dead
+
+        The number represents both the current state and previous state.
+        previous state = code % 2
 
         :type board: List[List[int]]
         :rtype: void Do not return anything, modify board in-place instead.
         """
         def neighbor(board, x, y, n, m):
-            """"""""
+            """Return number of neighbors."""
             deltas = (
                 (-1, -1), (-1, 0), (-1, 1),
                 (0, -1), (0, 1),
@@ -53,9 +56,7 @@ class Solution(object):
             for dx, dy in deltas:
                 xx = x + dx
                 yy = y + dy
-                if xx < 0 or xx >= n or yy < 0 or yy >= m:
-                    continue
-                if board[xx][yy] % 2 == 1:
+                if xx >= 0 and xx < n and yy >= 0 and yy < m and board[xx][yy] % 2 == 1:
                     count += 1
 
             return count
@@ -90,7 +91,7 @@ def main():
         [1, 0]
     ]
     sol.gameOfLife(board)
-    print board
+    assert board == [[1, 1], [1, 1]]
 
 
 if __name__ == '__main__':

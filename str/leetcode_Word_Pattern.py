@@ -25,25 +25,24 @@ class Solution(object):
         strings = string.split()
         if len(pattern) != len(strings):
             return False
+        # A string cannot be mapped to more than one different char.
+        used = set()
+        char_pat = [None] * 26
 
-        c_to_str = {}
-        str_to_c = {}
-        for i in xrange(len(pattern)):
-            c = pattern[i]
-            string = strings[i]
-
-            mapped_str = c_to_str.get(c)
-            mapped_c = str_to_c.get(string)
-
-            if mapped_c is None and mapped_str is None:
-                # Create bijection.
-                c_to_str[c] = string
-                str_to_c[string] = c
-            elif mapped_c is not None and mapped_str is not None:
-                if mapped_c != c or mapped_str != string:
+        for i, char in enumerate(pattern):
+            idx = ord(char) - 97
+            pat = char_pat[idx]
+            word = strings[i]
+            if pat is None:
+                if word in used:
                     return False
-            else:
+                else:
+                    char_pat[idx] = word
+                    used.add(word)
+            elif char_pat[idx] != strings[i]:
                 return False
+            else:
+                pass
         return True
 
 
