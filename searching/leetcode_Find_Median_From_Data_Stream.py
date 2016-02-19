@@ -20,9 +20,11 @@ findMedian() -> 1.5
 add(3)
 findMedian() -> 2
 """
+
 import heapq
 
 class MedianFinder:
+
     def __init__(self):
         """Using max-heap + min-heap
 
