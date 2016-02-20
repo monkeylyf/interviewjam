@@ -20,14 +20,21 @@ Note: There will be exactly one celebrity if he/she is in the party. Return the
 celebrity's label if there is a celebrity in the party. If there is no
 celebrity, return -1.
 """
-# The knows API is already defined for you.
-# @param a, person a
-# @param b, person b
-# @return a boolean, whether a knows b
-# def knows(a, b):
+
+
+def knows(a, b):
+    """The knows API is already defined for you.
+
+    @param a, person a
+    @param b, person b
+    @return a boolean, whether a knows b
+    """
+    return True
+
 
 class Solution(object):
-    def findCelebrity(self, n):
+
+    def findCelebrityWithExtraSpace(self, n):
         """
         :type n: int
         :rtype: int
@@ -59,3 +66,19 @@ class Solution(object):
                 if i != potential_celebrity and knows(potential_celebrity, i):
                     return -1
             return potential_celebrity
+
+    def findCelebrity(self, n):
+        """"""
+        candidate = 0
+        for i in xrange(1, n):
+            if knows(candidate, i):
+                # Disqualified and change candidate.
+                i = candidate
+
+        for i in xrange(n):
+            if i != candidate and \
+               (knows(candidate, i) or not knows(i, candidate)):
+                # Candidate knows no one and everyone must know candiate
+                return -1
+
+        return candidate
