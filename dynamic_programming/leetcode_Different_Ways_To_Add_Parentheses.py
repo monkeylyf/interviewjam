@@ -66,21 +66,21 @@ class Solution(object):
                 i = j
 
         tokens.append(int(expression[i:j]))
-        from pprint import pprint as p
         n = len(tokens)
 
-        dp = [[[] for _ in xrange(n)] for _ in xrange(n)]
+        dp = [[None for _ in xrange(n)] for _ in xrange(n)]
         for span in xrange(n):
             for i in xrange(n - span):
                 if span == 0:
-                    dp[i][i + span].append(tokens[i])
+                    dp[i][i + span] = [tokens[i]]
                 else:
-                    combinations = dp[i][i + span]
+                    combinations = []
                     for j in xrange(i, i + span):
                         func = calc(ops[j])
                         for a in dp[i][j]:
                             for b in dp[j + 1][i + span]:
                                 combinations.append(func(a, b))
+                    dp[i][i + span] = combinations
 
         return dp[0][n - 1]
 

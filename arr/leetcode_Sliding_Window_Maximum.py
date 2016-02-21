@@ -19,49 +19,30 @@ Window position                Max
 Therefore, return the max sliding window as [3,3,5,5,6,7].
 """
 
+
 from collections import deque
+
 
 class Solution(object):
     def maxSlidingWindow(self, nums, k):
-        """Return sequence of max value of all slicding windows from left to right.
+        """Keep queue monotone decreasing with val that idx pointing to"""
+        max_mindow = []
+        if k <= 0:
+            return max_mindow
+        queue = deque()
+        for i, val in enumerate(nums):
+            while queue and val > nums[queue[-1]]:
+                # Remove all vals idx pointting that are less than val.
+                queue.pop()
 
-        1. Use deque for window so popleft is really O(1). For list it's O(n)
-        2. Keep tracking max window value. If the element is about to enqueue is
-           larger or equal than max value, update max value. If the element is about
-           to be dequed is equal to max value, do the max for new window
+            queue.append(i)
 
-        The worst case is O(kn), e.g., [5, 4, 3, 2, 1] because every time you move the
-        window, the popped one is max value of current window then max will be called
-        If Queue.PriofityQueue is used to keep track of window, you can have max with
-        O(n), but it's hard to remove element by it's index.
-
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
-        """
-        if not nums:
-            return []
-
-        if len(nums) < k:
-            raise ValueError('Invalid window size: {}'.format(k))
-
-        window = deque(nums[:k])
-        current_max = max(window)
-        max_windows = [current_max]
-
-        for i, val in enumerate(nums, start=k):
-            popped = window.popleft()
-            window.append(val)
-            if val >= current_max:
-                current_max = val
-            elif popped == current_max:
-                current_max = max(window)
-            else:
-                pass
-
-            max_windows.append(current_max)
-
-        return max_windows[k:]
+            if i - queue[0] + 1 > k:
+                # Pop current max if it's no longer in the window.
+                queue.popleft()
+            if i >= k - 1:
+                max_mindow.append(nums[queue[0]])
+        return max_mindow
 
 
 def main():

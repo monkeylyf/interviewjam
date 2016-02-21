@@ -1,4 +1,6 @@
-/* Longest_Valid_Parentheses
+/**
+ * Longest_Valid_Parentheses.
+ *
  * Given a string containing just the characters '(' and ')', find the length of
  * the longest valid (well-formed) parentheses substring.
  * For "(()", the longest valid parentheses substring is "()", which has length=2.

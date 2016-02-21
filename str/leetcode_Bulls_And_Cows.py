@@ -29,6 +29,7 @@ You may assume that the secret number and your friend's guess only contain
 digits, and their lengths are always equal.
 """
 
+from collections import defaultdict
 
 class Solution(object):
     def getHint(self, secret, guess):
@@ -45,28 +46,20 @@ class Solution(object):
             raise ValueError('Guess should have length {}'.format(len(secret)))
 
         n = len(secret)
-        guess_used = [False] * n
-        secret_used = [False] * n
-        bulls = 0
-        cows = 0
+        secret_hash = defaultdict(int)
+        guess_hash = defaultdict(int)
+        a = 0
         for i in xrange(n):
-            if guess[i] == secret[i]:
-                bulls += 1
-                secret_used[i] = True
-                guess_used[i] = True
+            if secret[i] != guess[i]:
+                secret_hash[secret[i]] += 1
+                guess_hash[guess[i]] += 1
+            else:
+                a += 1
+        b = 0
+        for char, freq in secret_hash.iteritems():
+            b += min(freq, guess_hash[char])
 
-        for i in xrange(n):
-            for j in xrange(n):
-                if i == j or guess_used[i] or secret_used[j]:
-                    continue
-                if guess[i] == secret[j]:
-                    cows += 1
-                    guess_used[i] = True
-                    secret_used[j] = True
-                    break
-
-        return '{}A{}B'.format(bulls, cows)
-
+        return '{}A{}B'.format(a, b)
 
 
 def main():
