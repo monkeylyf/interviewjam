@@ -28,23 +28,24 @@ class Solution(object):
         :rtype: int
         """
         n = len(nums)
+        return n * (n + 1) / 2 - sum(nums)
+
+    def missingNumber(self, nums):
+        n = len(nums)
         i = 0
-        last = False
         while i < len(nums):
             val = nums[i]
-            if val == n:
-                last = True
-                i += 1
-            elif i == val:
+            if val == n or val == i:
+                # n is a outlier or it's already in the right position.
                 i += 1
             else:
+                # Swap but idx remains the same.
                 nums[i], nums[val] = nums[val], nums[i]
 
-        for i, val in enumerate(nums):
-            if i != val:
-                return i
-        else:
-            return n
+        i = 0
+        while i < n and nums[i] == i:
+            i += 1
+        return i
 
 
 def main():

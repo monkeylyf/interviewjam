@@ -1,4 +1,4 @@
-/*
+/**
  * Implement_strStr().
  *
  * Returns a pointer to the first occurrence of needle in haystack, or null if
