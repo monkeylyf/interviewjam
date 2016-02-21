@@ -26,7 +26,8 @@ class Solution(object):
         010
         101
 
-        110 -> second bit from right to left is the distinguisher, which is 10
+        The xor of all nums is equal to the xor of two single numbers.
+        110 -> second bit from right to left is the distinguisher, lsb is 10
         By compairing num & mask(10), two groups will be formed:
         1. distinct number a and other numbers that appear twice
         2. distinct number b and other numbers that appear twice
@@ -38,14 +39,11 @@ class Solution(object):
         :rtype: List[int]
         """
         xor = reduce(lambda x, y : x ^ y, nums)
-        mask = 1
-        while xor & mask == 0:
-            mask = mask << 1
-
+        lsb = xor & -xor
         a = 0
         b = 0
         for num in nums:
-            if num & mask:
+            if num & lsb:
                 a ^= num
             else:
                 b ^= num
