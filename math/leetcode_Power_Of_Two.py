@@ -20,6 +20,9 @@ class Solution(object):
             n /= 2
         return n == 1
 
+    def isPowerOfTwo(self, n):
+        return n > 0 and 2147483648 % n == 0
+
 
 def main():
     sol = Solution()

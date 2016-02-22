@@ -14,14 +14,15 @@ class Solution(object):
         """
         ret = []
         i = 0
-        for j in xrange(len(nums)):
-            if j == len(nums) - 1 or nums[j] + 1 != nums[j + 1]:
-                if j == i:
-                    ret.append(str(nums[i]))
-                else:
-                    ret.append('{}->{}'.format(nums[i], nums[j]))
-                i = j + 1
-
+        while i < len(nums):
+            j = i
+            while j < len(nums) - 1 and nums[j] + 1 == nums[j + 1]:
+                j += 1
+            if i == j:
+                ret.append(str(nums[i]))
+            else:
+                ret.append('{}->{}'.format(nums[i], nums[j]))
+            i = j + 1
         return ret
 
 
