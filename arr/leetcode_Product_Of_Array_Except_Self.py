@@ -41,6 +41,5 @@ def main():
     assert sol.productExceptSelf([1, 2, 3, 4]) == [24, 12, 8, 6]
 
 
-
 if __name__ == '__main__':
     main()

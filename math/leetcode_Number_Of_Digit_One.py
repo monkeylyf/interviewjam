@@ -16,13 +16,19 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        count = (n + 9) / 10  # 1s as last digit.
-        base = 10
-        while n >= base:
-            num = n / base
-            count += ((num + 8) / 10) * base # 1s as base
-            if num % 10 == 1:
-                count += n % base + 1 # leftover
+        base = 1
+        count = 0
+        num = n
+        while num > 0:
+            last_digit = num % 10
+            num /= 10
+            count += num * base  # When none-last-digit changes
+            if last_digit == 1:
+                count += n % base + 1  # Count partial right part
+            elif last_digit > 1:
+                count += base # Count the all right part
+            else:
+                pass
             base *= 10
         return count
 

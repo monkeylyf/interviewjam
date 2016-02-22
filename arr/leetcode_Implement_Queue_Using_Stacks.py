@@ -17,7 +17,9 @@ You may assume that all operations are valid (for example, no pop or peek
 operations will be called on an empty queue).
 """
 
+
 class Queue(object):
+
     def __init__(self):
         """
         initialize your data structure here.
@@ -31,7 +33,6 @@ class Queue(object):
         :rtype: nothing
         """
         self._enque.append(x)
-
 
     def pop(self):
         """

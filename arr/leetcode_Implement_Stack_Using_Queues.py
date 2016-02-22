@@ -3,9 +3,12 @@ leetcode
 
 """
 
+
 from collections import deque
 
+
 class Stack(object):
+
     def __init__(self):
         """
         initialize your data structure here.
@@ -20,7 +23,6 @@ class Stack(object):
         """
         self._queue.append(x)
 
-
     def pop(self):
         """
         :rtype: nothing
@@ -34,13 +36,11 @@ class Stack(object):
         self._queue, self._tmp = self._tmp, self._queue
         return top
 
-
     def top(self):
         """
         :rtype: int
         """
         return self._queue[-1]
-
 
     def empty(self):
         """
