@@ -16,14 +16,12 @@ class Solution(object):
         """
         mapping = {}
         for i, val in enumerate(nums):
-            try:
-                indexes = mapping[val]
-                for index in indexes:
-                    if i - index <= k:
-                        return True
+            indexes = mapping.get(val, [])
+            if indexes and i - indexes[-1] <= k:
+                return True
+            else:
                 indexes.append(i)
-            except KeyError:
-                mapping[val] = [i]
+                mapping[val] = indexes
 
         return False
 
