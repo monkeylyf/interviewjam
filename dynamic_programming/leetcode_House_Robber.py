@@ -1,6 +1,15 @@
-"""leetcode_House_Robber.py
+"""House Robber
+leetcode
 
-https://leetcode.com/problems/house-robber/
+You are a professional robber planning to rob houses along a street. Each house
+has a certain amount of money stashed, the only constraint stopping you from
+robbing each of them is that adjacent houses have security system connected and
+it will automatically contact the police if two adjacent houses were broken into
+on the same night.
+
+Given a list of non-negative integers representing the amount of money of each
+house, determine the maximum amount of money you can rob tonight without
+alerting the police.
 """
 
 
@@ -10,7 +19,7 @@ class Solution:
 
     dp[i] = max(dp[i - 2] + arr[i], dp[i - 1])
     Yes you can use an array to represent dp states but in this case use two
-    variables are good enought, just like fibonacci.
+    variables are good enough, just like fibonacci.
     """
 
     def rob(self, nums):
@@ -31,7 +40,7 @@ class Solution:
 def main():
     nums = [1, 2, 3, 4, 5]
     sol = Solution()
-    print sol.rob(nums)
+    assert sol.rob(nums) == 9
 
 
 if __name__ == '__main__':

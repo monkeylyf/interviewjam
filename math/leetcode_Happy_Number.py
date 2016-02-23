@@ -25,15 +25,15 @@ class Solution(object):
         """
         n = str(n)
         seen = set()
-        while n != '1':
+        is_happy = True
+        while is_happy and n != '1':
             seen.add(n)
             acc = 0
             for char in n:
                 acc += int(char) ** 2
             n = str(acc)
-            if n in seen:
-                return False
-        return True
+            is_happy = n in seen
+        return is_happy
 
 
 def main():

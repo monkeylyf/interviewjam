@@ -65,13 +65,14 @@ class Solution(object):
 
         def char_to_idx(char):
             """"""
-            return ord(char) - ord('a')
+            return ord(char) - 97  # ord('a')
 
         def dfs(board, i, j, root, container):
             """"""
-            if i < 0 or i >= len(board) or j < 0 or j >= len(board[0]) or \
-                board[i][j] == Solution.VISITED or \
-                root.children[char_to_idx(board[i][j])] is None:
+            if i < 0 or i >= len(board) or \
+               j < 0 or j >= len(board[0]) or \
+               board[i][j] == Solution.VISITED or \
+               root.children[char_to_idx(board[i][j])] is None:
                 # Out of boundary or visitd or current char doesn't match.
                 return
             char = board[i][j]

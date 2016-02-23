@@ -1,6 +1,15 @@
-"""leetcode_House_Robber_II
+"""House Robber II
+leetcode
 
-https://leetcode.com/problems/house-robber-ii/
+After robbing those houses on that street, the thief has found himself a new
+place for his thievery so that he will not get too much attention. This time,
+all houses at this place are arranged in a circle. That means the first house
+is the neighbor of the last one. Meanwhile, the security system for these
+houses remain the same as for those in the previous street.
+
+Given a list of non-negative integers representing the amount of money of each
+house, determine the maximum amount of money you can rob tonight without
+alerting the police.
 """
 
 
@@ -41,9 +50,9 @@ class Solution:
 def main():
     sol = Solution()
     arr = [1, 1, 1, 1]
-    #print sol.rob(arr)
+    assert sol.rob(arr) == 2
     arr = [1, 2, 1, 0]
-    print sol.rob(arr)
+    assert sol.rob(arr) == 2
 
 
 if __name__ == '__main__':

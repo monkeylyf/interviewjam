@@ -24,17 +24,12 @@ class Solution(object):
         """
         dummy = ListNode(-1)
         dummy.next = head
-
-        prev = dummy
-        cursor = dummy.next
-        while cursor is not None:
-            if cursor.val == val:
-                cursor = cursor.next
-                prev.next = cursor
+        cursor = dummy
+        while cursor.next is not None:
+            if cursor.next.val == val:
+                cursor.next = cursor.next.next
             else:
                 cursor = cursor.next
-                prev = prev.next
-
         return dummy.next
 
 

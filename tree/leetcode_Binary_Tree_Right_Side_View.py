@@ -32,30 +32,33 @@ class Solution:
         Such kinda of interview questions should be done within 10 minutes and
         bug-free.
         """
-        ret = []
         if root is None:
-            return ret
+            return []
 
-        cur_lvl = deque()
-        next_lvl = deque()
-        cur_lvl.append(root)
-
-        while cur_lvl:
-            node = cur_lvl.popleft()
+        count = 1
+        queue = deque([root])
+        view = [root.val]
+        while queue:
+            node = queue.popleft()
+            count -= 1
             if node.left is not None:
-                next_lvl.append(node.left)
+                queue.append(node.left)
             if node.right is not None:
-                next_lvl.append(node.right)
-            if not cur_lvl:
-                ret.append(node.val)
-                cur_lvl = next_lvl
-                next_lvl = deque()
-
-        return ret
+                queue.append(node.right)
+            if count == 0:
+                if queue:
+                    view.append(queue[-1].val)
+                count = len(queue)
+        return view
 
 
 def main():
-    pass
+    sol = Solution()
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.right.right = TreeNode(4)
+    assert sol.rightSideView(root) == [1, 3, 4]
 
 
 if __name__ == '__main__':

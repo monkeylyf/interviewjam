@@ -57,11 +57,16 @@ class Solution(object):
         arr = self.merge_sort(map(str, num))
         return int(''.join(arr))
 
+    def largestNumber(self, nums):
+        nums = [str(i) for i in nums]
+        nums = sorted(nums, cmp=lambda x,y : -1 if x + y > y + x else 1)
+        return str(int(''.join(nums)))
+
 
 def main():
     arr = [3, 30, 34, 5, 9]
     sol = Solution()
-    print sol.largestNumber(arr)
+    assert sol.largestNumber(arr) == '9534330'
 
 
 if __name__ == '__main__':
