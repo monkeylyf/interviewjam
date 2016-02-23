@@ -10,6 +10,9 @@ class Solution(object):
     def rangeBitwiseAnd(self, m, n):
         """Convert both numbers to binary form and find the different bit.
 
+        5 -> 0101
+        7 -> 0111
+
         On the right side of this bit(including this bit) will all become 0
         during the sequentical bitwise AND operations. So the result will be
         those on the left side(exclusive).
