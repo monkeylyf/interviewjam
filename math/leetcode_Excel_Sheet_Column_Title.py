@@ -1,45 +1,37 @@
-"""Excel Sheet Column Title
+"""Excel sheet column title
 leetcode
 
-Related to question Excel Sheet Column Title
-
-Given a column title as appear in an Excel sheet, return its corresponding column number.
+Given a positive integer, return its corresponding column title as appear in an Excel sheet.
 
 For example:
 
-A -> 1
-B -> 2
-C -> 3
+1 -> A
+2 -> B
+3 -> C
 ...
-Z -> 26
-AA -> 27
-AB -> 28
+26 -> Z
+27 -> AA
+28 -> AB
 """
 
-
 class Solution(object):
-
-    def titleToNumber(self, s):
+    def convertToTitle(self, n):
         """
-        :type s: str
-        :rtype: int
+        :type n: int
+        :rtype: str
         """
-        # Base 26 conversion.
-        num = 0
-        i = len(s) - 1
-        base = 1
-        while i >= 0:
-            c = ord(s[i]) - ord('A') + 1
-            num += c * base
-            i -= 1
-            base *= 26
-        return num
+        title = []
+        n -= 1
+        while n >= 0:
+            digit = n % 26
+            title.append(chr(ord('A') + digit))
+            n = n / 26 - 1
+        return ''.join(reversed(title))
 
 
 def main():
     sol = Solution()
-    assert sol.titleToNumber('A') == 1
-    assert sol.titleToNumber('AA') == 27
+    assert sol.convertToTitle(26) == 'Z'
 
 
 if __name__ == '__main__':
