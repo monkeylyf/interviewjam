@@ -1,15 +1,13 @@
 """Longest substring with at most two distinct characters
 leetcode
 
-Given a string, find the length of the longest substring T that contains at most
-2 distinct characters.
+Given a string, find the length of the longest substring T that contains at
+most 2 distinct characters.
 
 For example, Given s = "eceba",
 
 T is "ece" which its length is 3.
 """
-
-from collections import defaultdict
 
 
 class Solution(object):
@@ -31,14 +29,16 @@ class Solution(object):
         seen = {}
         i = 0
         j = 0
+        get_keys = seen.keys
+        pop = seen.pop
         while i < len(s) and j < len(s):
             char = s[j]
             if len(seen) == 2 and char not in seen:
                 max_len = max(max_len, j - i)
-                a, b = seen.keys()
+                a, b = get_keys()
                 removed_char = a if s[j - 1] == b else b
                 i = seen[removed_char] + 1
-                seen.pop(removed_char)
+                pop(removed_char)
             seen[char] = j
             j += 1
 
