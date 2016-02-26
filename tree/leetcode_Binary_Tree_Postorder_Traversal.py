@@ -1,51 +1,65 @@
-#leetcode_Binary_Tree_Postorder_Traversal
+"""Binary Tree Postorder Traversal
+leetcode
 
+Given a binary tree, return the postorder traversal of its nodes' values.
 
-class Solution:
-    # @param root, a tree node
-    # @return a list of integers
-    def postorderTraversal(self, root):
-        """Using two stacks.
-        
-        Bacially it is same as preorder traversal.
-        There is the solution using one stack but more complicated and meaningless:
-        http://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/
-        """
-        if not root:
-            return []
-            
-        s = [root]
-        ret = []
-        
-        while s:
-            cur = s.pop()
-            ret.append(cur.val)
-            if cur.left:
-                s.append(cur.left)
-            if cur.right:
-                s.append(cur.right)
-            
-        return list(reversed(ret))
+For example:
+Given binary tree {1,#,2,3},
+   1
+    \
+     2
+    /
+   3
+return [3,2,1].
+"""
 
-    def run(self):
-        print '1'
-        root = TreeNode(1)
-        root.left = TreeNode(2)
-        root.right = TreeNode(3)
-        root.right.right = TreeNode(4)
-
-        print self.postorderTraversal(root)
+from collections import deque
 
 
 class TreeNode:
+
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
 
 
+class Solution:
+    # @param root, a tree node
+    # @return a list of integers
+    def postorderTraversal(self, root):
+        """Same as preorder/inorder.
+
+        Instead of going left, go right.
+        """
+        postorder = deque()
+        stack = []
+        while stack or root is not None:
+            while root is not None:
+                postorder.appendleft(root.val)
+                stack.append(root)
+                root = root.right
+
+            root = stack.pop()
+            root = root.left
+
+        return list(postorder)
+
+
 def main():
-    Solution().run()
+    sol = Solution()
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.right.right = TreeNode(4)
+
+    print sol.postorderTraversal(root)
+
+    root = TreeNode(3)
+    root.left = TreeNode(1)
+    root.right = TreeNode(2)
+
+    print sol.postorderTraversal(root)
 
 
 if __name__ == '__main__':
