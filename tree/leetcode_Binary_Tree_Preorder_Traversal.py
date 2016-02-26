@@ -1,32 +1,17 @@
-#leetcode_Binary_Tree_Preorder_Traversal
+"""Binary Tree Preorder Traversal
+leetcode
 
+Given a binary tree, return the preorder traversal of its nodes' values.
 
-class Solution:
-    # @param root, a tree node
-    # @return a list of integers
-    def preorderTraversal(self, root):
-        if not root:
-            return []
-
-        stack = [root]
-        res = []
-        
-        while stack:
-            cur = stack.pop()
-            if cur.right:
-                stack.append(cur.right)
-            if cur.left:
-                stack.append(cur.left)
-            res.append(cur.val)
-            
-        return res
-
-    def run(self):
-        root = TreeNode(1)
-        root.right = TreeNode(2)
-        root.right.left = TreeNode(3)
-
-        print self.preorderTraversal(root)
+For example:
+Given binary tree {1,#,2,3},
+   1
+    \
+     2
+    /
+   3
+return [1,2,3].
+"""
 
 
 class TreeNode:
@@ -36,8 +21,30 @@ class TreeNode:
         self.right = None
 
 
+class Solution:
+    # @param root, a tree node
+    # @return a list of integers
+    def preorderTraversal(self, root):
+        """This code works for both preorder and inorder traversal in interative way"""
+        stack = []
+        preorder = []
+        while stack or root is not None:
+            while root is not None:
+                preorder.append(root.val)
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            root = root.right
+        return preorder
+
+
 def main():
-    Solution().run()
+    sol = Solution()
+    root = TreeNode(1)
+    root.right = TreeNode(2)
+    root.right.left = TreeNode(3)
+
+    assert sol.preorderTraversal(root) == [1, 2, 3]
 
 
 if __name__ == '__main__':
