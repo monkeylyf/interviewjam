@@ -33,14 +33,14 @@ import java.util.*;
 
 
 public class leetcode_Clone_Graph {
-	
+
 	public static void main(String[] args) {
-			
+
 	}
 	// DFS. Passed.
 	public static UndirectedGraphNode clone(UndirectedGraphNode node) {
 		if (node == null) {
-			return null;	
+			return null;
 		}
 		HashMap<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<UndirectedGraphNode,
 																 			UndirectedGraphNode>();
@@ -50,7 +50,7 @@ public class leetcode_Clone_Graph {
 	private static UndirectedGraphNode cloneUtil(UndirectedGraphNode node,
 												 HashMap<UndirectedGraphNode, UndirectedGraphNode> map) {
 		if (map.containsKey(node)) {
-			return map.get(node);	
+			return map.get(node);
 		} else {
 			UndirectedGraphNode newNode = new UndirectedGraphNode(node.label);
 			map.put(node, newNode);
@@ -59,13 +59,13 @@ public class leetcode_Clone_Graph {
 			}
 			return newNode;
 		}
-	
+
 	}
 
 	// BFS. Passed.
 	public static UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
 		if (node == null) {
-			return null;	
+			return null;
 		}
 		Queue<UndirectedGraphNode> q = new LinkedList<UndirectedGraphNode>();
 
@@ -78,7 +78,7 @@ public class leetcode_Clone_Graph {
 
 		while (!q.isEmpty()) {
 			cur = q.poll();
-			cloned = map.get(cur);	
+			cloned = map.get(cur);
 			if (cloned == null) {
 				cloned = new UndirectedGraphNode(cur.label);
 			}
@@ -118,25 +118,21 @@ def cloneGraph(self, node):
     # BFS
     if not node:
         return node
-    
+
     charted = { node: UndirectedGraphNode(node.label) }
     pipe = [node]
-    
+
     while pipe:
         cur = pipe.pop()
-        try:
-            cloned = charted[cur]
-        except KeyError:
-            cloned = UndirectedGraphNode(cur.label)
-        
+        cloned = charted[cur]
+
         for neighbor in cur.neighbors:
-            try:
-                neighborClone = charted[neighbor]
-            except KeyError:
+            neighborClone = charted.get(neighbor)
+            if neighborClone is None:
                 neighborClone = UndirectedGraphNode(neighbor.label)
                 charted[neighbor] = neighborClone
                 pipe.append(neighbor)
             cloned.neighbors.append(neighborClone)
-    
+
     return charted[node]
 */
