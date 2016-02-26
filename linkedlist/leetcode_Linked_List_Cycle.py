@@ -1,27 +1,31 @@
-# leetcode_Linked_List_Cycle.py
+"""Linked List Cycle
+leetcode
+
+Given a linked list, determine if it has a cycle in it.
+
+Follow up:
+Can you solve it without using extra space?
+"""
 
 
 class Solution:
-    # @param head, a ListNode
-    # @return a boolean
-    def hasCycle(self, head):
-        if not head or not head.next or not head.next.next:
-            return False
-            
-        fast = head.next.next
-        slow = head.next
-        
-        while fast is not slow:
-            if not fast or not fast.next:
-                return False
-                
-            fast = fast.next.next
-            slow = slow.next
-            
-        return True
 
-    def run(self):
-        # Test cases here.
+    def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        if not head or not head.next:
+            return False
+
+        one = head
+        two = head.next
+        while one is not two:
+            if two.next is None or two.next.next is None:
+                return False
+            one = one.next
+            two = two.next.next
+        return True
 
 
 class ListNode:
