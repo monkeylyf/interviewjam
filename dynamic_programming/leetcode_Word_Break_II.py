@@ -1,51 +1,65 @@
 """leetcode_Word_Break_II.py
 leetcode
 
+Given a string s and a dictionary of words dict, add spaces in s to construct a
+sentence where each word is a valid dictionary word.
+
+Return all such possible sentences.
+
+For example, given
+s = "catsanddog",
+dict = ["cat", "cats", "and", "sand", "dog"].
+
+A solution is ["cats and dog", "cat sand dog"].
 """
 
 
 class Solution:
-    # @param s, a string
-    # @param dikt, a set of string
-    # @return a list of strings
+
     def wordBreak(self, s, dikt):
-        # Nested function
-        def dfs(idx, acc):
-            """Given the trace, dfs to collect all possible results."""
-            for tail in trace[idx]:
-                substr = s[idx : tail]
-                new_acc = acc + (substr if idx == 0 else ' ' + substr)
-                if tail == len(s):
-                    container.append(new_acc)
-                else:
-                    dfs(tail, new_acc)
+        """trace records the start/stop index of all words in dikt.
+        When it ready, this question turns to be finding all path in graph.
 
-        # trace records the start/stop index of all words in dikt.
-        # When it ready, this question turns to be finding all path in graph.
-        trace = [None] * len(s)
-
-        # 1. Scan all substring s[i:] first to see if they are in dikt.
-        # 2. Continue scan backwards. if s[i:] in dikt, check all s[j:i]
-        # Basically it's backwards dp to track the start/end index of substr in dikt.
-        for tail in reversed(xrange(len(s) + 1)):
-            if tail >= len(s) or trace[tail]:
+        1. Scan all substring s[i:] first to see if they are in dikt.
+        2. Continue scan backwards. if s[i:] in dikt, check all s[j:i]
+        Basically it's backwards dp to track the start/end index of substr
+        in dikt.
+        """
+        n = len(s)
+        trace = [None] * n
+        for tail in reversed(xrange(n + 1)):
+            if tail == n or trace[tail]:
                 for head in reversed(xrange(tail)):
-                    if s[head : tail] in dikt:
+                    if s[head:tail] in dikt:
                         try:
                             trace[head].append(tail)
                         except AttributeError:
                             trace[head] = [tail]
 
         container = []
-        dfs(0, '')
+        self.dfs(0, trace, [], container, s)
         return container
 
-    def run(self):
-        print self.wordBreak('catsanddog', set(['cat', 'cats', 'and', 'sand', 'dog']))
+    def dfs(self, idx, trace, acc, container, s):
+        """Given the trace, dfs to collect all possible results."""
+        if trace[idx] is None:
+            return
+        for tail in trace[idx]:
+            substr = s[idx:tail]
+            acc.append(substr)
+            if tail == len(s):
+                container.append(' '.join(acc))
+            else:
+                self.dfs(tail, trace, acc, container, s)
+            acc.pop()
 
 
 def main():
-    Solution().run()
+    sol = Solution()
+    print sol.wordBreak(
+        'catsanddog',
+        set(['cat', 'cats', 'and', 'sand', 'dog'])
+    )
 
 
 if __name__ == '__main__':
@@ -76,7 +90,8 @@ class Solution {
     return container;
   }
 
-  private void dfs(List<List<Integer>> trace, String acc, int head, List<String> container, String s) {
+  private void dfs(List<List<Integer>> trace, String acc, int head,
+                   List<String> container, String s) {
     if (head == s.length()) {
       container.add(acc);
     } else {
@@ -88,5 +103,3 @@ class Solution {
   }
 }
 """
-
-
