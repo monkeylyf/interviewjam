@@ -41,7 +41,6 @@ class Solution {
     while (!q.empty()) {
       TreeNode* node = q.front();
       q.pop();
-      printf("node: %d\n", node->val);
       if (node->left != NULL) {
         n.push_back(node->left);
       }
