@@ -11,6 +11,14 @@
 class Solution {
  public:
   int mySqrt(int x) {
+    int root = x;
+    while (root * root > x) {
+      root = (root + x / root) / 2;
+    }
+    return root;
+  }
+
+  int mySqrtSlow(int x) {
     if (x == 0) {
       return 0;
     }
@@ -34,5 +42,5 @@ class Solution {
 int main() {
   Solution sol;
   int root = sol.mySqrt(4);
-  printf("resutl: %d\n", root);
+  printf("result: %d\n", root);
 }
