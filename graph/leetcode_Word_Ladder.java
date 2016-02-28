@@ -1,21 +1,22 @@
-/*Word_Ladder
-
-Given two words (start and end), and a dictionary, find the length of shortest
-transformation sequence from start to end, such that:
-Only one letter can be changed at a time
-Each intermediate word must exist in the dictionary
-For example,
-
-Given:
-start = "hit"
-end = "cog"
-dict = ["hot","dot","dog","lot","log"]
-As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog",
-return its length 5.
-
-Note:
-Return 0 if there is no such transformation sequence.
-*/
+/**
+ * Word_Ladder.
+ *
+ * Given two words (start and end), and a dictionary, find the length of shortest
+ * transformation sequence from start to end, such that:
+ * Only one letter can be changed at a time
+ * Each intermediate word must exist in the dictionary
+ * For example,
+ *
+ * Given:
+ * start = "hit"
+ * end = "cog"
+ * dict = ["hot","dot","dog","lot","log"]
+ * As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog",
+ * return its length 5.
+ *
+ * Note:
+ * Return 0 if there is no such transformation sequence.
+ */
 
 
 import java.util.Collections;
@@ -41,7 +42,7 @@ public class leetcode_Word_Ladder {
 	HashSet<String> visited = new HashSet<String>();
 	unvisited.add(start); // Init unvisited queue.
 	visited.add(start);
-	
+
 	dict.add(end);
 
 	int step = 2; // Unless there is no such transformation sequence at all which return 0, min step is two.
@@ -65,7 +66,7 @@ public class leetcode_Word_Ladder {
 		count = unvisited.size(); // Reset counter.
 	  }
 	}
-	return 0;        
+	return 0;
   }
 
   public static Set<String> generate(String s, HashSet<String> dict) {
@@ -95,12 +96,12 @@ def ladderLength(self, start, end, dict):
 	# Pre-calc the char_pool instead of calcing it every time you call word_gen and
 	# This optmization will help you pass OJ!
     char_pool = [ chr(j) for j in xrange(97, 123) ]
-	    
+
     dict.add(end)
-    
+
     num_tran = 2
     count = 1
-    
+
     while pipe:
         cur = pipe.pop(0)
         for ns in self.word_gen(cur, dict, char_pool):
@@ -109,12 +110,12 @@ def ladderLength(self, start, end, dict):
             elif not ns in visited:
                 visited.add(ns)
                 pipe.append(ns)
-        
+
         count -= 1
         if count == 0:
             num_tran += 1
             count = len(pipe)
-            
+
     return 0
 
 def word_gen(self, word, dict, char_pool):

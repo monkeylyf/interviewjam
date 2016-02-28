@@ -27,6 +27,9 @@ public class Find_Number_Of_Larger_Element_On_Right_Side {
     arr = new int[] {1, 1, 1, 4};
     System.out.println(Arrays.toString(solution.solveByBST(arr)));
     System.out.println(Arrays.toString(solution.solveByMergeSort(arr)));
+
+    arr = new int[] {51,9,21,84,66,65,36,100,41};
+    System.out.println(Arrays.toString(solution.solveByMergeSort(arr)));
   }
 
   /**
@@ -56,7 +59,7 @@ public class Find_Number_Of_Larger_Element_On_Right_Side {
     Item[] sortedLeft = mergeSortAndCount(left);
     Item[] sortedRight = mergeSortAndCount(right);
 
-    Item[] rv =  merge(sortedLeft, sortedRight);
+    Item[] rv = merge(sortedLeft, sortedRight);
 
     return rv;
   }

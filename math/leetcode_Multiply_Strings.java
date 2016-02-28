@@ -1,5 +1,5 @@
 /**
- * Multiply_Strings
+ * Multiply_Strings.
  *
  * Given two numbers represented as strings, return multiplication of the numbers
  * as a string.

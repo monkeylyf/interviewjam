@@ -1,8 +1,10 @@
-/*Evaluate_Reverse_Polish_Notation
-leetcode
-
-
-*/
+/**
+ * Evaluate_Reverse_Polish_Notation.
+ *
+ * leetcode
+ *
+ *
+ */
 
 import java.util.Stack;
 
@@ -23,7 +25,7 @@ public class leetcode_Evaluate_Reverse_Polish_Notation {
 	  System.out.println(s);
 	  try {
 		s.push(Integer.parseInt(cur)); // If is an integer.
-	  } catch (NumberFormatException e) { 
+	  } catch (NumberFormatException e) {
 		a = s.pop();
 		b = s.pop();
 		char op = cur.charAt(0);
@@ -47,7 +49,7 @@ public class leetcode_Evaluate_Reverse_Polish_Notation {
 
 def evalRPN(self, tokens):
     s = []
-    
+
     for token in tokens:
         if token in ('-', '+', '*', '/'):
             b = s.pop()
@@ -65,6 +67,6 @@ def evalRPN(self, tokens):
                 s.append(int(float(a) / float(b)))
         else:
             s.append(int(token))
-    
+
     return int(s[0])
 */

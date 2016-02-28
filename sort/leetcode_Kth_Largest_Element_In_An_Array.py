@@ -1,4 +1,5 @@
 """Kth largest element in an array.
+leetcode
 
 Find the kth largest element in an unsorted array. Note that it is the kth
 largest element in the sorted order, not the kth distinct element.
@@ -7,7 +8,9 @@ For example,
 Given [3,2,1,5,6,4] and k = 2, return 5.
 """
 
+
 class Solution(object):
+
     def findKthLargest(self, nums, k):
         """
         :type nums: List[int]
@@ -35,7 +38,12 @@ class Solution(object):
             return start
 
         def quick_sort(nums, start, end):
-            """Quick sort."""
+            """Quick sort.
+
+            Irrelevant to this question but it's a quick practice and also show
+            that the quick find is a variation of quick sort using quick
+            partition.
+            """
             if start >= end:
                 return
             else:

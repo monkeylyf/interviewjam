@@ -16,10 +16,9 @@ class leetcode_First_Missing_Positive {
   public static int firstMissingPositive(int[] A) {
     for (int i = 0; i < A.length; ++i) {
       int belonging_idx = A[i] - 1;
-      while (i != belonging_idx &&
-          0 <= belonging_idx &&
-          belonging_idx < A.length &&
-          A[i] != A[belonging_idx]) {
+      while (0 <= belonging_idx &&
+             belonging_idx < A.length &&
+             A[i] != A[belonging_idx]) {
         int tmp = A[i];
         A[i] = A[belonging_idx];
         A[belonging_idx] = tmp;
