@@ -1,5 +1,6 @@
-/*
- * Substring_with_Concatenation_of_All_Words
+/**
+ * Substring_with_Concatenation_of_All_Words.
+ * leetcode
  *
  * You are given a string, S, and a list of words, L, that are all of the same
  * length. Find all starting indices of substring(s) in S that is a concatenation
