@@ -25,7 +25,6 @@ Return 0.
 """
 
 
-
 class Solution(object):
     def minPatches(self, nums, n):
         """Return min patches required.
@@ -48,22 +47,23 @@ class Solution(object):
         if n == 0:
             return 0
 
-        reach = 0 # longest reach that numbers in [1, reach] can be formed.
-        patch = 0 # number of patches needed
-        i = 0
-        while i < len(nums):
-            while nums[i] > reach + 1:
+        # Longest reach that numbers in [1, reach] can be formed.
+        reach = 0
+        # Number of patches needed.
+        patch = 0
+        for i, val in enumerate(nums):
+            while val > reach + 1:
                 # For the first loop, nums[0] must be 1 otherwise it will be
                 # added as a patch.
-                reach += reach + 1 # add reach + 1 as patch
+                # Add reach + 1 as patch.
+                reach += reach + 1
                 patch += 1
                 if reach >= n:
                     return patch
 
-            reach += nums[i]
+            reach += val
             if reach >= n:
                 return patch
-            i += 1
 
         # After taking care of all given numbers we can do 1, 2, 4, 8..tricks
         while reach < n:
