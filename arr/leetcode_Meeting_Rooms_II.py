@@ -37,6 +37,7 @@ class Solution(object):
                 heapq.heappop(overlapped)
             heapq.heappush(overlapped, end)
             num_of_rooms = max(num_of_rooms, len(overlapped))
+            print overlapped
         return num_of_rooms
 
 

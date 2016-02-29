@@ -59,9 +59,11 @@ class Solution(object):
                 passed_idx = nums[i - k - 1] / b_size
                 del buckets[passed_idx]
             b_idx = val / b_size
+            prev_b_idx = b_idx - 1
+            next_b_idx = b_idx + 1
             if b_idx in buckets or \
-               b_idx - 1 in buckets and abs(val - buckets[b_idx - 1]) <= t or \
-               b_idx + 1 in buckets and abs(val - buckets[b_idx + 1]) <= t:
+               prev_b_idx in buckets and abs(val - buckets[prev_b_idx]) <= t or \
+               next_b_idx in buckets and abs(val - buckets[next_b_idx]) <= t:
                 return True
             buckets[b_idx] = val
         return False
