@@ -22,8 +22,8 @@ reconstructing the tree.
 Each comma separated value in the string must be either an integer or a
 character '#' representing null pointer.
 
-You may assume that the input format is always valid, for example it could never
-contain two consecutive commas such as "1,,3".
+You may assume that the input format is always valid, for example it could
+never contain two consecutive commas such as "1,,3".
 
 Example 1:
 "9,3,4,#,#,1,#,#,2,#,6,#,#"
@@ -84,7 +84,7 @@ class Solution(object):
                 open_slots -= 1
             else:
                 open_slots += 1
-        return open_slots == 0 # All slots are filled.
+        return open_slots == 0  # All slots are filled.
 
 
 def main():
@@ -92,7 +92,6 @@ def main():
     assert sol.isValidSerialization("9,3,4,#,#,1,#,#,2,#,6,#,#")
     assert not sol.isValidSerialization("1,#")
     assert not sol.isValidSerialization("9,#,#,1")
-
 
 
 if __name__ == '__main__':
