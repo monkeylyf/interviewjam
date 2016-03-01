@@ -2,10 +2,10 @@
 leetcode
 
 Given n balloons, indexed from 0 to n-1. Each balloon is painted with a number
-on it represented by array nums. You are asked to burst all the balloons. If the
-you burst balloon i you will get nums[left] * nums[i] * nums[right] coins. Here
-left and right are adjacent indices of i. After the burst, the left and right
-then becomes adjacent.
+on it represented by array nums. You are asked to burst all the balloons. If
+the you burst balloon i you will get nums[left] * nums[i] * nums[right] coins.
+Here left and right are adjacent indices of i. After the burst, the left and
+right then becomes adjacent.
 
 Find the maximum coins you can collect by bursting the balloons wisely.
 
@@ -34,6 +34,8 @@ class Solution(object):
         nums[i], nums[i - 1] and nums[i + 1] will be adjancent.
         Thinking the opposite, if dp[i] means nums[i] is the last to burst, dp
         relation stands.
+        dp[i][j] means, using nums[i] and nums[j] and buffer, what's the
+        maximum coins possible for bursting nums[i + 1: j]
 
         :type nums: List[int]
         :rtype: int
@@ -47,27 +49,22 @@ class Solution(object):
         for span in xrange(2, n):
             for left in xrange(0, n - span):
                 right = left + span
-                for pivot in xrange(left + 1, right):
+                for p in xrange(left + 1, right):
                     # pivot is in [left + 1, right] so then you pick the pivot
-                    # you will get coin nums[left] * nums[pivot] * nums[right]
+                    # you will get coin nums[left] * nums[p] * nums[right]
                     # nums[left] and nums[right] is the buffer on the sides.
                     dp[left][right] = max(
                         dp[left][right],
-                        nums[left] * nums[pivot] * nums[right] + dp[left][pivot] + dp[pivot][right])
+                        nums[left] * nums[p] * nums[right] + dp[left][p] + dp[p][right])
 
-        from pprint import pprint as p
-        p(dp)
-
-        print
-        print nums
         return dp[0][-1]
 
 
 def main():
     sol = Solution()
-    print sol.maxCoins([3, 1, 5])
-    #assert sol.maxCoins([3, 1, 5, 8]) == 167
-    #assert sol.maxCoins([9, 76, 64, 21]) == 116718
+    assert sol.maxCoins([3, 1, 5]) == 35
+    assert sol.maxCoins([3, 1, 5, 8]) == 167
+    assert sol.maxCoins([9, 76, 64, 21]) == 116718
 
 
 if __name__ == '__main__':

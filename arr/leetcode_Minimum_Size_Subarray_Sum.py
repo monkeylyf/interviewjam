@@ -1,8 +1,9 @@
 """Minimum size subarray sum
 leetcode
 
-Given an array of n positive integers and a positive integer s, find the minimal
-length of a subarray of which the sum >= s. If there isn't one, return 0 instead.
+Given an array of n positive integers and a positive integer s, find the
+minimal length of a subarray of which the sum >= s. If there isn't one, return
+0 instead.
 
 For example, given the array [2,3,1,2,4,3] and s = 7,
 the subarray [4,3] has the minimal length under the problem constraint.
@@ -44,7 +45,6 @@ def main():
     assert sol.minSubArrayLen(4, [1, 4, 4]) == 1
     assert sol.minSubArrayLen(7, [2, 3, 1, 2, 4, 3]) == 2
     assert sol.minSubArrayLen(5, [2, 3, 1, 1, 1, 1]) == 2
-
 
 
 if __name__ == '__main__':

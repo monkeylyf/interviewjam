@@ -22,6 +22,8 @@ class Solution(object):
         for coin in coins:
             for i in xrange(1, amount + 1):
                 if i >= coin:
+                    # Note that float('-inf') + 1 is stll float('inf') because
+                    # it's negative infinity, which is quite convinient.
                     dp[i] = min(dp[i], dp[i - coin] + 1)
 
         if dp[-1] == float('+inf'):
