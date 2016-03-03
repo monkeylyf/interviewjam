@@ -38,20 +38,14 @@ class Solution(object):
         :type input: str
         :rtype: List[int]
         """
-        def calc(op):
-            """Return lambda func given operation type."""
-            if op not in operators:
-                raise ValueError('Invalud expr: {} {} {}'.format(a, op, b))
-
-            if op == '+':
-                return lambda x, y : x + y
-            elif op == '-':
-                return lambda x, y : x - y
-            else:
-                return lambda x, y : x * y
-
+        lambdas = {
+            '+': lambda x, y : x + y,
+            '-': lambda x, y : x - y,
+            '*': lambda x, y : x * y
+        }
         operators = ('+', '-', '*')
-        # Parse
+
+        # Parse.
         i = 0
         j = 0
         tokens = []
@@ -76,7 +70,7 @@ class Solution(object):
                 else:
                     combinations = []
                     for j in xrange(i, i + span):
-                        func = calc(ops[j])
+                        func = lambdas[ops[j]]
                         for a in dp[i][j]:
                             for b in dp[j + 1][i + span]:
                                 combinations.append(func(a, b))

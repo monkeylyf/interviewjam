@@ -32,18 +32,23 @@ class Solution(object):
             return 0
         n = len(matrix)
         m = len(matrix[0])
-        dp = [[0 for _ in xrange(m)] for _ in xrange(n)]
-        max_area = 0
-        for i in xrange(n):
+
+        dp = map(int, matrix[0])
+        max_length = max(dp)
+        for i in xrange(1, n):
+            nx_dp = [0] * m
             for j in xrange(m):
-                if i == 0 or j == 0:
-                    dp[i][j] = int(matrix[i][j])
-                elif int(matrix[i][j]) == 1:
-                    dp[i][j] = min(dp[i - 1][j - 1], dp[i][j - 1], dp[i - 1][j]) + 1
+                if j == 0:
+                    nx_dp[0] = int(matrix[i][j])
+                elif matrix[i][j] == '1':
+                    # Draw it then you will understand it.
+                    nx_dp[j] = min(nx_dp[j - 1], dp[j - 1], dp[j]) + 1
                 else:
                     pass
-                max_area = max(max_area, dp[i][j])
-        return max_area * max_area
+
+                max_length = max(max_length, nx_dp[j])
+            dp = nx_dp
+        return max_length * max_length
 
 
 def main():
