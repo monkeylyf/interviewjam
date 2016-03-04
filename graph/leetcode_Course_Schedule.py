@@ -22,6 +22,7 @@ finished course 0, and to take course 0 you should also have finished course 1.
 So it is impossible.
 """
 
+
 from collections import deque
 
 
@@ -34,6 +35,28 @@ class Solution:
 
     def canFinish(self, numCourses, prerequisites):
         """"""
+        if not prerequisites:
+            return True
+        indegree = [0] * numCourses
+        outdegree = [set() for _ in xrange(numCourses)]
+
+        for a, b in prerequisites:
+            if a not in outdegree[b]:
+                outdegree[b].add(a)
+                indegree[a] += 1
+
+        queue = deque(i for i, val in enumerate(indegree) if val == 0)
+        while queue:
+            node = queue.popleft()
+            for neighbor in outdegree[node]:
+                indegree[neighbor] -= 1
+                if indegree[neighbor] == 0:
+                    queue.append(neighbor)
+
+        return not any(in_node for in_node in indegree)
+
+    def canFinishTooComplicated(self, numCourses, prerequisites):
+        """"""
         # Build adj list as graph.
         graph = {}
 
@@ -43,8 +66,6 @@ class Solution:
             graph.setdefault(node_from, []).append(node_to)
 
         # Cycle dection in DAG.
-        visited = [False] * numCourses
-
         return self.is_acyclic(graph, numCourses)
 
     def is_acyclic(self, graph, n):
@@ -108,6 +129,7 @@ class Solution:
 
 def main():
     sol = Solution()
+    assert sol.canFinish(10, [[5,8],[3,5],[1,9],[4,5],[0,2],[1,9],[7,8],[4,9]])
     assert sol.canFinish(2, [[1, 0]])
     assert sol.canFinish(3, [[2, 0], [2, 1]])
 

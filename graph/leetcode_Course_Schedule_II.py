@@ -28,7 +28,42 @@ class Solution:
 
     """99% based on leetcode_Course_Schedule.py. Seems the overkill is worthy."""
 
+
+from collections import deque
+
+
+class Solution:
+
     def findOrder(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: List[int]
+        """
+        if not prerequisites:
+            return range(numCourses)
+        indegree = [0] * numCourses
+        outdegree = [set() for _ in xrange(numCourses)]
+
+        for a, b in prerequisites:
+            if a not in outdegree[b]:
+                outdegree[b].add(a)
+                indegree[a] += 1
+        queue = deque(i for i, val in enumerate(indegree) if val == 0)
+        order = []
+        while queue:
+            node = queue.popleft()
+            order.append(node)
+            for neighbor in outdegree[node]:
+                indegree[neighbor] -= 1
+                if indegree[neighbor] == 0:
+                    queue.append(neighbor)
+        if sum(indegree) == 0:
+            return order
+        else:
+            return []
+
+    def findOrderComplicated(self, numCourses, prerequisites):
         """
         :type numCourses: int
         :type prerequisites: List[List[int]]
@@ -110,7 +145,7 @@ class Solution:
 
 def main():
     sol = Solution()
-    assert sol.findOrder(4, [[1, 0], [2, 0], [3, 1], [3, 2]]) == [0,2,1,3]
+    assert sol.findOrder(4, [[1, 0], [2, 0], [3, 1], [3, 2]]) == [0, 1, 2, 3]
 
 
 if __name__ == '__main__':

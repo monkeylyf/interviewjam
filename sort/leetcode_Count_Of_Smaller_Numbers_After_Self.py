@@ -16,6 +16,7 @@ To the right of 1 there is 0 smaller element.
 Return the array [2, 1, 1, 0].
 """
 
+
 class Token(object):
 
     __slots__ = ('val', 'idx', 'count')
@@ -46,9 +47,9 @@ class Solution(object):
         the same value of right[j] after right[j].
 
         Think the opposite: In order to count the smaller numbers after self, we
-        count the number no larger than self after self. Since the given array
+        count the number no smaller than self after self. Since the given array
         has fixed length, we can do:
-        # of smaller of arr[i] = (len(arr) - i - 1) - # of no larger than of arr[i]
+        # of smaller of arr[i] = (len(arr) - i - 1) - # of no smaller than of arr[i]
 
         This will be hell of easier to implementw without considering sequantial
         same numbers.
@@ -56,59 +57,59 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        def merge(left, right):
-            """Merge two sorted arrays.
-
-            :param left: list, of token objects
-            :param right: list, of token objects
-            """
-            i = 0
-            j = 0
-            merged = []
-            while i < len(left) and j < len(right):
-                left_token = left[i]
-                right_token = right[j]
-                if left_token <= right_token:
-                    # Key line.
-                    left_token.count = left_token.count + (len(right) - 1 - j) + 1
-                    merged.append(left_token)
-                    i += 1
-                else:
-                    merged.append(right_token)
-                    j += 1
-
-            if i < len(left):
-                merged.extend(left[i:])
-            if j < len(right):
-                merged.extend(right[j:])
-            return merged
-
-        def dnc(nums, start, end):
-            """Divide and conquer.
-
-            Just like merge sort.
-
-            :param nums: list
-            :param start: int
-            :param end: int
-            :param return: list
-            """
-            if start > end:
-                return []
-            elif start == end:
-                return [Token(nums[start], start, 0)]
-            else:
-                mid = (end - start) / 2 + start
-                left = dnc(nums, start, mid)
-                right = dnc(nums, mid + 1, end)
-                return merge(left, right)
-
         n = len(nums)
-        tokens = dnc(nums, 0, n - 1)
+        tokens = self.dnc(nums, 0, n - 1)
         res = [None] * n
         for token in tokens:
             res[token.idx] = n - token.idx - 1 - token.count
         return res
+
+    def dnc(self, nums, start, end):
+        """Divide and conquer.
+
+        Just like merge sort.
+
+        :param nums: list
+        :param start: int
+        :param end: int
+        :param return: list
+        """
+        if start > end:
+            return []
+        elif start == end:
+            return [Token(nums[start], start, 0)]
+        else:
+            mid = (end - start) / 2 + start
+            left = self.dnc(nums, start, mid)
+            right = self.dnc(nums, mid + 1, end)
+            return self.merge(left, right)
+
+    def merge(self, left, right):
+        """Merge two sorted arrays.
+
+        :param left: list, of token objects
+        :param right: list, of token objects
+        """
+        i = 0
+        j = 0
+        merged = []
+        while i < len(left) and j < len(right):
+            left_token = left[i]
+            right_token = right[j]
+            if left_token <= right_token:
+                # Crux of this question.
+                left_token.count = left_token.count + (len(right) - 1 - j) + 1
+                merged.append(left_token)
+                i += 1
+            else:
+                merged.append(right_token)
+                j += 1
+
+        if i < len(left):
+            merged.extend(left[i:])
+        if j < len(right):
+            merged.extend(right[j:])
+        return merged
 
 
 def main():

@@ -1,9 +1,11 @@
-/*Median_of_Two_Sorted_Arrays
-
-There are two sorted arrays A and B of size m and n respectively. Find the
-median of the two sorted arrays. The overall run time complexity should be
-O(log (m+n)).
-*/
+/**
+ * Median_of_Two_Sorted_Arrays.
+ * leetcode
+ *
+ * There are two sorted arrays A and B of size m and n respectively. Find the
+ * median of the two sorted arrays. The overall run time complexity should be
+ * O(log (m+n)).
+ */
 
 class leetcode_Median_of_Two_Sorted_Arrays {
 
@@ -17,7 +19,7 @@ class leetcode_Median_of_Two_Sorted_Arrays {
   }
 
   /** The idea is find the kth largest element in A and B.
-   *  
+   *
    *  The cool thing about the solution below is getting rid of the median
    *  concept since median brings even/odd length problem.
    *  Simply finding the kth largest element will help write clean code.
@@ -44,14 +46,14 @@ class leetcode_Median_of_Two_Sorted_Arrays {
 
 	// Assuming A[midA] < B[midB] so keep code clean.
 	if (A[midA] < B[midB]) { return find(B, m, A, n, th); }
-	
+
 	// Example:
 	// A:      a0, a1, a2, a3, a4
 	// B:  b0, b1, b2, b3, b4, b5, b6
 	// midA = 2 and midB = 3 and A[2] >= A[3]
 	if (midA + 1 + midB + 1 <= th + 1) {
 	  // th >= 6. What are those elements that th will never ever be in?
-	  // (b0..b3) <= (a2) <= (a3 a4) is know. Where (b4b5b6) can be? Can be anywhere between(b3, a2..a4) 
+	  // (b0..b3) <= (a2) <= (a3 a4) is know. Where (b4b5b6) can be? Can be anywhere between(b3, a2..a4)
 	  // Can not dump any a because when b4b5b6 are between b3 and a2 when kth will be in a2-a4
 	  // Conclusion: It's only safe to dump b0b1b2b3.
 	  return find(A, n, Arrays.copyOfRange(B, midB + 1, m), m - (midB + 1), th + 1 - (midB + 1) - 1);
@@ -128,7 +130,7 @@ class leetcode_Median_of_Two_Sorted_Arrays {
 
 
 
-/* Python version 
+/* Python version
 http://blog.csdn.net/sigh1988/article/details/12192299
 Time complexity O(lgm + lgn)
 
@@ -141,13 +143,13 @@ def findMedianSortedArrays(self, A, B):
     else:
         left = right - 1
         return (self.find(A, m, B, n, mid - 1) + self.find(A, m, B, n, mid)) / 2.0
-        
+
 def find(self, A, m, B, n, th):
     if m == 0:
         return B[th]
     if n == 0:
         return A[th]
-    
+
     mida = (m - 1) / 2
     midb = (n - 1) / 2
     if A[mida] < B[midb]:

@@ -9,6 +9,7 @@ Given word = "word", return the following list (order does not matter):
 "w1r1", "1o2", "2r1", "3d", "w3", "4"]
 """
 
+
 class Solution(object):
     def generateAbbreviations(self, word):
         """

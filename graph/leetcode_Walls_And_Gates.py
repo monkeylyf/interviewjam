@@ -22,9 +22,11 @@ After running your function, the 2D grid should be:
   0  -1   3   4
 """
 
+
 from collections import deque
 
 INF = 2147483647
+
 
 class Solution(object):
 
@@ -51,7 +53,7 @@ class Solution(object):
 
         queue = deque(starting_points)
         count = len(starting_points)
-        dis = 0
+        dis = 1
         deltas = ((1, 0), (-1, 0), (0, 1), (0, -1))
         while queue:
             x, y = queue.popleft()
@@ -61,32 +63,26 @@ class Solution(object):
                 yy = y + dy
                 if xx >= 0 and xx < n and \
                    yy >= 0 and yy < m and \
-                   rooms[xx][yy] > dis + 1: # Trimming. No need to continue if dis is already min
+                   rooms[xx][yy] > dis + 1:  # Trimming. No need to continue if dis is already min
                     queue.append((xx, yy))
+                    # Update distance.
+                    rooms[xx][yy] = dis
 
             if count == 0:
                 count = len(queue)
                 dis += 1
-                # Init next layer val before checking boundary. It's necessary
-                # because when two points are neighbors and determining whether
-                # is neighbor should be added into next layer, and one neighbor
-                # is not initialzed, it will be added but it should not.
-                for x, y in queue:
-                    # Each cell will be assigned with val once and only once
-                    # so it's O(nm) solution.
-                    rooms[x][y] = dis
 
 
 def main():
     sol = Solution()
     rooms = [
-        [INF,-1,0,INF],
-        [INF,INF,INF,-1],
-        [INF,-1,INF,-1],
-        [0,-1,INF,INF]
+        [INF, -1, 0, INF],
+        [INF, INF, INF, -1],
+        [INF, -1, INF, -1],
+        [0, -1, INF, INF]
     ]
     sol.wallsAndGates(rooms)
-    print rooms
+    assert rooms == [[3, -1, 0, 1], [2, 2, 1, -1], [1, -1, 2, -1], [0, -1, 3, 4]]
 
 
 if __name__ == '__main__':

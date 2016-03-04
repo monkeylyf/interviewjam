@@ -1,11 +1,13 @@
 """leetcode_Largest_Number.
 leetcode
 
-Given a list of non negative integers, arrange them such that they form the largest number.
+Given a list of non negative integers, arrange them such that they form the
+largest number.
 
 For example, given [3, 30, 34, 5, 9], the largest formed number is 9534330.
 
-Note: The result may be very large, so you need to return a string instead of an integer.
+Note: The result may be very large, so you need to return a string instead of
+an integer.
 """
 
 
@@ -46,20 +48,20 @@ class Solution(object):
             return arr
 
         half = len(arr) / 2
-
-        left  = self.merge_sort(arr[:half])
+        left = self.merge_sort(arr[:half])
         right = self.merge_sort(arr[half:])
 
         return self.merge(left, right)
 
-    def largestNumber(self, num):
+    def largestNumberComplicated(self, num):
         """"""
         arr = self.merge_sort(map(str, num))
         return int(''.join(arr))
 
     def largestNumber(self, nums):
+        """The key is the comparator you defined."""
         nums = [str(i) for i in nums]
-        nums = sorted(nums, cmp=lambda x,y : -1 if x + y > y + x else 1)
+        nums = sorted(nums, cmp=lambda x, y: -1 if x + y > y + x else 1)
         return str(int(''.join(nums)))
 
 

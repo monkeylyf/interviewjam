@@ -20,6 +20,7 @@
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 class leetcode_Regular_Expression_Matching {
@@ -33,7 +34,7 @@ class leetcode_Regular_Expression_Matching {
   }
 
   public static boolean isMatch(String s, String p) {
-    ArrayList<String> regex = new ArrayList<String>(); // parse the regex.
+    List<String> regex = new ArrayList<>(); // parse the regex.
     for (int i = p.length() - 1; i >= 0; --i) {
       if (p.charAt(i) == '*') {
         regex.add(0, p.substring(i - 1, i + 1));
