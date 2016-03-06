@@ -3,7 +3,8 @@ leetcode
 
 ven a pattern and a string str, find if str follows the same pattern.
 
-Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty substring in str.
+Here follow means a full match, such that there is a bijection between a letter
+in pattern and a non-empty substring in str.
 
 Examples:
 pattern = "abab", str = "redblueredblue" should return true.
@@ -31,7 +32,7 @@ class Solution(object):
             return j == len(string)
         else:
             char = pattern[i]
-            idx = ord(char) - 97 # ord('a')
+            idx = ord(char) - 97  # ord('a')
             mapped_pat = char_pattern[idx]
             if mapped_pat is None:
                 # char has not been mapped to any string yet.
