@@ -51,7 +51,7 @@ class Solution(object):
         reach = 0
         # Number of patches needed.
         patch = 0
-        for i, val in enumerate(nums):
+        for val in nums:
             while val > reach + 1:
                 # For the first loop, nums[0] must be 1 otherwise it will be
                 # added as a patch.
@@ -79,6 +79,7 @@ def main():
     assert sol.minPatches([1, 3], 6) == 1
     assert sol.minPatches([1, 2, 2], 5) == 0
     assert sol.minPatches([1, 7, 21, 31, 34, 37, 40, 43, 49, 87, 90, 92, 93, 98, 99], 12) == 2
+    assert sol.minPatches([2], 10) == 3  # 1, 4, 8
 
 
 if __name__ == '__main__':
