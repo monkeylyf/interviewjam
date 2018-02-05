@@ -26,16 +26,26 @@ class MinStack(object):
         :rtype: nothing
         """
         if self._stack:
-            self._mins.append(min(x, self._mins[-1]))
+            prev_min, count = self._mins[-1]
+            if x < prev_min:
+                self._mins.append([x, 1])
+            else:
+                self._mins[-1][1] += 1
+
         else:
-            self._mins.append(x)
+            self._mins.append([x, 1])
         self._stack.append(x)
 
     def pop(self):
         """
         :rtype: nothing
         """
-        self._mins.pop()
+        if self._mins[-1][1] > 1:
+            self._mins[-1][1] -= 1
+        elif self._mins[-1][1] == 1:
+            self._mins.pop()
+        else:
+            raise ValueError
         return self._stack.pop()
 
     def top(self):
@@ -48,7 +58,7 @@ class MinStack(object):
         """
         :rtype: int
         """
-        return self._mins[-1]
+        return self._mins[-1][0]
 
 
 def main():
@@ -58,6 +68,25 @@ def main():
     mstack.push(-1)
 
     assert mstack.getMin() == -2
+
+    mstack.push(-3)
+    assert mstack.getMin() == -3
+    mstack.push(-10)
+    assert mstack.getMin() == -10
+
+    assert mstack.pop() == -10
+    assert mstack.getMin() == -3
+
+    assert mstack.pop() == -3
+    assert mstack.getMin() == -2
+
+    assert mstack.pop() == -1
+    assert mstack.getMin() == -2
+
+    assert mstack.pop() == 0
+    assert mstack.getMin() == -2
+
+    assert mstack.pop() == -2
 
 
 if __name__ == '__main__':
