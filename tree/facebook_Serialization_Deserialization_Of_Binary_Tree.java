@@ -1,7 +1,7 @@
 /** facebook_Serialization_Deserialization_Of_Binary_Tree.
  *
- * Marked as duplicates ofgoogle_BST_Serialization_Deserialization.java
- * The diff is serialize can be implemented with iterative way.
+ * Marked as duplicates of google_BST_Serialization_Deserialization.java
+ * The diff is serialize can be implemented in an iterative fashion.
  *
  * not sure how to implement deserialize in iterative way.
  */
@@ -21,6 +21,11 @@ public class facebook_Serialization_Deserialization_Of_Binary_Tree {
 	}
 
 	public void solve() {
+        /*
+         *           30
+         *        10    20
+         *      50    45 35
+         */
 		TreeNode root = new TreeNode(30);
 		root.left = new TreeNode(10);
 		root.right = new TreeNode(20);
@@ -46,18 +51,17 @@ public class facebook_Serialization_Deserialization_Of_Binary_Tree {
 	}
 
 	private TreeNode deserializeUtil(Queue<String> serial) {
+        if (serial.isEmpty()) {
+            return null;
+        }
 		String str = serial.poll();
 		if (str.equals("#")) {
 			return null;
 		} else {
 			int val = Integer.parseInt(str);
 			TreeNode node = new TreeNode(val);
-			if (!serial.isEmpty()) {
-				node.left = deserializeUtil(serial);
-			}
-			if (!serial.isEmpty()) {
-				node.right = deserializeUtil(serial);
-			}
+			node.left = deserializeUtil(serial);
+			node.right = deserializeUtil(serial);
 			return node;
 		}
 	}
@@ -79,6 +83,7 @@ public class facebook_Serialization_Deserialization_Of_Binary_Tree {
 				continue;
 			}
 			serial.add(cur.val + "");
+            // Push right child first so left child pop out of stack first.
 			s.push(cur.right);
 			s.push(cur.left);
 		}

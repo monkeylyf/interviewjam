@@ -75,6 +75,42 @@ class ZigzagIterator(object):
         return self.i < self.max_length
 
 
+class GenericZigzagIterator(object):
+
+    def __init__(self, vectors):
+        self._vectors = [v for v in vectors if v]
+        self.length = len(self._vectors)
+        self.index = 0
+        self.vector_indexes = [0] * self.length
+
+    def hasNext(self):
+        for i, vector in enumerate(self._vectors):
+            index = self.vector_indexes[i]
+            if index < len(vector):
+                return True
+        else:
+            return False
+
+    def next(self):
+        if not self.hasNext():
+            raise StopIteration
+        found_next = False
+        return_value = None
+        while not found_next:
+            i = self.vector_indexes[self.index]
+            vector = self._vectors[self.index]
+            #print('vector', vector)
+            if i < len(vector):
+                self.vector_indexes[self.index] += 1
+                found_next = True
+                return_value = vector[i]
+
+            self.index = (self.index + 1) % self.length
+        #print(self.index, i)
+        return return_value
+
+
+
 def main():
     # Your ZigzagIterator object will be instantiated and called as such:
     v1 = [1, 2]
@@ -86,13 +122,17 @@ def main():
 
     assert vector == [1, 3, 2, 4, 5, 6]
 
-    #iterator = ZigzagIterator([1, 2, 3], [4, 5, 6], [7, 8, 9, 10])
-    #vector = []
-    #while iterator.hasNext():
-    #    vector.append(iterator.next())
+    generic_interator = GenericZigzagIterator([v1, v2])
+    vector = []
+    while generic_interator.hasNext():
+        vector.append(generic_interator.next())
+    assert vector == [1, 3, 2, 4, 5, 6]
 
-    #assert vector == [1, 4, 7, 2, 5, 8, 3, 6, 9, 10]
-
+    generic_interator = GenericZigzagIterator([[1, 2, 3], [4, 5], [7]])
+    vector = []
+    while generic_interator.hasNext():
+        vector.append(generic_interator.next())
+    assert vector == [1, 4, 7, 2, 5, 3]
 
 
 if __name__ == '__main__':
