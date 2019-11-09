@@ -24,7 +24,7 @@ public class HammerItBabe {
       new int[]{1, 0, 1, 0, 1, 1, 1, 0, 1, 0},
       new int[]{1, 0, 1, 0, 1, 1, 0, 1, 0, 0},
       new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-      new int[]{1, 0, 1, 1, 1, 1, 0, 1, 1, 1},
+      new int[]{1, 0, 1, 1, 1, 1, 0, 0, 1, 1},
       new int[]{1, 1, 0, 0, 0, 0, 1, 0, 0, 1}};
     System.out.println(hammerIt(maze, new Point(0, 0), new Point(8, 8)));
   }
@@ -45,8 +45,7 @@ public class HammerItBabe {
       commonWalls = Collections.emptySet();
     }
 
-    return commonWalls.isEmpty() ?
-      Collections.emptyList() : getShortestPath(maze, n, m, start, end, commonWalls);
+    return getShortestPath(maze, n, m, start, end, commonWalls);
   }
 
   /**
