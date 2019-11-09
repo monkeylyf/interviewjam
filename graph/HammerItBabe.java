@@ -118,6 +118,8 @@ public class HammerItBabe {
 
     Point cur = end;
     while (backTrace.containsKey(cur)) {
+      // FIXME: it's possible that the yielded path walks through wall more than once,
+      // Need flag to make sure it only walks though the wall once.
       final Point nextStep = backTrace.get(cur);
       shortedPath.add(nextStep);
       cur = nextStep;
