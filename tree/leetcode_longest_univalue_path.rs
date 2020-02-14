@@ -28,6 +28,7 @@
  * tree is not more than 1000.
  */
 
+use std::cell::Ref;
 use std::cell::RefCell;
 use std::cmp::max;
 use std::rc::Rc;
@@ -70,7 +71,7 @@ impl Solution {
     }
 
     fn longest(node: &Rc<RefCell<TreeNode>>) -> (i32, i32) {
-        let n = &node.borrow();
+        let n: Ref<TreeNode> = node.borrow();
         let mut both_side: i32 = 0;
         let mut one_side_max: i32 = 0;
         let mut local_max: i32 = 0;
